@@ -1,4 +1,4 @@
-# 日本語数学ノート テンプレート
+# 熊本大学 数学系大学院 過去問・解答
 #
 # source of truth は tex/*.tex のみ。
 # site/ 以下（content/*.md と dist/）はすべて生成物であり、編集も git 管理もしない。
