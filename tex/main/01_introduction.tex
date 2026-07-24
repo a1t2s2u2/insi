@@ -1,0 +1,180 @@
+%% ============================================================
+%%  サンプル章
+%%  このテンプレートが扱える書き方を一通り含んでいる。
+%%  自分のノートを書き始めるときは、中身を差し替えて使う。
+%% ============================================================
+
+\chapter{距離空間と収束}
+\label{ch:introduction}
+
+本章では距離空間を定義し、点列の収束と完備性を扱う。
+集合と写像に関する前提は付録にまとめてある。
+
+\section{距離空間}
+\label{sec:metric-space}
+
+\begin{definition}{距離空間}{metric-space}
+集合 $M$ と写像 $d \colon M \times M \to \R$ の組 $(M, d)$ が
+\textbf{距離空間}であるとは、任意の $x, y, z \in M$ に対して次が成り立つことをいう。
+\begin{enumerate}
+  \item $d(x, y) \geq 0$ であり、$d(x, y) = 0$ と $x = y$ は同値である（正値性）。
+  \item $d(x, y) = d(y, x)$（対称性）。
+  \item $d(x, z) \leq d(x, y) + d(y, z)$（三角不等式）。
+\end{enumerate}
+このとき $d$ を $M$ 上の\textbf{距離}という。
+\end{definition}
+
+\begin{example}{Euclid 距離}{euclidean}
+$M = \R^n$ とし、
+\[
+  d(x, y) = \norm{x - y} = \left( \sum_{i=1}^{n} \abs{x_i - y_i}^2 \right)^{1/2}
+\]
+と定めると、$(\R^n, d)$ は距離空間である。三角不等式は Cauchy--Schwarz の不等式から従う。
+\end{example}
+
+\begin{remark}{距離の値域}{codomain}
+定義では $d$ の値域を $\R$ としたが、正値性から実際には $d(M \times M) \subset [0, \infty)$ である。
+$\infty$ を値に許す一般化（拡張距離）はここでは扱わない。
+\end{remark}
+
+\section{収束と極限}
+\label{sec:convergence}
+
+\begin{definition}{点列の収束}{convergence}
+距離空間 $(M, d)$ の点列 $(x_n)_{n \in \N}$ が $x \in M$ に\textbf{収束する}とは、
+\[
+  \forall \varepsilon > 0,\ \exists N \in \N,\ \forall n \geq N,\ d(x_n, x) < \varepsilon
+\]
+が成り立つことをいう。このとき $x$ を $(x_n)$ の\textbf{極限}といい、
+$x_n \to x$ と書く。
+\end{definition}
+
+\begin{proposition}{極限の一意性}{limit-unique}
+距離空間 $(M, d)$ の点列 $(x_n)$ が $x$ にも $y$ にも収束するならば、$x = y$ である。
+\end{proposition}
+
+\begin{proof}
+$x \neq y$ と仮定する。距離の正値性（定義~\ref{def:metric-space}）より $d(x, y) > 0$ であるから、
+$\varepsilon = d(x, y) / 2 > 0$ とおける。収束の定義~\ref{def:convergence}より、
+ある $N_1, N_2 \in \N$ が存在して
+\[
+  n \geq N_1 \implies d(x_n, x) < \varepsilon,
+  \qquad
+  n \geq N_2 \implies d(x_n, y) < \varepsilon
+\]
+が成り立つ。$n = \max\{N_1, N_2\}$ をとると、三角不等式より
+\begin{align*}
+  d(x, y)
+  &\leq d(x, x_n) + d(x_n, y) \\
+  &< \varepsilon + \varepsilon \\
+  &= d(x, y)
+\end{align*}
+となり矛盾する。よって $x = y$ である。
+\end{proof}
+
+\begin{lemma}{収束列は有界}{convergent-bounded}
+距離空間 $(M, d)$ の収束列 $(x_n)$ に対し、ある $x \in M$ と $R > 0$ が存在して、
+すべての $n \in \N$ について $d(x_n, x) \leq R$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$x_n \to x$ とする。$\varepsilon = 1$ に対して $N \in \N$ をとれば、
+$n \geq N$ のとき $d(x_n, x) < 1$ である。残りは有限個なので
+\[
+  R = \max\{1,\ d(x_1, x),\ \ldots,\ d(x_{N-1}, x)\}
+\]
+とおけばよい。
+\end{proof}
+
+\section{完備性}
+\label{sec:completeness}
+
+\begin{definition}{Cauchy 列}{cauchy}
+距離空間 $(M, d)$ の点列 $(x_n)$ が \textbf{Cauchy 列}であるとは、
+\[
+  \forall \varepsilon > 0,\ \exists N \in \N,\ \forall m, n \geq N,\ d(x_m, x_n) < \varepsilon
+\]
+が成り立つことをいう。
+\end{definition}
+
+\begin{claim}{収束列は Cauchy 列}{convergent-cauchy}
+距離空間の収束列は Cauchy 列である。
+\end{claim}
+
+\begin{proof}
+$x_n \to x$ とし、$\varepsilon > 0$ をとる。定義~\ref{def:convergence}より、
+$n \geq N$ ならば $d(x_n, x) < \varepsilon / 2$ となる $N$ が存在する。
+$m, n \geq N$ のとき、三角不等式より
+\[
+  d(x_m, x_n) \leq d(x_m, x) + d(x, x_n) < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+\]
+である。
+\end{proof}
+
+\begin{definition}{完備距離空間}{complete}
+距離空間 $(M, d)$ が\textbf{完備}であるとは、$M$ の任意の Cauchy 列が $M$ の点に収束することをいう。
+\end{definition}
+
+逆向きの主張、すなわち Cauchy 列が必ず収束することは一般には成り立たない。
+
+\begin{example}{完備でない距離空間}{incomplete}
+$M = \Q$ に Euclid 距離を入れた空間は完備ではない。
+$\sqrt{2}$ に収束する有理数列は $\Q$ の中では極限を持たないが、Cauchy 列である。
+\end{example}
+
+\begin{theorem}{閉部分集合の完備性}{closed-complete}
+完備距離空間 $(M, d)$ の部分集合 $A \subset M$ が閉集合であれば、
+$(A, d)$ も完備距離空間である。
+\end{theorem}
+
+\begin{proof}
+$(x_n)$ を $A$ の Cauchy 列とする。これは $M$ の Cauchy 列でもあるから、
+$M$ の完備性よりある $x \in M$ に収束する。$A$ は閉集合であり
+$x$ は $A$ の点列の極限であるから $x \in A$ である。
+よって $(x_n)$ は $A$ の点に収束する。
+\end{proof}
+
+\begin{corollary}{有界閉区間の完備性}{closed-interval}
+$a \leq b$ なる実数に対し、$([a, b], \abs{\cdot})$ は完備距離空間である。
+\end{corollary}
+
+\begin{proof}
+$\R$ は完備であり、$[a, b]$ は $\R$ の閉集合である。定理~\ref{thm:closed-complete}を適用すればよい。
+\end{proof}
+
+\begin{memo*}
+完備性は距離に依存する性質であって、位相だけでは決まらない。
+開区間 $(0, 1)$ は $\R$ と同相だが、Euclid 距離のもとでは完備でない。
+\end{memo*}
+
+\section{アルゴリズムと図}
+\label{sec:extras}
+
+反復で不動点を求める手続きは、次のように書ける。
+
+\begin{algorithm}{alg:fixed-point}
+入力: 縮小写像 $T \colon M \to M$、初期点 $x_0 \in M$、許容誤差 $\varepsilon > 0$ \\
+$n \leftarrow 0$ \\
+$d(x_{n+1}, x_n) < \varepsilon$ となるまで $x_{n+1} \leftarrow T(x_n)$ と更新し、$n$ を 1 増やす \\
+出力: $x_n$
+\end{algorithm}
+
+図は tikz で書く。PDF には出るが、サイトでは省略される。
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[scale=1.2]
+    \draw[->] (-0.3,0) -- (3.5,0) node[right] {$n$};
+    \draw[->] (0,-0.3) -- (0,2.2) node[above] {$d(x_n, x)$};
+    \draw[dashed] (0,0.2) -- (3.3,0.2) node[right] {$\varepsilon$};
+    \foreach \x/\y in {0.5/1.8, 1.0/1.1, 1.5/0.7, 2.0/0.42, 2.5/0.26, 3.0/0.16}
+      \fill (\x,\y) circle (1.6pt);
+  \end{tikzpicture}
+  \caption{収束の様子。有限回で $\varepsilon$ を下回る。}
+  \label{fig:convergence}
+\end{figure}
+
+サイトにだけ図を出したいときは、site.config.mjs の demos に登録した名前を
+行頭で呼び出す。次の位置に差し込まれる（PDF には何も出ない）。
+
+\demohint{convergence}

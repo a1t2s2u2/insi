@@ -1,0 +1,60 @@
+%% ============================================================
+%%  サンプル付録
+%%  本編から参照される前提知識をここに置く。
+%%  \appendix 以降に \input するので、番号は A.1.1 の形になる。
+%% ============================================================
+
+\chapter{集合と写像}
+\label{ch:preliminaries}
+
+本編で用いる記法をまとめる。内容は標準的なもので、証明は省略する。
+
+\section{集合}
+\label{sec:sets}
+
+\begin{definition}{冪集合}{power-set}
+集合 $A$ の部分集合すべてからなる集合を $A$ の\textbf{冪集合}といい、$2^A$ と書く。
+\end{definition}
+
+\begin{definition}{上限}{supremum}
+$S \subset \R$ を空でない上に有界な集合とする。$S$ の上界のうち最小のものを
+$S$ の\textbf{上限}といい、$\sup S$ と書く。
+\end{definition}
+
+\begin{remark}{上限の存在}{supremum-exists}
+空でない上に有界な $S \subset \R$ に対して $\sup S$ が存在することは、
+実数の連続性公理そのものである。本資料ではこれを認める。
+\end{remark}
+
+\section{写像}
+\label{sec:maps}
+
+\begin{definition}{像と逆像}{image}
+写像 $f \colon A \to B$ と $S \subset A$、$T \subset B$ に対し、
+\[
+  f(S) = \{ f(x) : x \in S \},
+  \qquad
+  f^{-1}(T) = \{ x \in A : f(x) \in T \}
+\]
+をそれぞれ $S$ の\textbf{像}、$T$ の\textbf{逆像}という。
+\end{definition}
+
+\begin{proposition}{逆像は演算を保つ}{preimage-operations}
+写像 $f \colon A \to B$ と $T_1, T_2 \subset B$ に対して次が成り立つ。
+\begin{itemize}
+  \item $f^{-1}(T_1 \cup T_2) = f^{-1}(T_1) \cup f^{-1}(T_2)$
+  \item $f^{-1}(T_1 \cap T_2) = f^{-1}(T_1) \cap f^{-1}(T_2)$
+  \item $f^{-1}(B \setminus T_1) = A \setminus f^{-1}(T_1)$
+\end{itemize}
+像 $f(\cdot)$ については、和集合は保つが共通部分は一般に保たない。
+\end{proposition}
+
+\begin{proof}
+いずれも $x \in f^{-1}(T)$ と $f(x) \in T$ が定義により同値であることから直ちに従う。
+\end{proof}
+
+\begin{example}{像は共通部分を保たない}{image-intersection}
+$A = \{1, 2\}$、$B = \{0\}$、$f(1) = f(2) = 0$ とする。
+$S_1 = \{1\}$、$S_2 = \{2\}$ とおくと $S_1 \cap S_2 = \emptyset$ だが、
+$f(S_1) \cap f(S_2) = \{0\} \neq \emptyset$ である。
+\end{example}

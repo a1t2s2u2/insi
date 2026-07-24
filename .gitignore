@@ -1,0 +1,21 @@
+# --- サイトの生成物 ---
+# site/ は tools/site が丸ごと生成する（content/*.md も dist/ も生成物）。
+# 手で編集するのは site.config.mjs だけ。
+# 先頭の / はルート限定の指定。これがないと tools/site/ まで除外されてしまう。
+/site/
+
+# --- LaTeX の生成物 ---
+out/
+*.aux
+*.log
+*.dvi
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+
+# --- OS / エディタ ---
+.DS_Store

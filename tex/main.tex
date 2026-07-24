@@ -1,0 +1,31 @@
+\documentclass[uplatex, dvipdfmx]{jsreport}
+
+\input{preamble}
+
+\title{ノートのタイトル\\{\Large 副題}}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+%% ============================================================
+%%  本編
+%%  章を足したら site.config.mjs の chapters にも追加する
+%% ============================================================
+\input{main/01_introduction}
+
+%% ============================================================
+%%  付録：前提知識
+%%  \appendix 以降が付録。サイトでは group: "appendix" に対応し、
+%%  定理番号も A.1.1 の形になる
+%% ============================================================
+\appendix
+\input{foundations/00_preliminaries}
+
+%% --- 参考文献 ---
+% \bibliographystyle{plainnat}
+% \bibliography{references}
+
+\end{document}
