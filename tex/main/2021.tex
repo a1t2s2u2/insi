@@ -1,0 +1,185 @@
+\chapter{2021年度}
+\label{ch:2021}
+
+\section{第1期・専門基礎科目（3題必修）}
+
+\begin{problem}{第1問｜Jordan 標準形}{2021-1-1}
+$a\in\mathbb C$ とし
+\[
+A=\begin{pmatrix}a-1&a&0\\-a&-a-1&0\\-1&1&-1\end{pmatrix}.
+\]
+固有多項式，固有値と固有空間の次元，Jordan 標準形を求めよ。
+\end{problem}
+\begin{proof}[解答]
+$N=A+I$ とおくと
+\[
+N^2=\begin{pmatrix}0&0&0\\0&0&0\\-2a&-2a&0\end{pmatrix},\qquad N^3=O.
+\]
+したがって固有多項式は $(\lambda+1)^3$，固有値は $-1$ のみ。$a\ne0$ なら $N^2\ne0$ なので固有空間は1次元，標準形は $J_3(-1)$。$a=0$ なら $N\ne0$, $N^2=0$, $\operatorname{rank}N=1$ なので固有空間は2次元，標準形は $J_2(-1)\oplus(-1)$。
+\end{proof}
+
+\begin{problem}{第2問｜二変数関数}{2021-1-2}
+\[
+f(x,y)=\begin{cases}\dfrac{\sin(x^2y)}{x^2+y^2},&(x,y)\ne(0,0),\\0,&(x,y)=(0,0).
+\end{cases}
+\]
+\begin{enumerate}
+  \item[(1)] 極座標で $|f(x,y)|\le r$ および $|f(x,y)|\le r^{-2}$ を示せ。
+  \item[(2)] 原点で連続であることを示せ。
+  \item[(3)] $p>1$，$B(R)=\{x^2+y^2\le R^2\}$ とし $I_p(R)=\iint_{B(R)}|f|^p\,\d x\d y$ とおく。$\lim_{R\to\infty}I_p(R)$ の存在を示せ。
+  \item[(4)] $\partial f/\partial y(x,0)$ を求め，$f$ が $C^1$ 級か判定せよ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+\begin{enumerate}
+  \item[(1)] $|\sin u|\le|u|$ から $|f|\le |x^2y|/r^2\le r$。また $|\sin u|\le1$ から $|f|\le r^{-2}$。
+  \item[(2)] $|f|\le r\to0$。
+  \item[(3)] $r\le1$ では $|f|^p\le r^p$，$r\ge1$ では $|f|^p\le r^{-2p}$。極座標で両者は積分可能（後者は $p>1$）。よって $|f|^p\in L^1(\R^2)$ で，単調収束により極限が存在する。
+  \item[(4)] 計算すると
+  \[
+  \frac{\partial f}{\partial y}(x,0)=\begin{cases}1,&x\ne0,\\0,&x=0.
+  \end{cases}
+  \]
+  この偏導関数は原点で不連続なので $C^1$ 級ではない。
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{第3問｜連続像}{2021-1-3}
+\begin{enumerate}
+  \item[(1)] 集合と写像 $f:X\to Y$, $g:Y\to Z$ で，$f$ は全射でなく，$g$ は単射でなく，$g\circ f$ は全単射となる例を挙げよ。
+  \item[(2)] 連続写像による連結集合の像は連結か。
+  \item[(3)] 連続写像によるコンパクト集合の像はコンパクトか。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+\begin{enumerate}
+  \item[(1)] $X=Z=\{0\}$，$Y=\{0,1\}$，$f(0)=0$，$g(0)=g(1)=0$。
+  \item[(2)] 連結である。像が二つの相対開集合に分離すれば，その逆像が元の集合を分離して矛盾。
+  \item[(3)] コンパクトである。像の開被覆を逆像に引き戻し，有限部分被覆を取ればよい。
+\end{enumerate}
+\end{proof}
+
+\section{第1期・専門科目（4題から2題選択）}
+
+\begin{problem}{第1問｜環とイデアル}{2021-s-1}
+$\Phi:\mathbb C[X,Y,Z]\to\mathbb C[t]$ を
+$\Phi(f)=f(t^2,t^3,t^4)$ で定め，$I=\ker\Phi$，$R=\mathbb C[X,Y,Z]/I$ とする。
+\begin{enumerate}
+  \item[(1)] $I$ は素イデアルか。
+  \item[(2)] $I$ の生成元を求めよ。
+  \item[(3)] $\bar X,\bar Y,\bar Z$ で生成される $R$ のイデアル $\mathfrak m$ が極大であることを示せ。
+  \item[(4)] $\mathfrak m$ が2元で生成されることを示せ。
+  \item[(5)] $\mathfrak m$ が単項イデアルでないことを示せ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+\begin{enumerate}
+  \item[(1)] $R\cong\mathbb C[t^2,t^3]\subset\mathbb C[t]$ は整域なので $I$ は素。
+  \item[(2)] 生成元は
+  \[
+  I=(Z-X^2,\ Y^2-X^3).
+  \]
+  $Z$ を $X^2$ で消去し，$\mathbb C[X,Y]/(Y^2-X^3)\to\mathbb C[t^2,t^3]$ が同型であることから従う。
+  \item[(3)] $R/\mathfrak m\cong\mathbb C$ より極大。
+  \item[(4)] $\bar Z=\bar X^2$ なので $\mathfrak m=(\bar X,\bar Y)$。
+  \item[(5)] $\mathfrak m/\mathfrak m^2$ は $\bar X,\bar Y$ の像を基底とする2次元 $\mathbb C$ ベクトル空間。単項ならこの次元は高々1となるので矛盾。
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{第2問｜曲率・捩率}{2021-s-2}
+$p(t)=(\cos t,\sin t,\cosh t)$ と円柱面 $S=\{x^2+y^2=1\}$ を考える。
+\begin{enumerate}
+  \item[(1)] $p$ の曲率と捩率を求めよ。
+  \item[(2)] $S$ の主方向と $p'(t)$ の角度が $\pi/4$ となる $t$ を全て求めよ。
+  \item[(3)] $p$ の $S$ における測地的曲率ベクトルを求めよ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+$\norm{p'}=\cosh t$，$\norm{p'\times p''}=\sqrt2\cosh t$，$(p'\times p'')\cdot p'''=2\sinh t$ から
+\[
+\kappa(t)=\frac{\sqrt2}{\cosh^2t},\qquad
+\tau(t)=\frac{\sinh t}{\cosh^2t}.
+\]
+主方向は円周方向 $(-\sin t,\cos t,0)$ と軸方向 $(0,0,1)$。条件は $\cosh t=\sqrt2$ なので
+$t=\pm\log(1+\sqrt2)$。
+単位接ベクトルを弧長で微分し，法線成分を除くと
+\[
+\boldsymbol{k}_g
+=\operatorname{sech}^2t\,(\tanh t\sin t,-\tanh t\cos t,\operatorname{sech}t).
+\]
+\end{proof}
+
+\begin{problem}{第3問｜収束べき級数}{2021-s-3}
+$\varphi(z)=\sum_{n=0}^\infty a_nz^n$ は収束べき級数で $a_0\ne0$ とする。
+\begin{enumerate}
+  \item[(1)] $1/\varphi(z)$ が $z=0$ で収束べき級数に展開できることを示せ。
+  \item[(2)] その収束半径が $\varphi$ の収束半径より真に小さくなることはあるか。
+  \item[(3)] $1/\varphi(z)=\sum b_nz^n$ とするとき $b_0,b_1,b_2$ を求めよ。
+  \item[(4)] $n=0,1,2,3$ に対し $\displaystyle\int_{|z|=1}\frac{\d z}{z^n\sin^2z}$ を求めよ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+(1) $\varphi(0)\ne0$ なので $1/\varphi$ は0の近傍で正則。(2) ある。例えば $\varphi(z)=1-2z$ は整関数だが逆数の収束半径は $1/2$。(3) 係数比較から
+\[
+b_0=\frac1{a_0},\quad b_1=-\frac{a_1}{a_0^2},\quad
+b_2=\frac{a_1^2-a_0a_2}{a_0^3}.
+\]
+(4) $\csc^2z=z^{-2}+1/3+z^2/15+\cdots$ の留数を読む。順に
+\[
+0,\qquad \frac{2\pi i}{3},\qquad0,\qquad\frac{2\pi i}{15}.
+\]
+\end{proof}
+
+\begin{problem}{第4問｜測度収束}{2021-s-4}
+$E\subset\R^d$ は可測で $|E|<\infty$，$f_n$ は $E$ 上可測とする。$A_{n,\varepsilon}=\{x\in E\mid|f_n(x)|\ge\varepsilon\}$ とおく。
+\begin{enumerate}
+  \item[(1)] $g\in L^1(E)$，$F=\{|g|\ge1\}$ なら $|F|\le\int_E|g|$ を示せ。
+  \item[(2)] $\int_E|f_n|\to0$ なら全ての $\varepsilon>0$ で $|A_{n,\varepsilon}|\to0$ を示せ。
+  \item[(3)] $f_n\to0$ がほとんど至る所なら $\displaystyle\int_E\frac{|f_n|}{1+|f_n|}\to0$ を示せ。
+  \item[(4)] 全ての $\varepsilon>0$ で $|A_{n,\varepsilon}|\to0$ なら，ほとんど至る所で0に収束する部分列があることを示せ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+(1) $1_F\le|g|$ を積分する。(2) Chebyshev の不等式 $|A_{n,\varepsilon}|\le\varepsilon^{-1}\int|f_n|$。(3) 被積分関数は1以下で点wiseに0へ収束するので優収束定理。(4) $|A_{n_k,1/k}|<2^{-k}$ となる部分列を取る。和が有限なので Borel--Cantelli により，ほとんど全ての点はこれらの集合に有限回しか入らない。ゆえに $|f_{n_k}(x)|<1/k$ がやがて成り立つ。
+\end{proof}
+
+\section{第2期・専門基礎科目（3題必修）}
+
+\begin{problem}{第1問｜等角ベクトルと対称行列}{2021-2-1}
+$x_1,\ldots,x_n\in\R^3$ が $|(x_i,x_j)|=r$ $(i\ne j)$，$|(x_i,x_i)|=1$ を満たす。ただし $r\ne1$。
+\begin{enumerate}
+  \item[(1)] 3次実対称行列全体の次元を求めよ。
+  \item[(2)] $\sum_i a_i(x_i,x_j)^2=0$ が全ての $j$ で成り立つなら，全ての $a_i$ が0であることを示せ。
+  \item[(3)] 行列 $x_ix_i^{\mathsf T}$ が一次独立であることを示せ。
+  \item[(4)] $n\le6$ を示せ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+(1) 対角3成分と上三角3成分で6次元。(2) $j$ の式は $(1-r^2)a_j+r^2\sum_i a_i=0$。2式の差から全 $a_j$ は等しく，元の式から0。(3) $\sum a_ix_ix_i^{\mathsf T}=0$ とし，Frobenius 内積を $x_jx_j^{\mathsf T}$ と取れば (2) の式になる。(4) 6次元空間内の $n$ 個の一次独立な元なので $n\le6$。
+\end{proof}
+
+\begin{problem}{第2問｜Gamma 関数と Beta 関数}{2021-2-2}
+$p,q>0$ とし
+\[
+\Gamma(p)=\int_0^\infty x^{p-1}e^{-x}\,\d x,
+\quad B(p,q)=\int_0^1x^{p-1}(1-x)^{q-1}\,\d x.
+\]
+$\Gamma(p)\Gamma(q)=B(p,q)\Gamma(p+q)$ を，二重積分に (1) $x=st,y=s(1-t)$，(2) $x=(r\cos\theta)^2,y=(r\sin\theta)^2$ を用いる二通りで示せ。
+\end{problem}
+\begin{proof}[解答]
+(1) Jacobian は $s$ で，領域は $s>0,0<t<1$。被積分関数は
+$s^{p+q-1}e^{-s}t^{p-1}(1-t)^{q-1}$ となり，積分が $\Gamma(p+q)B(p,q)$ に分かれる。
+(2) Jacobian は $4r^3\sin\theta\cos\theta$。$0<r<\infty$, $0<\theta<\pi/2$ で積分すると，$u=r^2$ と $t=\cos^2\theta$ の置換により同じ二つの積分の積になる。
+\end{proof}
+
+\begin{problem}{第3問｜距離空間の連続写像}{2021-2-3}
+距離空間 $(X,d_X)$ から $(Y,d_Y)$ への写像 $f$ について答えよ。
+\begin{enumerate}
+  \item[(1)] $f$ が点 $x\in X$ で連続であることを開球を用いて定義せよ。
+  \item[(2)] $f$ が連続なら，任意の閉集合 $F\subset Y$ に対し $f^{-1}(F)$ が閉であることを示せ。
+  \item[(3)] 任意の $A\subset X$ に対し $f(\overline A)\subset\overline{f(A)}$ を示せ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+(1) 任意の $\varepsilon>0$ に対し，ある $\delta>0$ が存在して $f(B_X(x,\delta))\subset B_Y(f(x),\varepsilon)$。(2) 補集合 $Y\setminus F$ は開で，連続性によりその逆像も開。これは $X\setminus f^{-1}(F)$。(3) $x\in\overline A$ とし，$f(x)$ の任意の近傍の逆像を考える。それは $x$ の近傍なので $A$ と交わり，従って元の近傍は $f(A)$ と交わる。
+\end{proof}

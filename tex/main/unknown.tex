@@ -1,0 +1,109 @@
+\chapter{年度不明の問題}
+\label{ch:unknown}
+
+\begin{memo*}
+元資料に年度表記がないため，推測で年度を付けずに掲載する。写真の問題番号から，少なくとも二つの試験冊子が混在している。
+\end{memo*}
+
+\section{専門基礎科目と思われる問題}
+
+\begin{problem}{行列｜直交対角化}{unknown-1}
+\[
+P=\begin{pmatrix}
+1/\sqrt3&1/\sqrt2&p\\q&r&s\\-1/\sqrt3&1/\sqrt2&-1/\sqrt6
+\end{pmatrix}
+\]
+は直交行列とする。$p,q,r,s$ を求め，$(P^{\mathsf T})^{10}P^{19}(P^{\mathsf T})^{10}$ を求めよ。さらに $A$ は $P$ で対角化され，固有多項式が $x^3+\sqrt[10]{2}x^2$，$(1,0,1)^{\mathsf T}$ が固有値 $-\sqrt[10]{2}$ の固有ベクトルであるとき $A^{10}$ を求めよ。直交行列で対角化される実行列が対称であることも示せ。
+\end{problem}
+\begin{proof}[解答]
+$\varepsilon=\pm1$ として全ての組は
+\[
+p=\frac1{\sqrt6},\quad q=\frac{\varepsilon}{\sqrt3},\quad r=0,
+\quad s=-\varepsilon\sqrt{\frac23}.
+\]
+$P^{\mathsf T}=P^{-1}$ なので第2問は $P^{-1}=P^{\mathsf T}$。$u=(1,0,1)^{\mathsf T}/\sqrt2$ とすれば $A=-\sqrt[10]{2}\,uu^{\mathsf T}$ だから
+\[
+A^{10}=2uu^{\mathsf T}=\begin{pmatrix}1&0&1\\0&0&0\\1&0&1\end{pmatrix}.
+\]
+$P^{-1}AP=D$ が実対角なら $A=PDP^{\mathsf T}$ であり，転置しても同じなので対称。
+\end{proof}
+
+\begin{problem}{微分積分｜積分記号下の微分}{unknown-2}
+$f\in C^1(D)$ とする。固定端点および可変端点の積分に対する Leibniz 則を示せ。また
+\[
+p(x)=\int_{x^2}^{x^3}\frac{\sin(xy)}y\,\d y\qquad(x>0)
+\]
+の導関数を求めよ。
+\end{problem}
+\begin{proof}[解答]
+固定端点では差商と微積分学の基本定理から
+$\frac{d}{dx}\int_c^df(x,y)dy=\int_c^df_x(x,y)dy$。可変端点では上下端の細い区間を分けると
+\[
+\frac d{dx}\int_{\phi(x)}^{\psi(x)}f(x,y)dy
+=f(x,\psi)\psi'-f(x,\phi)\phi'+\int_\phi^\psi f_x(x,y)dy.
+\]
+これを代入して
+\[
+p'(x)=\frac{4\sin(x^4)-3\sin(x^3)}x.
+\]
+\end{proof}
+
+\begin{problem}{距離空間｜コンパクト集合の近傍}{unknown-3}
+コンパクト集合 $K$ までの距離 $\rho(x)=\inf_{z\in K}d(x,z)$ について，$|\rho(x)-\rho(y)|\le d(x,y)$，各 $x$ で最短点 $a\in K$ が存在することを示せ。また $K\subset L$ で $L$ が開なら，ある $r>0$ で $\{\rho<r\}\subset L$ を示せ。
+\end{problem}
+\begin{proof}[解答]
+三角不等式を使い $z\in K$ について下限を取れば Lipschitz 評価を得る。$z\mapsto d(x,z)$ は $K$ 上連続なのでコンパクト性から最小値を取る。$F=X\setminus L$ とおくと $K$ と閉集合 $F$ は正の距離を持つ（$K$ 上で $d(\cdot,F)$ の正の最小値を取る）。その値より小さい $r$ を選べばよい。
+\end{proof}
+
+\section{専門科目と思われる問題}
+
+\begin{problem}{回転面｜トーラス}{unknown-4}
+$R>r>0$ とし，円 $(x-R)^2+z^2=r^2$ を $z$ 軸の周りに回転したトーラス $S$ の Gauss 曲率と平均曲率を求め，測地線を一つ挙げよ。
+\end{problem}
+\begin{proof}[解答]
+\[
+X(u,v)=((R+r\cos v)\cos u,(R+r\cos v)\sin u,r\sin v)
+\]
+とおく。外向き法線に対する主曲率は $-\cos v/(R+r\cos v)$ と $-1/r$。従って
+\[
+K=\frac{\cos v}{r(R+r\cos v)},\qquad
+H=-\frac{R+2r\cos v}{2r(R+r\cos v)}.
+\]
+$v=0$（外側の赤道）を $u$ で動く円は，加速度が曲面法線方向だけなので測地線。
+\end{proof}
+
+\begin{problem}{Euler 型微分方程式}{unknown-5}
+$x^2y''+pxy'+qy=0$ $(x\ge1)$，$y(1)=0,y'(1)=1$ を考える。$q=0,p\ne1$ の解，$x=e^t$ による変形，$p=2$ の解を求める。さらに $p=2$ で $x>1$ の零点が存在する $q$ の範囲と最小の零点を求めよ。
+\end{problem}
+\begin{proof}[解答]
+$q=0$ では $y=(x^{1-p}-1)/(1-p)$。$Y(t)=y(e^t)$ とおけば
+\[
+Y''+(p-1)Y'+qY=0,\qquad Y(0)=0, Y'(0)=1.
+\]
+$p=2$ で $d=1-4q$ とすると
+\[
+y=x^{-1/2}\begin{cases}
+\dfrac{2}{\sqrt d}\sinh(\frac{\sqrt d}{2}\log x),&d>0,\\
+\log x,&d=0,\\
+\dfrac{2}{\sqrt{-d}}\sin(\frac{\sqrt{-d}}2\log x),&d<0.
+\end{cases}
+\]
+$x>1$ の零点があるのは $q>1/4$ のときだけで，最小値は
+$\exp(2\pi/\sqrt{4q-1})$。
+\end{proof}
+
+\begin{problem}{解析｜弱い特異核}{unknown-6}
+$0<\alpha<1$，$\phi$ は $[0,\infty)$ 上有界可測とし $f(x)=\int_0^x\phi(t)dt$，
+$g(x)=\int_0^x f(s)(x-s)^{-\alpha}ds$ とする。$f$ の連続性，
+\[
+g(x)=\frac1{1-\alpha}\int_0^x\phi(t)(x-t)^{1-\alpha}dt
+\]
+を示し，$g'(x)=\int_0^x\phi(t)(x-t)^{-\alpha}dt$ を示せ。
+\end{problem}
+\begin{proof}[解答]
+$|f(y)-f(x)|\le\norm\phi_\infty|y-x|$ なので $f$ は連続。$f(s)=\int_0^s\phi(t)dt$ を代入し，Fubini で積分順序を交換すると
+\[
+g(x)=\int_0^x\phi(t)\int_t^x(x-s)^{-\alpha}ds\,dt
+\]
+となり表示式を得る。表示式の差商を取り，$0<\alpha<1$ による可積分な優関数で極限を通せば，指定された導関数になる。
+\end{proof}

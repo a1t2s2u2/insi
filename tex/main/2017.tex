@@ -1,0 +1,172 @@
+\chapter{2017年度（平成29年度）}
+\label{ch:2017}
+
+\section{専門基礎科目（3題必修）}
+
+\begin{problem}{第1問｜不変部分空間}{2017-b-1}
+$f:\R^3\to\R^3$ を
+\[
+f(x)=\begin{pmatrix}1&0&0\\1&3&-3\\-2&2&-4\end{pmatrix}x
+\]
+で定める。$f(W)\subset W$ となる1次元および2次元の部分空間 $W$ を全て求めよ。
+\end{problem}
+\begin{proof}[解答]
+固有値は $1,2,-3$ で相異なる。対応する固有ベクトルを
+\[
+v_1=(-4,11,6)^{\mathsf T},\quad v_2=(0,3,1)^{\mathsf T},\quad
+v_3=(0,1,2)^{\mathsf T}
+\]
+と取れる。従って1次元不変部分空間は $\langle v_1\rangle,\langle v_2\rangle,\langle v_3\rangle$。2次元不変部分空間は $\langle v_1,v_2\rangle,\langle v_1,v_3\rangle,\langle v_2,v_3\rangle$ であり，これが全てである。
+\end{proof}
+
+\begin{problem}{第2問｜近似恒等核}{2017-b-2}
+$f$ は $[0,\infty)$ 上の有界連続関数とし
+$I_n=\int_0^\infty n f(x)e^{-nx}\,\d x$ とおく。
+\begin{enumerate}
+  \item[(1)] $I_n$ が有限であることを示せ。
+  \item[(2)] 任意の $\delta>0$ に対し $\displaystyle\int_\delta^\infty nf(x)e^{-nx}\,\d x\to0$ を示せ。
+  \item[(3)] $I_n\to f(0)$ を示せ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+$|f|\le M$ とすれば (1) は $\int_0^\infty nMe^{-nx}=M$，(2) は絶対値が $Me^{-n\delta}$ 以下。(3) $\int_0^\infty ne^{-nx}=1$ より
+\[
+I_n-f(0)=\int_0^\infty n(f(x)-f(0))e^{-nx}\,\d x.
+\]
+連続性で $[0,\delta]$ の差を小さくし，残りは (2) で抑える。
+\end{proof}
+
+\begin{problem}{第3問｜有理数の部分空間}{2017-b-3}
+$\Q$ に通常の距離を入れ，$A=\{x\in\Q\mid1\le x<2\}$ とする。$A$ は閉，コンパクト，連結か。
+\end{problem}
+\begin{proof}[解答]
+全て否定。
+\begin{itemize}
+  \item $2-1/n\in A$ は $\Q$ 内で $2\notin A$ に収束するので閉でない。
+  \item 距離空間のコンパクト集合は閉だから，コンパクトでない。
+  \item 無理数 $c\in(1,2)$ を取ると $A\cap(-\infty,c)$ と $A\cap(c,\infty)$ が非空な開分離を与えるので連結でない。
+\end{itemize}
+\end{proof}
+
+\section{専門科目（8題から2題選択）}
+
+\begin{problem}{第1問｜群の交換子}{2017-s-1}
+$G$ を有限群，$K\subset H$ を部分群とし
+$X=\{x\in G\mid[x,h]\in K\ (\forall h\in H)\}$，$[x,y]=x^{-1}y^{-1}xy$ とおく。
+\begin{enumerate}
+  \item[(1)] $x\in X$ なら $x^{-1}Kx=K$ を示せ。
+  \item[(2)] $X$ が $G$ の部分群であることを示せ。
+  \item[(3)] $K\triangleleft H$ かつ $H/K$ が可換であることと $H\subset X$ が同値であることを示せ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+(1) $[x,k]\in K$ から $x^{-1}kx\in K$。有限性により包含は等号になる。(2) $x,y\in X$ に対し
+$[xy,h]=y^{-1}[x,h]y[y,h]\in K$。逆元も同様で，単位元も入る。(3) $H\subset X$ は全ての $h_1,h_2\in H$ で $[h_1,h_2]\in K$ という条件。これは $K$ の正規性と商群の可換性に同値。
+\end{proof}
+
+\begin{problem}{第2問｜剰余環と局所化}{2017-s-2}
+$R$ を可換環，$a\in R$，$S=\{a^n\mid n\ge0\}$ とする。自然な写像 $\pi:R\to R/(a)$，$\tau:R\to S^{-1}R$ を考える。
+\begin{enumerate}
+  \item[(1)] $x\in\ker\pi\cap\ker\tau$ なら，ある $n$ で $x^n=0$ となることを示せ。
+  \item[(2)] $\tau$ が全射なら $\ker\pi+\ker\tau=R$ を示せ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+(1) $x=ar$ かつ，ある $m$ で $a^mx=0$。従って $x^{m+1}=a^mr^mx=0$。(2) 全射性により $b/1=1/a$ となる $b\in R$ がある。従ってある $n$ で $a^n(ab-1)=0$，すなわち $ab-1\in\ker\tau$。$ab\in(a)=\ker\pi$ だから $1=ab-(ab-1)$ は二つの核の和に入る。
+\end{proof}
+
+\begin{problem}{第3問｜被覆空間と Betti 数}{2017-s-3}
+\begin{enumerate}
+  \item[(1)] $F:\R\to S^1$，$F(\theta)=(\cos\theta,\sin\theta)$ が普遍被覆であることを示し，被覆変換群を求めよ。
+  \item[(2)] 四面体の境界のうち，三つの面からなる複体を $K_1$，残り一面を $K_2$ とする。$K_1\cap K_2,K_1,K_2,K_1\cup K_2$ の Betti 数を求めよ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+(1) 十分短い円弧の逆像は，$2\pi\Z$ だけ平行移動された区間の非交和になる。$\R$ は単連結なので普遍被覆。被覆変換は $T_k(\theta)=\theta+2\pi k$ で，群は $\Z$。
+(2) $K_1\simeq D^2$，$K_2\simeq D^2$，$K_1\cap K_2\simeq S^1$，和は四面体境界 $S^2$。従って
+\[
+\begin{array}{c|ccc}
+&b_0&b_1&b_2\\\hline
+K_1\cap K_2&1&1&0\\
+K_1&1&0&0\\
+K_2&1&0&0\\
+K_1\cup K_2&1&0&1
+\end{array}
+\]
+で，高次は0。最後の行は Mayer--Vietoris 完全系列からも直ちに出る。
+\end{proof}
+
+\begin{problem}{第4問｜管状曲面}{2017-s-4}
+$0<a<1$ とし
+\[
+p(u,v)=(u,u^2/2,0)+\frac{a\cos v}{\sqrt{u^2+1}}(-u,1,0)+a\sin v(0,0,1).
+\]
+これが曲面であることを示し，Gauss 曲率・平均曲率を求めよ。また $q(s)=p(u_0,s/a)$ が測地線であることを示せ。
+\end{problem}
+\begin{proof}[解答]
+これは平面曲線 $c(u)=(u,u^2/2,0)$ の半径 $a$ の管状曲面である。中心曲線の曲率を $\kappa=(1+u^2)^{-3/2}$ とすると $a\kappa<1$ なので正則。外向き法線を選ぶと主曲率は
+\[
+k_1=\frac{\kappa\cos v}{1-a\kappa\cos v},\qquad k_2=-\frac1a.
+\]
+従って
+\[
+K=-\frac{\kappa\cos v}{a(1-a\kappa\cos v)},\qquad
+H=\frac12\left(\frac{\kappa\cos v}{1-a\kappa\cos v}-\frac1a\right).
+\]
+$q$ は単位速度の半径 $a$ の円で，加速度は $-1/a$ 倍の曲面法線。接成分が0なので測地線である。
+\end{proof}
+
+\begin{problem}{第5問｜扇形上の正則関数}{2017-s-5}
+$S=\{z\in\mathbb C\mid0<|z|<r,\ \alpha<\arg z<\beta\}$，$\beta<\alpha+2\pi$ とする。
+\begin{enumerate}
+  \item[(1)] $f(z)$ は $z\to0$ で極限を持つが $f'(z)$ は持たない例を挙げよ。
+  \item[(2)] $0<r'<r$，$\alpha<\alpha'<\beta'<\beta$ で切り取った閉じた小扇形の各点を中心に，$S$ に含まれる円板があることを示せ。
+  \item[(3)] $f$ が $S$ 上有界正則なら，境界から $\varepsilon$ だけ離した小扇形 $T_\varepsilon$ 上で $|f'(z)|\le M_\varepsilon/|z|$ となることを示せ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+(1) $S$ 上で対数の枝を取り $f(z)=\exp(\tfrac12\log z)$ とする。$f(z)\to0$ だが $|f'(z)|=1/(2\sqrt{|z|})\to\infty$。(2) $S$ は開集合なので各点に含まれる小円板がある。(3) 角度と外周から一様に離れているため，ある $c_\varepsilon>0$ があり $B(z,c_\varepsilon|z|)\subset S$。$|f|\le B$ と Cauchy の評価を用いれば $|f'(z)|\le B/(c_\varepsilon|z|)$。
+\end{proof}
+
+\begin{problem}{第6問｜線形微分方程式}{2017-s-6}
+\begin{enumerate}
+  \item[(1)] $y''+2y'+2y=0$，$y(0)=1,y'(0)=0$ を解き，零点を全て求めよ。
+  \item[(2)] $y''+2y=\cos(\omega x)$，$y(0)=0,y'(0)=1$ の解が $x>0$ で非有界となる $\omega$ と，その解を求めよ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+(1)
+\[
+y=e^{-x}(\cos x+\sin x),\qquad x=-\frac\pi4+k\pi\quad(k\in\Z).
+\]
+(2) 共振する $\omega=\pm\sqrt2$ のときだけ非有界で，
+\[
+y(x)=\frac{x+2}{2\sqrt2}\sin(\sqrt2x).
+\]
+\end{proof}
+
+\begin{problem}{第7問｜パラメータ積分}{2017-s-7}
+$f$ は $(0,\infty)$ 上可測で $\int_0^\infty x|f(x)|\,\d x<\infty$ を満たす。次を求めよ。
+\[
+\lim_{a\downarrow0}\frac1a\int_0^\infty(\log(1+ax)-ax)f(x)\,\d x.
+\]
+\end{problem}
+\begin{proof}[解答]
+各 $x$ で $(\log(1+ax)-ax)/a\to0$。また $0\le ax-\log(1+ax)\le ax$ なので絶対値は $x$ 以下。$x|f(x)|$ を優関数として優収束定理を使い，答えは $0$。
+\end{proof}
+
+\begin{problem}{第8問｜確率収束}{2017-s-8}
+実確率変数列 $X_n$ と実確率変数 $X$ について答えよ。
+\begin{enumerate}
+  \item[(1)] $\lim_{N\to\infty}P(|X|>N)=0$ を示せ。
+  \item[(2)] $X_n\to X$ が確率収束し，$f:\R\to\R$ が連続なら $f(X_n)\to f(X)$ も確率収束することを示せ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+(1) 事象 $\{|X|>N\}$ は単調減少し，共通部分は空集合。確率の上からの連続性を使う。(2) (1) から $P(|X|>M)$ を小さくする。コンパクト区間 $[-M-1,M+1]$ 上で $f$ は一様連続なので，ある $\delta>0$ で $|x-y|<\delta$ なら $|f(x)-f(y)|<\varepsilon$。従って
+\[
+P(|f(X_n)-f(X)|\ge\varepsilon)
+\le P(|X|>M)+P(|X_n-X|\ge\delta),
+\]
+右辺を順に小さくできる。
+\end{proof}

@@ -1,0 +1,186 @@
+\chapter{2026年度}
+\label{ch:2026}
+
+\section{第1期・専門科目（4題から2題選択）}
+
+\begin{problem}{第1問｜群論}{2026-1-1}
+$S_6$ の元 $\sigma=(1\ 2)(3\ 4)(5\ 6)$ と，その中心化群
+\[
+Z_{S_6}(\sigma)=\{\tau\in S_6\mid \tau\sigma\tau^{-1}=\sigma\}
+\]
+を考える。積は $\sigma\tau(i)=\sigma(\tau(i))$ で定める。
+\begin{enumerate}
+  \item[(1)] $\rho\in S_6$ と巡回置換 $(k_1\ k_2\ \cdots\ k_r)$ に対し
+  $\rho(k_1\ k_2\ \cdots\ k_r)\rho^{-1}=(\rho(k_1)\ \rho(k_2)\ \cdots\ \rho(k_r))$
+  を示せ。
+  \item[(2)] $S_6$ における $\sigma$ の共役類の元の個数を求めよ。
+  \item[(3)] $Z_{S_6}(\sigma)$ の位数を求めよ。
+  \item[(4)] $Z_{S_6}(\sigma)$ の Sylow $3$ 部分群を一つ求めよ。
+  \item[(5)] $H=\langle(1\ 2),(3\ 4),(5\ 6)\rangle$ が $Z_{S_6}(\sigma)$ の正規部分群であることを示せ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+\begin{enumerate}
+  \item[(1)] $k_{r+1}=k_1$ とする。$x=\rho(k_i)$ なら左辺は $\rho(k_{i+1})$ に写し，右辺も同じ。どの $\rho(k_i)$ でもない $x$ は両辺が固定する。よって二つの置換は等しい。
+  \item[(2)] 共役類は型 $(2,2,2)$ の置換全体である。6文字を並べ，3組の順序と各組内の順序を除けば
+  \[
+  \frac{6!}{3!\,2^3}=15.
+  \]
+  \item[(3)] 軌道・安定化群定理から
+  $\abs{Z_{S_6}(\sigma)}=6!/15=48$。
+  \item[(4)] $g=(1\ 3\ 5)(2\ 4\ 6)$ は三つの互換を巡回させるので $g\sigma g^{-1}=\sigma$。したがって $\langle g\rangle$ は位数 $3$ の Sylow $3$ 部分群である。
+  \item[(5)] $H\cong(C_2)^3$ であり，各生成元は $\sigma$ と可換するから $H\subset Z_{S_6}(\sigma)$。$\rho\in Z_{S_6}(\sigma)$ は三つの組 $\{1,2\},\{3,4\},\{5,6\}$ を置換する。ゆえに $\rho(k\ k+1)\rho^{-1}$ は再び $H$ の生成元であり，$\rho H\rho^{-1}=H$。
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{第2問｜基本群と被覆空間}{2026-1-2}
+$S^1\subset\R^2$ を単位円，$x_0=(1,0)$ とする。
+\begin{enumerate}
+  \item[(1)] $\pi_1(S^1\times S^1,(x_0,x_0))$ を求めよ。ただし $\pi_1(S^1,x_0)\cong\Z$ は用いてよい。
+  \item[(2)] $S^1\times S^1$ の普遍被覆空間が $\R^2$ と同型であることを示せ。
+  \item[(3)] $S^1\times S^1$ の被覆空間で，基本群が $\Z$ と同型なものを構成せよ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+\begin{enumerate}
+  \item[(1)] 閉道を成分ごとに送る $[(f,g)]\mapsto([f],[g])$ は群同型だから
+  \[
+  \pi_1(S^1\times S^1)\cong\pi_1(S^1)\times\pi_1(S^1)\cong\Z^2.
+  \]
+  \item[(2)] $p(t)=(\cos2\pi t,\sin2\pi t)$ とおけば $p\times p:\R^2\to S^1\times S^1$ は被覆写像。$\R^2$ は単連結なので，これが普遍被覆である。
+  \item[(3)] $q:S^1\times\R\to S^1\times S^1$, $q(z,t)=(z,p(t))$ は被覆写像で，$\pi_1(S^1\times\R)\cong\Z$。
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{第3問｜複素積分}{2026-1-3}
+\[
+f(z)=\frac{\sin z}{e^z-1-z},\qquad C=\{z\mid |z|=1\}
+\]
+とし，$C$ は反時計回りとする。
+\begin{enumerate}
+  \item[(1)] $g(z)=e^z-1-z$ の Maclaurin 展開と，零点 $z=0$ の位数を求めよ。
+  \item[(2)] $|z|=1$ のとき
+  \[
+  \left|e^z-1-z-\frac{z^2}{2}\right|\le e-\frac52
+  \]
+  を示し，$g$ が $C$ の内部に $0$ 以外の零点を持たないことを示せ。$2.7<e<2.8$ は用いてよい。
+  \item[(3)] $\displaystyle\int_C f(z)\,\d z$ を求めよ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+\begin{enumerate}
+  \item[(1)] 展開すると
+  \[
+  g(z)=\sum_{n=2}^{\infty}\frac{z^n}{n!}
+      =z^2\sum_{k=0}^{\infty}\frac{z^k}{(k+2)!}.
+  \]
+  後ろの級数は $z=0$ で $1/2$ だから，位数は $2$。
+  \item[(2)] 三角不等式から左辺は $\sum_{n=3}^{\infty}1/n!=e-5/2<1/2=|z^2/2|$。Rouché の定理により $g=z^2/2+(g-z^2/2)$ と $z^2/2$ は円内の零点数が同じく2。$0$ が既に2位の零点なので，他にはない。
+  \item[(3)] 円内の極は $0$ のみで1位。よって
+  \[
+  \operatorname{Res}(f;0)=\lim_{z\to0}\frac{z\sin z}{e^z-1-z}=2,
+  \qquad \int_Cf(z)\,\d z=4\pi i.
+  \]
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{第4問｜ルベーグ積分}{2026-1-4}
+$G:\R\to\R$ は有界連続関数，$M=\sup_{x\in\R}|G(x)|$ とする。$f_n,f:\R^d\to\R$ はルベーグ可測で，$f_n\to f$ がほとんど至る所で成り立つ。
+\begin{enumerate}
+  \item[(1)] 任意の開集合 $I\subset\R$ に対し $(G\circ f)^{-1}(I)$ がルベーグ可測であることを示せ。
+  \item[(2)] $G\circ f_n\to G\circ f$ がほとんど至る所で成り立つことを示せ。
+  \item[(3)] 可測集合 $E\subset\R^d$ が $|E|<\infty$ を満たすとき
+  \[
+  \lim_{n\to\infty}\int_E(G\circ f_n)(x)\,\d x
+  =\int_E(G\circ f)(x)\,\d x
+  \]
+  を示せ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+\begin{enumerate}
+  \item[(1)] 連続性により $G^{-1}(I)$ は開集合。したがって $(G\circ f)^{-1}(I)=f^{-1}(G^{-1}(I))$ は可測である。
+  \item[(2)] $f_n(x)\to f(x)$ となる各 $x$ で，$G$ の連続性から $G(f_n(x))\to G(f(x))$。
+  \item[(3)] $|G(f_n)|\chi_E\le M\chi_E$ かつ $\int M\chi_E=M|E|<\infty$。優収束定理を適用すればよい。
+\end{enumerate}
+\end{proof}
+
+\section{第2期・専門基礎科目（3題必修）}
+
+\begin{problem}{第1問｜エルミート行列}{2026-2-1}
+\[
+A=\begin{pmatrix}
+2&-i&1&i\\ i&2&i&-1\\ 1&-i&2&i\\ -i&-1&-i&2
+\end{pmatrix}.
+\]
+\begin{enumerate}
+  \item[(1)] $\det A$ を求めよ。
+  \item[(2)] 固有値と各固有空間を求めよ。
+  \item[(3)] $A$ をユニタリ行列で対角化せよ。
+  \item[(4)] エルミート行列の固有値がすべて実数であることを示せ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+$v=(i,-1,i,1)^{\mathsf T}$ とおくと $A=I_4+vv^*$ である。
+\begin{enumerate}
+  \item[(1)] $v$ 方向の固有値は $1+\norm{v}^2=5$，その直交補空間では $1$。したがって $\det A=5$。
+  \item[(2)] 固有値は $1$（重複度3）と $5$（重複度1）で，
+  \[
+  W_5=\langle v\rangle,\qquad W_1=v^\perp
+  =\{x\in\mathbb C^4\mid -ix_1-x_2-ix_3+x_4=0\}.
+  \]
+  \item[(3)] 次の列は正規直交基底である：
+  \[
+  u_1=\frac1{\sqrt2}(1,-i,0,0)^{\mathsf T},\quad
+  u_2=\frac1{\sqrt2}(0,0,1,i)^{\mathsf T},
+  \]
+  \[
+  u_3=\frac12(-i,1,i,1)^{\mathsf T},\quad
+  u_4=\frac12(i,-1,i,1)^{\mathsf T}.
+  \]
+  $P=(u_1\ u_2\ u_3\ u_4)$ とすれば $P^*P=I$ かつ $P^*AP=\diag(1,1,1,5)$。
+  \item[(4)] $Xw=\lambda w$，$w\ne0$ とする。$X=X^*$ なので
+  $\lambda\inner{w}{w}=\inner{Xw}{w}=\inner{w}{Xw}=\overline\lambda\inner{w}{w}$。
+  $\inner{w}{w}>0$ より $\lambda=\overline\lambda\in\R$。
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{第2問｜重積分}{2026-2-2}
+\[
+D=\{(x,y)\in\R^2\mid1\le x^2+y^2\le4,\ 0\le x\le1,\ y\ge0\}.
+\]
+\begin{enumerate}
+  \item[(1)] $D$ を図示せよ。
+  \item[(2)] $-\pi/2<\theta<\pi/2$ で $\displaystyle\log\left(\tan\theta+\frac1{\cos\theta}\right)$ の導関数を求めよ。
+  \item[(3)] $\displaystyle\iint_D\frac{x}{\sqrt{x^2+y^2}}\,\d x\d y$ を求めよ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+\begin{enumerate}
+  \item[(1)] 上半平面にある半径1と2の半円の間を，縦線 $x=0,1$ で切った領域である。
+  \item[(2)] 直接微分して整理すると $1/\cos\theta$。
+  \item[(3)] 極座標で $x/r=\cos\theta$，Jacobian は $r$。$0\le\theta\le\pi/3$ では $1\le r\le\sec\theta$，$\pi/3\le\theta\le\pi/2$ では $1\le r\le2$ だから
+  \[
+  \int_0^{\pi/3}\int_1^{\sec\theta}r\cos\theta\,\d r\d\theta
+  +\int_{\pi/3}^{\pi/2}\int_1^2r\cos\theta\,\d r\d\theta
+  =\frac32-\sqrt3+\frac12\log(2+\sqrt3).
+  \]
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{第3問｜集合までの距離}{2026-2-3}
+距離空間 $(X,d)$ と空でない部分集合 $A\subset X$ に対し
+$d(x,A)=\inf\{d(x,a)\mid a\in A\}$ とおく。
+\begin{enumerate}
+  \item[(1)] $|d(x,A)-d(y,A)|\le d(x,y)$ を示せ。
+  \item[(2)] $f(x)=d(x,A)$ が連続であることを示せ。
+  \item[(3)] $x$ が $A$ の触点であることと $d(x,A)=0$ が同値であることを示せ。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+\begin{enumerate}
+  \item[(1)] 任意の $a\in A$ に対し $d(x,a)\le d(x,y)+d(y,a)$。下限を取って $d(x,A)\le d(x,y)+d(y,A)$。$x,y$ を交換した式と合わせればよい。
+  \item[(2)] (1) は $f$ が $1$-Lipschitz であることを表すので連続。
+  \item[(3)] $d(x,A)=0$ は「任意の $\varepsilon>0$ に対し $d(x,a)<\varepsilon$ となる $a\in A$ がある」と同値。これは任意の開球 $B(x,\varepsilon)$ が $A$ と交わる，すなわち $x\in\overline A$ と同値である。
+\end{enumerate}
+\end{proof}

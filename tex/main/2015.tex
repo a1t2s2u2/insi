@@ -1,0 +1,250 @@
+\chapter{2015年度（平成27年度）}
+\label{ch:2015}
+
+\section{第1期・専門基礎科目（3題必修）}
+
+\begin{problem}{第1問｜基底と上三角化}{2015-b-1}
+有限次元実ベクトル空間 $V$ について，一次独立と基底を定義せよ。基底 $v_1,\ldots,v_n$ と同型写像 $f:V\to V$ に対し $f(v_1),\ldots,f(v_n)$ も基底であることを示せ。また $V=\R^n$，$W_i=\langle v_1,\ldots,v_i\rangle$ とし，$AW_i\subset W_i$ なら $P^{-1}AP$ を上三角にする正則行列 $P$ があることを示せ。
+\end{problem}
+\begin{proof}[解答]
+一次独立とは $\sum a_iv_i=0$ なら全 $a_i=0$ となること，基底とは一次独立かつ $V$ を生成すること。同型は線形関係と生成を保つので像も基底。最後は $P=(v_1\ \cdots\ v_n)$ と取る。$Av_i\in W_i$ だから第 $i$ 列の第 $i+1$ 行以下は0，従って $P^{-1}AP$ は上三角。
+\end{proof}
+
+\begin{problem}{第2問｜広義積分}{2015-b-2}
+$f_a(x)=x^a\log x$ $(x>0)$ とする。不定積分を求めよ。また
+$I(a,R)=\iint_{x^2+y^2<R^2}f_a(1+x^2+y^2)\,\d x\d y$ とするとき $I(0,1)$ と，$\lim_{R\to\infty}I(a,R)$ が収束する $a$ の範囲を求めよ。
+\end{problem}
+\begin{proof}[解答]
+$a\ne-1$ なら
+\[
+\int x^a\log x\,\d x=x^{a+1}\left(\frac{\log x}{a+1}-\frac1{(a+1)^2}\right)+C,
+\]
+$a=-1$ なら $(\log x)^2/2+C$。極座標で
+$I(a,R)=\pi\int_1^{1+R^2}u^a\log u\,\d u$。よって
+$I(0,1)=\pi(2\log2-1)$，広義積分が収束するのは $a<-1$。
+\end{proof}
+
+\begin{problem}{第3問｜二重周期関数}{2015-b-3}
+連続関数 $f:\R^2\to\R$ が $f(x+1,y)=f(x,y+1)=f(x,y)$ を満たす。
+$f(\R^2)=f([0,1]^2)$，$f$ が最大・最小値を持つこと，さらに最大値 $b$ と最小値 $a$ に対して $f\circ c:[0,1]\to[a,b]$ が全射となる連続曲線 $c$ が存在することを示せ。
+\end{problem}
+\begin{proof}[解答]
+整数部分を引けば任意の点を基本領域へ移せるので像は等しい。$[0,1]^2$ はコンパクトだから最大・最小点 $p,q$ がある。$c(t)=(1-t)p+tq$ とすれば $f\circ c$ は連続で両端値 $a,b$ を取るため，中間値の定理により $[a,b]$ 上全射。
+\end{proof}
+
+\section{専門科目（8題から2題選択）}
+
+\begin{problem}{第1問｜有限体上の行列群}{2015-s-1}
+$\mathbb F_p$ 上で
+\[
+G=\left\{\begin{pmatrix}a&0&b\\c&1&d\\e&0&f\end{pmatrix}\ \middle|\ af-be=1\right\}
+\]
+とする。$G$ が群であること，外側の $2\times2$ 小行列を取る写像 $\varphi:G\to GL_2(\mathbb F_p)$ が準同型であることを示せ。$K=\ker\varphi$ の中心化群を求め，さらに
+$X=\begin{pmatrix}1&0&0\\0&1&0\\1&0&1\end{pmatrix}$ と $K$ が生成する $H$ の位数と中心を求めよ。
+\end{problem}
+\begin{proof}[解答]
+基底順を $(e_1,e_3;e_2)$ と見れば元は $\begin{pmatrix}B&0\\u&1\end{pmatrix}$（$B\in SL_2,u\in\mathbb F_p^2$）。この表示で群性と $\varphi(B,u)=B$ は明らか。
+$K=\{(I,u)\}\cong\mathbb F_p^2$。全ての $u$ と可換するには $B=I$ が必要なので $C_G(K)=K$。$\varphi(X)=\begin{pmatrix}1&0\\1&1\end{pmatrix}$ は位数 $p$ で，$|H|=p^2p=p^3$。中心は
+\[
+Z(H)=\left\{\begin{pmatrix}1&0&0\\c&1&0\\0&0&1\end{pmatrix}\middle|c\in\mathbb F_p\right\},
+\]
+従って位数 $p$。
+\end{proof}
+
+\begin{problem}{第2問｜整数係数多項式環}{2015-s-2}
+$\Phi:\Z[X]\to\R\times\R$，$\Phi(f)=(f(\sqrt7),f(\sqrt{13}))$ とする。$f(\sqrt7)=0$ なら $X^2-7$ が $f$ を割ること，
+$\ker\Phi=((X^2-7)(X^2-13))$ を示せ。$P_1=(\Phi(X^2-7))$，$P_2=(\Phi(X^2-13))$ が $\operatorname{Im}\Phi$ の素イデアルだが極大でないことを示し，両方を含む素イデアルの個数を求めよ。
+\end{problem}
+\begin{proof}[解答]
+除法で $f=(X^2-7)q+rX+s$ と書けば $r\sqrt7+s=0$。$r,s\in\Z$ と $\sqrt7\notin\Q$ より $r=s=0$。同様に二つの既約多項式の積が核を生成する。
+$\operatorname{Im}\Phi/P_1\cong\Z[\sqrt7]$，$\operatorname{Im}\Phi/P_2\cong\Z[\sqrt{13}]$ は整域だが体でない。
+両方を含む素イデアルは $6$ を含む。$2$ 上では $X^2-1=(X-1)^2$ から1個，$3$ 上では $(X-1)(X+1)$ から2個生じるので，合計は $3$ 個。
+\end{proof}
+
+\begin{problem}{第3問｜リフトと基本群}{2015-s-3}
+弧状連結空間の写像 $f:Y\to X$ が道とホモトピーの一意なリフト性を持ち，$F=f^{-1}(x_0)$ は離散とする。誘導写像 $f_*:\pi_1(Y,y_0)\to\pi_1(X,x_0)$ が単射であることを示せ。また閉道のリフトの終点を対応させる $\varphi:\pi_1(X,x_0)\to F$ が well-defined，全射であり，$\varphi([\gamma_0])=\varphi([\gamma_1])$ と $[\gamma_0][\gamma_1]^{-1}\in f_*(\pi_1(Y,y_0))$ が同値であることを示せ。
+\end{problem}
+\begin{proof}[解答]
+$f\circ\eta$ が零ホモトピックなら，そのホモトピーを持ち上げる。端点は離散集合 $F$ 内を連続に動くので一定となり，$\eta$ 自身が零ホモトピック。従って $f_*$ は単射。ホモトピーのリフトでも終点が一定なので $\varphi$ は well-defined。$Y$ の弧状連結性から $y_0$ と任意の $y\in F$ を結ぶ道を取り，像を使えば全射。二つのリフトの終点が等しいことは，連結した道 $\gamma_0\gamma_1^{-1}$ が $y_0$ で閉じることと同値であり，これはその類が $f_*$ の像に入ることと同値。
+\end{proof}
+
+\begin{problem}{第4問｜楕円放物面}{2015-s-4}
+$S$ を $z=2x^2+y^2$ のグラフ，$C(t)=(t,t,3t^2)$ とする。$S$ の Gauss 曲率・平均曲率，$C$ の接線方向の法曲率を求め，法曲率と平均曲率が等しい $C$ 上の点を求めよ。
+\end{problem}
+\begin{proof}[解答]
+$W=\sqrt{1+16x^2+4y^2}$ とおくと（上向き法線）
+\[
+K=\frac8{W^4},\qquad H=\frac{3+16x^2+8y^2}{W^3}.
+\]
+$C$ の方向 $(1,1)$ に対する法曲率は
+\[
+k_n(t)=\frac6{\sqrt{1+20t^2}(2+36t^2)}.
+\]
+$k_n=H(t,t)$ を整理すると $36t^2(1+24t^2)=0$。従って点は $(0,0,0)$ のみ。
+\end{proof}
+
+\begin{problem}{第5問｜3次方程式}{2015-s-5}
+$f(z)=z^3+az+b$，$R=\max\{|a|,|b|\}+1$ とする。$|z|\ge R+1$ なら $f(z)\ne0$ を示せ。また
+\[
+P_n=\frac1{2\pi i}\int_{|z|=R+1}\frac{z^n(3z^2+a)}{z^3+az+b}\,\d z,
+\quad \Delta=P_0P_3^2-\frac12P_2^3
+\]
+を $a,b$ で表し，$\Delta=0$, $(a,b)\ne(0,0)$ のときの全ての根を求めよ。
+\end{problem}
+\begin{proof}[解答]
+$|z|^3>|a||z|+|b|$ を使えば最初の主張が従う。偏角原理から $P_n$ は3根の $n$ 乗和。Newton の公式で $P_0=3,P_2=-2a,P_3=-3b$，従って
+$\Delta=4a^3+27b^2$。
+$\Delta=0$ は重根を持つ条件。$r=-3b/(2a)$ とおけば
+\[
+f(z)=(z-r)^2(z+2r),
+\]
+なので根は $-3b/(2a)$（重複度2）と $3b/a$。
+\end{proof}
+
+\begin{problem}{第6問｜常微分方程式}{2015-s-6}
+$y'=\sin y$, $y(0)=\pi/2$ を解け。また $f\in C^1(\R^2)$ に対する $y'=\sin f(x,y)$ の任意の極大解の定義域が $\R$ 全体であることを示せ。
+\end{problem}
+\begin{proof}[解答]
+変数分離により $\log\tan(y/2)=x$，従って $y=2\arctan(e^x)$。一般の式でも $|y'|\le1$ なので有限区間で $y$ は発散できない。右辺は $C^1$ で局所解の延長が可能だから，極大解の端点は有限にならない。
+\end{proof}
+
+\begin{problem}{第7問｜収束定理}{2015-s-7}
+$p>0$，$0<f<\infty$，$\int_Xf^p\,\d\mu=1$ とする。次を求めよ。
+\[
+\lim_{n\to\infty}\int_X\left|n\sin\left(\frac{f(x)}n\right)\right|^p\,\d\mu(x).
+\]
+\end{problem}
+\begin{proof}[解答]
+点ごとに $n\sin(f/n)\to f$。また $|n\sin(f/n)|^p\le f^p$ なので優収束定理を使える。答えは $\int f^p=1$。
+\end{proof}
+
+\begin{problem}{第8問｜独立確率変数の級数}{2015-s-8}
+$X$ の平均を $\mu$，分散を $\sigma^2$ とし，独立な $X_n$ の密度を $nf(nx)$ とする。$S_n=\sum_{k=1}^nX_k$ とおく。$E[X_n],V[X_n]$ を求め，$S_n$ が概収束する必要十分条件が $\mu=0$ であることを示せ。$X$ が標準正規分布なら極限分布を求めよ。
+\end{problem}
+\begin{proof}[解答]
+$X_n$ は $X/n$ と同分布なので $E[X_n]=\mu/n$，$V[X_n]=\sigma^2/n^2$。$\mu=0$ なら独立・中心化かつ分散和が有限なので Kolmogorov の収束定理により概収束。$\mu\ne0$ なら中心化した級数は収束する一方，平均部分 $\mu\sum1/n$ が発散するので概収束しない。標準正規の場合，極限は平均0，分散 $\sum1/n^2=\pi^2/6$ の正規分布。
+\end{proof}
+
+\section{第2期・専門基礎科目（3題必修）}
+
+\begin{problem}{第1問｜像・核と直和}{2015-2-1}
+\[
+A=\begin{pmatrix}1&2&3&0\\-1&0&-1&2\\2&3&5&-1\\1&1&2&-1\end{pmatrix},\quad
+B=\begin{pmatrix}1&2&3&0\\1&2&2&1\\2&4&3&3\\3&6&7&2\end{pmatrix}.
+\]
+$\operatorname{Im}A,\operatorname{Im}B$ の基底と共通部分，$\dim(\ker A+\ker B)$ を求めよ。また一般に $\R^n=\operatorname{Im}f\oplus\operatorname{Im}g$ のとき $\ker(f+g)=\ker f\cap\ker g$ を示し，さらに $\R^n=\ker f+\ker g$ なら $f+g$ が全単射であることを示せ。
+\end{problem}
+\begin{proof}[解答]
+行基本変形により
+\[
+\operatorname{Im}A=\langle(1,-1,2,1),(2,0,3,1)\rangle,
+\]
+\[
+\operatorname{Im}B=\langle(1,1,2,3),(3,2,3,7)\rangle,
+\quad \operatorname{Im}A\cap\operatorname{Im}B=\{0\}.
+\]
+$\ker A=\langle(-1,-1,1,0),(2,-1,0,1)\rangle$，
+$\ker B=\langle(-2,1,0,0),(-3,0,1,1)\rangle$ なので核の和の次元は3。
+一般論は $(f+g)x=0$ なら $f(x)=-g(x)$ が直和の共通部分に入るため両方0。従って核の等式を得る。追加仮定から核の次元公式で $\ker f\cap\ker g=0$，よって $f+g$ は単射，有限同次元なので全射。
+\end{proof}
+
+\begin{problem}{第2問｜滑らかな関数の分解}{2015-2-2}
+$f\in C^\infty(\R^2)$，$f(0,0)=0$ とする。$f=xg+yh$ となる滑らかな $g,h$ があること，さらに $f=xG(x,y)+yH(y)$ とできることを示せ。
+\end{problem}
+\begin{proof}[解答]
+\[
+f(x,y)=\int_0^1\frac{\d}{\d t}f(tx,ty)\,\d t
+=x\int_0^1f_x(tx,ty)\,\d t+y\int_0^1f_y(tx,ty)\,\d t.
+\]
+これが最初の分解。次に $H(y)=\int_0^1f_y(0,ty)\,\d t$，$G(x,y)=\int_0^1f_x(tx,y)\,\d t$ と取れば
+$f(x,y)=f(x,y)-f(0,y)+f(0,y)=xG+yH$。
+\end{proof}
+
+\begin{problem}{第3問｜コンパクト性と連結性}{2015-2-3}
+コンパクト空間 $S$ から Hausdorff 空間 $T$ への連続写像 $f$ と $p\in f(S)$ に対し $f^{-1}(\{p\})$ がコンパクトであることを示せ。また $X=\Q^2$，$Y=\R^2\setminus\Q^2$ は連結か判定せよ。
+\end{problem}
+\begin{proof}[解答]
+Hausdorff 空間の一点集合は閉なので，逆像はコンパクト空間 $S$ の閉部分集合，従ってコンパクト。$X$ は無理数を境界に使って分離できるので非連結。$Y$ は道連結である。実際，座標の一方が無理数である水平線・垂直線を中継して任意の二点を折れ線で結べる。
+\end{proof}
+
+\section{応用数理コース・専門基礎科目（4題必修）}
+
+\begin{problem}{第1問｜連立方程式と行列}{2015-a-1}
+連立方程式
+$x+2y+3z=1$, $4x+5y+6z=-2$, $7x+8y+9z=a$ が解を持つ $a$ と全解を求めよ。また
+\[
+A=\begin{pmatrix}1&2&3\\2&3&1\\3&1&2\end{pmatrix},
+B=\begin{pmatrix}1&2&3\\8&5&5\\3&1&2\end{pmatrix},
+C=\begin{pmatrix}2&1&3\\3&2&1\\1&3&2\end{pmatrix}
+\]
+に対し $XA=B$, $AY=C$ を解け。さらに $A^2+A-2I=0$ なら $A$ が正則，冪零行列 $A$ は非正則だが $I\pm A$ は正則であることを示せ。
+\end{problem}
+\begin{proof}[解答]
+$a=-5$，全解は $(x,y,z)=(t-3,2-2t,t)$。
+\[
+X=\begin{pmatrix}1&0&0\\0&1&2\\0&0&1\end{pmatrix},\qquad
+Y=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix}.
+\]
+恒等式から $A^{-1}=(A+I)/2$。$A^m=0$ なら正則性は矛盾し，$(I-A)^{-1}=I+A+\cdots+A^{m-1}$，$(I+A)^{-1}=I-A+\cdots+(-A)^{m-1}$。
+\end{proof}
+
+\begin{problem}{第2問｜対角化・漸化式・直交行列}{2015-a-2}
+$A=\begin{pmatrix}-2&1&2\\1&0&0\\0&1&0\end{pmatrix}$ の固有値・固有空間を求め，対角化せよ。対角化に使う正則行列とその逆行列，$A^n$ の第1行も求めよ。また $x_n=-2x_{n-1}+x_{n-2}+2x_{n-3}$ の二組の指定初期値 $(1,0,0)$ と $(0,-1,1)$ に対する一般項を求めよ。
+
+さらに，実正方行列 $B$ に関する次の三条件が同値であることを示せ。
+\begin{enumerate}
+  \item[(ア)] $B$ は直交行列である。
+  \item[(イ)] 任意の $x\in\R^n$ に対し $\norm{Bx}=\norm{x}$。
+  \item[(ウ)] 任意の $x,y\in\R^n$ に対し $\inner{Bx}{By}=\inner{x}{y}$。
+\end{enumerate}
+\end{problem}
+\begin{proof}[解答]
+固有値は $1,-1,-2$，固有ベクトルは順に $(1,1,1),(1,-1,1),(4,-2,1)$。従って
+\[
+P=\begin{pmatrix}1&1&4\\1&-1&-2\\1&1&1\end{pmatrix},\qquad
+P^{-1}=\begin{pmatrix}1/6&1/2&1/3\\-1/2&-1/2&1\\1/3&0&-1/3\end{pmatrix}
+\]
+とすれば $P^{-1}AP=\diag(1,-1,-2)$。
+$A^n$ の第1行は
+\[
+\left(\frac16-\frac{(-1)^n}2+\frac43(-2)^n,
+\frac{1-(-1)^n}2,
+\frac13+(-1)^n-\frac43(-2)^n\right).
+\]
+一般項はそれぞれ
+\[
+x_n=\frac13-(-1)^n+\frac16(-2)^n,\qquad
+x_n=-\frac13-\frac16(-2)^n.
+\]
+
+最後は $(\text{ア})\Rightarrow(\text{イ})$ が
+$\norm{Bx}^2=x^{\mathsf T}B^{\mathsf T}Bx=\norm{x}^2$ から従う。
+$(\text{イ})\Rightarrow(\text{ウ})$ は実内積の極化公式
+\[
+2\inner{x}{y}=\norm{x+y}^2-\norm{x}^2-\norm{y}^2
+\]
+を使う。$(\text{ウ})\Rightarrow(\text{ア})$ は標準基底 $e_i$ に対して
+$\inner{Be_i}{Be_j}=\delta_{ij}$，すなわち $B^{\mathsf T}B=I$ となることから従う。
+\end{proof}
+
+\begin{problem}{第3問｜初等微積分}{2015-a-3}
+$\log|\tan x|$ と $x^{\sin x}$ の導関数を求めよ。$x+\sqrt{x^2+1}=t$ から $x$ を表し，$\int_0^1\d x/\sqrt{x^2+1}$ と $\int_0^1\sqrt{x^2+1}\,\d x$ を求めよ。
+\end{problem}
+\begin{proof}[解答]
+導関数は
+\[
+\frac1{\sin x\cos x},\qquad
+x^{\sin x}\left(\cos x\log x+\frac{\sin x}{x}\right).
+\]
+$x=(t-t^{-1})/2$。積分値は順に
+\[
+\log(1+\sqrt2),\qquad \frac{\sqrt2+\log(1+\sqrt2)}2.
+\]
+\end{proof}
+
+\begin{problem}{第4問｜最大最小と三重積分}{2015-a-4}
+$\sqrt x+\sqrt y=1$ のもとで $x^2+xy+y^2$ の最大・最小を求めよ。また原点中心・半径 $a$ の球 $V$ 上で $\iiint_V(x+y+z)\,\d x\d y\d z$ を求めよ。
+\end{problem}
+\begin{proof}[解答]
+$u=\sqrt x,v=\sqrt y$ とし $u+v=1$。$q=uv\in[0,1/4]$ とおけば値は $1-4q+3q^2$。最大値は $1$（$(x,y)=(1,0),(0,1)$），最小値は $3/16$（$x=y=1/4$）。三重積分は領域の原点対称性と被積分関数の奇対称性から $0$。
+\end{proof}
