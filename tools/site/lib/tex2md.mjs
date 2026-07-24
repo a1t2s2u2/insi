@@ -390,7 +390,7 @@ class Converter {
         }
         if (proofNodes !== null && proofNodes !== undefined) {
           output.push("");
-          output.push(":::details-embedded 証明");
+          output.push(":::details-embedded 解答");
           const proofText = this.renderNodes(proofNodes).join("\n").trim();
           if (proofText) output.push(proofText);
           output.push(":::");
@@ -410,7 +410,7 @@ class Converter {
       }
 
       if (kind === "standalone_proof") {
-        output.push(":::details-embedded 証明");
+        output.push(":::details-embedded 解答");
         const proofText = this.renderNodes(node[1]).join("\n").trim();
         if (proofText) output.push(proofText);
         output.push(":::");

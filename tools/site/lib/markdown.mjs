@@ -45,8 +45,11 @@ const CONTAINERS = containerSpecs();
 
 // 見出しから参照キーを取り出す正規表現。
 // 「Lem 2.2.3: タイトル」（番号付き）と「Lem: タイトル」の両形式を許す。
-const HEADING_PREFIXES = Object.values(ID_PREFIX)
-  .map((p) => p[0].toUpperCase() + p.slice(1))
+const HEADING_PREFIXES = [
+  ...Object.values(ID_PREFIX).map((p) => p[0].toUpperCase() + p.slice(1)),
+  ...Object.values(BLOCK_TYPES).map((meta) => meta.label),
+]
+  .filter((value, index, values) => values.indexOf(value) === index)
   .join("|");
 const HEADING_NAME_RE = new RegExp(
   `^(?:${HEADING_PREFIXES})(?:\\s+[0-9A-Z.]+)?:\\s*(.+)$`,

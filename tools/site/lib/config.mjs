@@ -19,6 +19,7 @@ const DEFAULT_FEATURES = {
   fadeIn: true, // ブロックのスクロール・フェードイン
   refPulse: true, // 参照クリック時に本文側ブロックを光らせる
   keyboardHelp: true, // "?" でショートカット一覧を表示
+  dependencyGraph: true, // 依存グラフへの導線
 };
 
 // tex の環境名 → [サイト側コンテナ, 見出し接頭辞]。
@@ -26,6 +27,7 @@ const DEFAULT_FEATURES = {
 // コンテナ名はそのままブロック種別になり、配色・依存グラフの絞り込みに効く
 // （対応表は lib/blocks.mjs）。tex 側の環境と 1 対 1 に保つこと。
 const DEFAULT_BLOCK_ENVS = {
+  problem: ["problem", "問題"],
   definition: ["definition", "Def"],
   claim: ["claim", "Clm"],
   lemma: ["lemma", "Lem"],
@@ -39,6 +41,7 @@ const DEFAULT_BLOCK_ENVS = {
 
 // tex の環境名 → \label の接頭辞（\ref 解決と定理番号の引き当てに使う）。
 const DEFAULT_ENV_TO_PREFIX = {
+  problem: "prob",
   definition: "def",
   claim: "clm",
   lemma: "lem",
@@ -51,6 +54,7 @@ const DEFAULT_ENV_TO_PREFIX = {
 
 // \label の接頭辞 → 表示略号。
 const DEFAULT_LABEL_PREFIX_MAP = {
+  prob: "問題",
   def: "Def",
   clm: "Clm",
   lem: "Lem",
@@ -63,6 +67,7 @@ const DEFAULT_LABEL_PREFIX_MAP = {
 
 // 本文中の参照語（日本語）→ 表示略号。tex 側の「定理~\ref{...}」を解釈する。
 const DEFAULT_JP_TO_ABBREV = {
+  問題: "問題",
   定義: "Def",
   主張: "Clm",
   命題: "Prop",
@@ -138,6 +143,7 @@ export async function loadConfig(seminarDir) {
     logo: raw.logo ?? "OT",
     siteName: raw.siteName ?? `${raw.title}セミナー`,
     landingTitle: raw.landingTitle ?? raw.title,
+    landingTagline: raw.landingTagline ?? "セミナー資料",
     landingSubtitle: raw.landingSubtitle ?? "",
     landingFooter: raw.landingFooter ?? "",
     appendixHeading: raw.appendixHeading ?? "付録：前提知識",

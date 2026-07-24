@@ -2,6 +2,7 @@
 // 1 か所で対応づける。ここに足せば三者が同時に追随する。
 
 export const BLOCK_TYPES = {
+  problem: { label: "問題", cssClass: "block--problem", color: "var(--teal)" },
   definition: { label: "定義", cssClass: "block--def", color: "var(--teal)" },
   theorem: { label: "定理", cssClass: "block--thm", color: "var(--indigo)" },
   proposition: { label: "命題", cssClass: "block--prop", color: "var(--orange)" },
@@ -15,6 +16,7 @@ export const BLOCK_TYPES = {
 
 // HTML の id に使う接頭辞（def-…, thm-… など）。
 export const ID_PREFIX = {
+  problem: "prob",
   definition: "def",
   theorem: "thm",
   proposition: "prop",
