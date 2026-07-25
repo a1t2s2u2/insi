@@ -43,12 +43,61 @@ $S^1\subset\R^2$ を単位円，$x_0=(1,0)$ とする。
 \end{problem}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] 閉道を成分ごとに送る $[(f,g)]\mapsto([f],[g])$ は群同型だから
+  \item[(1)] $S^1\times S^1$ の基点付き閉道 $\gamma$ は
+  $\gamma(t)=(\gamma_1(t),\gamma_2(t))$ と成分ごとに書ける。ホモトピーも成分ごとに分解できるので
   \[
-  \pi_1(S^1\times S^1)\cong\pi_1(S^1)\times\pi_1(S^1)\cong\Z^2.
+  \Phi:\pi_1(S^1\times S^1,(x_0,x_0))
+  \longrightarrow\pi_1(S^1,x_0)\times\pi_1(S^1,x_0),
+  \quad
+  [\gamma]\longmapsto([\gamma_1],[\gamma_2])
   \]
-  \item[(2)] $p(t)=(\cos2\pi t,\sin2\pi t)$ とおけば $p\times p:\R^2\to S^1\times S^1$ は被覆写像。$\R^2$ は単連結なので，これが普遍被覆である。
-  \item[(3)] $q:S^1\times\R\to S^1\times S^1$, $q(z,t)=(z,p(t))$ は被覆写像で，$\pi_1(S^1\times\R)\cong\Z$。
+  は well-defined である。逆写像は $([\alpha],[\beta])\mapsto[(\alpha,\beta)]$ であり、
+  閉道の積も成分ごとに計算されるので $\Phi$ は群同型である。従って
+  \[
+  \pi_1(S^1\times S^1,(x_0,x_0))
+  \cong\pi_1(S^1,x_0)\times\pi_1(S^1,x_0)
+  \cong\Z\times\Z.
+  \]
+
+  \item[(2)]
+  \[
+  p:\R\to S^1,
+  \qquad p(t)=(\cos2\pi t,\sin2\pi t)
+  \]
+  とおき、$P=p\times p:\R^2\to S^1\times S^1$ を考える。
+  各 $(z,w)\in S^1\times S^1$ の周りに、それぞれ $S^1$ を一周しない短い開円弧
+  $U\ni z$, $V\ni w$ を取る。$U,V$ は $p$ により均等被覆されるから
+  \[
+  p^{-1}(U)=\bigsqcup_{k\in\Z}U_k,
+  \qquad
+  p^{-1}(V)=\bigsqcup_{\ell\in\Z}V_\ell,
+  \]
+  かつ各制限 $p|_{U_k}:U_k\to U$, $p|_{V_\ell}:V_\ell\to V$ は同相写像である。従って
+  \[
+  P^{-1}(U\times V)
+  =\bigsqcup_{(k,\ell)\in\Z^2}(U_k\times V_\ell),
+  \]
+  各成分への $P$ の制限は $U\times V$ への同相写像である。よって $P$ は被覆写像である。
+  $\R^2$ は弧状連結かつ単連結なので、$P$ は普遍被覆である。
+
+  \item[(3)]
+  \[
+  q:S^1\times\R\to S^1\times S^1,
+  \qquad q(z,t)=(z,p(t))
+  \]
+  と定める。(2) と同じく、短い円弧の積 $U\times V$ に対して
+  \[
+  q^{-1}(U\times V)
+  =\bigsqcup_{k\in\Z}(U\times V_k)
+  \]
+  となり、各 $U\times V_k$ は $q$ により $U\times V$ へ同相に写る。従って $q$ は被覆写像である。
+  また $\R$ は可縮なので
+  \[
+  \pi_1(S^1\times\R)
+  \cong\pi_1(S^1)\times\pi_1(\R)
+  \cong\Z\times\{0\}\cong\Z.
+  \]
+  よって $q$ が求める被覆空間を与える。
 \end{enumerate}
 \end{proof}
 
@@ -109,9 +158,48 @@ $G:\R\to\R$ は有界連続関数，$M=\sup_{x\in\R}|G(x)|$ とする。$f_n,f:\
 \end{problem}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] 連続性により $G^{-1}(I)$ は開集合。したがって $(G\circ f)^{-1}(I)=f^{-1}(G^{-1}(I))$ は可測である。
-  \item[(2)] $f_n(x)\to f(x)$ となる各 $x$ で，$G$ の連続性から $G(f_n(x))\to G(f(x))$。
-  \item[(3)] $|G(f_n)|\chi_E\le M\chi_E$ かつ $\int M\chi_E=M|E|<\infty$。優収束定理を適用すればよい。
+  \item[(1)] $I\subset\R$ は開集合であり、$G$ は連続だから $G^{-1}(I)$ も開集合である。
+  $f$ はルベーグ可測なので、開集合の逆像 $f^{-1}(G^{-1}(I))$ はルベーグ可測である。
+  写像の合成の逆像を順に計算すると
+  \[
+  (G\circ f)^{-1}(I)
+  =\{x\in\R^d\mid G(f(x))\in I\}
+  =f^{-1}(G^{-1}(I))
+  \]
+  となるから、$G\circ f$ はルベーグ可測である。
+
+  \item[(2)] $f_n\to f$ がほとんど至る所で成り立つので、ある零集合 $N\subset\R^d$ が存在して
+  \[
+  x\in\R^d\setminus N\quad\Longrightarrow\quad f_n(x)\to f(x)
+  \]
+  となる。各 $x\notin N$ について $G$ の $f(x)$ における連続性を使えば
+  \[
+  G(f_n(x))\longrightarrow G(f(x))
+  \]
+  である。従って $G\circ f_n\to G\circ f$ はほとんど至る所で成り立つ。
+
+  \item[(3)] $\chi_E$ を $E$ の定義関数とし
+  \[
+  h_n(x)=G(f_n(x))\chi_E(x),
+  \qquad h(x)=G(f(x))\chi_E(x)
+  \]
+  とおく。(1), (2) より $h_n,h$ は可測で、$h_n\to h$ がほとんど至る所で成り立つ。
+  また $G$ の有界性から
+  \[
+  |h_n(x)|=|G(f_n(x))|\chi_E(x)
+  \le M\chi_E(x)
+  \]
+  であり、$|E|<\infty$ だから
+  \[
+  \int_{\R^d}M\chi_E(x)\,\d x=M|E|<\infty.
+  \]
+  従って優収束定理により
+  \begin{align*}
+  \lim_{n\to\infty}\int_EG(f_n(x))\,\d x
+  &=\lim_{n\to\infty}\int_{\R^d}h_n(x)\,\d x\\
+  &=\int_{\R^d}h(x)\,\d x
+  =\int_EG(f(x))\,\d x.
+  \end{align*}
 \end{enumerate}
 \end{proof}
 
@@ -131,17 +219,40 @@ A=\begin{pmatrix}
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-$B=A-I_4$ とおくと
+$A$ の対角成分を $2=1+1$ と分けると
 \[
-B=\begin{pmatrix}
+A=I_4+B,
+\]
+ただし
+\[
+B:=A-I_4
+=\begin{pmatrix}
 1&-i&1&i\\ i&1&i&-1\\ 1&-i&1&i\\ -i&-1&-i&1
 \end{pmatrix}.
 \]
-第4列を
+この $B$ に行基本変形
+\[
+R_2\longleftarrow R_2-iR_1,\qquad
+R_3\longleftarrow R_3-R_1,\qquad
+R_4\longleftarrow R_4+iR_1
+\]
+を施すと
+\[
+\begin{pmatrix}
+1&-i&1&i\\ i&1&i&-1\\ 1&-i&1&i\\ -i&-1&-i&1
+\end{pmatrix}
+\longrightarrow
+\begin{pmatrix}
+1&-i&1&i\\0&0&0&0\\0&0&0&0\\0&0&0&0
+\end{pmatrix}.
+\]
+従って $\operatorname{rank}B=1$ である。
+
+第4列は非零であり、その第4成分は1である。そこで、この列を
 \[
 v=Be_4=\begin{pmatrix}i\\-1\\i\\1\end{pmatrix}
 \]
-とおく。$B$ の各列を $v$ と比較すると
+とおく。$\operatorname{rank}B=1$ なので $B$ の各列は $v$ のスカラー倍である。実際に各列を比較すると
 \[
 Be_1=-iv,\qquad Be_2=-v,\qquad Be_3=-iv,\qquad Be_4=v.
 \]
@@ -377,8 +488,55 @@ $d(x,A)=\inf\{d(x,a)\mid a\in A\}$ とおく。
 \end{problem}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] 任意の $a\in A$ に対し $d(x,a)\le d(x,y)+d(y,a)$。下限を取って $d(x,A)\le d(x,y)+d(y,A)$。$x,y$ を交換した式と合わせればよい。
-  \item[(2)] (1) は $f$ が $1$-Lipschitz であることを表すので連続。
-  \item[(3)] $d(x,A)=0$ は「任意の $\varepsilon>0$ に対し $d(x,a)<\varepsilon$ となる $a\in A$ がある」と同値。これは任意の開球 $B(x,\varepsilon)$ が $A$ と交わる，すなわち $x\in\overline A$ と同値である。
+  \item[(1)] 任意の $a\in A$ に対し、三角不等式から
+  \[
+  d(x,a)\le d(x,y)+d(y,a)
+  \]
+  である。また $d(x,A)$ は $\{d(x,a)\mid a\in A\}$ の下限だから
+  \[
+  d(x,A)\le d(x,a)\le d(x,y)+d(y,a)
+  \]
+  が全ての $a\in A$ について成り立つ。右端について $a\in A$ の下限を取ると
+  \[
+  d(x,A)\le d(x,y)+\inf_{a\in A}d(y,a)
+  =d(x,y)+d(y,A),
+  \]
+  従って $d(x,A)-d(y,A)\le d(x,y)$ である。
+  $x,y$ を交換すれば
+  \[
+  d(y,A)-d(x,A)\le d(y,x)=d(x,y)
+  \]
+  も得られる。二つの不等式を合わせて
+  \[
+  |d(x,A)-d(y,A)|\le d(x,y)
+  \]
+  となる。
+
+  \item[(2)] $f(x)=d(x,A)$ とおく。(1) より $|f(x)-f(y)|\le d(x,y)$ だから、$f$ は $1$-Lipschitz である。
+  実際、任意の $\varepsilon>0$ に対して $\delta=\varepsilon$ と取れば
+  \[
+  d(x,y)<\delta
+  \quad\Longrightarrow\quad
+  |f(x)-f(y)|\le d(x,y)<\varepsilon.
+  \]
+  従って $f$ は各 $x\in X$ で連続である。
+
+  \item[(3)] $x$ が $A$ の触点であるとは、任意の $\varepsilon>0$ に対して
+  $B(x,\varepsilon)\cap A\ne\varnothing$ となること、すなわち $x\in\overline A$ となることである。
+
+  $x$ が $A$ の触点なら、任意の $\varepsilon>0$ に対して
+  $a\in B(x,\varepsilon)\cap A$ を取れるので
+  \[
+  0\le d(x,A)\le d(x,a)<\varepsilon.
+  \]
+  これは全ての $\varepsilon>0$ について成り立つから $d(x,A)=0$ である。
+
+  逆に $d(x,A)=0$ とする。もしある $\varepsilon>0$ に対して
+  $B(x,\varepsilon)\cap A=\varnothing$ なら、全ての $a\in A$ に対して
+  $d(x,a)\ge\varepsilon$ となり
+  \[
+  d(x,A)=\inf_{a\in A}d(x,a)\ge\varepsilon>0
+  \]
+  となって矛盾する。従って任意の開球 $B(x,\varepsilon)$ は $A$ と交わり、$x$ は $A$ の触点である。
 \end{enumerate}
 \end{proof}

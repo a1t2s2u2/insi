@@ -216,7 +216,80 @@ X^2-1=(X-1)(X+1)
 弧状連結空間の写像 $f:Y\to X$ が道とホモトピーの一意なリフト性を持ち，$F=f^{-1}(x_0)$ は離散とする。誘導写像 $f_*:\pi_1(Y,y_0)\to\pi_1(X,x_0)$ が単射であることを示せ。また閉道のリフトの終点を対応させる $\varphi:\pi_1(X,x_0)\to F$ が well-defined，全射であり，$\varphi([\gamma_0])=\varphi([\gamma_1])$ と $[\gamma_0][\gamma_1]^{-1}\in f_*(\pi_1(Y,y_0))$ が同値であることを示せ。
 \end{problem}
 \begin{proof}[解答]
-$f\circ\eta$ が零ホモトピックなら，そのホモトピーを持ち上げる。端点は離散集合 $F$ 内を連続に動くので一定となり，$\eta$ 自身が零ホモトピック。従って $f_*$ は単射。ホモトピーのリフトでも終点が一定なので $\varphi$ は well-defined。$Y$ の弧状連結性から $y_0$ と任意の $y\in F$ を結ぶ道を取り，像を使えば全射。二つのリフトの終点が等しいことは，連結した道 $\gamma_0\gamma_1^{-1}$ が $y_0$ で閉じることと同値であり，これはその類が $f_*$ の像に入ることと同値。
+まず $f_*$ の単射性を示す。$y_0$ を基点とする閉道 $\eta:[0,1]\to Y$ に対して
+\[
+f_*([\eta])=[f\circ\eta]=1
+\]
+と仮定する。このとき $f\circ\eta$ と定値道 $c_{x_0}$ の間に、端点を固定するホモトピー
+\[
+H:[0,1]\times[0,1]\to X
+\]
+が存在する。$H(0,t)=f(\eta(t))$ とし、このホモトピーを初期リフト $\eta$ から持ち上げて
+$\widetilde H:[0,1]^2\to Y$ を得る。
+
+各 $s\in[0,1]$ について $H(s,0)=H(s,1)=x_0$ だから
+\[
+\widetilde H(s,0),\ \widetilde H(s,1)\in F=f^{-1}(x_0).
+\]
+二つの写像 $s\mapsto\widetilde H(s,0)$ と $s\mapsto\widetilde H(s,1)$ は連続であり、
+$[0,1]$ は連結、$F$ は離散なので、それぞれ一定である。$s=0$ では両端点が $y_0$ だから
+\[
+\widetilde H(s,0)=\widetilde H(s,1)=y_0
+\qquad(0\le s\le1).
+\]
+さらに $H(1,t)=x_0$ であり、その $y_0$ から始まるリフトは道のリフトの一意性により
+定値道 $c_{y_0}$ である。従って $\eta=\widetilde H(0,\cdot)$ は
+$c_{y_0}=\widetilde H(1,\cdot)$ と端点を固定してホモトピックであり、$[\eta]=1$ である。
+よって $\ker f_*=\{1\}$、すなわち $f_*$ は単射である。
+
+次に、$x_0$ を基点とする閉道 $\gamma$ の $y_0$ から始まる一意なリフトを
+$\widetilde\gamma$ とし
+\[
+\varphi([\gamma])=\widetilde\gamma(1)\in F
+\]
+と定める。同じ類を表す閉道 $\gamma_0,\gamma_1$ の間の端点固定ホモトピーを持ち上げると、
+リフトの終点は $F$ の中を連続に動く。$F$ は離散なので終点は一定であり
+\[
+\widetilde\gamma_0(1)=\widetilde\gamma_1(1).
+\]
+従って $\varphi$ は代表元の取り方によらず well-defined である。
+
+$\varphi$ が全射であることを示す。任意の $y\in F$ に対して、$Y$ の弧状連結性より
+$y_0$ から $y$ への道 $\alpha$ を取れる。このとき
+\[
+\gamma=f\circ\alpha
+\]
+は $x_0$ を基点とする閉道であり、$\alpha$ 自身が $\gamma$ の $y_0$ から始まるリフトである。
+従って $\varphi([\gamma])=\alpha(1)=y$ となり、$\varphi$ は全射である。
+
+最後に、$\gamma_0,\gamma_1$ の $y_0$ から始まるリフトを
+$\widetilde\gamma_0,\widetilde\gamma_1$ とする。もし
+\[
+\varphi([\gamma_0])=\varphi([\gamma_1])=:y
+\]
+なら、道
+\[
+\widetilde\gamma_0*\widetilde\gamma_1^{-1}
+\]
+は $y_0$ を基点とする $Y$ の閉道であり、その $f$ による像は
+$\gamma_0*\gamma_1^{-1}$ である。従って
+\[
+[\gamma_0][\gamma_1]^{-1}
+=f_*([\widetilde\gamma_0*\widetilde\gamma_1^{-1}])
+\in f_*(\pi_1(Y,y_0)).
+\]
+
+逆に $[\gamma_0][\gamma_1]^{-1}\in f_*(\pi_1(Y,y_0))$ とする。
+このとき $\gamma_0*\gamma_1^{-1}$ は、ある $Y$ の閉道の像と端点を固定してホモトピックである。
+ホモトピーを持ち上げ、上と同じく終点が離散集合 $F$ の中で一定であることを使うと、
+$\gamma_0*\gamma_1^{-1}$ の $y_0$ から始まるリフトも $y_0$ で終わる。
+このリフトの後半を逆向きに見ると、それは $\gamma_1$ の $y_0$ から始まるリフトであり、
+その終点は $\widetilde\gamma_0(1)$ である。道のリフトの一意性より、このリフトは
+$\widetilde\gamma_1$ と一致する。従って
+\[
+\widetilde\gamma_0(1)=\widetilde\gamma_1(1),
+\]
+すなわち $\varphi([\gamma_0])=\varphi([\gamma_1])$ である。
 \end{proof}
 
 \begin{problem}{第4問｜楕円放物面}{2015-s-4}
@@ -504,12 +577,56 @@ $p,q,r$ は一次独立である。従って $\dim(\ker A+\ker B)=3$。
 $f\in C^\infty(\R^2)$，$f(0,0)=0$ とする。$f=xg+yh$ となる滑らかな $g,h$ があること，さらに $f=xG(x,y)+yH(y)$ とできることを示せ。
 \end{problem}
 \begin{proof}[解答]
+まず一変数関数 $\varphi(t)=f(tx,ty)$ を考える。連鎖律より
 \[
-f(x,y)=\int_0^1\frac{\d}{\d t}f(tx,ty)\,\d t
-=x\int_0^1f_x(tx,ty)\,\d t+y\int_0^1f_y(tx,ty)\,\d t.
+\varphi'(t)=x f_x(tx,ty)+y f_y(tx,ty)
 \]
-これが最初の分解。次に $H(y)=\int_0^1f_y(0,ty)\,\d t$，$G(x,y)=\int_0^1f_x(tx,y)\,\d t$ と取れば
-$f(x,y)=f(x,y)-f(0,y)+f(0,y)=xG+yH$。
+である。$f(0,0)=0$ と微積分学の基本定理を用いると
+\begin{align*}
+f(x,y)
+&=f(x,y)-f(0,0)\\
+&=\varphi(1)-\varphi(0)\\
+&=\int_0^1\varphi'(t)\,\d t\\
+&=x\int_0^1f_x(tx,ty)\,\d t
+ +y\int_0^1f_y(tx,ty)\,\d t.
+\end{align*}
+従って
+\[
+g(x,y)=\int_0^1f_x(tx,ty)\,\d t,
+\qquad
+h(x,y)=\int_0^1f_y(tx,ty)\,\d t
+\]
+とおけば $f=xg+yh$ となる。$f_x,f_y$ は滑らかであり、コンパクト区間 $0\le t\le1$ 上の
+パラメータ積分は任意の階数で積分記号下に微分できるので、$g,h$ も滑らかである。
+
+次の分解では
+\[
+f(x,y)=\{f(x,y)-f(0,y)\}+f(0,y)
+\]
+と二つに分ける。固定した $y$ に対して $s\mapsto f(sx,y)$ に基本定理を使うと
+\begin{align*}
+f(x,y)-f(0,y)
+&=\int_0^1\frac{\d}{\d s}f(sx,y)\,\d s\\
+&=x\int_0^1f_x(sx,y)\,\d s.
+\end{align*}
+また $f(0,0)=0$ だから、$t\mapsto f(0,ty)$ に同じ計算を行うと
+\begin{align*}
+f(0,y)
+&=f(0,y)-f(0,0)\\
+&=\int_0^1\frac{\d}{\d t}f(0,ty)\,\d t\\
+&=y\int_0^1f_y(0,ty)\,\d t.
+\end{align*}
+そこで
+\[
+G(x,y)=\int_0^1f_x(sx,y)\,\d s,
+\qquad
+H(y)=\int_0^1f_y(0,ty)\,\d t
+\]
+とおけば、$G,H$ は滑らかであり
+\[
+f(x,y)=xG(x,y)+yH(y)
+\]
+を得る。
 \end{proof}
 
 \begin{problem}{第3問｜コンパクト性と連結性}{2015-2-3}

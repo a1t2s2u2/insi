@@ -85,12 +85,27 @@ $n$ を十分大きくすれば右辺は $\varepsilon$ 未満になるので $I_
 $\Q$ に通常の距離を入れ，$A=\{x\in\Q\mid1\le x<2\}$ とする。$A$ は閉，コンパクト，連結か。
 \end{problem}
 \begin{proof}[解答]
-全て否定。
-\begin{itemize}
-  \item $2-1/n\in A$ は $\Q$ 内で $2\notin A$ に収束するので閉でない。
-  \item 距離空間のコンパクト集合は閉だから，コンパクトでない。
-  \item 無理数 $c\in(1,2)$ を取ると $A\cap(-\infty,c)$ と $A\cap(c,\infty)$ が非空な開分離を与えるので連結でない。
-\end{itemize}
+閉でもコンパクトでも連結でもない。
+
+まず $n\ge2$ に対して $x_n=2-1/n$ とおくと
+\[
+x_n\in A,\qquad d_{\Q}(x_n,2)=|x_n-2|=\frac1n\longrightarrow0
+\]
+である。一方、$2\in\Q$ であるが $2\notin A$ なので、$A$ は $\Q$ の閉集合ではない。
+距離空間は Hausdorff 空間であり、そのコンパクト部分集合は閉集合である。
+従って、閉集合でない $A$ はコンパクトでもない。
+
+次に、無理数 $c\in(1,2)$ を一つ取り
+\[
+U=A\cap(-\infty,c),\qquad V=A\cap(c,\infty)
+\]
+とおく。ここで区間との共通部分は $\Q$ の相対位相で開であるから、
+$U,V$ は $A$ の相対位相で開である。また有理数の稠密性より $U,V$ はともに空でなく、
+$c\notin\Q$ だから
+\[
+A=U\sqcup V
+\]
+となる。よって $U,V$ は $A$ の非自明な開分離であり、$A$ は連結でない。
 \end{proof}
 
 \section{専門科目（8題から2題選択）}
@@ -136,7 +151,42 @@ $R$ を可換環，$a\in R$，$S=\{a^n\mid n\ge0\}$ とする。自然な写像 
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-(1) $x=ar$ かつ，ある $m$ で $a^mx=0$。従って $x^{m+1}=a^mr^mx=0$。(2) 全射性により $b/1=1/a$ となる $b\in R$ がある。従ってある $n$ で $a^n(ab-1)=0$，すなわち $ab-1\in\ker\tau$。$ab\in(a)=\ker\pi$ だから $1=ab-(ab-1)$ は二つの核の和に入る。
+\begin{enumerate}
+  \item[(1)] $x\in\ker\pi$ であることは $x\in(a)$ を意味するので、ある $r\in R$ により
+  \[
+  x=ar
+  \]
+  と書ける。また $x\in\ker\tau$ だから $x/1=0/1$ である。
+  局所化における分数の等号の定義より、ある $m\ge0$ が存在して
+  \[
+  a^m(x\cdot1-0\cdot1)=a^mx=0
+  \]
+  となる。従って
+  \[
+  x^{m+1}=(ar)^m x=a^m r^m x=r^m(a^mx)=0
+  \]
+  であり、$x$ は冪零である。
+
+  \item[(2)] $\tau$ が全射なので、$S^{-1}R$ の元 $1/a$ に対して、ある $b\in R$ が存在し
+  \[
+  \frac b1=\frac1a
+  \]
+  となる。再び局所化における分数の等号の定義を使うと、ある $n\ge0$ に対して
+  \[
+  a^n(ab-1)=0
+  \]
+  である。従って
+  \[
+  \tau(ab-1)=\frac{ab-1}{1}=0,
+  \qquad ab-1\in\ker\tau.
+  \]
+  一方、$ab\in(a)=\ker\pi$ であるから
+  \[
+  1=ab-(ab-1)\in\ker\pi+\ker\tau.
+  \]
+  二つの核の和は $R$ のイデアルであり、$1$ を含むので
+  $\ker\pi+\ker\tau=R$ である。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第3問｜被覆空間と Betti 数}{2017-s-3}
@@ -146,8 +196,42 @@ $R$ を可換環，$a\in R$，$S=\{a^n\mid n\ge0\}$ とする。自然な写像 
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-(1) 十分短い円弧の逆像は，$2\pi\Z$ だけ平行移動された区間の非交和になる。$\R$ は単連結なので普遍被覆。被覆変換は $T_k(\theta)=\theta+2\pi k$ で，群は $\Z$。
-(2) $K_1\simeq D^2$，$K_2\simeq D^2$，$K_1\cap K_2\simeq S^1$，和は四面体境界 $S^2$。従って
+\begin{enumerate}
+\item[(1)] $z_0=F(\theta_0)\in S^1$ を任意に取り、$0<\varepsilon<\pi$ とする。
+円弧
+\[
+U=F((\theta_0-\varepsilon,\theta_0+\varepsilon))
+\]
+に対して
+\[
+F^{-1}(U)
+=\bigsqcup_{k\in\Z}
+(\theta_0-\varepsilon+2\pi k,\theta_0+\varepsilon+2\pi k)
+\]
+であり、各区間への $F$ の制限は $U$ への同相写像である。
+従って $F$ は被覆写像である。さらに $\R$ は単連結なので、これは普遍被覆である。
+
+$k\in\Z$ に対して
+\[
+T_k(\theta)=\theta+2\pi k
+\]
+とおけば $F\circ T_k=F$ なので、$T_k$ は被覆変換である。逆に被覆変換 $T$ に対して
+\[
+F(T(\theta))=F(\theta)
+\quad\Longrightarrow\quad
+T(\theta)-\theta\in2\pi\Z.
+\]
+左辺は $\theta$ の連続関数であり、$\R$ は連結だから、この整数値は一定である。
+従って $T=T_k$ となる。合成について $T_kT_\ell=T_{k+\ell}$ なので、被覆変換群は $\Z$ と同型である。
+
+\item[(2)] $K_2$ は三角形一枚なので $D^2$ と同相であり、$K_1$ も残りの三面を合わせた円板なので $D^2$ と同相である。
+両者の共通部分は $K_2$ の境界であるから
+\[
+K_1\simeq D^2,\qquad K_2\simeq D^2,
+\qquad K_1\cap K_2\simeq S^1,
+\qquad K_1\cup K_2\simeq S^2.
+\]
+$D^2,S^1,S^2$ のホモロジー群から、Betti 数は
 \[
 \begin{array}{c|ccc}
 &b_0&b_1&b_2\\\hline
@@ -157,7 +241,8 @@ K_2&1&0&0\\
 K_1\cup K_2&1&0&1
 \end{array}
 \]
-で，高次は0。最後の行は Mayer--Vietoris 完全系列からも直ちに出る。
+であり、高次の Betti 数はいずれも0である。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第4問｜管状曲面}{2017-s-4}
@@ -362,10 +447,41 @@ $\log(1+u)=u+o(u)$ だから、各 $x>0$ について
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-(1) 事象 $\{|X|>N\}$ は単調減少し，共通部分は空集合。確率の上からの連続性を使う。(2) (1) から $P(|X|>M)$ を小さくする。コンパクト区間 $[-M-1,M+1]$ 上で $f$ は一様連続なので，ある $\delta>0$ で $|x-y|<\delta$ なら $|f(x)-f(y)|<\varepsilon$。従って
+\begin{enumerate}
+\item[(1)] $A_N=\{|X|>N\}$ とおくと
+\[
+A_1\supset A_2\supset\cdots,
+\qquad \bigcap_{N=1}^{\infty}A_N=\varnothing
+\]
+である。確率測度の上からの連続性より
+\[
+\lim_{N\to\infty}P(|X|>N)
+=\lim_{N\to\infty}P(A_N)
+=P\left(\bigcap_{N=1}^{\infty}A_N\right)=0.
+\]
+
+\item[(2)] 任意の $\varepsilon>0$ と $\eta>0$ を取る。(1) より、十分大きな $M$ を取れば
+\[
+P(|X|>M)<\frac\eta2
+\]
+となる。$f$ はコンパクト区間 $[-M-1,M+1]$ 上で一様連続なので、ある $0<\delta\le1$ が存在して
+\[
+x,y\in[-M-1,M+1],\quad |x-y|<\delta
+\quad\Longrightarrow\quad |f(x)-f(y)|<\varepsilon
+\]
+となる。
+
+$|X|\le M$ かつ $|X_n-X|<\delta$ なら $|X_n|\le M+1$ であり、上の一様連続性が使える。従って事象の包含
+\[
+\{|f(X_n)-f(X)|\ge\varepsilon\}
+\subset
+\{|X|>M\}\cup\{|X_n-X|\ge\delta\}
+\]
+が成り立つので
 \[
 P(|f(X_n)-f(X)|\ge\varepsilon)
 \le P(|X|>M)+P(|X_n-X|\ge\delta),
 \]
-右辺を順に小さくできる。
+を得る。$X_n\to X$ は確率収束するから、十分大きな $n$ では第2項も $\eta/2$ 未満である。よって左辺は $\eta$ 未満となり、$f(X_n)\to f(X)$ は確率収束する。
+\end{enumerate}
 \end{proof}

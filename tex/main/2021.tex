@@ -96,9 +96,40 @@ f(x,y)=\begin{cases}\dfrac{\sin(x^2y)}{x^2+y^2},&(x,y)\ne(0,0),\\0,&(x,y)=(0,0).
 \end{problem}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] $X=Z=\{0\}$，$Y=\{0,1\}$，$f(0)=0$，$g(0)=g(1)=0$。
-  \item[(2)] 連結である。像が二つの相対開集合に分離すれば，その逆像が元の集合を分離して矛盾。
-  \item[(3)] コンパクトである。像の開被覆を逆像に引き戻し，有限部分被覆を取ればよい。
+  \item[(1)] $X=Z=\{0\}$、$Y=\{0,1\}$ とし
+  \[
+  f(0)=0,\qquad g(0)=g(1)=0
+  \]
+  と定める。$1\notin f(X)$ なので $f$ は全射でなく、$g(0)=g(1)$ なので $g$ は単射でない。
+  一方、$g\circ f:X\to Z$ は一元集合から一元集合への写像なので全単射である。
+
+  \item[(2)] 連結である。連結集合 $C$ と連続写像 $h:C\to Y$ を取り、$h(C)$ が連結でないと仮定する。
+  このとき $h(C)$ の相対位相で開な非空集合 $U,V$ が存在して
+  \[
+  h(C)=U\sqcup V
+  \]
+  と書ける。$U=h(C)\cap U'$, $V=h(C)\cap V'$ となる $Y$ の開集合 $U',V'$ を取れば
+  \[
+  C=h^{-1}(U')\sqcup h^{-1}(V')
+  \]
+  となる。右辺の二集合は連続性により $C$ で開であり、$U,V$ が非空なので、ともに非空である。
+  これは $C$ の連結性に矛盾する。従って $h(C)$ は連結である。
+
+  \item[(3)] コンパクトである。コンパクト集合 $K$ と連続写像 $h:K\to Y$ を取り、
+  $h(K)$ の開被覆を $\{U_\lambda\}_{\lambda\in\Lambda}$ とする。このとき
+  \[
+  K\subset\bigcup_{\lambda\in\Lambda}h^{-1}(U_\lambda)
+  \]
+  であり、各 $h^{-1}(U_\lambda)$ は $K$ で開である。$K$ のコンパクト性より有限個
+  $\lambda_1,\ldots,\lambda_m$ を選んで
+  \[
+  K\subset\bigcup_{j=1}^m h^{-1}(U_{\lambda_j})
+  \]
+  とできる。両辺を $h$ で写せば
+  \[
+  h(K)\subset\bigcup_{j=1}^m U_{\lambda_j}
+  \]
+  となるので、$h(K)$ はコンパクトである。
 \end{enumerate}
 \end{proof}
 
@@ -117,15 +148,69 @@ $\Phi(f)=f(t^2,t^3,t^4)$ で定め，$I=\ker\Phi$，$R=\mathbb C[X,Y,Z]/I$ と�
 \end{problem}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] $R\cong\mathbb C[t^2,t^3]\subset\mathbb C[t]$ は整域なので $I$ は素。
+  \item[(1)] $t^4=(t^2)^2$ だから
+  \[
+  \operatorname{Im}\Phi=\mathbb C[t^2,t^3,t^4]
+  =\mathbb C[t^2,t^3].
+  \]
+  第1同型定理より
+  \[
+  R=\mathbb C[X,Y,Z]/\ker\Phi
+  \cong\mathbb C[t^2,t^3]\subset\mathbb C[t].
+  \]
+  $\mathbb C[t]$ は整域なので、その部分環 $\mathbb C[t^2,t^3]$ も整域である。
+  従って $I=\ker\Phi$ は素イデアルである。
   \item[(2)] 生成元は
   \[
   I=(Z-X^2,\ Y^2-X^3).
   \]
-  $Z$ を $X^2$ で消去し，$\mathbb C[X,Y]/(Y^2-X^3)\to\mathbb C[t^2,t^3]$ が同型であることから従う。
-  \item[(3)] $R/\mathfrak m\cong\mathbb C$ より極大。
-  \item[(4)] $\bar Z=\bar X^2$ なので $\mathfrak m=(\bar X,\bar Y)$。
-  \item[(5)] $\mathfrak m/\mathfrak m^2$ は $\bar X,\bar Y$ の像を基底とする2次元 $\mathbb C$ ベクトル空間。単項ならこの次元は高々1となるので矛盾。
+  実際、$\Phi(Z-X^2)=t^4-(t^2)^2=0$、
+  $\Phi(Y^2-X^3)=t^6-(t^2)^3=0$ だから、右辺を $J$ とおけば $J\subset I$。
+
+  逆に $f\in I$ とする。$Z-X^2$ を用いて $Z$ を消去すれば、ある
+  $g(X,Y)\in\mathbb C[X,Y]$ により
+  \[
+  f\equiv g(X,Y)\pmod{(Z-X^2)}
+  \]
+  と書ける。さらに $g$ を $Y$ の多項式と見て、モニック多項式
+  $Y^2-X^3$ で割ると
+  \[
+  g(X,Y)=q(X,Y)(Y^2-X^3)+a(X)Y+b(X)
+  \]
+  となる。$f\in I$ より
+  \[
+  0=\Phi(f)=a(t^2)t^3+b(t^2).
+  \]
+  $a(t^2)t^3$ は奇数次数の項だけ、$b(t^2)$ は偶数次数の項だけからなるので、
+  この多項式恒等式から $a=b=0$。従って $f\in J$ であり、$I=J$ を得る。
+
+  \item[(3)] $R\cong\mathbb C[t^2,t^3]$ のもとで
+  $\mathfrak m=(t^2,t^3)$ に対応する。定数項を取る準同型
+  \[
+  \mathbb C[t^2,t^3]\longrightarrow\mathbb C,qquad h(t)\longmapsto h(0)
+  \]
+  は全射で、核は $(t^2,t^3)$ である。従って
+  $R/\mathfrak m\cong\mathbb C$ は体だから $\mathfrak m$ は極大である。
+
+  \item[(4)] $\bar Z=\bar X^2$ だから
+  \[
+  \mathfrak m=(\bar X,\bar Y,\bar Z)
+  =(\bar X,\bar Y,\bar X^2)=(\bar X,\bar Y).
+  \]
+
+  \item[(5)] $R\cong\mathbb C[t^2,t^3]$ で考えると
+  \[
+  \mathfrak m=(t^2,t^3),\qquad
+  \mathfrak m^2=(t^4,t^5,t^6).
+  \]
+  従って $\mathfrak m/\mathfrak m^2$ では $t^2,t^3$ の剰余類が一次独立であり、
+  これらが全体を生成するから
+  \[
+  \dim_{R/\mathfrak m}(\mathfrak m/\mathfrak m^2)
+  =\dim_{\mathbb C}(\mathfrak m/\mathfrak m^2)=2.
+  \]
+  もし $\mathfrak m=(h)$ が単項なら、$\mathfrak m/\mathfrak m^2$ は
+  $h+\mathfrak m^2$ 一つで生成される $R/\mathfrak m$ ベクトル空間なので次元は高々1となり、矛盾する。
 \end{enumerate}
 \end{proof}
 
@@ -288,7 +373,50 @@ $E\subset\R^d$ は可測で $|E|<\infty$，$f_n$ は $E$ 上可測とする。$A
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-(1) $1_F\le|g|$ を積分する。(2) Chebyshev の不等式 $|A_{n,\varepsilon}|\le\varepsilon^{-1}\int|f_n|$。(3) 被積分関数は1以下で点wiseに0へ収束するので優収束定理。(4) $|A_{n_k,1/k}|<2^{-k}$ となる部分列を取る。和が有限なので Borel--Cantelli により，ほとんど全ての点はこれらの集合に有限回しか入らない。ゆえに $|f_{n_k}(x)|<1/k$ がやがて成り立つ。
+\begin{enumerate}
+\item[(1)] $F=\{|g|\ge1\}$ 上では $1\le|g|$ だから、$E$ 上で
+$\mathbf1_F\le|g|$ である。両辺を積分して
+\[
+|F|=\int_E\mathbf1_F\le\int_E|g|.
+\]
+
+\item[(2)] $A_{n,\varepsilon}$ 上では $|f_n|/\varepsilon\ge1$ なので
+\[
+\mathbf1_{A_{n,\varepsilon}}
+\le\frac{|f_n|}{\varepsilon}.
+\]
+従って
+\[
+|A_{n,\varepsilon}|
+\le\frac1\varepsilon\int_E|f_n|\longrightarrow0.
+\]
+
+\item[(3)]
+\[
+0\le\frac{|f_n(x)|}{1+|f_n(x)|}\le1
+\]
+であり、$f_n(x)\to0$ となる点では左辺も0へ収束する。
+$|E|<\infty$ なので優関数 $\mathbf1_E$ は可積分であり、優収束定理から
+\[
+\int_E\frac{|f_n|}{1+|f_n|}\longrightarrow0.
+\]
+
+\item[(4)] 各 $k$ について $|A_{n,1/k}|\to0$ だから、$n_1<n_2<\cdots$ を
+\[
+|A_{n_k,1/k}|<2^{-k}
+\]
+となるよう帰納的に選べる。すると
+\[
+\sum_{k=1}^\infty|A_{n_k,1/k}|
+\le\sum_{k=1}^\infty2^{-k}<\infty.
+\]
+Borel--Cantelli の補題より、ほとんど全ての $x$ は
+$A_{n_k,1/k}$ に有限回しか属さない。従ってそのような $x$ では、十分大きい $k$ に対し
+\[
+|f_{n_k}(x)|<\frac1k,
+\]
+ゆえに $f_{n_k}(x)\to0$ である。
+\end{enumerate}
 \end{proof}
 
 \section{第2期・専門基礎科目（3題必修）}
@@ -411,5 +539,42 @@ $\Gamma(p)\Gamma(q)=\Gamma(p+q)B(p,q)$ を得る。
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-(1) 任意の $\varepsilon>0$ に対し，ある $\delta>0$ が存在して $f(B_X(x,\delta))\subset B_Y(f(x),\varepsilon)$。(2) 補集合 $Y\setminus F$ は開で，連続性によりその逆像も開。これは $X\setminus f^{-1}(F)$。(3) $x\in\overline A$ とし，$f(x)$ の任意の近傍の逆像を考える。それは $x$ の近傍なので $A$ と交わり，従って元の近傍は $f(A)$ と交わる。
+\begin{enumerate}
+\item[(1)] $B_X(x,\delta)=\{y\in X\mid d_X(x,y)<\delta\}$ とする。
+$f$ が $x$ で連続であるとは
+\[
+\forall\varepsilon>0\ \exists\delta>0\quad
+f(B_X(x,\delta))\subset B_Y(f(x),\varepsilon)
+\]
+が成り立つこと、すなわち
+\[
+d_X(x,y)<\delta\quad\Longrightarrow\quad
+d_Y(f(x),f(y))<\varepsilon
+\]
+が成り立つことである。
+
+\item[(2)] $F\subset Y$ を閉集合とすると $Y\setminus F$ は開集合である。
+$f$ は連続なので $f^{-1}(Y\setminus F)$ は $X$ の開集合であり、
+\[
+f^{-1}(Y\setminus F)=X\setminus f^{-1}(F)
+\]
+である。従って $f^{-1}(F)$ の補集合は開であり、$f^{-1}(F)$ は閉集合である。
+
+\item[(3)] $x\in\overline A$ を取り、$f(x)\in\overline{f(A)}$ を示す。
+任意の $\varepsilon>0$ に対して、$x$ における連続性より、ある $\delta>0$ が存在して
+\[
+f(B_X(x,\delta))\subset B_Y(f(x),\varepsilon)
+\]
+となる。$x\in\overline A$ だから $B_X(x,\delta)\cap A\ne\varnothing$ である。
+この共通部分から $a$ を一つ取ると
+\[
+f(a)\in B_Y(f(x),\varepsilon)\cap f(A)
+\]
+となる。従って $f(x)$ の任意の開球は $f(A)$ と交わるので
+$f(x)\in\overline{f(A)}$ である。以上より
+\[
+f(\overline A)\subset\overline{f(A)}
+\]
+を得る。
+\end{enumerate}
 \end{proof}
