@@ -1,7 +1,8 @@
 \chapter{この別冊の使い方}
 \label{ch:reference-guide}
 
-解答編は答案の筋を短く示しているため、定義や標準定理の説明を省いている。
+解答編には計算と論証の過程を記しているが、同じ定義や標準定理を問題ごとに繰り返す代わりに、
+この別冊へまとめている。
 用語を忘れたときは、問題の分野から本冊の該当章を引き、次の順で確認するとよい。
 
 \begin{enumerate}
@@ -59,13 +60,34 @@ $\sum_i a_iv_i=0$ から $a_1=\cdots=a_k=0$ が従うとき、$v_1,\ldots,v_k$ �
 を\textbf{核}、\textbf{像}という。$\dim\operatorname{Im}f$ を $f$ の\textbf{階数}という。
 \end{definition}
 
-\begin{theorem}{次元定理}{rank-nullity}
+\begin{theorem}{次元定理（階数・退化次数の定理）}{rank-nullity}
 $V$ が有限次元なら
 \[
   \dim V=\dim\ker f+\dim\operatorname{Im}f.
 \]
 特に同じ有限次元の空間の間の線形写像では、単射・全射・同型が同値である。
 \end{theorem}
+
+\begin{definition}{行基本変形と行簡約形}{elementary-row-operations}
+行列に対する次の三操作を\textbf{行基本変形}という。
+\begin{enumerate}
+  \item 二つの行を入れ替える。
+  \item 一つの行を0でないスカラー倍する。
+  \item 一つの行に、別の行のスカラー倍を加える。
+\end{enumerate}
+行基本変形を繰り返して、各非零行の先頭の非零成分より下を0にした形を
+\textbf{行階段形}という。さらに先頭成分を1にし、その上下も0にした形を
+\textbf{簡約行階段形}という。
+\end{definition}
+
+\begin{proposition}{行基本変形は階数を保つ}{row-rank-invariance}
+各行基本変形は、左から正則な基本行列を掛ける操作である。
+従って行基本変形の前後で行列の階数は変わらない。
+行階段形に現れる非零行の本数は、元の行列の階数に等しい。
+
+なお、$B=A-I$ のように別の行列を引いて新しい行列を定める操作は行基本変形ではない。
+行基本変形は、定めた後の $B$ の階数や連立方程式を調べるために用いる。
+\end{proposition}
 
 \begin{definition}{直和}{direct-sum}
 $V=U+W$ かつ $U\cap W=\{0\}$ のとき $V=U\oplus W$ と書く。
@@ -96,6 +118,32 @@ $\det(\lambda I-A)$ を\textbf{固有多項式}という。
 また $A$ が正則であること、$\det A\ne0$、$0$ が固有値でないことは同値である。
 \end{proposition}
 
+\begin{definition}{余因子・随伴行列}{cofactor-adjugate}
+$A=(a_{ij})$ を $n$ 次行列とする。$A$ から第 $i$ 行と第 $j$ 列を除いた小行列を
+$A_{ij}$ とするとき
+\[
+C_{ij}=(-1)^{i+j}\det A_{ij}
+\]
+を $(i,j)$ \textbf{余因子}という。余因子行列 $(C_{ij})$ を転置した
+\[
+\operatorname{adj}A=(C_{ij})^{\mathsf T}
+\]
+を $A$ の\textbf{随伴行列}という。
+\end{definition}
+
+\begin{proposition}{随伴行列による逆行列}{inverse-adjugate}
+余因子展開から
+\[
+A\operatorname{adj}A
+=\operatorname{adj}A\,A
+=(\det A)I
+\]
+が成り立つ。従って $\det A\ne0$ なら
+\[
+A^{-1}=\frac1{\det A}\operatorname{adj}A.
+\]
+\end{proposition}
+
 \begin{definition}{対角化}{diagonalization}
 ある正則行列 $P$ により $P^{-1}AP$ が対角行列になるとき、$A$ は\textbf{対角化可能}であるという。
 これは空間が固有ベクトルからなる基底を持つことと同値である。
@@ -105,6 +153,25 @@ $\det(\lambda I-A)$ を\textbf{固有多項式}という。
 相異なる固有値に属する固有ベクトルは一次独立である。
 従って $n$ 次行列が $n$ 個の相異なる固有値を持てば対角化可能である。
 \end{theorem}
+
+\begin{proposition}{定数係数線形漸化式の特性方程式}{recurrence-characteristic}
+定数係数線形漸化式
+\[
+x_n+c_1x_{n-1}+\cdots+c_kx_{n-k}=0
+\]
+に $x_n=r^n$ を代入すると
+\[
+r^k+c_1r^{k-1}+\cdots+c_k=0
+\]
+を得る。これを\textbf{特性方程式}という。
+相異なる根が $r_1,\ldots,r_k$ なら一般解は
+\[
+x_n=\alpha_1r_1^n+\cdots+\alpha_kr_k^n
+\]
+であり、係数 $\alpha_j$ は初期値を代入した連立方程式から決める。
+重複度 $m$ の根 $r$ には
+$r^n,nr^n,\ldots,n^{m-1}r^n$ が対応する。
+\end{proposition}
 
 \begin{definition}{不変部分空間}{invariant-subspace}
 線形写像 $f:V\to V$ と部分空間 $W$ に対し $f(W)\subset W$ なら、$W$ を $f$ の\textbf{不変部分空間}という。
@@ -136,6 +203,20 @@ $U^\perp=\{x\mid\inner{x}{u}=0\ (\forall u\in U)\}$ と書く。
 有限次元内積空間では $V=U\oplus U^\perp$ である。
 \end{definition}
 
+\begin{proposition}{極化公式}{polarization-identity}
+実内積空間では
+\[
+2\inner{x}{y}
+=\norm{x+y}^2-\norm{x}^2-\norm{y}^2
+\]
+が成り立つ。従って線形写像 $T$ が全ての $x$ について
+$\norm{Tx}=\norm{x}$ を満たすなら
+\[
+\inner{Tx}{Ty}=\inner{x}{y}
+\]
+であり、$T$ は内積も保つ。
+\end{proposition}
+
 \begin{definition}{直交行列・ユニタリ行列}{orthogonal-unitary}
 実行列 $Q$ が $Q^{\mathsf T}Q=I$ を満たすとき\textbf{直交行列}、複素行列 $U$ が $U^*U=I$ を満たすとき\textbf{ユニタリ行列}という。
 これらは内積と長さを保ち、逆行列はそれぞれ $Q^{\mathsf T}$、$U^*$ である。
@@ -164,6 +245,14 @@ $\inner{xx^{\mathsf T}}{yy^{\mathsf T}}_F=(x^{\mathsf T}y)^2$ である。
 \begin{proposition}{階数1更新 $I+vv^*$}{rank-one-update}
 $A=I+vv^*$ とする。$v$ の方向では固有値 $1+\norm v^2$、$v^\perp$ では固有値 $1$ である。
 従って $\det(I+vv^*)=1+\norm v^2$ である。
+
+$v\ne0$ なら
+\[
+(vv^*)x=v(v^*x)in\langle v\rangle,
+\qquad
+(vv^*)v=\norm v^2v\ne0
+\]
+だから $\operatorname{Im}(vv^*)=\langle v\rangle$ であり、$vv^*$ の階数は1である。
 \end{proposition}
 
 \chapter{微分積分}
@@ -498,6 +587,18 @@ $|G|=p^am$、$p\nmid m$ とする。位数 $p^a$ の部分群を\textbf{Sylow $p
   \item Sylow $p$ 部分群は全て共役である。
   \item その個数 $n_p$ は $n_p\equiv1\pmod p$ かつ $n_p\mid m$ を満たす。
 \end{enumerate}
+\end{theorem}
+
+\begin{theorem}{$S_5$ の正規部分群}{normal-subgroups-s5}
+$S_5$ の正規部分群は
+\[
+\{1\},\qquad A_5,\qquad S_5
+\]
+の三つだけである。従って $S_5$ の非自明な正規部分群は $A_5$ を含み、
+その位数は少なくとも60である。
+
+これは、$A_5$ が単純群であること、$[S_5:A_5]=2$、および
+$S_5$ の中心が $\{1\}$ であることから従う標準事実である。
 \end{theorem}
 
 \section{環・イデアル・局所化}

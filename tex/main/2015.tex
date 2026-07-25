@@ -568,9 +568,78 @@ x_1+2x_2+3x_4=0,\qquad x_3-x_4=0
 \[
 \ker B=\langle(-2,1,0,0),(-3,0,1,1)\rangle.
 \]
-最後の生成ベクトルは最初の3本を $p,q,r$ としたとき $p+q+2r$ に等しく、
-$p,q,r$ は一次独立である。従って $\dim(\ker A+\ker B)=3$。
-一般論は $(f+g)x=0$ なら $f(x)=-g(x)$ が直和の共通部分に入るため両方0。従って核の等式を得る。追加仮定から核の次元公式で $\ker f\cap\ker g=0$，よって $f+g$ は単射，有限同次元なので全射。
+ここで
+\[
+p=(-1,-1,1,0),\quad q=(2,-1,0,1),\quad
+r=(-2,1,0,0),\quad s=(-3,0,1,1)
+\]
+とおくと
+\[
+s=p+q+2r
+\]
+である。従って $\ker A+\ker B=\langle p,q,r\rangle$ である。
+さらに $ap+bq+cr=0$ とすると、第3、第4成分から
+\[
+a=0,\qquad b=0
+\]
+となり、第1成分から $-2c=0$、すなわち $c=0$ となる。
+よって $p,q,r$ は一次独立であり
+\[
+\dim(\ker A+\ker B)=3
+\]
+である。
+
+次に一般の線形写像 $f,g:\R^n\to\R^n$ を考え
+\[
+\R^n=\operatorname{Im}f\oplus\operatorname{Im}g
+\]
+と仮定する。この仮定から
+\[
+\operatorname{Im}f\cap\operatorname{Im}g=\{0\}
+\]
+である。$x\in\ker(f+g)$ なら
+\[
+f(x)+g(x)=0,
+\qquad f(x)=-g(x).
+\]
+ここで $f(x)\in\operatorname{Im}f$ であり、同時に
+$f(x)=-g(x)\in\operatorname{Im}g$ だから
+\[
+f(x)\in\operatorname{Im}f\cap\operatorname{Im}g=\{0\}.
+\]
+従って $f(x)=g(x)=0$ となり、$x\in\ker f\cap\ker g$ である。
+逆に $x\in\ker f\cap\ker g$ なら
+$(f+g)(x)=f(x)+g(x)=0$ だから
+\[
+\ker(f+g)=\ker f\cap\ker g
+\]
+を得る。
+
+さらに $\R^n=\ker f+\ker g$ と仮定する。
+像の直和と階数・退化次数の定理から
+\begin{align*}
+n
+&=\dim\operatorname{Im}f+\dim\operatorname{Im}g\\
+&=(n-\dim\ker f)+(n-\dim\ker g),
+\end{align*}
+従って
+\[
+\dim\ker f+\dim\ker g=n.
+\]
+一方、核の和が $\R^n$ 全体であることと部分空間の和の次元公式から
+\begin{align*}
+n
+&=\dim(\ker f+\ker g)\\
+&=\dim\ker f+\dim\ker g-dim(\ker f\cap\ker g)\\
+&=n-\dim(\ker f\cap\ker g).
+\end{align*}
+よって $\ker f\cap\ker g=\{0\}$ である。先に示した核の等式より
+\[
+\ker(f+g)=\{0\},
+\]
+従って $f+g$ は単射である。$f+g$ は同じ有限次元空間
+$\R^n$ から $\R^n$ への線形写像なので、階数・退化次数の定理により全射でもある。
+以上から $f+g$ は全単射である。
 \end{proof}
 
 \begin{problem}{第2問｜滑らかな関数の分解}{2015-2-2}
@@ -692,10 +761,28 @@ $XA=B$ と $AY=C$ を解くため、まず $A$ の正則性を確認する。第
 &=(6-1)-2(4-3)+3(2-9)\\
 &=5-2-21=-18\ne0.
 \end{align*}
-従って $A$ は正則である。余因子を計算して転置すると
+従って $A$ は正則である。$A$ の余因子行列を $C_A=(C_{ij})$ とすると、各成分は
+\[
+C_A=
+\begin{pmatrix}
+\det\begin{pmatrix}3&1\\1&2\end{pmatrix}&
+-\det\begin{pmatrix}2&1\\3&2\end{pmatrix}&
+\det\begin{pmatrix}2&3\\3&1\end{pmatrix}\\[3mm]
+-\det\begin{pmatrix}2&3\\1&2\end{pmatrix}&
+\det\begin{pmatrix}1&3\\3&2\end{pmatrix}&
+-\det\begin{pmatrix}1&2\\3&1\end{pmatrix}\\[3mm]
+\det\begin{pmatrix}2&3\\3&1\end{pmatrix}&
+-\det\begin{pmatrix}1&3\\2&1\end{pmatrix}&
+\det\begin{pmatrix}1&2\\2&3\end{pmatrix}
+\end{pmatrix}
+=
+\begin{pmatrix}5&-1&-7\\-1&-7&5\\-7&5&-1\end{pmatrix}.
+\]
+従って随伴行列は
 \[
 \operatorname{adj}A=
-\begin{pmatrix}5&-1&-7\\-1&-7&5\\-7&5&-1\end{pmatrix},
+ C_A^{\mathsf T}
+=\begin{pmatrix}5&-1&-7\\-1&-7&5\\-7&5&-1\end{pmatrix},
 \]
 よって
 \[
@@ -704,14 +791,20 @@ A^{-1}=\frac1{\det A}\operatorname{adj}A
 \begin{pmatrix}-5&1&7\\1&7&-5\\7&-5&1\end{pmatrix}.
 \]
 $XA=B$ は右から $A^{-1}$ を掛けて $X=BA^{-1}$、
-$AY=C$ は左から $A^{-1}$ を掛けて $Y=A^{-1}C$ である。積を計算すると
+$AY=C$ は左から $A^{-1}$ を掛けて $Y=A^{-1}C$ である。それぞれの積は
 \[
 BA^{-1}=\frac1{18}
+\begin{pmatrix}1&2&3\\8&5&5\\3&1&2\end{pmatrix}
+\begin{pmatrix}-5&1&7\\1&7&-5\\7&-5&1\end{pmatrix}
+=\frac1{18}
 \begin{pmatrix}18&0&0\\0&18&36\\0&0&18\end{pmatrix}
 =\begin{pmatrix}1&0&0\\0&1&2\\0&0&1\end{pmatrix},
 \]
 \[
 A^{-1}C=\frac1{18}
+\begin{pmatrix}-5&1&7\\1&7&-5\\7&-5&1\end{pmatrix}
+\begin{pmatrix}2&1&3\\3&2&1\\1&3&2\end{pmatrix}
+=\frac1{18}
 \begin{pmatrix}0&18&0\\18&0&0\\0&0&18\end{pmatrix}
 =\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix}.
 \]
@@ -752,8 +845,25 @@ $A=\begin{pmatrix}-2&1&2\\1&0&0\\0&1&0\end{pmatrix}$ の固有値・固有空間
 &=(\lambda+2)\lambda^2-\lambda-2\\
 &=(\lambda-1)(\lambda+1)(\lambda+2).
 \end{align*}
-従って固有値は $1,-1,-2$ である。各 $\lambda$ について
-$(A-\lambda I)x=0$ を解くと
+従って固有値は $1,-1,-2$ である。
+$x=(x_1,x_2,x_3)^{\mathsf T}$ に対して $Ax=\lambda x$ を成分で書くと
+\[
+\begin{cases}
+-2x_1+x_2+2x_3=\lambda x_1,\\
+x_1=\lambda x_2,\\
+x_2=\lambda x_3.
+\end{cases}
+\]
+今回の固有値はいずれも0でない。第2、第3式から
+\[
+x_2=\lambda x_3,
+\qquad x_1=\lambda x_2=\lambda^2x_3
+\]
+となる。$x_3=t$ とおけば
+\[
+x=t(\lambda^2,\lambda,1)^{\mathsf T}.
+\]
+$\lambda=1,-1,-2$ を順に代入して
 \[
 E_1=\langle(1,1,1)^{\mathsf T}\rangle,\quad
 E_{-1}=\langle(1,-1,1)^{\mathsf T}\rangle,\quad
@@ -761,41 +871,133 @@ E_{-2}=\langle(4,-2,1)^{\mathsf T}\rangle.
 \]
 三つの固有値が相異なるので、これらの固有ベクトルは一次独立であり、
 \[
-P=\begin{pmatrix}1&1&4\\1&-1&-2\\1&1&1\end{pmatrix},\qquad
-P^{-1}=\begin{pmatrix}1/6&1/2&1/3\\-1/2&-1/2&1\\1/3&0&-1/3\end{pmatrix}
+P=\begin{pmatrix}1&1&4\\1&-1&-2\\1&1&1\end{pmatrix}
 \]
-とすれば $P^{-1}AP=\diag(1,-1,-2)$。
+とおける。実際
+\[
+\det P
+=1\begin{vmatrix}-1&-2\\1&1\end{vmatrix}
+-1\begin{vmatrix}1&-2\\1&1\end{vmatrix}
++4\begin{vmatrix}1&-1\\1&1\end{vmatrix}
+=1-3+8=6\ne0
+\]
+なので $P$ は正則である。余因子を用いると
+\[
+P^{-1}=\frac1{6}
+\begin{pmatrix}1&3&2\\-3&-3&6\\2&0&-2\end{pmatrix}
+=\begin{pmatrix}1/6&1/2&1/3\\-1/2&-1/2&1\\1/3&0&-1/3\end{pmatrix}.
+\]
+$P$ の各列は順に固有値 $1,-1,-2$ の固有ベクトルだから
+\[
+AP=P\diag(1,-1,-2).
+\]
+左から $P^{-1}$ を掛けて
+\[
+P^{-1}AP=\diag(1,-1,-2)
+\]
+を得る。
+
 従って
 \[
 A^n=P\diag(1,(-1)^n,(-2)^n)P^{-1}.
 \]
-右辺の第1行、すなわち $(1,1,4)\diag(1,(-1)^n,(-2)^n)P^{-1}$ を掛けると
+右辺の第1行を求めるため、まず
+\[
+(1,1,4)\diag(1,(-1)^n,(-2)^n)
+=\bigl(1,(-1)^n,4(-2)^n\bigr)
+\]
+と計算する。これを $P^{-1}$ に掛けると、$A^n$ の第1行は
 \[
 \left(\frac16-\frac{(-1)^n}2+\frac43(-2)^n,
 \frac{1-(-1)^n}2,
 \frac13+(-1)^n-\frac43(-2)^n\right).
 \]
+
 漸化式の特性方程式も
 \[
 r^3+2r^2-r-2=(r-1)(r+1)(r+2)=0
 \]
 なので一般解は $x_n=\alpha+\beta(-1)^n+\gamma(-2)^n$ と書ける。
-各初期値 $x_1,x_2,x_3$ を代入して $\alpha,\beta,\gamma$ の連立方程式を解くと、
-$(1,0,0)$ では $(\alpha,\beta,\gamma)=(1/3,-1,1/6)$、
-$(0,-1,1)$ では $(\alpha,\beta,\gamma)=(-1/3,0,-1/6)$ となる。よって一般項はそれぞれ
+$n=1,2,3$ を代入すると
+\[
+x_1=\alpha-\beta-2\gamma,
+\qquad
+x_2=\alpha+\beta+4\gamma,
+\qquad
+x_3=\alpha-\beta-8\gamma.
+\]
+
+初期値 $(x_1,x_2,x_3)=(1,0,0)$ のときは
+\[
+\begin{cases}
+\alpha-\beta-2\gamma=1,\\
+\alpha+\beta+4\gamma=0,\\
+\alpha-\beta-8\gamma=0.
+\end{cases}
+\]
+第3式から第1式を引くと $-6\gamma=-1$ だから $\gamma=1/6$ である。
+第2式から第1式を引くと
+$2\beta+6\gamma=-1$ だから $\beta=-1$ となり、第1式から $\alpha=1/3$ を得る。
+
+初期値 $(x_1,x_2,x_3)=(0,-1,1)$ のときは
+\[
+\begin{cases}
+\alpha-\beta-2\gamma=0,\\
+\alpha+\beta+4\gamma=-1,\\
+\alpha-\beta-8\gamma=1.
+\end{cases}
+\]
+第3式から第1式を引くと $-6\gamma=1$ だから $\gamma=-1/6$ である。
+第2式から第1式を引くと
+$2\beta+6\gamma=-1$ だから $\beta=0$ となり、第1式から $\alpha=-1/3$ を得る。
+よって一般項はそれぞれ
 \[
 x_n=\frac13-(-1)^n+\frac16(-2)^n,\qquad
 x_n=-\frac13-\frac16(-2)^n.
 \]
 
-最後は $(\text{ア})\Rightarrow(\text{イ})$ が
-$\norm{Bx}^2=x^{\mathsf T}B^{\mathsf T}Bx=\norm{x}^2$ から従う。
-$(\text{イ})\Rightarrow(\text{ウ})$ は実内積の極化公式
+最後に三条件の同値を示す。
+$(\text{ア})$、すなわち $B^{\mathsf T}B=I$ を仮定すると、任意の $x\in\R^n$ に対して
 \[
-2\inner{x}{y}=\norm{x+y}^2-\norm{x}^2-\norm{y}^2
+\norm{Bx}^2
+=(Bx)^{\mathsf T}(Bx)
+=x^{\mathsf T}B^{\mathsf T}Bx
+=x^{\mathsf T}x
+=\norm{x}^2.
 \]
-を使う。$(\text{ウ})\Rightarrow(\text{ア})$ は標準基底 $e_i$ に対して
-$\inner{Be_i}{Be_j}=\delta_{ij}$，すなわち $B^{\mathsf T}B=I$ となることから従う。
+両辺は非負なので平方根を取り $\norm{Bx}=\norm{x}$ となる。よって
+$(\text{ア})\Rightarrow(\text{イ})$ である。
+
+次に (イ) を仮定する。$B$ の線形性と (イ) を $x+y,x,y$ に適用すると
+\begin{align*}
+\norm{x+y}^2
+&=\norm{B(x+y)}^2\\
+&=\norm{Bx+By}^2\\
+&=\norm{Bx}^2+2\inner{Bx}{By}+\norm{By}^2\\
+&=\norm{x}^2+2\inner{Bx}{By}+\norm{y}^2.
+\end{align*}
+一方
+\[
+\norm{x+y}^2
+=\norm{x}^2+2\inner{x}{y}+\norm{y}^2
+\]
+だから、共通する項を消去して
+\[
+\inner{Bx}{By}=\inner{x}{y}
+\]
+を得る。よって $(\text{イ})\Rightarrow(\text{ウ})$ である。
+
+最後に (ウ) を仮定し、$e_1,\ldots,e_n$ を $\R^n$ の標準基底とする。
+$B^{\mathsf T}B$ の $(i,j)$ 成分は
+\[
+e_i^{\mathsf T}B^{\mathsf T}Be_j
+=(Be_i)^{\mathsf T}(Be_j)
+=\inner{Be_i}{Be_j}
+=\inner{e_i}{e_j}
+=\delta_{ij}.
+\]
+従って $B^{\mathsf T}B=I$ であり、$B$ は直交行列である。
+よって $(\text{ウ})\Rightarrow(\text{ア})$ も成り立ち、三条件は同値である。
 \end{proof}
 
 \begin{problem}{第3問｜初等微積分}{2015-a-3}
