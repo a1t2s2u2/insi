@@ -305,8 +305,21 @@ $\cos x+\sin x=\sqrt2\sin(x+\pi/4)$ から得られる。
 同次解も三角関数なので全ての解は有界である。
 $\omega=\pm\sqrt2$ のときは共振し、$a=\sqrt2$ とおけば
 \[
-\left(\frac{x}{2a}\sin ax\right)''
-+a^2\left(\frac{x}{2a}\sin ax\right)=\cos ax.
+y_p=\frac{x}{2a}\sin ax
+\]
+と置く。このとき
+\[
+y_p'=\frac1{2a}\sin ax+\frac x2\cos ax,
+\]
+\[
+y_p''=\frac12\cos ax+\frac12\cos ax-\frac{ax}{2}\sin ax
+=\cos ax-\frac{ax}{2}\sin ax.
+\]
+従って
+\[
+y_p''+a^2y_p
+=\cos ax-\frac{ax}{2}\sin ax+\frac{ax}{2}\sin ax
+=\cos ax.
 \]
 初期条件を満たす同次解 $(1/a)\sin ax$ を加えて
 \[

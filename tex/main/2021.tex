@@ -49,7 +49,26 @@ f(x,y)=\begin{cases}\dfrac{\sin(x^2y)}{x^2+y^2},&(x,y)\ne(0,0),\\0,&(x,y)=(0,0).
 \begin{enumerate}
   \item[(1)] $|\sin u|\le|u|$ から $|f|\le |x^2y|/r^2\le r$。また $|\sin u|\le1$ から $|f|\le r^{-2}$。
   \item[(2)] $|f|\le r\to0$。
-  \item[(3)] $r\le1$ では $|f|^p\le r^p$，$r\ge1$ では $|f|^p\le r^{-2p}$。極座標で両者は積分可能（後者は $p>1$）。よって $|f|^p\in L^1(\R^2)$ で，単調収束により極限が存在する。
+  \item[(3)] $r\le1$ では $|f|^p\le r^p$、$r\ge1$ では
+  $|f|^p\le r^{-2p}$ である。極座標の面積要素は
+  $\d x\d y=r\,\d r\d\theta$ だから
+  \[
+  \iint_{r\le1}|f|^p\,\d x\d y
+  \le\int_0^{2\pi}\int_0^1r^p r\,\d r\d\theta
+  =\frac{2\pi}{p+2}<\infty,
+  \]
+  \[
+  \iint_{r\ge1}|f|^p\,\d x\d y
+  \le\int_0^{2\pi}\int_1^\infty r^{-2p}r\,\d r\d\theta
+  =2\pi\int_1^\infty r^{1-2p}\,\d r
+  =\frac{2\pi}{2p-2}<\infty.
+  \]
+  最後の積分が収束する条件が $p>1$ である。従って
+  $|f|^p\in L^1(\R^2)$。また
+  $|f|^p\mathbf1_{B(R)}\uparrow|f|^p$ なので、単調収束定理より
+  \[
+  \lim_{R\to\infty}I_p(R)=\iint_{\R^2}|f|^p\,\d x\d y<\infty.
+  \]
   \item[(4)] 偏微分を計算すると
   \[
   \frac{\partial f}{\partial y}(x,0)=\begin{cases}1,&x\ne0,\\0,&x=0.
@@ -163,12 +182,34 @@ T=\frac{p'}{\norm{p'}}
   \operatorname{sech}t\cos t,\tanh t).
 \]
 $\d s/\d t=\norm{p'}=\cosh t$ より $\d/\d s=\operatorname{sech}t\,\d/\d t$。
-これを用いて $\d T/\d s$ を計算し、円柱の単位法線
-$n=(\cos t,\sin t,0)$ 方向の成分
-$(\d T/\d s\cdot n)n$ を引くと
+従って成分ごとに微分すると
+\[
+\frac{\d T}{\d s}
+=\operatorname{sech}t\frac{\d T}{\d t}
+\]
+\[
+=\bigl(
+\operatorname{sech}^2t\tanh t\sin t-\operatorname{sech}^2t\cos t,
+-\operatorname{sech}^2t\tanh t\cos t-\operatorname{sech}^2t\sin t,
+\operatorname{sech}^3t
+\bigr).
+\]
+円柱の単位法線は $n=(\cos t,\sin t,0)$ であり
+\begin{align*}
+\frac{\d T}{\d s}\cdot n
+&=\operatorname{sech}^2t\tanh t\sin t\cos t
+-\operatorname{sech}^2t\cos^2t\\
+&\quad-\operatorname{sech}^2t\tanh t\cos t\sin t
+-\operatorname{sech}^2t\sin^2t\\
+&=-\operatorname{sech}^2t.
+\end{align*}
+従って法線成分を引けば
 \[
 \boldsymbol{k}_g
-=\operatorname{sech}^2t\,(\tanh t\sin t,-\tanh t\cos t,\operatorname{sech}t).
+=\frac{\d T}{\d s}
+-\left(\frac{\d T}{\d s}\cdot n\right)n
+=\operatorname{sech}^2t\,
+(\tanh t\sin t,-\tanh t\cos t,\operatorname{sech}t).
 \]
 \end{proof}
 
@@ -205,7 +246,22 @@ b_2=\frac{a_1^2-a_0a_2}{a_0^3}.
 \[
 \sin z=z-\frac{z^3}{6}+\frac{z^5}{120}+O(z^7)
 \]
-を二乗して逆数を取ると
+を二乗すると
+\begin{align*}
+\sin^2z
+&=z^2-\frac13z^4
++\left(\frac1{36}+\frac1{60}\right)z^6+O(z^8)\\
+&=z^2\left(1-\frac13z^2+\frac{2}{45}z^4+O(z^6)\right).
+\end{align*}
+$u=-z^2/3+2z^4/45+O(z^6)$ とおき
+$(1+u)^{-1}=1-u+u^2+O(u^3)$ を使うと
+\begin{align*}
+\left(1-\frac13z^2+\frac{2}{45}z^4+O(z^6)\right)^{-1}
+&=1+\frac13z^2
++\left(\frac19-\frac{2}{45}\right)z^4+O(z^6)\\
+&=1+\frac13z^2+\frac1{15}z^4+O(z^6).
+\end{align*}
+従って
 \[
 \frac1{\sin^2z}=\frac1{z^2}+\frac13+\frac{z^2}{15}+O(z^4).
 \]
@@ -311,8 +367,22 @@ $\Gamma(p)\Gamma(q)=B(p,q)\Gamma(p+q)$ を，二重積分に (1) $x=st,y=s(1-t)$
 \end{align*}
 
 (2) $x=(r\cos\theta)^2$, $y=(r\sin\theta)^2$ とおくと
-$0<r<\infty$, $0<\theta<\pi/2$ で、Jacobian は
-$4r^3\sin\theta\cos\theta$ である。従って
+$0<r<\infty$, $0<\theta<\pi/2$ である。各偏微分は
+\[
+x_r=2r\cos^2\theta,\quad x_\theta=-2r^2\sin\theta\cos\theta,
+\]
+\[
+y_r=2r\sin^2\theta,\quad y_\theta=2r^2\sin\theta\cos\theta
+\]
+だから、Jacobian は
+\begin{align*}
+\left|\frac{\partial(x,y)}{\partial(r,\theta)}\right|
+&=\left|x_ry_\theta-x_\theta y_r\right|\\
+&=4r^3\sin\theta\cos\theta
+(\cos^2\theta+\sin^2\theta)\\
+&=4r^3\sin\theta\cos\theta.
+\end{align*}
+従って
 \begin{align*}
 \Gamma(p)\Gamma(q)
 &=4\int_0^\infty r^{2p+2q-1}e^{-r^2}\,\d r

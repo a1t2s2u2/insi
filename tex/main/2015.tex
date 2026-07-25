@@ -51,8 +51,20 @@ $a=-1$ では $u=\log x$ と置換し、$\d u=\d x/x$ より
 \int\frac{\log x}{x}\,\d x=\int u\,\d u=\frac{(\log x)^2}{2}+C.
 \]
 
-二重積分では $x=r\cos\theta$, $y=r\sin\theta$ とおく。Jacobian は $r$ で、
-$0\le r<R$, $0\le\theta<2\pi$ だから
+二重積分では
+\[
+x=r\cos\theta,\qquad y=r\sin\theta
+\]
+とおく。このとき
+\[
+\left|\frac{\partial(x,y)}{\partial(r,\theta)}\right|
+=\left|\det\begin{pmatrix}
+\cos\theta&-r\sin\theta\\
+\sin\theta&r\cos\theta
+\end{pmatrix}\right|
+=r(\cos^2\theta+\sin^2\theta)=r.
+\]
+円板 $x^2+y^2<R^2$ は $0\le r<R$, $0\le\theta<2\pi$ に対応するから
 \begin{align*}
 I(a,R)
 &=\int_0^{2\pi}\int_0^R(1+r^2)^a\log(1+r^2)r\,\d r\d\theta\\
@@ -323,6 +335,14 @@ $0<y<\pi$ の範囲で変数分離すると
 \frac{\d y}{\sin y}=\d x,\qquad
 \int\frac{\d y}{\sin y}=\log\tan\frac y2.
 \]
+ここで原始関数は
+\[
+\frac{\d}{\d y}\log\tan\frac y2
+=\frac{1}{\tan(y/2)}\cdot\frac12\sec^2\frac y2
+=\frac1{2\sin(y/2)\cos(y/2)}
+=\frac1{\sin y}
+\]
+から確かめられる。
 従って $\log\tan(y/2)=x+C$。初期条件 $y(0)=\pi/2$ から $C=0$ なので
 \[
 \tan\frac y2=e^x,\qquad y(x)=2\arctan(e^x).
@@ -426,20 +446,45 @@ b_2=(3,2,3,7)^{\mathsf T}
 \[
 \operatorname{Im}B=\langle(1,1,2,3),(3,2,3,7)\rangle,
 \]
-である。$\alpha a_1+\beta a_2=\gamma b_1+\delta b_2$ とおく。
-4成分を比較して消去すると
+である。共通部分の元を
+$\alpha a_1+\beta a_2=\gamma b_1+\delta b_2$ と表す。4成分を比較すると
+\[
+\begin{cases}
+\alpha+2\beta=\gamma+3\delta,\\
+-\alpha=\gamma+2\delta,\\
+2\alpha+3\beta=2\gamma+3\delta,\\
+\alpha+\beta=3\gamma+7\delta.
+\end{cases}
+\]
+第2式から $\gamma=-\alpha-2\delta$。これを第1、3、4式へ代入すると
+\[
+\delta=2\alpha+2\beta,\qquad
+4\alpha+3\beta+\delta=0,
+\qquad4\alpha+\beta-\delta=0.
+\]
+さらに $\delta=2\alpha+2\beta$ を後ろ2式へ代入して
 \[
 6\alpha+5\beta=0,\qquad 2\alpha-\beta=0
 \]
-となるので $\alpha=\beta=0$、従って $\gamma=\delta=0$。よって
+を得る。第2式から $\beta=2\alpha$、これを第1式へ入れると
+$16\alpha=0$ なので $\alpha=\beta=0$。従って
+$\delta=0$, $\gamma=0$ であり
 \[
 \operatorname{Im}A\cap\operatorname{Im}B=\{0\}.
 \]
-$Ax=0$ は
+列の関係式から、任意の $x=(x_1,x_2,x_3,x_4)^{\mathsf T}$ に対し
+\[
+Ax=(x_1+x_3-2x_4)a_1+(x_2+x_3+x_4)a_2.
+\]
+$a_1,a_2$ は一次独立だから $Ax=0$ は
 \[
 x_1+x_3-2x_4=0,\qquad x_2+x_3+x_4=0
 \]
-と同値で、$Bx=0$ は
+と同値である。同様に
+\[
+Bx=(x_1+2x_2+3x_4)b_1+(x_3-x_4)b_2
+\]
+だから、$Bx=0$ は
 \[
 x_1+2x_2+3x_4=0,\qquad x_3-x_4=0
 \]
@@ -521,16 +566,37 @@ y=2-2t,\qquad x=1-2y-3z=t-3,
 \]
 従って全解は $(x,y,z)=(t-3,2-2t,t)$ である。
 
-$XA=B$ は右から $A^{-1}$ を掛けて $X=BA^{-1}$、$AY=C$ は左から
-$A^{-1}$ を掛けて $Y=A^{-1}C$ と解く。そのためまず掃き出し計算をすると
+$XA=B$ と $AY=C$ を解くため、まず $A$ の正則性を確認する。第1行で展開すると
+\begin{align*}
+\det A
+&=1\det\begin{pmatrix}3&1\\1&2\end{pmatrix}
+-2\det\begin{pmatrix}2&1\\3&2\end{pmatrix}
++3\det\begin{pmatrix}2&3\\3&1\end{pmatrix}\\
+&=(6-1)-2(4-3)+3(2-9)\\
+&=5-2-21=-18\ne0.
+\end{align*}
+従って $A$ は正則である。余因子を計算して転置すると
 \[
-A^{-1}=\frac1{18}
+\operatorname{adj}A=
+\begin{pmatrix}5&-1&-7\\-1&-7&5\\-7&5&-1\end{pmatrix},
+\]
+よって
+\[
+A^{-1}=\frac1{\det A}\operatorname{adj}A
+=\frac1{18}
 \begin{pmatrix}-5&1&7\\1&7&-5\\7&-5&1\end{pmatrix}.
 \]
-実際に積を取ると
+$XA=B$ は右から $A^{-1}$ を掛けて $X=BA^{-1}$、
+$AY=C$ は左から $A^{-1}$ を掛けて $Y=A^{-1}C$ である。積を計算すると
 \[
-BA^{-1}=\begin{pmatrix}1&0&0\\0&1&2\\0&0&1\end{pmatrix},\qquad
-A^{-1}C=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix}.
+BA^{-1}=\frac1{18}
+\begin{pmatrix}18&0&0\\0&18&36\\0&0&18\end{pmatrix}
+=\begin{pmatrix}1&0&0\\0&1&2\\0&0&1\end{pmatrix},
+\]
+\[
+A^{-1}C=\frac1{18}
+\begin{pmatrix}0&18&0\\18&0&0\\0&0&18\end{pmatrix}
+=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix}.
 \]
 よって
 \[
@@ -640,7 +706,10 @@ $x=0,1$ は $t=1,1+\sqrt2$ に対応する。従って
 &=\int_1^{1+\sqrt2}\frac{\d t}{t}
 =\log(1+\sqrt2),\\
 \int_0^1\sqrt{x^2+1}\,\d x
-&=\frac12\left[x\sqrt{x^2+1}+\log(x+\sqrt{x^2+1})\right]_0^1\\
+&=\frac14\int_1^{1+\sqrt2}
+  (t+t^{-1})(1+t^{-2})\,\d t\\
+&=\frac14\int_1^{1+\sqrt2}(t+2t^{-1}+t^{-3})\,\d t\\
+&=\left[\frac{t^2}{8}+\frac12\log t-\frac1{8t^2}\right]_1^{1+\sqrt2}\\
 &=\frac{\sqrt2+\log(1+\sqrt2)}2.
 \end{align*}
 \end{proof}
