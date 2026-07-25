@@ -20,7 +20,7 @@ import { chapterTemplate, landingTemplate, graphTemplate, outPathOf } from "./li
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ASSETS_DIR = path.join(__dirname, "assets");
-const ASSETS = ["styles.css", "app.js", "graph.js"];
+const ASSETS = ["styles.css", "app.js", "graph.js", "track-filter.js"];
 
 const seminarDir = process.argv.slice(2).find((a) => !a.startsWith("--"));
 if (!seminarDir) {

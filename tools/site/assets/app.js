@@ -53,6 +53,9 @@ function buildToc() {
 
   headings.forEach((h) => {
     const li = document.createElement("li");
+    if (h.dataset.examTrack) li.dataset.examTrack = h.dataset.examTrack;
+    const selectedTrack = document.documentElement.dataset.examTrack || "all";
+    li.hidden = selectedTrack !== "all" && h.dataset.examTrack !== selectedTrack;
     const a = document.createElement("a");
     a.href = `#${h.id}`;
     a.className = "chapter-toc__link";
@@ -99,6 +102,13 @@ function buildToc() {
 }
 
 buildToc();
+
+document.addEventListener("examtrackchange", (event) => {
+  const selectedTrack = event.detail?.track || "all";
+  document.querySelectorAll(".chapter-toc__list li[data-exam-track]").forEach((item) => {
+    item.hidden = selectedTrack !== "all" && item.dataset.examTrack !== selectedTrack;
+  });
+});
 
 /* ---------- Reference Sidebar (Right, Fixed) ---------- */
 
@@ -296,17 +306,27 @@ if (features.keyboardHelp) {
 const allBlockEls = document.querySelectorAll(".block, .example-band, .margin-note");
 let currentBlockIdx = -1;
 
+function visibleBlockEls() {
+  return [...allBlockEls].filter((element) => !element.hidden && element.offsetParent !== null);
+}
+
+document.addEventListener("examtrackchange", () => {
+  currentBlockIdx = -1;
+});
+
 document.addEventListener("keydown", (e) => {
   if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
 
   if (e.key === "j") {
-    currentBlockIdx = Math.min(currentBlockIdx + 1, allBlockEls.length - 1);
-    allBlockEls[currentBlockIdx]?.scrollIntoView({ behavior: "smooth", block: "center" });
+    const blocks = visibleBlockEls();
+    currentBlockIdx = Math.min(currentBlockIdx + 1, blocks.length - 1);
+    blocks[currentBlockIdx]?.scrollIntoView({ behavior: "smooth", block: "center" });
     e.preventDefault();
   }
   if (e.key === "k") {
+    const blocks = visibleBlockEls();
     currentBlockIdx = Math.max(currentBlockIdx - 1, 0);
-    allBlockEls[currentBlockIdx]?.scrollIntoView({ behavior: "smooth", block: "center" });
+    blocks[currentBlockIdx]?.scrollIntoView({ behavior: "smooth", block: "center" });
     e.preventDefault();
   }
   if (e.key === "Escape") {

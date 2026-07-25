@@ -7,7 +7,27 @@
 有限次元実ベクトル空間 $V$ について，一次独立と基底を定義せよ。基底 $v_1,\ldots,v_n$ と同型写像 $f:V\to V$ に対し $f(v_1),\ldots,f(v_n)$ も基底であることを示せ。また $V=\R^n$，$W_i=\langle v_1,\ldots,v_i\rangle$ とし，$AW_i\subset W_i$ なら $P^{-1}AP$ を上三角にする正則行列 $P$ があることを示せ。
 \end{problem}
 \begin{proof}[解答]
-一次独立とは $\sum a_iv_i=0$ なら全 $a_i=0$ となること，基底とは一次独立かつ $V$ を生成すること。同型は線形関係と生成を保つので像も基底。最後は $P=(v_1\ \cdots\ v_n)$ と取る。$Av_i\in W_i$ だから第 $i$ 列の第 $i+1$ 行以下は0，従って $P^{-1}AP$ は上三角。
+一次独立とは
+\[
+\sum_{i=1}^n a_iv_i=0\quad\Longrightarrow\quad
+a_1=\cdots=a_n=0
+\]
+となること，基底とは一次独立で、かつ任意の $v\in V$ が
+$v=\sum_i a_iv_i$ と一意に表せることをいう。
+
+$\sum_i a_if(v_i)=0$ とすると、線形性から
+$f(\sum_i a_iv_i)=0$ である。同型写像 $f$ は単射なので
+$\sum_i a_iv_i=0$、従って全ての $a_i$ は0である。また任意の $w\in V$ に対し、
+全射性から $w=f(v)$ となる $v\in V$ があり、$v=\sum_i b_iv_i$ と書けば
+$w=\sum_i b_if(v_i)$ となる。よって $f(v_1),\ldots,f(v_n)$ も基底である。
+
+最後に、$P=(v_1\ \cdots\ v_n)$ と取る。$P$ は基底を列に持つので正則である。
+$Av_i\in W_i=\langle v_1,\ldots,v_i\rangle$ より、ある係数 $c_{ji}$ を用いて
+\[
+Av_i=\sum_{j=1}^i c_{ji}v_j
+\]
+と書ける。従って $P^{-1}AP$ の第 $i$ 列は
+$(c_{1i},\ldots,c_{ii},0,\ldots,0)^{\mathsf T}$ であり、対角成分より下が全て0になるので上三角行列である。
 \end{proof}
 
 \begin{problem}{第2問｜広義積分}{2015-b-2}
@@ -15,13 +35,42 @@ $f_a(x)=x^a\log x$ $(x>0)$ とする。不定積分を求めよ。また
 $I(a,R)=\iint_{x^2+y^2<R^2}f_a(1+x^2+y^2)\,\d x\d y$ とするとき $I(0,1)$ と，$\lim_{R\to\infty}I(a,R)$ が収束する $a$ の範囲を求めよ。
 \end{problem}
 \begin{proof}[解答]
-$a\ne-1$ なら
+$a\ne-1$ なら部分積分で $u=\log x$, $\d v=x^a\,\d x$ とおくと
 \[
-\int x^a\log x\,\d x=x^{a+1}\left(\frac{\log x}{a+1}-\frac1{(a+1)^2}\right)+C,
+\d u=\frac{\d x}{x},\qquad v=\frac{x^{a+1}}{a+1}
 \]
-$a=-1$ なら $(\log x)^2/2+C$。極座標で
-$I(a,R)=\pi\int_1^{1+R^2}u^a\log u\,\d u$。よって
-$I(0,1)=\pi(2\log2-1)$，広義積分が収束するのは $a<-1$。
+なので
+\begin{align*}
+\int x^a\log x\,\d x
+&=\frac{x^{a+1}\log x}{a+1}
+-\frac1{a+1}\int x^a\,\d x\\
+&=x^{a+1}\left(\frac{\log x}{a+1}-\frac1{(a+1)^2}\right)+C.
+\end{align*}
+$a=-1$ では $u=\log x$ と置換し、$\d u=\d x/x$ より
+\[
+\int\frac{\log x}{x}\,\d x=\int u\,\d u=\frac{(\log x)^2}{2}+C.
+\]
+
+二重積分では $x=r\cos\theta$, $y=r\sin\theta$ とおく。Jacobian は $r$ で、
+$0\le r<R$, $0\le\theta<2\pi$ だから
+\begin{align*}
+I(a,R)
+&=\int_0^{2\pi}\int_0^R(1+r^2)^a\log(1+r^2)r\,\d r\d\theta\\
+&=2\pi\int_0^R(1+r^2)^a\log(1+r^2)r\,\d r.
+\end{align*}
+$u=1+r^2$ とおけば $\d u=2r\,\d r$ なので
+\[
+I(a,R)=\pi\int_1^{1+R^2}u^a\log u\,\d u.
+\]
+$a=0$, $R=1$ のときは
+\[
+I(0,1)=\pi[u\log u-u]_1^2=\pi(2\log2-1).
+\]
+$R\to\infty$ の収束性は $\int_1^\infty u^a\log u\,\d u$ で判定する。
+$a<-1$ なら上の原始関数の $u^{a+1}\log u$ と $u^{a+1}$ はともに0へ収束する。
+$a=-1$ なら原始関数が $(\log u)^2/2\to\infty$、$a>-1$ なら
+$u^a\log u\ge u^a$（$u\ge e$）かつ $\int_e^\infty u^a\,\d u$ が発散する。
+従って収束するのは $a<-1$ の場合に限る。
 \end{proof}
 
 \begin{problem}{第3問｜二重周期関数}{2015-b-3}
@@ -29,7 +78,22 @@ $I(0,1)=\pi(2\log2-1)$，広義積分が収束するのは $a<-1$。
 $f(\R^2)=f([0,1]^2)$，$f$ が最大・最小値を持つこと，さらに最大値 $b$ と最小値 $a$ に対して $f\circ c:[0,1]\to[a,b]$ が全射となる連続曲線 $c$ が存在することを示せ。
 \end{problem}
 \begin{proof}[解答]
-整数部分を引けば任意の点を基本領域へ移せるので像は等しい。$[0,1]^2$ はコンパクトだから最大・最小点 $p,q$ がある。$c(t)=(1-t)p+tq$ とすれば $f\circ c$ は連続で両端値 $a,b$ を取るため，中間値の定理により $[a,b]$ 上全射。
+任意の $(x,y)\in\R^2$ に対し $m=\lfloor x\rfloor$, $n=\lfloor y\rfloor$ とおくと
+$(x-m,y-n)\in[0,1)^2\subset[0,1]^2$ であり、周期性を繰り返し使って
+\[
+f(x,y)=f(x-m,y-n)
+\]
+となる。従って $f(\R^2)\subset f([0,1]^2)$ であり、逆の包含は明らかなので両者は等しい。
+
+$[0,1]^2$ はコンパクトで $f$ は連続だから、最大値・最小値の定理により
+$f(p)=a$, $f(q)=b$ となる点 $p,q\in[0,1]^2$ が存在する。
+線分
+\[
+c(t)=(1-t)p+tq\qquad(0\le t\le1)
+\]
+は $[0,1]^2$ 内にあり連続である。従って $f\circ c$ も連続で、
+$(f\circ c)(0)=a$, $(f\circ c)(1)=b$ である。任意の $y\in[a,b]$ に対し
+中間値の定理から $(f\circ c)(t)=y$ となる $t$ が存在するので、$f\circ c$ は $[a,b]$ 上全射である。
 \end{proof}
 
 \section{専門科目（8題から2題選択）}
@@ -43,8 +107,43 @@ G=\left\{\begin{pmatrix}a&0&b\\c&1&d\\e&0&f\end{pmatrix}\ \middle|\ af-be=1\righ
 $X=\begin{pmatrix}1&0&0\\0&1&0\\1&0&1\end{pmatrix}$ と $K$ が生成する $H$ の位数と中心を求めよ。
 \end{problem}
 \begin{proof}[解答]
-基底順を $(e_1,e_3;e_2)$ と見れば元は $\begin{pmatrix}B&0\\u&1\end{pmatrix}$（$B\in SL_2,u\in\mathbb F_p^2$）。この表示で群性と $\varphi(B,u)=B$ は明らか。
-$K=\{(I,u)\}\cong\mathbb F_p^2$。全ての $u$ と可換するには $B=I$ が必要なので $C_G(K)=K$。$\varphi(X)=\begin{pmatrix}1&0\\1&1\end{pmatrix}$ は位数 $p$ で，$|H|=p^2p=p^3$。中心は
+基底順を $(e_1,e_3;e_2)$ と見れば元は
+$\begin{pmatrix}B&0\\u&1\end{pmatrix}$（$B\in SL_2,u\in\mathbb F_p^2$）と書ける。
+この表示で積と逆元は
+\[
+\begin{pmatrix}B&0\\u&1\end{pmatrix}
+\begin{pmatrix}C&0\\v&1\end{pmatrix}
+=\begin{pmatrix}BC&0\\uC+v&1\end{pmatrix},
+\]
+\[
+\begin{pmatrix}B&0\\u&1\end{pmatrix}^{-1}
+=\begin{pmatrix}B^{-1}&0\\-uB^{-1}&1\end{pmatrix}.
+\]
+$BC,B^{-1}\in SL_2(\mathbb F_p)$ なので $G$ は群であり、
+$\varphi(B,u)=B$ について $\varphi((B,u)(C,v))=BC=\varphi(B,u)\varphi(C,v)$ である。
+$K=\{(I,u)\}\cong\mathbb F_p^2$ である。$(B,w)$ が全ての $(I,u)\in K$ と可換する条件を積の公式へ代入すると
+\[
+(B,w)(I,u)=(B,w+u),\qquad
+(I,u)(B,w)=(B,uB+w).
+\]
+従って全ての行ベクトル $u$ について $uB=u$、すなわち $B=I$ が必要十分である。
+よって $C_G(K)=K$。
+
+$B_0=\varphi(X)=\begin{pmatrix}1&0\\1&1\end{pmatrix}$ とおくと
+\[
+B_0^j=\begin{pmatrix}1&0\\j&1\end{pmatrix}\qquad(j\in\mathbb F_p)
+\]
+なので $B_0$ の位数は $p$。$K\cap\langle X\rangle=\{1\}$ で、$X$ は共役により
+$K$ を保つから、$H=K\rtimes\langle X\rangle$ であり
+$|H|=p^2p=p^3$ となる。
+
+中心の元は特に $K$ と可換するので、上の議論から $(I,u)$ の形に限る。
+$u=(c,d)$ とすると
+\[
+(I,u)(B_0,0)=(B_0,uB_0),\qquad
+(B_0,0)(I,u)=(B_0,u),
+\]
+かつ $uB_0=(c+d,d)$ だから、$X$ と可換する条件は $d=0$ である。従って中心は
 \[
 Z(H)=\left\{\begin{pmatrix}1&0&0\\c&1&0\\0&0&1\end{pmatrix}\middle|c\in\mathbb F_p\right\},
 \]
@@ -56,9 +155,49 @@ $\Phi:\Z[X]\to\R\times\R$，$\Phi(f)=(f(\sqrt7),f(\sqrt{13}))$ とする。$f(\s
 $\ker\Phi=((X^2-7)(X^2-13))$ を示せ。$P_1=(\Phi(X^2-7))$，$P_2=(\Phi(X^2-13))$ が $\operatorname{Im}\Phi$ の素イデアルだが極大でないことを示し，両方を含む素イデアルの個数を求めよ。
 \end{problem}
 \begin{proof}[解答]
-除法で $f=(X^2-7)q+rX+s$ と書けば $r\sqrt7+s=0$。$r,s\in\Z$ と $\sqrt7\notin\Q$ より $r=s=0$。同様に二つの既約多項式の積が核を生成する。
-$\operatorname{Im}\Phi/P_1\cong\Z[\sqrt7]$，$\operatorname{Im}\Phi/P_2\cong\Z[\sqrt{13}]$ は整域だが体でない。
-両方を含む素イデアルは $6$ を含む。$2$ 上では $X^2-1=(X-1)^2$ から1個，$3$ 上では $(X-1)(X+1)$ から2個生じるので，合計は $3$ 個。
+多項式の除法により
+\[
+f(X)=(X^2-7)q(X)+rX+s\qquad(r,s\in\Z)
+\]
+と書ける。$f(\sqrt7)=0$ なら $r\sqrt7+s=0$。もし $r\ne0$ なら
+$\sqrt7=-s/r\in\Q$ となって矛盾するので $r=0$、さらに $s=0$ である。
+従って $X^2-7$ は $f$ を割る。
+
+$f\in\ker\Phi$ とする。上の結果から $f=(X^2-7)q$ と書ける。
+$0=f(\sqrt{13})=6q(\sqrt{13})$ なので $q(\sqrt{13})=0$。
+同じ議論により $X^2-13$ は $q$ を割るから
+\[
+f\in((X^2-7)(X^2-13)).
+\]
+逆にこの積の倍数は $\sqrt7$, $\sqrt{13}$ の両方で0になるので、
+\[
+\ker\Phi=((X^2-7)(X^2-13)).
+\]
+
+$\operatorname{Im}\Phi$ から第1成分を取る写像の像は $\Z[\sqrt7]$ で、核は
+$P_1$ である。従って準同型定理から
+\[
+\operatorname{Im}\Phi/P_1\cong\Z[\sqrt7].
+\]
+これは整域なので $P_1$ は素イデアルだが、例えば2は逆元を持たないので体ではなく、
+$P_1$ は極大でない。同様に
+$\operatorname{Im}\Phi/P_2\cong\Z[\sqrt{13}]$ から $P_2$ も素だが極大でない。
+
+$P_1,P_2$ の両方を含む素イデアル $\mathfrak p$ は
+\[
+\Phi(X^2-7)-\Phi(X^2-13)=\Phi(6)
+\]
+を含む。従って $6\in\mathfrak p$ であり、素性から $2\in\mathfrak p$ または
+$3\in\mathfrak p$ である。法2では二つの関係式はいずれも
+\[
+X^2-1=(X-1)^2
+\]
+となるので素イデアルは $(2,X-1)$ に対応する1個。法3では
+\[
+X^2-1=(X-1)(X+1)
+\]
+となるので $(3,X-1)$ と $(3,X+1)$ に対応する2個である。
+従って求める素イデアルは合計 $1+2=3$ 個である。
 \end{proof}
 
 \begin{problem}{第3問｜リフトと基本群}{2015-s-3}
@@ -72,15 +211,57 @@ $f\circ\eta$ が零ホモトピックなら，そのホモトピーを持ち上�
 $S$ を $z=2x^2+y^2$ のグラフ，$C(t)=(t,t,3t^2)$ とする。$S$ の Gauss 曲率・平均曲率，$C$ の接線方向の法曲率を求め，法曲率と平均曲率が等しい $C$ 上の点を求めよ。
 \end{problem}
 \begin{proof}[解答]
-$W=\sqrt{1+16x^2+4y^2}$ とおくと（上向き法線）
+グラフを $X(x,y)=(x,y,2x^2+y^2)$ とパラメータ表示する。
+\[
+X_x=(1,0,4x),\qquad X_y=(0,1,2y)
+\]
+なので、第1基本形式の係数と上向き単位法線は
+\[
+E=1+16x^2,\quad F=8xy,\quad G=1+4y^2,
+\]
+\[
+n=\frac{(-4x,-2y,1)}W,qquad W=\sqrt{1+16x^2+4y^2}.
+\]
+また $X_{xx}=(0,0,4)$, $X_{xy}=0$, $X_{yy}=(0,0,2)$ より
+第2基本形式の係数は
+\[
+e=\frac4W,qquad f=0,qquad g=\frac2W.
+\]
+従って
+\begin{align*}
+K&=\frac{eg-f^2}{EG-F^2}
+=\frac{8/W^2}{W^2}=\frac8{W^4},\\
+H&=\frac{eG-2fF+gE}{2(EG-F^2)}\\
+&=\frac{4(1+4y^2)+2(1+16x^2)}{2W^3}
+=\frac{3+16x^2+8y^2}{W^3}.
+\end{align*}
+すなわち
 \[
 K=\frac8{W^4},\qquad H=\frac{3+16x^2+8y^2}{W^3}.
 \]
-$C$ の方向 $(1,1)$ に対する法曲率は
+$C(t)=X(t,t)$ の座標方向は $(\d x,\d y)=(1,1)$ なので、法曲率は
+第2基本形式と第1基本形式の比から
+\begin{align*}
+k_n(t)
+&=\frac{e+2f+g}{E+2F+G}\bigg|_{(x,y)=(t,t)}\\
+&=\frac{6/\sqrt{1+20t^2}}{2+36t^2}\\
+&=\frac6{\sqrt{1+20t^2}(2+36t^2)}.
+\end{align*}
+従って
 \[
 k_n(t)=\frac6{\sqrt{1+20t^2}(2+36t^2)}.
 \]
-$k_n=H(t,t)$ を整理すると $36t^2(1+24t^2)=0$。従って点は $(0,0,0)$ のみ。
+$x=y=t$ を代入すると
+\[
+H(t,t)=\frac{3+24t^2}{(1+20t^2)^{3/2}},\qquad
+k_n(t)=\frac6{\sqrt{1+20t^2}(2+36t^2)}.
+\]
+両辺に正の $(1+20t^2)^{3/2}(2+36t^2)$ を掛けて整理すると
+\begin{align*}
+6(1+20t^2)&=(3+24t^2)(2+36t^2)\\
+&=6+156t^2+864t^4,
+\end{align*}
+すなわち $36t^2(1+24t^2)=0$。実数では $t=0$ だけなので、点は $(0,0,0)$ のみ。
 \end{proof}
 
 \begin{problem}{第5問｜3次方程式}{2015-s-5}
@@ -92,20 +273,66 @@ P_n=\frac1{2\pi i}\int_{|z|=R+1}\frac{z^n(3z^2+a)}{z^3+az+b}\,\d z,
 を $a,b$ で表し，$\Delta=0$, $(a,b)\ne(0,0)$ のときの全ての根を求めよ。
 \end{problem}
 \begin{proof}[解答]
-$|z|^3>|a||z|+|b|$ を使えば最初の主張が従う。偏角原理から $P_n$ は3根の $n$ 乗和。Newton の公式で $P_0=3,P_2=-2a,P_3=-3b$，従って
-$\Delta=4a^3+27b^2$。
-$\Delta=0$ は重根を持つ条件。$r=-3b/(2a)$ とおけば
+$M=\max\{|a|,|b|\}$ とおくと $R=M+1$ である。$t=|z|\ge R+1=M+2$ なら
 \[
-f(z)=(z-r)^2(z+2r),
+|az+b|\le |a|t+|b|\le M(t+1)le(t-2)(t+1)<t^3=|z^3|.
 \]
-なので根は $-3b/(2a)$（重複度2）と $3b/a$。
+従って逆三角不等式から
+$|f(z)|\ge |z|^3-|az+b|>0$ となり、$f(z)\ne0$ である。
+
+$f'(z)=3z^2+a$ なので、偏角原理（対数微分の留数）から
+\[
+P_n=\frac1{2\pi i}\int_Cz^n\frac{f'(z)}{f(z)}\,\d z
+=\sum_{j=1}^3\alpha_j^n,
+\]
+ここで $\alpha_1,\alpha_2,\alpha_3$ は重複度を込めた3根である。
+$P_0=3$ であり、$\alpha_1+\alpha_2+\alpha_3=0$、
+$\alpha_1\alpha_2+\alpha_2\alpha_3+\alpha_3\alpha_1=a$、
+$\alpha_1\alpha_2\alpha_3=-b$ を使うと
+\begin{align*}
+P_2&=(\alpha_1+\alpha_2+\alpha_3)^2
+-2(\alpha_1\alpha_2+\alpha_2\alpha_3+\alpha_3\alpha_1)=-2a,\\
+P_3&=(\alpha_1+\alpha_2+\alpha_3)^3
+-3(\alpha_1+\alpha_2+\alpha_3)
+(\alpha_1\alpha_2+\alpha_2\alpha_3+\alpha_3\alpha_1)
++3\alpha_1\alpha_2\alpha_3=-3b.
+\end{align*}
+従って
+\[
+\Delta=3(-3b)^2-\frac12(-2a)^3=4a^3+27b^2.
+\]
+
+$\Delta=0$ かつ $(a,b)\ne(0,0)$ なら $a\ne0$ である。
+$r=-3b/(2a)$ とおく。$4a^3+27b^2=0$ を用いると
+\[
+-3r^2=a,\qquad 2r^3=b.
+\]
+従って係数を比較して
+\[
+(z-r)^2(z+2r)=z^3-3r^2z+2r^3=z^3+az+b=f(z).
+\]
+よって根は $r=-3b/(2a)$（重複度2）と $-2r=3b/a$（重複度1）である。
 \end{proof}
 
 \begin{problem}{第6問｜常微分方程式}{2015-s-6}
 $y'=\sin y$, $y(0)=\pi/2$ を解け。また $f\in C^1(\R^2)$ に対する $y'=\sin f(x,y)$ の任意の極大解の定義域が $\R$ 全体であることを示せ。
 \end{problem}
 \begin{proof}[解答]
-変数分離により $\log\tan(y/2)=x$，従って $y=2\arctan(e^x)$。一般の式でも $|y'|\le1$ なので有限区間で $y$ は発散できない。右辺は $C^1$ で局所解の延長が可能だから，極大解の端点は有限にならない。
+$0<y<\pi$ の範囲で変数分離すると
+\[
+\frac{\d y}{\sin y}=\d x,\qquad
+\int\frac{\d y}{\sin y}=\log\tan\frac y2.
+\]
+従って $\log\tan(y/2)=x+C$。初期条件 $y(0)=\pi/2$ から $C=0$ なので
+\[
+\tan\frac y2=e^x,\qquad y(x)=2\arctan(e^x).
+\]
+一般の式 $y'=\sin f(x,y)$ では $|y'|\le1$。解が $x_0$ から有限時刻 $b$ まで存在するとき
+\[
+|y(x)-y(x_0)|\le|x-x_0|
+\]
+だから $y$ は有限区間で発散しない。右辺は $C^1$ なので局所存在・一意性定理により
+有限な端点の近くからさらに解を延長できる。従って極大解の定義域の端点は有限にならず、定義域は $\R$ 全体である。
 \end{proof}
 
 \begin{problem}{第7問｜収束定理}{2015-s-7}
@@ -115,14 +342,59 @@ $p>0$，$0<f<\infty$，$\int_Xf^p\,\d\mu=1$ とする。次を求めよ。
 \]
 \end{problem}
 \begin{proof}[解答]
-点ごとに $n\sin(f/n)\to f$。また $|n\sin(f/n)|^p\le f^p$ なので優収束定理を使える。答えは $\int f^p=1$。
+各 $x$ について $u_n=f(x)/n\to0$ であり、$\sin u/u\to1$ だから
+\[
+n\sin\left(\frac{f(x)}n\right)
+=f(x)\frac{\sin u_n}{u_n}\longrightarrow f(x).
+\]
+従って被積分関数は点ごとに $f(x)^p$ へ収束する。また $f>0$ と
+$|\sin u|\le|u|$ から
+\[
+\left|n\sin\left(\frac{f(x)}n\right)\right|^p
+\le f(x)^p.
+\]
+仮定より $f^p$ は可積分で、その積分は1である。よって優収束定理を適用でき
+\[
+\lim_{n\to\infty}\int_X
+\left|n\sin\left(\frac{f(x)}n\right)\right|^p\,\d\mu
+=\int_Xf(x)^p\,\d\mu=1.
+\]
 \end{proof}
 
 \begin{problem}{第8問｜独立確率変数の級数}{2015-s-8}
 $X$ の平均を $\mu$，分散を $\sigma^2$ とし，独立な $X_n$ の密度を $nf(nx)$ とする。$S_n=\sum_{k=1}^nX_k$ とおく。$E[X_n],V[X_n]$ を求め，$S_n$ が概収束する必要十分条件が $\mu=0$ であることを示せ。$X$ が標準正規分布なら極限分布を求めよ。
 \end{problem}
 \begin{proof}[解答]
-$X_n$ は $X/n$ と同分布なので $E[X_n]=\mu/n$，$V[X_n]=\sigma^2/n^2$。$\mu=0$ なら独立・中心化かつ分散和が有限なので Kolmogorov の収束定理により概収束。$\mu\ne0$ なら中心化した級数は収束する一方，平均部分 $\mu\sum1/n$ が発散するので概収束しない。標準正規の場合，極限は平均0，分散 $\sum1/n^2=\pi^2/6$ の正規分布。
+$X_n$ の分布関数を変数変換すると、任意の有界可測関数 $\psi$ に対し
+\[
+E[\psi(X_n)]=\int_{\R}\psi(x)nf(nx)\,\d x
+=\int_{\R}\psi(u/n)f(u)\,\d u.
+\]
+従って $X_n$ は $X/n$ と同分布であり
+\[
+E[X_n]=\frac\mu n,\qquad V[X_n]=\frac{\sigma^2}{n^2}.
+\]
+
+$Y_n=X_n-\mu/n$ とおくと、$Y_n$ は独立、平均0で
+\[
+\sum_{n=1}^\infty V[Y_n]
+=\sigma^2\sum_{n=1}^\infty\frac1{n^2}<\infty.
+\]
+Kolmogorov の収束定理により $\sum_nY_n$ はほとんど確実に収束する。
+従って
+\[
+S_n=\sum_{k=1}^nY_k+\mu\sum_{k=1}^n\frac1k.
+\]
+$\mu=0$ なら右辺第1項だけなので $S_n$ は概収束する。
+$\mu\ne0$ なら第1項は有限値へ収束する一方、調和級数を含む第2項は
+$\operatorname{sgn}(\mu)\infty$ へ発散するため、$S_n$ は有限な確率変数へ概収束しない。
+
+$X$ が標準正規分布なら $X_n\sim N(0,1/n^2)$ であり、独立性から
+\[
+S_n\sim N\left(0,\sum_{k=1}^n\frac1{k^2}\right).
+\]
+分散は $\sum_{k=1}^n1/k^2\to\pi^2/6$ だから、概収束極限の分布は
+$N(0,\pi^2/6)$ である。
 \end{proof}
 
 \section{第2期・専門基礎科目（3題必修）}
@@ -135,16 +407,51 @@ B=\begin{pmatrix}1&2&3&0\\1&2&2&1\\2&4&3&3\\3&6&7&2\end{pmatrix}.
 $\operatorname{Im}A,\operatorname{Im}B$ の基底と共通部分，$\dim(\ker A+\ker B)$ を求めよ。また一般に $\R^n=\operatorname{Im}f\oplus\operatorname{Im}g$ のとき $\ker(f+g)=\ker f\cap\ker g$ を示し，さらに $\R^n=\ker f+\ker g$ なら $f+g$ が全単射であることを示せ。
 \end{problem}
 \begin{proof}[解答]
-行基本変形により
+列ベクトルを調べる。$A$ の第1、2列を
+\[
+a_1=(1,-1,2,1)^{\mathsf T},\qquad
+a_2=(2,0,3,1)^{\mathsf T}
+\]
+とおくと、第3列は $a_1+a_2$、第4列は $-2a_1+a_2$ である。
+$a_1,a_2$ は一次独立なので
 \[
 \operatorname{Im}A=\langle(1,-1,2,1),(2,0,3,1)\rangle,
 \]
+となる。同様に $B$ の第1、3列を
+\[
+b_1=(1,1,2,3)^{\mathsf T},\qquad
+b_2=(3,2,3,7)^{\mathsf T}
+\]
+とおくと、第2列は $2b_1$、第4列は $3b_1-b_2$ だから
 \[
 \operatorname{Im}B=\langle(1,1,2,3),(3,2,3,7)\rangle,
-\quad \operatorname{Im}A\cap\operatorname{Im}B=\{0\}.
 \]
-$\ker A=\langle(-1,-1,1,0),(2,-1,0,1)\rangle$，
-$\ker B=\langle(-2,1,0,0),(-3,0,1,1)\rangle$ なので核の和の次元は3。
+である。$\alpha a_1+\beta a_2=\gamma b_1+\delta b_2$ とおく。
+4成分を比較して消去すると
+\[
+6\alpha+5\beta=0,\qquad 2\alpha-\beta=0
+\]
+となるので $\alpha=\beta=0$、従って $\gamma=\delta=0$。よって
+\[
+\operatorname{Im}A\cap\operatorname{Im}B=\{0\}.
+\]
+$Ax=0$ は
+\[
+x_1+x_3-2x_4=0,\qquad x_2+x_3+x_4=0
+\]
+と同値で、$Bx=0$ は
+\[
+x_1+2x_2+3x_4=0,\qquad x_3-x_4=0
+\]
+と同値である。従って
+\[
+\ker A=\langle(-1,-1,1,0),(2,-1,0,1)\rangle,
+\]
+\[
+\ker B=\langle(-2,1,0,0),(-3,0,1,1)\rangle.
+\]
+最後の生成ベクトルは最初の3本を $p,q,r$ としたとき $p+q+2r$ に等しく、
+$p,q,r$ は一次独立である。従って $\dim(\ker A+\ker B)=3$。
 一般論は $(f+g)x=0$ なら $f(x)=-g(x)$ が直和の共通部分に入るため両方0。従って核の等式を得る。追加仮定から核の次元公式で $\ker f\cap\ker g=0$，よって $f+g$ は単射，有限同次元なので全射。
 \end{proof}
 
@@ -164,7 +471,30 @@ $f(x,y)=f(x,y)-f(0,y)+f(0,y)=xG+yH$。
 コンパクト空間 $S$ から Hausdorff 空間 $T$ への連続写像 $f$ と $p\in f(S)$ に対し $f^{-1}(\{p\})$ がコンパクトであることを示せ。また $X=\Q^2$，$Y=\R^2\setminus\Q^2$ は連結か判定せよ。
 \end{problem}
 \begin{proof}[解答]
-Hausdorff 空間の一点集合は閉なので，逆像はコンパクト空間 $S$ の閉部分集合，従ってコンパクト。$X$ は無理数を境界に使って分離できるので非連結。$Y$ は道連結である。実際，座標の一方が無理数である水平線・垂直線を中継して任意の二点を折れ線で結べる。
+Hausdorff 空間では一点集合 $\{p\}$ は閉である。$f$ の連続性から
+$f^{-1}(\{p\})$ は $S$ の閉部分集合であり、コンパクト空間の閉部分集合はコンパクトだから、
+$f^{-1}(\{p\})$ はコンパクトである。
+
+$X=\Q^2$ について、無理数 $c$ を一つ取る。例えば
+\[
+U=X\cap\{(x,y)\mid x<c\},\qquad
+V=X\cap\{(x,y)\mid x>c\}
+\]
+は $X$ の互いに素な非空開集合で、$c\notin\Q$ より $X=U\cup V$ である。
+従って $X$ は非連結である。
+
+$Y=\R^2\setminus\Q^2$ は道連結である。実際、無理数 $\alpha,\beta$ を固定する。
+$p=(p_1,p_2)\in Y$ について、$p_1$ が無理数なら
+\[
+p\longrightarrow(p_1,\beta)\longrightarrow(\alpha,\beta)
+\]
+という縦・横の線分を取り、$p_1$ が有理数なら $p_2$ は無理数なので
+\[
+p\longrightarrow(\alpha,p_2)\longrightarrow(\alpha,\beta)
+\]
+という横・縦の線分を取る。各線分上では少なくとも一方の座標が固定された無理数なので
+$\Q^2$ と交わらない。任意の二点をそれぞれ $(\alpha,\beta)$ へ結んで一方を逆向きにつなげれば、
+$Y$ 内の折れ線で結べる。
 \end{proof}
 
 \section{応用数理コース・専門基礎科目（4題必修）}
@@ -180,12 +510,45 @@ C=\begin{pmatrix}2&1&3\\3&2&1\\1&3&2\end{pmatrix}
 に対し $XA=B$, $AY=C$ を解け。さらに $A^2+A-2I=0$ なら $A$ が正則，冪零行列 $A$ は非正則だが $I\pm A$ は正則であることを示せ。
 \end{problem}
 \begin{proof}[解答]
-$a=-5$，全解は $(x,y,z)=(t-3,2-2t,t)$。
+第2式から第1式の4倍を引き、第3式から第1式の7倍を引くと
+\[
+-3y-6z=-6,\qquad -6y-12z=a-7.
+\]
+前者は $y+2z=2$ であり、後者がその2倍になるためには $a-7=-12$、
+すなわち $a=-5$ が必要である。このとき $z=t$ とおけば
+\[
+y=2-2t,\qquad x=1-2y-3z=t-3,
+\]
+従って全解は $(x,y,z)=(t-3,2-2t,t)$ である。
+
+$XA=B$ は右から $A^{-1}$ を掛けて $X=BA^{-1}$、$AY=C$ は左から
+$A^{-1}$ を掛けて $Y=A^{-1}C$ と解く。そのためまず掃き出し計算をすると
+\[
+A^{-1}=\frac1{18}
+\begin{pmatrix}-5&1&7\\1&7&-5\\7&-5&1\end{pmatrix}.
+\]
+実際に積を取ると
+\[
+BA^{-1}=\begin{pmatrix}1&0&0\\0&1&2\\0&0&1\end{pmatrix},\qquad
+A^{-1}C=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix}.
+\]
+よって
 \[
 X=\begin{pmatrix}1&0&0\\0&1&2\\0&0&1\end{pmatrix},\qquad
 Y=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix}.
 \]
-恒等式から $A^{-1}=(A+I)/2$。$A^m=0$ なら正則性は矛盾し，$(I-A)^{-1}=I+A+\cdots+A^{m-1}$，$(I+A)^{-1}=I-A+\cdots+(-A)^{m-1}$。
+$A^2+A-2I=0$ なら $A(A+I)=2I=(A+I)A$ なので
+$A^{-1}=(A+I)/2$ である。
+
+次に $A^m=O$ となる冪零行列 $A$ が正則だと仮定すると、$A^m$ も正則になるが
+$O$ は正則でないので矛盾する。一方、有限等比和を掛けると
+\[
+(I-A)(I+A+\cdots+A^{m-1})=I-A^m=I,
+\]
+\[
+(I+A)(I-A+A^2-\cdots+(-A)^{m-1})=I-(-A)^m=I.
+\]
+従って $I-A$, $I+A$ はともに正則で、括弧内の行列がそれぞれの逆行列である。
 \end{proof}
 
 \begin{problem}{第2問｜対角化・漸化式・直交行列}{2015-a-2}
@@ -199,19 +562,44 @@ $A=\begin{pmatrix}-2&1&2\\1&0&0\\0&1&0\end{pmatrix}$ の固有値・固有空間
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-固有値は $1,-1,-2$，固有ベクトルは順に $(1,1,1),(1,-1,1),(4,-2,1)$。従って
+固有値を求めるため特性多項式を計算すると
+\begin{align*}
+\det(\lambda I-A)
+&=\det\begin{pmatrix}\lambda+2&-1&-2\\-1&\lambda&0\\0&-1&\lambda\end{pmatrix}\\
+&=(\lambda+2)\lambda^2-\lambda-2\\
+&=(\lambda-1)(\lambda+1)(\lambda+2).
+\end{align*}
+従って固有値は $1,-1,-2$ である。各 $\lambda$ について
+$(A-\lambda I)x=0$ を解くと
+\[
+E_1=\langle(1,1,1)^{\mathsf T}\rangle,\quad
+E_{-1}=\langle(1,-1,1)^{\mathsf T}\rangle,\quad
+E_{-2}=\langle(4,-2,1)^{\mathsf T}\rangle.
+\]
+三つの固有値が相異なるので、これらの固有ベクトルは一次独立であり、
 \[
 P=\begin{pmatrix}1&1&4\\1&-1&-2\\1&1&1\end{pmatrix},\qquad
 P^{-1}=\begin{pmatrix}1/6&1/2&1/3\\-1/2&-1/2&1\\1/3&0&-1/3\end{pmatrix}
 \]
 とすれば $P^{-1}AP=\diag(1,-1,-2)$。
-$A^n$ の第1行は
+従って
+\[
+A^n=P\diag(1,(-1)^n,(-2)^n)P^{-1}.
+\]
+右辺の第1行、すなわち $(1,1,4)\diag(1,(-1)^n,(-2)^n)P^{-1}$ を掛けると
 \[
 \left(\frac16-\frac{(-1)^n}2+\frac43(-2)^n,
 \frac{1-(-1)^n}2,
 \frac13+(-1)^n-\frac43(-2)^n\right).
 \]
-一般項はそれぞれ
+漸化式の特性方程式も
+\[
+r^3+2r^2-r-2=(r-1)(r+1)(r+2)=0
+\]
+なので一般解は $x_n=\alpha+\beta(-1)^n+\gamma(-2)^n$ と書ける。
+各初期値 $x_1,x_2,x_3$ を代入して $\alpha,\beta,\gamma$ の連立方程式を解くと、
+$(1,0,0)$ では $(\alpha,\beta,\gamma)=(1/3,-1,1/6)$、
+$(0,-1,1)$ では $(\alpha,\beta,\gamma)=(-1/3,0,-1/6)$ となる。よって一般項はそれぞれ
 \[
 x_n=\frac13-(-1)^n+\frac16(-2)^n,\qquad
 x_n=-\frac13-\frac16(-2)^n.
@@ -232,19 +620,48 @@ $\log|\tan x|$ と $x^{\sin x}$ の導関数を求めよ。$x+\sqrt{x^2+1}=t$ �
 \end{problem}
 \begin{proof}[解答]
 導関数は
+\begin{align*}
+\frac{\d}{\d x}\log|\tan x|
+&=\frac{\sec^2x}{\tan x}
+=\frac1{\sin x\cos x},\\
+\frac{\d}{\d x}x^{\sin x}
+&=\frac{\d}{\d x}\exp(\sin x\log x)\\
+&=x^{\sin x}\left(\cos x\log x+\frac{\sin x}{x}\right).
+\end{align*}
+$t=x+\sqrt{x^2+1}$ から $t^{-1}=\sqrt{x^2+1}-x$ なので
 \[
-\frac1{\sin x\cos x},\qquad
-x^{\sin x}\left(\cos x\log x+\frac{\sin x}{x}\right).
+x=\frac{t-t^{-1}}2,\qquad
+\sqrt{x^2+1}=\frac{t+t^{-1}}2,\qquad
+\d x=\frac{1+t^{-2}}2\,\d t.
 \]
-$x=(t-t^{-1})/2$。積分値は順に
-\[
-\log(1+\sqrt2),\qquad \frac{\sqrt2+\log(1+\sqrt2)}2.
-\]
+$x=0,1$ は $t=1,1+\sqrt2$ に対応する。従って
+\begin{align*}
+\int_0^1\frac{\d x}{\sqrt{x^2+1}}
+&=\int_1^{1+\sqrt2}\frac{\d t}{t}
+=\log(1+\sqrt2),\\
+\int_0^1\sqrt{x^2+1}\,\d x
+&=\frac12\left[x\sqrt{x^2+1}+\log(x+\sqrt{x^2+1})\right]_0^1\\
+&=\frac{\sqrt2+\log(1+\sqrt2)}2.
+\end{align*}
 \end{proof}
 
 \begin{problem}{第4問｜最大最小と三重積分}{2015-a-4}
 $\sqrt x+\sqrt y=1$ のもとで $x^2+xy+y^2$ の最大・最小を求めよ。また原点中心・半径 $a$ の球 $V$ 上で $\iiint_V(x+y+z)\,\d x\d y\d z$ を求めよ。
 \end{problem}
 \begin{proof}[解答]
-$u=\sqrt x,v=\sqrt y$ とし $u+v=1$。$q=uv\in[0,1/4]$ とおけば値は $1-4q+3q^2$。最大値は $1$（$(x,y)=(1,0),(0,1)$），最小値は $3/16$（$x=y=1/4$）。三重積分は領域の原点対称性と被積分関数の奇対称性から $0$。
+$u=\sqrt x$, $v=\sqrt y$ とおくと $u,v\ge0$, $u+v=1$ である。
+$q=uv$ とおけば相加相乗平均から $0\le q\le(u+v)^2/4=1/4$。また
+\begin{align*}
+x^2+xy+y^2
+&=u^4+u^2v^2+v^4\\
+&=(u^2+v^2)^2-u^2v^2\\
+&=((u+v)^2-2uv)^2-(uv)^2\\
+&=1-4q+3q^2=:F(q).
+\end{align*}
+$F'(q)=-4+6q<0$ は $0\le q\le1/4$ で常に負なので、$F$ はこの区間で単調減少する。
+従って最大値は $F(0)=1$ で、$q=0$、すなわち $(x,y)=(1,0),(0,1)$ のとき。
+最小値は $F(1/4)=3/16$ で、$u=v=1/2$、すなわち $x=y=1/4$ のときである。
+
+三重積分では変換 $T(x,y,z)=(-x,-y,-z)$ を考える。球 $V$ は $T$ で不変、Jacobian の絶対値は1であり、
+被積分関数は $(x+y+z)\circ T=-(x+y+z)$ となる。従って積分値を $J$ とすれば $J=-J$ なので $J=0$。
 \end{proof}

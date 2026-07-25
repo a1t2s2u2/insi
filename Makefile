@@ -5,11 +5,12 @@
 
 SITE := node tools/site
 
-.PHONY: help all site pdf open clean
+.PHONY: help all site pdf pdf-combined open clean
 
 help:
 	@echo "make site   tex から Web サイトを生成（site/dist/index.html）"
-	@echo "make pdf    tex から PDF を生成（tex/out/main.pdf）"
+	@echo "make pdf    専門基礎・専門・補足資料の3 PDFを生成"
+	@echo "make pdf-combined  全問題をまとめた従来版 PDF を生成"
 	@echo "make all    site と pdf の両方"
 	@echo "make open   生成したサイトをブラウザで開く"
 	@echo "make clean  生成物を削除"
@@ -22,10 +23,14 @@ site:
 	@echo "→ site/dist/index.html をブラウザで開いてください（make open）"
 
 pdf:
-	cd tex && latexmk
+	node tools/split-pdf-sources.mjs .
+	cd tex && latexmk kumadai-basic.tex kumadai-specialized.tex kumadai-reference.tex
+
+pdf-combined:
+	cd tex && latexmk main.tex
 
 open: site
 	@open site/dist/index.html 2>/dev/null || xdg-open site/dist/index.html
 
 clean:
-	rm -rf site tex/out
+	rm -rf site tex/out tex/generated

@@ -16,16 +16,51 @@ P=\begin{pmatrix}
 は直交行列とする。$p,q,r,s$ を求め，$(P^{\mathsf T})^{10}P^{19}(P^{\mathsf T})^{10}$ を求めよ。さらに $A$ は $P$ で対角化され，固有多項式が $x^3+\sqrt[10]{2}x^2$，$(1,0,1)^{\mathsf T}$ が固有値 $-\sqrt[10]{2}$ の固有ベクトルであるとき $A^{10}$ を求めよ。直交行列で対角化される実行列が対称であることも示せ。
 \end{problem}
 \begin{proof}[解答]
-$\varepsilon=\pm1$ として全ての組は
+直交行列の各列は正規直交系である。第1列と第2列の内積から
+\[
+\frac1{\sqrt6}+qr-\frac1{\sqrt6}=qr=0.
+\]
+第2列のノルムは $1/2+r^2+1/2=1$ なので $r=0$。第1列のノルムから
+$1/3+q^2+1/3=1$、従って $q=\varepsilon/\sqrt3$（$\varepsilon=\pm1$）である。
+第3列を $(p,s,-1/\sqrt6)^{\mathsf T}$ と書く。第2列との直交条件は
+\[
+\frac p{\sqrt2}-\frac1{\sqrt{12}}=0
+\]
+なので $p=1/\sqrt6$。第1列との直交条件は
+\[
+\frac p{\sqrt3}+qs+\frac1{\sqrt{18}}=0.
+\]
+$p=1/\sqrt6$, $q=\varepsilon/\sqrt3$ を代入すると
+$s=-\varepsilon\sqrt{2/3}$ となる。従って全ての組は
 \[
 p=\frac1{\sqrt6},\quad q=\frac{\varepsilon}{\sqrt3},\quad r=0,
 \quad s=-\varepsilon\sqrt{\frac23}.
 \]
-$P^{\mathsf T}=P^{-1}$ なので第2問は $P^{-1}=P^{\mathsf T}$。$u=(1,0,1)^{\mathsf T}/\sqrt2$ とすれば $A=-\sqrt[10]{2}\,uu^{\mathsf T}$ だから
+$P^{\mathsf T}=P^{-1}$ なので、指数法則を使うと
+\begin{align*}
+(P^{\mathsf T})^{10}P^{19}(P^{\mathsf T})^{10}
+&=P^{-10}P^{19}P^{-10}\\
+&=P^{-1}=P^{\mathsf T}.
+\end{align*}
+
+固有多項式は $x^2(x+\sqrt[10]{2})$ だから、固有値は0（重複度2）と
+$-\sqrt[10]{2}$（重複度1）である。$A$ は直交行列で対角化されるため、
+異なる固有空間は直交する。正規化した固有ベクトルを
+$u=(1,0,1)^{\mathsf T}/\sqrt2$ とすれば、$u$ 方向への直交射影は $uu^{\mathsf T}$ なので
 \[
-A^{10}=2uu^{\mathsf T}=\begin{pmatrix}1&0&1\\0&0&0\\1&0&1\end{pmatrix}.
+A=-\sqrt[10]{2}\,uu^{\mathsf T}.
 \]
-$P^{-1}AP=D$ が実対角なら $A=PDP^{\mathsf T}$ であり，転置しても同じなので対称。
+ここで $(uu^{\mathsf T})^2=u(u^{\mathsf T}u)u^{\mathsf T}=uu^{\mathsf T}$ だから
+\[
+A^{10}=(-\sqrt[10]{2})^{10}uu^{\mathsf T}
+=2uu^{\mathsf T}=\begin{pmatrix}1&0&1\\0&0&0\\1&0&1\end{pmatrix}.
+\]
+最後に、直交行列 $P$ について $P^{-1}AP=D$ が実対角なら
+$A=PDP^{\mathsf T}$ である。転置すると
+\[
+A^{\mathsf T}=(PDP^{\mathsf T})^{\mathsf T}=PD^{\mathsf T}P^{\mathsf T}=PDP^{\mathsf T}=A
+\]
+となるので $A$ は対称である。
 \end{proof}
 
 \begin{problem}{微分積分｜積分記号下の微分}{unknown-2}
@@ -42,7 +77,23 @@ $\frac{d}{dx}\int_c^df(x,y)dy=\int_c^df_x(x,y)dy$。可変端点では上下端�
 \frac d{dx}\int_{\phi(x)}^{\psi(x)}f(x,y)dy
 =f(x,\psi)\psi'-f(x,\phi)\phi'+\int_\phi^\psi f_x(x,y)dy.
 \]
-これを代入して
+この公式を使うため
+\[
+f(x,y)=\frac{\sin(xy)}y,\qquad
+f_x(x,y)=\cos(xy),\qquad
+\phi(x)=x^2,\quad\psi(x)=x^3
+\]
+とおくと
+\begin{align*}
+p'(x)
+&=f(x,x^3)\,3x^2-f(x,x^2)\,2x
+  +\int_{x^2}^{x^3}\cos(xy)\,\d y\\
+&=\frac{3\sin(x^4)-2\sin(x^3)}x
+  +\left[\frac{\sin(xy)}x\right]_{y=x^2}^{x^3}\\
+&=\frac{3\sin(x^4)-2\sin(x^3)}x
+  +\frac{\sin(x^4)-\sin(x^3)}x.
+\end{align*}
+従って
 \[
 p'(x)=\frac{4\sin(x^4)-3\sin(x^3)}x.
 \]
@@ -52,7 +103,34 @@ p'(x)=\frac{4\sin(x^4)-3\sin(x^3)}x.
 コンパクト集合 $K$ までの距離 $\rho(x)=\inf_{z\in K}d(x,z)$ について，$|\rho(x)-\rho(y)|\le d(x,y)$，各 $x$ で最短点 $a\in K$ が存在することを示せ。また $K\subset L$ で $L$ が開なら，ある $r>0$ で $\{\rho<r\}\subset L$ を示せ。
 \end{problem}
 \begin{proof}[解答]
-三角不等式を使い $z\in K$ について下限を取れば Lipschitz 評価を得る。$z\mapsto d(x,z)$ は $K$ 上連続なのでコンパクト性から最小値を取る。$F=X\setminus L$ とおくと $K$ と閉集合 $F$ は正の距離を持つ（$K$ 上で $d(\cdot,F)$ の正の最小値を取る）。その値より小さい $r$ を選べばよい。
+任意の $z\in K$ に対し三角不等式から
+\[
+d(x,z)\le d(x,y)+d(y,z)
+\]
+である。$z\in K$ について右辺の下限を取ると
+$\rho(x)\le d(x,y)+\rho(y)$、すなわち $\rho(x)-\rho(y)\le d(x,y)$ を得る。
+$x,y$ を交換した式と合わせて
+\[
+|\rho(x)-\rho(y)|\le d(x,y)
+\]
+となる。
+
+$z\mapsto d(x,z)$ は上の評価と同様に1-Lipschitz、従って $K$ 上連続である。
+$K$ はコンパクトなので最小値を取る点 $a\in K$ が存在し
+\[
+d(x,a)=\min_{z\in K}d(x,z)=\rho(x).
+\]
+
+最後に $F=X\setminus L$ とおく。$F$ は閉で $K\cap F=\varnothing$ である。
+$h(z)=d(z,F)$ は $K$ 上連続であり、各 $z\in K$ について $h(z)>0$ だから、
+コンパクト性により
+\[
+\delta:=\min_{z\in K}d(z,F)>0.
+\]
+$0<r<\delta$ とする。$\rho(x)<r$ なら、最短点の存在により
+$d(x,a)=\rho(x)<r$ となる $a\in K$ がある。もし $x\in F$ なら
+$d(a,F)\le d(a,x)<r<\delta$ となり矛盾する。従って $x\in L$ であり、
+$\{x\mid\rho(x)<r\}\subset L$ を得る。
 \end{proof}
 
 \section{専門科目と思われる問題}
@@ -64,23 +142,71 @@ $R>r>0$ とし，円 $(x-R)^2+z^2=r^2$ を $z$ 軸の周りに回転したトー
 \[
 X(u,v)=((R+r\cos v)\cos u,(R+r\cos v)\sin u,r\sin v)
 \]
-とおく。外向き法線に対する主曲率は $-\cos v/(R+r\cos v)$ と $-1/r$。従って
+とおく。まず偏微分は
+\[
+X_u=(-(R+r\cos v)\sin u,(R+r\cos v)\cos u,0),
+\]
+\[
+X_v=(-r\sin v\cos u,-r\sin v\sin u,r\cos v).
+\]
+従って第1基本形式の係数は
+\[
+E=(R+r\cos v)^2,\qquad F=0,\qquad G=r^2.
+\]
+$R>r$ より $R+r\cos v>0$ なので $EG-F^2>0$、従ってこれは正則な曲面である。
+外向き単位法線を
+\[
+N=(\cos v\cos u,\cos v\sin u,\sin v)
+\]
+と取る。二階偏微分と内積を取ると
+\[
+L=X_{uu}\cdot N=-(R+r\cos v)\cos v,\quad
+M=X_{uv}\cdot N=0,\quad
+N_2=X_{vv}\cdot N=-r.
+\]
+$F=M=0$ なので座標方向が主方向であり、主曲率は
+\[
+k_1=\frac LE=-\frac{\cos v}{R+r\cos v},\qquad
+k_2=\frac{N_2}G=-\frac1r.
+\]
+従って
 \[
 K=\frac{\cos v}{r(R+r\cos v)},\qquad
 H=-\frac{R+2r\cos v}{2r(R+r\cos v)}.
 \]
-$v=0$（外側の赤道）を $u$ で動く円は，加速度が曲面法線方向だけなので測地線。
+$v=0$ と固定した外側の赤道を $\gamma(u)=X(u,0)$ とおくと
+\[
+\gamma''(u)=-(R+r)(\cos u,\sin u,0)=-(R+r)N(u,0).
+\]
+加速度の接平面成分が0、すなわち測地的曲率が0なので、この円は測地線である。
 \end{proof}
 
 \begin{problem}{Euler 型微分方程式}{unknown-5}
 $x^2y''+pxy'+qy=0$ $(x\ge1)$，$y(1)=0,y'(1)=1$ を考える。$q=0,p\ne1$ の解，$x=e^t$ による変形，$p=2$ の解を求める。さらに $p=2$ で $x>1$ の零点が存在する $q$ の範囲と最小の零点を求めよ。
 \end{problem}
 \begin{proof}[解答]
-$q=0$ では $y=(x^{1-p}-1)/(1-p)$。$Y(t)=y(e^t)$ とおけば
+$q=0$ では $x^2y''+pxy'=0$ である。$z=y'$ とおくと
+\[
+xz'+pz=0,\qquad \frac{z'}z=-\frac px.
+\]
+従って $z=Cx^{-p}$。初期条件 $y'(1)=1$ から $C=1$ で、$y(1)=0$ を使って
+\[
+y(x)=\int_1^x s^{-p}\,\d s=\frac{x^{1-p}-1}{1-p}\qquad(p\ne1).
+\]
+
+次に $x=e^t$、$Y(t)=y(e^t)$ とおく。連鎖律から
+\[
+Y'(t)=e^ty'(e^t)=xy'(x),
+\]
+\[
+Y''(t)=xy'(x)+x^2y''(x),
+\]
+従って $x^2y''=Y''-Y'$ である。元の方程式は
 \[
 Y''+(p-1)Y'+qY=0,\qquad Y(0)=0, Y'(0)=1.
 \]
-$p=2$ で $d=1-4q$ とすると
+$p=2$ では特性方程式が $\lambda^2+\lambda+q=0$ となる。
+$d=1-4q$ とおいて根の場合分けをし、初期条件を代入すると
 \[
 y=x^{-1/2}\begin{cases}
 \dfrac{2}{\sqrt d}\sinh(\frac{\sqrt d}{2}\log x),&d>0,\\
@@ -88,8 +214,17 @@ y=x^{-1/2}\begin{cases}
 \dfrac{2}{\sqrt{-d}}\sin(\frac{\sqrt{-d}}2\log x),&d<0.
 \end{cases}
 \]
-$x>1$ の零点があるのは $q>1/4$ のときだけで，最小値は
-$\exp(2\pi/\sqrt{4q-1})$。
+$d\ge0$ の場合、$x>1$ では $\log x>0$ であり、$\sinh u$ と $u$ は正なので零点を持たない。
+$d<0$、すなわち $q>1/4$ の場合は
+\[
+\sin\left(\frac{\sqrt{4q-1}}2\log x\right)=0
+\]
+より、正の零点は
+\[
+\frac{\sqrt{4q-1}}2\log x=k\pi\qquad(k=1,2,\ldots).
+\]
+従って $x>1$ の零点があるのは $q>1/4$ のときに限り、最小の零点は
+$\exp(2\pi/\sqrt{4q-1})$ である。
 \end{proof}
 
 \begin{problem}{解析｜弱い特異核}{unknown-6}
@@ -102,8 +237,41 @@ g(x)=\frac1{1-\alpha}\int_0^x\phi(t)(x-t)^{1-\alpha}dt
 \end{problem}
 \begin{proof}[解答]
 $|f(y)-f(x)|\le\norm\phi_\infty|y-x|$ なので $f$ は連続。$f(s)=\int_0^s\phi(t)dt$ を代入し，Fubini で積分順序を交換すると
+\begin{align*}
+g(x)
+&=\int_0^x\int_0^s\phi(t)(x-s)^{-\alpha}\,\d t\d s\\
+&=\int_0^x\phi(t)\int_t^x(x-s)^{-\alpha}\,\d s\d t.
+\end{align*}
+ここで $|\phi(t)|(x-s)^{-\alpha}$ は三角形 $0\le t\le s\le x$ 上可積分である。実際、
 \[
-g(x)=\int_0^x\phi(t)\int_t^x(x-s)^{-\alpha}ds\,dt
+\int_0^x\int_0^s\norm\phi_\infty(x-s)^{-\alpha}\,\d t\d s
+=\norm\phi_\infty\int_0^x s(x-s)^{-\alpha}\,\d s<\infty
 \]
-となり表示式を得る。表示式の差商を取り，$0<\alpha<1$ による可積分な優関数で極限を通せば，指定された導関数になる。
+なので Fubini の定理を適用できる。内側を $u=x-s$ で積分すると
+\[
+\int_t^x(x-s)^{-\alpha}\,\d s
+=\int_0^{x-t}u^{-\alpha}\,\d u
+=\frac{(x-t)^{1-\alpha}}{1-\alpha},
+\]
+従って指定された表示式を得る。
+
+導関数の候補を
+\[
+G(x)=\int_0^x\phi(t)(x-t)^{-\alpha}\,\d t
+\]
+とおく。$0<\alpha<1$ なのでこの積分は絶対収束する。さらに Fubini の定理により
+\begin{align*}
+\int_0^xG(u)\,\d u
+&=\int_0^x\int_0^u\phi(t)(u-t)^{-\alpha}\,\d t\d u\\
+&=\int_0^x\phi(t)\int_t^x(u-t)^{-\alpha}\,\d u\d t\\
+&=\frac1{1-\alpha}\int_0^x\phi(t)(x-t)^{1-\alpha}\,\d t\\
+&=g(x).
+\end{align*}
+$G$ は局所連続である。実際、核 $u^{-\alpha}\mathbf1_{(0,L)}(u)$ は
+$L^1(\R)$ に属し、その平行移動は $L^1$ で連続、$\phi$ は有界だからである。
+従って微積分学の基本定理を適用でき
+\[
+g'(x)=G(x)=\int_0^x\phi(t)(x-t)^{-\alpha}\,\d t
+\]
+を得る。
 \end{proof}

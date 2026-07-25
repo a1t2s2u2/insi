@@ -6,6 +6,7 @@
 
 # --- LaTeX の生成物 ---
 out/
+/tex/generated/
 *.aux
 *.log
 *.dvi

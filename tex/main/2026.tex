@@ -121,15 +121,49 @@ A=\begin{pmatrix}
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-$v=(i,-1,i,1)^{\mathsf T}$ とおくと $A=I_4+vv^*$ である。
+まず $v$ の選び方を説明する。$B=A-I_4$ とおくと
+\[
+B=\begin{pmatrix}
+1&-i&1&i\\ i&1&i&-1\\ 1&-i&1&i\\ -i&-1&-i&1
+\end{pmatrix}.
+\]
+$B$ の第2、第3、第4行はそれぞれ第1行の $i,1,-i$ 倍であり、
+$B\ne O$ だから $\operatorname{rank}B=1$ である。また $B=B^*$ なので、
+階数1のエルミート行列に適した $B=vv^*$ という形を探す。
+$v$ の第4成分を $1$ とすれば、$vv^*$ の第4列は
+$v\overline{v_4}=v$ そのものになる。そこで $B$ の第4列を取り
+\[
+v=\begin{pmatrix}i\\-1\\i\\1\end{pmatrix}
+\]
+と選ぶ。実際に外積を計算すると
+\[
+vv^*
+=\begin{pmatrix}i\\-1\\i\\1\end{pmatrix}
+ \begin{pmatrix}-i&-1&-i&1\end{pmatrix}
+=B
+\]
+である。従って $A=I_4+vv^*$ である。
 \begin{enumerate}
-  \item[(1)] $v$ 方向の固有値は $1+\norm{v}^2=5$，その直交補空間では $1$。したがって $\det A=5$。
+  \item[(1)] $Av=v+vv^*v=(1+v^*v)v=5v$ である。
+  一方、$x\in v^\perp$ なら $v^*x=0$ なので $Ax=x$。
+  従って固有値は $5,1,1,1$ であり
+  \[
+  \det A=5\cdot1^3=5.
+  \]
   \item[(2)] 固有値は $1$（重複度3）と $5$（重複度1）で，
   \[
   W_5=\langle v\rangle,\qquad W_1=v^\perp
   =\{x\in\mathbb C^4\mid -ix_1-x_2-ix_3+x_4=0\}.
   \]
-  \item[(3)] 次の列は正規直交基底である：
+  \item[(3)] まず $W_1=v^\perp$ の条件
+  \[
+  -ix_1-x_2-ix_3+x_4=0
+  \]
+  に対し、前半2成分だけを使う解 $(1,-i,0,0)$ と、後半2成分だけを使う解
+  $(0,0,1,i)$ を選ぶ。この2本は互いに直交している。
+  さらに両者と直交する $W_1$ のベクトルを上の一次方程式と内積条件から解くと
+  $(-i,1,i,1)$ を取れる。それぞれを正規化し、最後に $v$ 自身も正規化すると
+  次の正規直交基底が得られる：
   \[
   u_1=\frac1{\sqrt2}(1,-i,0,0)^{\mathsf T},\quad
   u_2=\frac1{\sqrt2}(0,0,1,i)^{\mathsf T},
@@ -138,7 +172,24 @@ $v=(i,-1,i,1)^{\mathsf T}$ とおくと $A=I_4+vv^*$ である。
   u_3=\frac12(-i,1,i,1)^{\mathsf T},\quad
   u_4=\frac12(i,-1,i,1)^{\mathsf T}.
   \]
-  $P=(u_1\ u_2\ u_3\ u_4)$ とすれば $P^*P=I$ かつ $P^*AP=\diag(1,1,1,5)$。
+  ここで $u_1,u_2,u_3\in v^\perp$、$u_4=v/\norm v=v/2$ であり、
+  各ベクトルのノルムは1である。また異なる2本の内積は
+  \[
+  u_1^*u_2=0,\quad
+  u_1^*u_3=\frac{-i+i}{2\sqrt2}=0,\quad
+  u_1^*u_4=\frac{i-i}{2\sqrt2}=0,
+  \]
+  \[
+  u_2^*u_3=\frac{i-i}{2\sqrt2}=0,\quad
+  u_2^*u_4=\frac{i-i}{2\sqrt2}=0,\quad
+  u_3^*u_4=\frac{-1-1+1+1}{4}=0.
+  \]
+  従って $u_j^*u_k=\delta_{jk}$ である。
+  $P=(u_1\ u_2\ u_3\ u_4)$ とすれば $P^*P=I$ で、各列が固有ベクトルだから
+  \[
+  AP=P\diag(1,1,1,5),\qquad
+  P^*AP=\diag(1,1,1,5).
+  \]
   \item[(4)] $Xw=\lambda w$，$w\ne0$ とする。$X=X^*$ なので
   $\lambda\inner{w}{w}=\inner{Xw}{w}=\inner{w}{Xw}=\overline\lambda\inner{w}{w}$。
   $\inner{w}{w}>0$ より $\lambda=\overline\lambda\in\R$。
@@ -158,12 +209,43 @@ D=\{(x,y)\in\R^2\mid1\le x^2+y^2\le4,\ 0\le x\le1,\ y\ge0\}.
 \begin{proof}[解答]
 \begin{enumerate}
   \item[(1)] 上半平面にある半径1と2の半円の間を，縦線 $x=0,1$ で切った領域である。
-  \item[(2)] 直接微分して整理すると $1/\cos\theta$。
+  \item[(2)] $h(\theta)=\tan\theta+\sec\theta$ とおく。
+  $-\pi/2<\theta<\pi/2$ では
+  $h=(1+\sin\theta)/\cos\theta>0$ なので対数を微分できる。
+  \[
+  h'(\theta)=\sec^2\theta+\sec\theta\tan\theta
+  =\sec\theta(\sec\theta+\tan\theta).
+  \]
+  従って連鎖律により
+  \[
+  \frac{\d}{\d\theta}\log(\tan\theta+\sec\theta)
+  =\frac{h'(\theta)}{h(\theta)}
+  =\frac{\sec\theta(\sec\theta+\tan\theta)}
+         {\sec\theta+\tan\theta}
+  =\sec\theta=\frac1{\cos\theta}.
+  \]
   \item[(3)] 極座標で $x/r=\cos\theta$，Jacobian は $r$。$0\le\theta\le\pi/3$ では $1\le r\le\sec\theta$，$\pi/3\le\theta\le\pi/2$ では $1\le r\le2$ だから
   \[
-  \int_0^{\pi/3}\int_1^{\sec\theta}r\cos\theta\,\d r\d\theta
-  +\int_{\pi/3}^{\pi/2}\int_1^2r\cos\theta\,\d r\d\theta
-  =\frac32-\sqrt3+\frac12\log(2+\sqrt3).
+  I_1=\int_0^{\pi/3}\int_1^{\sec\theta}r\cos\theta\,\d r\d\theta,
+  \qquad
+  I_2=\int_{\pi/3}^{\pi/2}\int_1^2r\cos\theta\,\d r\d\theta
+  \]
+  と分ける。まず
+  \begin{align*}
+  I_1
+  &=\frac12\int_0^{\pi/3}(\sec^2\theta-1)\cos\theta\,\d\theta\\
+  &=\frac12\int_0^{\pi/3}(\sec\theta-\cos\theta)\,\d\theta\\
+  &=\frac12\left[\log(\sec\theta+\tan\theta)-\sin\theta\right]_0^{\pi/3}\\
+  &=\frac12\log(2+\sqrt3)-\frac{\sqrt3}{4}.
+  \end{align*}
+  また
+  \[
+  I_2=\frac32\int_{\pi/3}^{\pi/2}\cos\theta\,\d\theta
+  =\frac32\left(1-\frac{\sqrt3}{2}\right).
+  \]
+  よって
+  \[
+  I_1+I_2=\frac32-\sqrt3+\frac12\log(2+\sqrt3).
   \]
 \end{enumerate}
 \end{proof}

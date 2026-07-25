@@ -29,7 +29,24 @@ $f:\R\to\R$ が $f(x+y)=f(x)+f(y)$ を満たす。
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-(1) は $f(0)=f(0)+f(0)$ と $0=f(x)+f(-x)$ から従う。(2) はまず整数倍，次に $f(x)=n f(x/n)$ を使う。(3) $c=f(1)$ とおけば有理数 $r$ で $f(r)=cr$。任意の実数 $x$ に収束する有理数列 $r_n$ を取り，連続性から $f(x)=\lim f(r_n)=cx$。
+\begin{enumerate}
+  \item[(1)] $f(0)=f(0+0)=2f(0)$ より $f(0)=0$。
+  また $0=f(0)=f(x+(-x))=f(x)+f(-x)$ より $f(-x)=-f(x)$。
+  \item[(2)] $n\in\N$ なら帰納法で $f(nx)=nf(x)$。負の整数については (1) を使う。
+  $n\ge1$ に対し $f(x)=f(n(x/n))=nf(x/n)$ だから $f(x/n)=f(x)/n$。
+  従って $r=m/n\in\Q$ に対し
+  \[
+  f(rx)=f\left(m\frac{x}{n}\right)=m f(x/n)=\frac mn f(x)=rf(x).
+  \]
+  \item[(3)] $c=f(1)$ とおくと (2) より $f(r)=cr$ $(r\in\Q)$。
+  任意の $x\in\R$ に対し $r_n\in\Q$, $r_n\to x$ を取る。
+  連続性から
+  \[
+  f(x)=f\left(\lim_{n\to\infty}r_n\right)
+  =\lim_{n\to\infty}f(r_n)
+  =\lim_{n\to\infty}cr_n=cx.
+  \]
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第3問｜連続写像の反例}{2022-1-3}
@@ -82,7 +99,19 @@ $\omega_p(u,v)=\inner p{u\times v}$ と定める。
   \item[(1)] 外積の反対称性から前半が従う。後半は $v=p\times u$ と選ぶと
   $\omega_p(u,p\times u)=\norm u^2$ となるので $u=0$。
   \item[(2)] 球面の式から $r(\theta,h)=\sqrt{1-h^2}$。
-  \item[(3)] $r=\sqrt{1-h^2}$ として直接計算すると $T_\theta\times T_h=T$。したがって答えは $\inner TT=1$。
+  \item[(3)] $r=\sqrt{1-h^2}$ だから $\partial r/\partial h=-h/r$ であり
+  \[
+  T_\theta=(-r\sin\theta,r\cos\theta,0),\qquad
+  T_h=\left(-\frac h r\cos\theta,-\frac h r\sin\theta,1\right).
+  \]
+  外積を成分ごとに計算すると
+  \begin{align*}
+  T_\theta\times T_h
+  &=\left(r\cos\theta,r\sin\theta,
+    h(\sin^2\theta+\cos^2\theta)\right)\\
+  &=(r\cos\theta,r\sin\theta,h)=T(\theta,h).
+  \end{align*}
+  従って $\omega_T(T_\theta,T_h)=\inner{T}{T}=1$。
 \end{enumerate}
 \end{proof}
 
@@ -93,7 +122,7 @@ $f$ を $\R$ 上有界連続とし，$y''-y=f(x)$ を考える。
   \item[(2)] $e^{-x}f(x)$ が任意の $[a,\infty)$ 上で広義積分可能であることを示せ。
   \item[(3)] 次で定める $g$ を考える：
   \[
-  g(x)=\frac{e^x}{2}\int_x^\infty e^{-t}f(t)\,\d t
+  g(x)=-\frac{e^x}{2}\int_x^\infty e^{-t}f(t)\,\d t
   -\frac{e^{-x}}2\int_{-\infty}^x e^tf(t)\,\d t
   \]
   が方程式の解であることを示せ。
@@ -105,16 +134,71 @@ $f$ を $\R$ 上有界連続とし，$y''-y=f(x)$ を考える。
 \begin{enumerate}
   \item[(1)] $y=C_1e^x+C_2e^{-x}$。
   \item[(2)] $|f|\le M$ とすれば $\int_a^\infty|e^{-x}f(x)|\,\d x\le Me^{-a}$。
-  \item[(3)] 積の微分と積分の微分を2回行うと $g''-g=f$。途中で現れる $f(x)$ の項だけが残る。
-  \item[(4)] $f=1+(f-1)$ と分ける。定数1が作る解は $-1$，残りは有界性と $f-1\to0$ から0に収束する。
-  \item[(5)] 任意の $D\in\R$ に対し
+  \item[(3)]
+  \[
+  A(x)=\int_x^\infty e^{-t}f(t)\,\d t,\qquad
+  B(x)=\int_{-\infty}^x e^tf(t)\,\d t
+  \]
+  とおく。微積分学の基本定理より
+  \[
+  A'(x)=-e^{-x}f(x),\qquad B'(x)=e^xf(x).
+  \]
+  $g=-(e^xA+e^{-x}B)/2$ を積の微分法で微分すると
+  \begin{align*}
+  g'
+  &=-\frac12\{e^xA+e^xA'-e^{-x}B+e^{-x}B'\}\\
+  &=-\frac12e^xA+\frac12e^{-x}B,
+  \end{align*}
+  ここでは $e^xA'=-f$ と $e^{-x}B'=f$ が打ち消し合った。もう一度微分して
+  \begin{align*}
+  g''
+  &=-\frac12(e^xA+e^xA')
+    +\frac12(-e^{-x}B+e^{-x}B')\\
+  &=-\frac12(e^xA+e^{-x}B)+f(x)\\
+  &=g(x)+f(x).
+  \end{align*}
+  従って $g''-g=f$ である。
+  \item[(4)] $h=f-1$ とおくと $h(x)\to0$ で、$h$ は有界である。
+  定数関数 $1$ を上の式に代入して得られる解は
+  \[
+  -\frac{e^x}{2}\int_x^\infty e^{-t}\,\d t
+  -\frac{e^{-x}}2\int_{-\infty}^x e^t\,\d t=-1.
+  \]
+  一方、$h$ が作る第1項は変数変換 $t=x+s$ により
+  \[
+  e^x\int_x^\infty e^{-t}h(t)\,\d t
+  =\int_0^\infty e^{-s}h(x+s)\,\d s\longrightarrow0,
+  \]
+  第2項も $t=x-s$ により
+  \[
+  e^{-x}\int_{-\infty}^x e^th(t)\,\d t
+  =\int_0^\infty e^{-s}h(x-s)\,\d s\longrightarrow0.
+  \]
+  いずれも有界性から $Ce^{-s}$ を優関数にして優収束定理を使った。
+  従って $g(x)\to-1$。
+  \item[(5)] $x\ge0$ では、定数項 $1$ の特殊解は $-1$。
+  また $-e^{-x}$ は同次解 $e^{-x}$ と共振するので
+  $y_p=Cxe^{-x}$ とおくと
+  \[
+  y_p''-y_p=-2Ce^{-x}.
+  \]
+  よって $C=1/2$。$x\to\infty$ で $-1$ に収束するには $e^x$ の項があってはならないから
+  \[
+  y(x)=-1+\left(D+\frac x2\right)e^{-x}\qquad(x\ge0).
+  \]
+  $x<0$ では $f=0$ なので $y=Be^x+Ce^{-x}$。
+  $x=0$ で $y,y'$ を一致させると
+  \[
+  B+C=-1+D,\qquad B-C=\frac12-D,
+  \]
+  従って $B=-1/4$, $C=D-3/4$。以上より、任意の $D\in\R$ に対し
   \[
   y(x)=\begin{cases}
   -\frac14e^x+(D-\frac34)e^{-x},&x<0,\\
   -1+(D+\frac x2)e^{-x},&x\ge0
   \end{cases}
   \]
-  であり，これが全て。$x=0$ で $y,y'$ を一致させれば得られる。
+  であり、これが全てである。
 \end{enumerate}
 \end{proof}
 
@@ -138,7 +222,55 @@ $t>0$ とする。
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-(1) $\sin x/x$ を $x=0$ で1と定めれば連続。(2) は $e^{-xy}(-y\sin x-\cos x)/(1+y^2)$ を微分する。(3) $1/x=\int_0^\infty e^{-xy}\,\d y$ と Fubini を使う。(4) 第2積分は $u=ty$ と評価すると0へ収束し，第1積分は $\arctan y|_0^\infty=\pi/2$。答えは $\pi/2$。
+\begin{enumerate}
+  \item[(1)] $\lim_{x\to0}\sin x/x=1$ なので、$x=0$ で値を1と定めれば $[0,t]$ 上連続になる。
+  従ってコンパクト区間上でルベーグ積分可能である。
+  \item[(2)]
+  \[
+  F(x)=\frac{e^{-xy}(-y\sin x-\cos x)}{1+y^2}
+  \]
+  とおく。積の微分法により
+  \begin{align*}
+  F'(x)
+  &=\frac{e^{-xy}}{1+y^2}
+  \{(-y)(-y\sin x-\cos x)-y\cos x+\sin x\}\\
+  &=e^{-xy}\sin x.
+  \end{align*}
+  よって
+  \begin{align*}
+  \int_0^t e^{-xy}\sin x\,\d x
+  &=F(t)-F(0)\\
+  &=\frac1{1+y^2}
+   -\frac{e^{-ty}}{1+y^2}(y\sin t+\cos t).
+  \end{align*}
+  \item[(3)] $x>0$ では
+  \[
+  \frac1x=\int_0^\infty e^{-xy}\,\d y.
+  \]
+  また
+  \[
+  \int_0^t\int_0^\infty|e^{-xy}\sin x|\,\d y\d x
+  =\int_0^t\frac{|\sin x|}{x}\,\d x<\infty
+  \]
+  なので Fubini の定理で積分順序を交換できる。(2) を用いて
+  \begin{align*}
+  \int_0^t\frac{\sin x}{x}\,\d x
+  &=\int_0^\infty\int_0^t e^{-xy}\sin x\,\d x\d y\\
+  &=\int_0^\infty\frac{\d y}{1+y^2}
+  -\int_0^\infty\frac{e^{-ty}}{1+y^2}(y\sin t+\cos t)\,\d y.
+  \end{align*}
+  \item[(4)] 第2積分の絶対値は
+  \[
+  \int_0^\infty e^{-ty}(y+1)\,\d y
+  =\frac1{t^2}+\frac1t\longrightarrow0
+  \]
+  以下である。一方
+  \[
+  \int_0^\infty\frac{\d y}{1+y^2}
+  =[\arctan y]_0^\infty=\frac\pi2.
+  \]
+  従って求める極限は $\pi/2$。
+\end{enumerate}
 \end{proof}
 
 \section{第2期・専門基礎科目（3題必修）}
@@ -163,12 +295,32 @@ $a<b$，$u$ は $[a,b]^2$ 上連続とする。
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-(1) $F(s)=\int_a^s u(s,t)\,\d t$ は連続なので微積分学の基本定理を使う。(2)
+\begin{enumerate}
+\item[(1)] $F(s)=\int_a^s u(s,t)\,\d t$ とおく。
+$u$ の連続性から $F$ も連続であり $f(x)=\int_a^xF(s)\,\d s$ だから、微積分学の基本定理より
 \[
-g(x)=\int_0^x\int_0^t s(1-2st)\,\d s\d t
-=\frac{x^3}{6}-\frac{2x^5}{15}.
+f'(x)=F(x)=\int_a^x u(x,t)\,\d t.
 \]
-$g'(x)=x^2(1/2-2x^2/3)$ だから最大点は $x=\sqrt3/2$，最大値は $\sqrt3/40$。
+\item[(2)] 積分領域は $0\le s\le t\le x$ なので
+\begin{align*}
+g(x)
+&=\int_0^x\int_0^t (s-2s^2t)\,\d s\d t\\
+&=\int_0^x\left[\frac{s^2}{2}-\frac{2ts^3}{3}\right]_{s=0}^{s=t}\d t\\
+&=\int_0^x\left(\frac{t^2}{2}-\frac{2t^4}{3}\right)\d t\\
+&=\frac{x^3}{6}-\frac{2x^5}{15}.
+\end{align*}
+従って
+\[
+g'(x)=\frac{x^2}{2}-\frac{2x^4}{3}
+=x^2\left(\frac12-\frac{2x^2}{3}\right).
+\]
+$x>0$ では $x=\sqrt3/2$ の前で正、後で負であり、$g(x)\to-\infty$ $(x\to\infty)$ だからここで最大になる。
+\[
+g\left(\frac{\sqrt3}{2}\right)
+=\frac{\sqrt3}{16}-\frac{3\sqrt3}{80}
+=\frac{\sqrt3}{40}.
+\]
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第3問｜線形空間}{2022-2-3}
@@ -179,7 +331,14 @@ $g'(x)=x^2(1/2-2x^2/3)$ だから最大点は $x=\sqrt3/2$，最大値は $\sqrt
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-(1) 共通部分は零元・加法・スカラー倍について閉じる。合併について，どちらにも包含されない $u\in W_1\setminus W_2$, $v\in W_2\setminus W_1$ があれば $u+v$ はどちらにも入らず矛盾。(2) 線形性をそのまま使う。$f(x)=f(y)$ と $f(x-y)=0$ は同値。(3)
+(1) 共通部分は零元・加法・スカラー倍について閉じる。合併について，どちらにも包含されない $u\in W_1\setminus W_2$, $v\in W_2\setminus W_1$ があれば $u+v$ はどちらにも入らず矛盾。
+(2) $x,y\in\ker f$ と $a,b$ に対し $f(ax+by)=af(x)+bf(y)=0$ なので $\ker f$ は部分空間。
+また
+\[
+f(x)=f(y)\Longleftrightarrow f(x-y)=0
+\Longleftrightarrow x-y\in\ker f.
+\]
+従って $f$ が単射であることと $\ker f=\{0\}$ は同値。(3)
 \[
 E_{12}-E_{21},\quad E_{13}-E_{31},\quad E_{23}-E_{32}
 \]

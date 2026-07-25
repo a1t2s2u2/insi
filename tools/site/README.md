@@ -92,7 +92,7 @@ macroOverrides: {
 
 ### features
 
-すべて既定 `true`。
+原則として既定 `true`。文書固有の `examTrackFilter` だけは既定 `false`。
 
 | キー | 内容 |
 | --- | --- |
@@ -102,10 +102,12 @@ macroOverrides: {
 | `fadeIn` | ブロックのスクロール・フェードイン |
 | `refPulse` | 参照クリック時に本文側のブロックを光らせる |
 | `keyboardHelp` | `?` でショートカット一覧を表示 |
+| `dependencyGraph` | 依存グラフへの導線を表示 |
+| `examTrackFilter` | 「専門基礎科目」「専門科目」を見出しから分類し、表示切替を追加 |
 
 ### 見た目を差し替える
 
-`<文書のディレクトリ>/site-assets/` に `styles.css` / `app.js` / `graph.js` を置くと、
+`<文書のディレクトリ>/site-assets/` に `styles.css` / `app.js` / `graph.js` / `track-filter.js` を置くと、
 そのファイルだけ共通アセットの代わりに使われる。
 
 ## 対応している tex の書き方

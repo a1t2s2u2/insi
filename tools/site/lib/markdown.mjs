@@ -64,6 +64,7 @@ export class MarkdownRenderer {
     this.blocks = [];
     this.usedBlockIds = new Set();
     this.currentChapterId = null;
+    this.currentExamTrack = null;
   }
 
   makeBlockId(type, rawName) {
@@ -120,6 +121,7 @@ export class MarkdownRenderer {
 
   render(markdown, chapterId) {
     this.currentChapterId = chapterId ?? null;
+    this.currentExamTrack = null;
     const lines = markdown.replace(/\r\n/g, "\n").split("\n");
     const html = [];
     const stack = [];
@@ -161,6 +163,7 @@ export class MarkdownRenderer {
             type: currentBlock.type,
             title: currentBlock.fullTitle,
             chapter: this.currentChapterId,
+            examTrack: currentBlock.examTrack,
             html: html.slice(currentBlock.divIndex + 1).join("\n"),
           });
         }
@@ -196,10 +199,22 @@ export class MarkdownRenderer {
 
       const container = CONTAINERS[spec];
       if (!container) throw new Error(`未知のコンテナ ":::${spec}"`);
-      if (container.type) {
-        currentBlock = { type: container.type, divIndex: html.length, depth: stack.length };
+      let openTag = container.open;
+      if (container.type === "problem" && this.currentExamTrack) {
+        openTag = openTag.replace(
+          />/,
+          ` data-exam-track="${this.currentExamTrack}">`,
+        );
       }
-      html.push(container.open);
+      if (container.type) {
+        currentBlock = {
+          type: container.type,
+          divIndex: html.length,
+          depth: stack.length,
+          examTrack: container.type === "problem" ? this.currentExamTrack : null,
+        };
+      }
+      html.push(openTag);
       stack.push(container.close);
     };
 
@@ -285,13 +300,22 @@ export class MarkdownRenderer {
           html[currentBlock.divIndex] = original.replace(/>/, ` id="${escapeHtml(id)}">`);
         }
         if (level === 2) {
+          const headingTitle = heading[2].trim();
+          this.currentExamTrack = headingTitle.includes("専門基礎科目")
+            ? "basic"
+            : headingTitle.includes("専門科目")
+              ? "specialized"
+              : null;
           const slug = heading[2].trim().toLowerCase()
             .replace(/\\\([^)]*\\\)/g, "")
             .replace(/\s+/g, "-")
             .replace(/[^a-z0-9ぁ-ゟ゠-ヿ一-鿿-]/g, "")
             .replace(/-+/g, "-")
             .replace(/^-|-$/g, "");
-          html.push(`<h2 id="sec-${slug}">${this.renderInline(heading[2])}</h2>`);
+          const trackAttr = this.currentExamTrack
+            ? ` data-exam-track="${this.currentExamTrack}"`
+            : "";
+          html.push(`<h2 id="sec-${slug}"${trackAttr}>${this.renderInline(heading[2])}</h2>`);
         } else if (
           level === 3 &&
           currentBlock &&

@@ -11,12 +11,35 @@ f(x)=\begin{pmatrix}1&0&0\\1&3&-3\\-2&2&-4\end{pmatrix}x
 で定める。$f(W)\subset W$ となる1次元および2次元の部分空間 $W$ を全て求めよ。
 \end{problem}
 \begin{proof}[解答]
-固有値は $1,2,-3$ で相異なる。対応する固有ベクトルを
+行列を $A$ と書く。まず特性多項式を第1行で展開すると
+\begin{align*}
+\det(\lambda I-A)
+&=(\lambda-1)\det\begin{pmatrix}\lambda-3&3\\-2&\lambda+4\end{pmatrix}\\
+&=(\lambda-1)\{(\lambda-3)(\lambda+4)+6\}\\
+&=(\lambda-1)(\lambda-2)(\lambda+3).
+\end{align*}
+従って固有値は $1,2,-3$ で相異なる。各方程式 $(A-\lambda I)x=0$ を解くと、対応する固有ベクトルを
 \[
 v_1=(-4,11,6)^{\mathsf T},\quad v_2=(0,3,1)^{\mathsf T},\quad
 v_3=(0,1,2)^{\mathsf T}
 \]
-と取れる。従って1次元不変部分空間は $\langle v_1\rangle,\langle v_2\rangle,\langle v_3\rangle$。2次元不変部分空間は $\langle v_1,v_2\rangle,\langle v_1,v_3\rangle,\langle v_2,v_3\rangle$ であり，これが全てである。
+と取れる。
+
+1次元部分空間 $W=\langle w\rangle$ が不変なら $Aw\in\langle w\rangle$ だから、
+$Aw=\lambda w$ となり、$w$ は固有ベクトルである。各固有空間は1次元なので、
+1次元不変部分空間は
+$\langle v_1\rangle,\langle v_2\rangle,\langle v_3\rangle$ に限る。
+
+2次元不変部分空間 $W$ について、$A$ の最小多項式
+$(t-1)(t-2)(t+3)$ は $A|_W$ も零化する。これは重根を持たないので
+$A|_W$ は対角化可能であり、$W$ は $A$ の固有ベクトルからなる基底を持つ。
+各固有空間は1次元だから、その基底は相異なる二つの固有値に属する。従って
+\[
+\langle v_1,v_2\rangle,\qquad
+\langle v_1,v_3\rangle,\qquad
+\langle v_2,v_3\rangle
+\]
+が全てである。実際、各空間は固有ベクトルで生成されるので $A$ で不変である。
 \end{proof}
 
 \begin{problem}{第2問｜近似恒等核}{2017-b-2}
@@ -29,11 +52,33 @@ $I_n=\int_0^\infty n f(x)e^{-nx}\,\d x$ とおく。
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-$|f|\le M$ とすれば (1) は $\int_0^\infty nMe^{-nx}=M$，(2) は絶対値が $Me^{-n\delta}$ 以下。(3) $\int_0^\infty ne^{-nx}=1$ より
+$|f(x)|\le M$ とする。(1) は
+\[
+\int_0^\infty|nf(x)e^{-nx}|\,\d x
+\le M\int_0^\infty ne^{-nx}\,\d x
+=M[-e^{-nx}]_0^\infty=M
+\]
+より絶対収束する。(2) も同様に
+\[
+\left|\int_\delta^\infty nf(x)e^{-nx}\,\d x\right|
+\le M\int_\delta^\infty ne^{-nx}\,\d x
+=Me^{-n\delta}\longrightarrow0.
+\]
+
+(3) $\int_0^\infty ne^{-nx}\,\d x=1$ より
 \[
 I_n-f(0)=\int_0^\infty n(f(x)-f(0))e^{-nx}\,\d x.
 \]
-連続性で $[0,\delta]$ の差を小さくし，残りは (2) で抑える。
+任意の $\varepsilon>0$ を取る。$f$ の0での連続性から、ある $\delta>0$ があり
+$0\le x\le\delta$ なら $|f(x)-f(0)|<\varepsilon/2$ となる。一方
+$|f(x)-f(0)|\le2M$ なので、積分を $[0,\delta]$ と $[\delta,\infty)$ に分けると
+\begin{align*}
+|I_n-f(0)|
+&\le\frac\varepsilon2\int_0^\delta ne^{-nx}\,\d x
++2M\int_\delta^\infty ne^{-nx}\,\d x\\
+&\le\frac\varepsilon2+2Me^{-n\delta}.
+\end{align*}
+$n$ を十分大きくすれば右辺は $\varepsilon$ 未満になるので $I_n\to f(0)$ である。
 \end{proof}
 
 \begin{problem}{第3問｜有理数の部分空間}{2017-b-3}
@@ -60,8 +105,27 @@ $X=\{x\in G\mid[x,h]\in K\ (\forall h\in H)\}$，$[x,y]=x^{-1}y^{-1}xy$ とお�
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-(1) $[x,k]\in K$ から $x^{-1}kx\in K$。有限性により包含は等号になる。(2) $x,y\in X$ に対し
-$[xy,h]=y^{-1}[x,h]y[y,h]\in K$。逆元も同様で，単位元も入る。(3) $H\subset X$ は全ての $h_1,h_2\in H$ で $[h_1,h_2]\in K$ という条件。これは $K$ の正規性と商群の可換性に同値。
+(1) $k\in K\subset H$ とすると $[x,k]=x^{-1}k^{-1}xk\in K$ である。
+従って $x^{-1}k^{-1}x=[x,k]k^{-1}\in K$、逆元を取って $x^{-1}kx\in K$。
+よって $x^{-1}Kx\subset K$ であり、両者は有限集合で同じ位数を持つので等号となる。
+
+(2) まず $1\in X$ である。$x,y\in X$, $h\in H$ に対し交換子公式から
+\[
+[xy,h]=y^{-1}[x,h]y[y,h].
+\]
+(1) より $y^{-1}Ky=K$ であり、$[x,h],[y,h]\in K$ だから右辺は $K$ に入る。
+従って $xy\in X$。さらに
+\[
+[x^{-1},h]=\bigl(x[x,h]x^{-1}\bigr)^{-1}
+\]
+であり、$[x,h]\in K$、(1) より $xKx^{-1}=K$ なので $x^{-1}\in X$。
+よって $X$ は部分群である。
+
+(3) $H\subset X$ とする。(1) を $x\in H$ に適用すれば $K\triangleleft H$。
+また全ての $h_1,h_2\in H$ について $[h_1,h_2]\in K$ だから、商群では
+$(h_1K)(h_2K)=(h_2K)(h_1K)$ となり $H/K$ は可換である。
+逆に $K\triangleleft H$ かつ $H/K$ が可換なら、任意の $h_1,h_2\in H$ の交換子は
+$K$ に入る。従って各 $h_1\in H$ は $X$ に属し、$H\subset X$ となる。
 \end{proof}
 
 \begin{problem}{第2問｜剰余環と局所化}{2017-s-2}
@@ -104,16 +168,59 @@ p(u,v)=(u,u^2/2,0)+\frac{a\cos v}{\sqrt{u^2+1}}(-u,1,0)+a\sin v(0,0,1).
 これが曲面であることを示し，Gauss 曲率・平均曲率を求めよ。また $q(s)=p(u_0,s/a)$ が測地線であることを示せ。
 \end{problem}
 \begin{proof}[解答]
-これは平面曲線 $c(u)=(u,u^2/2,0)$ の半径 $a$ の管状曲面である。中心曲線の曲率を $\kappa=(1+u^2)^{-3/2}$ とすると $a\kappa<1$ なので正則。外向き法線を選ぶと主曲率は
+中心曲線を $c(u)=(u,u^2/2,0)$ とし、
+\[
+w=\norm{c'(u)}=\sqrt{1+u^2},\quad
+T=\frac{(1,u,0)}w,\quad
+N=\frac{(-u,1,0)}w,\quad B=(0,0,1)
+\]
+とおく。中心曲線の曲率は
+\[
+\kappa=\frac{\norm{c'\times c''}}{\norm{c'}^3}
+=\frac1{(1+u^2)^{3/2}}
+\]
+であり、Frenet の公式から $N_u=-\kappa wT$ である。問題の写像は
+\[
+p(u,v)=c(u)+a\cos v\,N(u)+a\sin v\,B
+\]
+と書けるので
+\[
+p_u=w(1-a\kappa\cos v)T,
+\qquad p_v=a(-\sin v\,N+\cos v\,B).
+\]
+$0<a<1$ かつ $0<\kappa\le1$ だから $1-a\kappa\cos v\ge1-a>0$。
+従って $p_u,p_v$ はともに0でなく互いに直交し、$p_u\times p_v\ne0$ なので正則な曲面である。
+
+外向き単位法線を $\nu=\cos v\,N+\sin v\,B$ と取ると
+\[
+\nu_u=-\kappa w\cos v\,T,
+\qquad \nu_v=-\sin v\,N+\cos v\,B=\frac1a p_v.
+\]
+形作用素 $S(X)=-\d\nu(X)$ を $p_u,p_v$ に作用させると
+\[
+S(p_u)=\frac{\kappa\cos v}{1-a\kappa\cos v}p_u,
+\qquad S(p_v)=-\frac1a p_v.
+\]
+従って座標方向は主方向で、主曲率は
 \[
 k_1=\frac{\kappa\cos v}{1-a\kappa\cos v},\qquad k_2=-\frac1a.
 \]
-従って
+よって積と平均を取れば
 \[
 K=-\frac{\kappa\cos v}{a(1-a\kappa\cos v)},\qquad
 H=\frac12\left(\frac{\kappa\cos v}{1-a\kappa\cos v}-\frac1a\right).
 \]
-$q$ は単位速度の半径 $a$ の円で，加速度は $-1/a$ 倍の曲面法線。接成分が0なので測地線である。
+$q(s)=p(u_0,s/a)$ について連鎖律から
+\[
+q'(s)=\frac1a p_v(u_0,s/a),\qquad
+q''(s)=\frac1{a^2}p_{vv}(u_0,s/a).
+\]
+$\norm{p_v}=a$ なので $q$ は単位速度であり、
+$p_{vv}=-a(\cos v\,N+\sin v\,B)=-a\nu$ だから
+\[
+q''(s)=-\frac1a\nu(u_0,s/a).
+\]
+加速度が曲面法線方向だけで接成分が0なので、$q$ は測地線である。
 \end{proof}
 
 \begin{problem}{第5問｜扇形上の正則関数}{2017-s-5}
@@ -125,7 +232,50 @@ $S=\{z\in\mathbb C\mid0<|z|<r,\ \alpha<\arg z<\beta\}$，$\beta<\alpha+2\pi$ と
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-(1) $S$ 上で対数の枝を取り $f(z)=\exp(\tfrac12\log z)$ とする。$f(z)\to0$ だが $|f'(z)|=1/(2\sqrt{|z|})\to\infty$。(2) $S$ は開集合なので各点に含まれる小円板がある。(3) 角度と外周から一様に離れているため，ある $c_\varepsilon>0$ があり $B(z,c_\varepsilon|z|)\subset S$。$|f|\le B$ と Cauchy の評価を用いれば $|f'(z)|\le B/(c_\varepsilon|z|)$。
+\begin{enumerate}
+\item[(1)] 扇形の角度は $2\pi$ 未満なので、$S$ 上で正則な対数の枝を取れる。
+\[
+f(z)=\exp\left(\frac12\log z\right)
+\]
+とおけば $|f(z)|=|z|^{1/2}\to0$ である。一方
+\[
+f'(z)=\frac12\exp\left(-\frac12\log z\right),\qquad
+|f'(z)|=\frac1{2\sqrt{|z|}}\longrightarrow\infty,
+\]
+従って $f'$ は有限な極限を持たない。
+
+\item[(2)] 切り取った小扇形の点 $z$ は $0<|z|<r$ かつ
+$\alpha<\arg z<\beta$ を満たすので $z\in S$ である。$S$ は開集合だから、
+開集合の定義により、各 $z$ に対してある $\rho_z>0$ が存在し
+$B(z,\rho_z)\subset S$ となる。
+
+\item[(3)] $T_\varepsilon$ では角度が二つの境界半直線から少なくとも
+$\varepsilon$ 離れ、外周も $r'<r$ に切り取られているとする。
+\[
+0<c_\varepsilon<\min\left\{1,\sin\varepsilon,\frac r{r'}-1\right\}
+\]
+を取れば、任意の $z\in T_\varepsilon$ に対し
+\[
+B(z,c_\varepsilon|z|)\subset S.
+\]
+実際、半径が $|z|$ 未満なので円板は0を含まず、境界半直線までの距離
+$|z|\sin\varepsilon$ より小さく、さらに円板内の $w$ は
+$|w|<(1+c_\varepsilon)r'<r$ を満たす。
+
+$|f|\le B$ とし、円 $|\zeta-z|=c_\varepsilon|z|$ 上で Cauchy の微分公式を使うと
+\[
+f'(z)=\frac1{2\pi i}\int_{|\zeta-z|=c_\varepsilon|z|}
+\frac{f(\zeta)}{(\zeta-z)^2}\,\d\zeta.
+\]
+従って円周の長さも含めて評価すると
+\[
+|f'(z)|\le
+\frac1{2\pi}\frac{B}{(c_\varepsilon|z|)^2}
+2\pi c_\varepsilon|z|
+=\frac{B}{c_\varepsilon|z|}.
+\]
+$M_\varepsilon=B/c_\varepsilon$ とおけば求める評価を得る。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第6問｜線形微分方程式}{2017-s-6}
@@ -135,14 +285,35 @@ $S=\{z\in\mathbb C\mid0<|z|<r,\ \alpha<\arg z<\beta\}$，$\beta<\alpha+2\pi$ と
 \end{enumerate}
 \end{problem}
 \begin{proof}[解答]
-(1)
+\begin{enumerate}
+\item[(1)] 特性方程式は
+\[
+r^2+2r+2=0,\qquad r=-1\pm i
+\]
+なので一般解は $y=e^{-x}(C_1\cos x+C_2\sin x)$。
+$y(0)=1$ から $C_1=1$、
+\[
+y'(0)=-C_1+C_2=0
+\]
+から $C_2=1$。従って
 \[
 y=e^{-x}(\cos x+\sin x),\qquad x=-\frac\pi4+k\pi\quad(k\in\Z).
 \]
-(2) 共振する $\omega=\pm\sqrt2$ のときだけ非有界で，
+最後の零点は $e^{-x}\ne0$ と
+$\cos x+\sin x=\sqrt2\sin(x+\pi/4)$ から得られる。
+\item[(2)] $\omega^2\ne2$ なら特殊解 $\cos(\omega x)/(2-\omega^2)$ が取れ、
+同次解も三角関数なので全ての解は有界である。
+$\omega=\pm\sqrt2$ のときは共振し、$a=\sqrt2$ とおけば
+\[
+\left(\frac{x}{2a}\sin ax\right)''
++a^2\left(\frac{x}{2a}\sin ax\right)=\cos ax.
+\]
+初期条件を満たす同次解 $(1/a)\sin ax$ を加えて
 \[
 y(x)=\frac{x+2}{2\sqrt2}\sin(\sqrt2x).
 \]
+これは $x>0$ で非有界である。従って求める $\omega$ は $\omega=\pm\sqrt2$。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第7問｜パラメータ積分}{2017-s-7}
@@ -152,7 +323,22 @@ $f$ は $(0,\infty)$ 上可測で $\int_0^\infty x|f(x)|\,\d x<\infty$ を満た
 \]
 \end{problem}
 \begin{proof}[解答]
-各 $x$ で $(\log(1+ax)-ax)/a\to0$。また $0\le ax-\log(1+ax)\le ax$ なので絶対値は $x$ 以下。$x|f(x)|$ を優関数として優収束定理を使い，答えは $0$。
+$u=ax\ge0$ とおく。$a\downarrow0$ のとき $u\to0$ であり、
+$\log(1+u)=u+o(u)$ だから、各 $x>0$ について
+\[
+\frac{\log(1+ax)-ax}{a}
+=x\frac{\log(1+u)-u}{u}\longrightarrow0.
+\]
+また $\log(1+u)\le u$ であり、$\log(1+u)\ge0$ でもあるので
+\[
+0\le u-\log(1+u)\le u.
+\]
+従って
+\[
+\left|\frac{\log(1+ax)-ax}{a}f(x)\right|
+\le x|f(x)|.
+\]
+仮定より右辺は $(0,\infty)$ 上可積分である。よって優収束定理により積分と極限を交換でき、求める極限は $0$ である。
 \end{proof}
 
 \begin{problem}{第8問｜確率収束}{2017-s-8}

@@ -43,6 +43,18 @@ ${macrosToJsLiteral(macros).replace(/<\//g, "<\\/")}
     </script>`;
 }
 
+function examTrackSwitch() {
+  return `<div class="exam-track-switch" data-exam-track-switch>
+          <span class="exam-track-switch__label">表示する問題</span>
+          <div class="exam-track-switch__options" role="group" aria-label="問題区分">
+            <button type="button" data-exam-track-value="all" aria-pressed="true">すべて</button>
+            <button type="button" data-exam-track-value="basic" aria-pressed="false">専門基礎</button>
+            <button type="button" data-exam-track-value="specialized" aria-pressed="false">専門</button>
+          </div>
+          <span class="exam-track-switch__status" data-exam-track-status aria-live="polite"></span>
+        </div>`;
+}
+
 function siteHeader(config, sections, currentSection) {
   const curOut = outPathOf(currentSection);
   const mainSecs = sections.filter((s) => s.data.group !== "appendix");
@@ -111,6 +123,10 @@ export function chapterTemplate(config, section, sections, index, blocks, macros
   const graphBase = relUrl(curOut, "graph.html");
   const blocksJson = safeJson(blocks).replaceAll("__GRAPH_BASE__", graphBase);
   const showRefSidebar = config.features.refPulse !== false;
+  const trackFilterScript = config.features.examTrackFilter
+    ? `\n    <script defer src="${relUrl(curOut, "track-filter.js")}"></script>`
+    : "";
+  const trackSwitch = config.features.examTrackFilter ? examTrackSwitch() : "";
   const refSidebar = showRefSidebar
     ? `<aside class="ref-sidebar" aria-label="参照">
         <div class="ref-sidebar__header">
@@ -143,6 +159,7 @@ export function chapterTemplate(config, section, sections, index, blocks, macros
       window.__typeLabels = ${safeJson(typeLabels())};
       window.__typeColors = ${safeJson(typeColors())};
     </script>
+    ${trackFilterScript}
     <script defer src="${relUrl(curOut, "app.js")}"></script>
     <noscript>
       <!-- ブロックの初期状態は透明で、app.js が可視化する。JS 無効時に本文が消えないようにする。 -->
@@ -167,6 +184,8 @@ export function chapterTemplate(config, section, sections, index, blocks, macros
             <h1 class="chapter-hero__title">${escapeHtml(section.data.title)}</h1>
           </div>
         </div>
+
+        ${trackSwitch}
 
         <article class="prose" id="${escapeHtml(section.data.id)}">
           ${section.html.replaceAll("__GRAPH_BASE__", graphBase)}
@@ -204,6 +223,15 @@ function chapterBlockStats(blocks, chapterId) {
   return parts.join("・");
 }
 
+function chapterExamTrackStats(blocks, chapterId) {
+  const counts = { basic: 0, specialized: 0 };
+  for (const block of blocks) {
+    if (block.chapter !== chapterId || block.type !== "problem") continue;
+    if (block.examTrack in counts) counts[block.examTrack] += 1;
+  }
+  return counts;
+}
+
 const HERO_DECORATION = `<div class="landing__hero-deco" aria-hidden="true">
           <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
             <path d="M100,350 Q200,100 400,200 T700,150" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -229,13 +257,16 @@ export function landingTemplate(config, sections, blocks) {
         const eyebrow = s.data.eyebrow
           ? `\n          <span class="toc-card__eyebrow">${escapeHtml(s.data.eyebrow)}</span>`
           : "";
-        const stats = config.features.chapterStats
-          ? chapterBlockStats(blocks, s.data.id)
-          : "";
+        const trackStats = chapterExamTrackStats(blocks, s.data.id);
+        const stats = config.features.examTrackFilter
+          ? `専門基礎 ${trackStats.basic}題・専門 ${trackStats.specialized}題`
+          : config.features.chapterStats
+            ? chapterBlockStats(blocks, s.data.id)
+            : "";
         const statsHtml = stats
-          ? `\n          <span class="toc-card__stats">${escapeHtml(stats)}</span>`
+          ? `\n          <span class="toc-card__stats" data-exam-track-card-stats>${escapeHtml(stats)}</span>`
           : "";
-        return `        <a href="${escapeHtml(outPathOf(s))}" class="toc-card" style="animation-delay:${i * 80}ms">
+        return `        <a href="${escapeHtml(outPathOf(s))}" class="toc-card" data-basic-count="${trackStats.basic}" data-specialized-count="${trackStats.specialized}" style="animation-delay:${i * 80}ms">
           <span class="toc-card__num">${num}</span>${eyebrow}
           <h2 class="toc-card__title">${escapeHtml(s.data.title)}</h2>${statsHtml}
         </a>`;
@@ -266,6 +297,10 @@ ${renderCards(appendixSecs)}
   const subtitle = config.landingSubtitle
     ? `\n        <p class="landing__sub">${config.landingSubtitle}</p>`
     : "";
+  const trackFilterScript = config.features.examTrackFilter
+    ? '\n    <script defer src="./track-filter.js"></script>'
+    : "";
+  const trackSwitch = config.features.examTrackFilter ? examTrackSwitch() : "";
 
   return `<!doctype html>
 <html lang="${escapeHtml(config.lang)}">
@@ -275,6 +310,7 @@ ${renderCards(appendixSecs)}
     <title>${escapeHtml(config.siteName)}</title>
     ${FONTS_LINKS}
     <link rel="stylesheet" href="./styles.css" />
+    ${trackFilterScript}
   </head>
   <body>
     <main class="landing">
@@ -285,6 +321,7 @@ ${renderCards(appendixSecs)}
           <span>${escapeHtml(config.landingTagline)}</span>
         </h1>${subtitle}
       </div>
+      ${trackSwitch}
       <nav class="landing__toc">
 ${renderCards(mainSecs)}
       </nav>${appendixBlock}

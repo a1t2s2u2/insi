@@ -36,5 +36,6 @@ export default {
     fadeIn: false,
     refPulse: false,
     keyboardHelp: false,
+    examTrackFilter: true,
   },
 };

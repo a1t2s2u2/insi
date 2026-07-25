@@ -20,6 +20,7 @@ const DEFAULT_FEATURES = {
   refPulse: true, // 参照クリック時に本文側ブロックを光らせる
   keyboardHelp: true, // "?" でショートカット一覧を表示
   dependencyGraph: true, // 依存グラフへの導線
+  examTrackFilter: false, // 過去問サイト用の「専門基礎 / 専門」切替
 };
 
 // tex の環境名 → [サイト側コンテナ, 見出し接頭辞]。

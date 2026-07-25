@@ -1,0 +1,766 @@
+\chapter{この別冊の使い方}
+\label{ch:reference-guide}
+
+解答編は答案の筋を短く示しているため、定義や標準定理の説明を省いている。
+用語を忘れたときは、問題の分野から本冊の該当章を引き、次の順で確認するとよい。
+
+\begin{enumerate}
+  \item \textbf{Def.} で記号と条件を確認する。
+  \item \textbf{Thm. / Prop.} で、解答中の「したがって」が何に基づくか確認する。
+  \item 各節末の Memo で、その定理を使う典型的な合図を確認する。
+\end{enumerate}
+
+\section{専門基礎科目との対応}
+
+\begin{itemize}
+  \item \textbf{2026年度}: エルミート行列は第\ref{ch:linear-algebra}章、重積分は第\ref{ch:calculus}章、集合までの距離は第\ref{ch:metric-topology}章。
+  \item \textbf{2022年度}: 実行列・線形空間は第\ref{ch:linear-algebra}章、関数方程式・微分積分は第\ref{ch:calculus}章、連続写像・位相空間は第\ref{ch:metric-topology}章。
+  \item \textbf{2021年度}: Jordan 標準形と対称行列は第\ref{ch:linear-algebra}章、二変数関数と Gamma・Beta 関数は第\ref{ch:calculus}章、連続像と距離空間は第\ref{ch:metric-topology}章。
+  \item \textbf{2017年度}: 不変部分空間は第\ref{ch:linear-algebra}章、近似恒等核は第\ref{ch:calculus}章、有理数の部分空間は第\ref{ch:metric-topology}章。
+  \item \textbf{2015年度}: 行列・基底・像・核は第\ref{ch:linear-algebra}章、積分・滑らかな関数は第\ref{ch:calculus}章、コンパクト性・連結性は第\ref{ch:metric-topology}章。
+  \item \textbf{年度不明}: 直交対角化は第\ref{ch:linear-algebra}章、Leibniz 則は第\ref{ch:calculus}章、コンパクト集合の近傍は第\ref{ch:metric-topology}章。
+\end{itemize}
+
+\section{専門科目との対応}
+
+\begin{itemize}
+  \item \textbf{代数学}: 群・Sylow 部分群・交換子・環・イデアル・局所化は第\ref{ch:algebra}章。
+  \item \textbf{複素解析}: 複素積分、収束べき級数、扇形上の正則関数、3次方程式は第\ref{ch:complex}章。
+  \item \textbf{実解析・測度・確率}: ルベーグ積分、Dirichlet 積分、測度収束、収束定理、確率収束は第\ref{ch:measure-probability}章。
+  \item \textbf{常微分方程式}: 線形方程式、共振、Euler 型方程式、極大解は第\ref{ch:ode}章。
+  \item \textbf{位相幾何}: 基本群、被覆空間、リフト、Betti 数は第\ref{ch:topology-geometry}章。
+  \item \textbf{微分幾何}: 曲率・捩率、曲面、Gauss 曲率・平均曲率、測地線は第\ref{ch:topology-geometry}章。
+\end{itemize}
+
+\begin{memo*}
+問題文の中で定義が与えられている用語も、本冊では周辺概念と一緒に再掲している。
+定理の仮定は結論と同じくらい重要である。特に「連続」「コンパクト」「有限測度」「可積分」を落とさないこと。
+\end{memo*}
+
+\chapter{線形代数}
+\label{ch:linear-algebra}
+
+\section{ベクトル空間と線形写像}
+
+\begin{definition}{部分空間・生成・一次独立・基底}{linear-basic}
+ベクトル空間 $V$ の空でない部分集合 $W$ が\textbf{部分空間}であるとは、加法とスカラー倍で閉じていることをいう。
+$v_1,\ldots,v_k$ の一次結合全体を $\langle v_1,\ldots,v_k\rangle$ と書く。
+
+$\sum_i a_iv_i=0$ から $a_1=\cdots=a_k=0$ が従うとき、$v_1,\ldots,v_k$ は\textbf{一次独立}である。
+一次独立で $V$ を生成する列を\textbf{基底}といい、有限次元空間の基底の本数を $\dim V$ と書く。
+\end{definition}
+
+\begin{definition}{像・核・階数}{image-kernel}
+線形写像 $f:V\to W$ に対し
+\[
+  \ker f=\{v\in V\mid f(v)=0\},\qquad
+  \operatorname{Im}f=\{f(v)\mid v\in V\}
+\]
+を\textbf{核}、\textbf{像}という。$\dim\operatorname{Im}f$ を $f$ の\textbf{階数}という。
+\end{definition}
+
+\begin{theorem}{次元定理}{rank-nullity}
+$V$ が有限次元なら
+\[
+  \dim V=\dim\ker f+\dim\operatorname{Im}f.
+\]
+特に同じ有限次元の空間の間の線形写像では、単射・全射・同型が同値である。
+\end{theorem}
+
+\begin{definition}{直和}{direct-sum}
+$V=U+W$ かつ $U\cap W=\{0\}$ のとき $V=U\oplus W$ と書く。
+各 $v\in V$ が $v=u+w$ と一意に表されることと同値である。
+\end{definition}
+
+\begin{proposition}{部分空間の和の次元}{dimension-sum}
+有限次元の部分空間 $U,W$ に対し
+\[
+  \dim(U+W)=\dim U+\dim W-\dim(U\cap W).
+\]
+\end{proposition}
+
+\section{行列式・固有値・対角化}
+
+\begin{definition}{固有値・固有空間・固有多項式}{eigenvalue}
+正方行列 $A$ に対し $Av=\lambda v$ を満たす $v\ne0$ があるとき、$\lambda$ を\textbf{固有値}、
+$\ker(A-\lambda I)$ を\textbf{固有空間}という。
+$\det(\lambda I-A)$ を\textbf{固有多項式}という。
+\end{definition}
+
+\begin{proposition}{行列式と固有値}{determinant-eigenvalues}
+固有値を重複度込みで $\lambda_1,\ldots,\lambda_n$ とすると
+\[
+  \det A=\prod_{i=1}^n\lambda_i,
+  \qquad \tr A=\sum_{i=1}^n\lambda_i.
+\]
+また $A$ が正則であること、$\det A\ne0$、$0$ が固有値でないことは同値である。
+\end{proposition}
+
+\begin{definition}{対角化}{diagonalization}
+ある正則行列 $P$ により $P^{-1}AP$ が対角行列になるとき、$A$ は\textbf{対角化可能}であるという。
+これは空間が固有ベクトルからなる基底を持つことと同値である。
+\end{definition}
+
+\begin{theorem}{相異なる固有値の固有ベクトル}{distinct-eigenvalues}
+相異なる固有値に属する固有ベクトルは一次独立である。
+従って $n$ 次行列が $n$ 個の相異なる固有値を持てば対角化可能である。
+\end{theorem}
+
+\begin{definition}{不変部分空間}{invariant-subspace}
+線形写像 $f:V\to V$ と部分空間 $W$ に対し $f(W)\subset W$ なら、$W$ を $f$ の\textbf{不変部分空間}という。
+1次元不変部分空間は固有ベクトルが張る空間である。
+\end{definition}
+
+\begin{proposition}{不変旗と上三角化}{invariant-flag}
+基底 $v_1,\ldots,v_n$ に対し $W_i=\langle v_1,\ldots,v_i\rangle$ とおく。
+$A(W_i)\subset W_i$ が全ての $i$ で成り立つなら、この基底に関する $A$ の表現行列は上三角である。
+\end{proposition}
+
+\begin{definition}{冪零行列と Jordan 標準形}{jordan-form}
+$N^m=0$ となる $m$ がある行列 $N$ を\textbf{冪零行列}という。
+複素正方行列は、対角に固有値を置き、その直上に $1$ を並べた Jordan ブロックの直和に相似である。
+固有値 $\lambda$ の Jordan ブロック数は $\dim\ker(A-\lambda I)$ に等しい。
+\end{definition}
+
+\begin{memo*}
+$N=A-\lambda I$ の $N,N^2,\ldots$ の階数や核の次元を見ると Jordan ブロックの大きさが分かる。
+対角化できることは「全ての Jordan ブロックが大きさ1」であることと同値である。
+\end{memo*}
+
+\section{内積・直交性・エルミート行列}
+
+\begin{definition}{内積・直交補空間}{inner-product}
+複素ベクトル空間では $\inner{x}{y}=x^*y$ とする。
+$U$ に直交するベクトル全体を
+$U^\perp=\{x\mid\inner{x}{u}=0\ (\forall u\in U)\}$ と書く。
+有限次元内積空間では $V=U\oplus U^\perp$ である。
+\end{definition}
+
+\begin{definition}{直交行列・ユニタリ行列}{orthogonal-unitary}
+実行列 $Q$ が $Q^{\mathsf T}Q=I$ を満たすとき\textbf{直交行列}、複素行列 $U$ が $U^*U=I$ を満たすとき\textbf{ユニタリ行列}という。
+これらは内積と長さを保ち、逆行列はそれぞれ $Q^{\mathsf T}$、$U^*$ である。
+\end{definition}
+
+\begin{definition}{対称・交代・エルミート行列}{symmetric-hermitian}
+$A^{\mathsf T}=A$ を満たす実行列を\textbf{対称行列}、$A^{\mathsf T}=-A$ を満たすものを\textbf{交代行列}という。
+$A^*=A$ を満たす複素行列を\textbf{エルミート行列}という。
+\end{definition}
+
+\begin{theorem}{スペクトル定理}{spectral-theorem}
+実対称行列は直交行列で、エルミート行列はユニタリ行列で対角化できる。
+その固有値は全て実数であり、異なる固有値の固有空間は互いに直交する。
+逆に、実行列が直交行列で対角化できれば対称行列である。
+\end{theorem}
+
+\begin{definition}{Frobenius 内積}{frobenius}
+同じ大きさの実行列に対し
+\[
+  \inner{A}{B}_{F}=\tr(A^{\mathsf T}B)
+\]
+を Frobenius 内積という。特に
+$\inner{xx^{\mathsf T}}{yy^{\mathsf T}}_F=(x^{\mathsf T}y)^2$ である。
+\end{definition}
+
+\begin{proposition}{階数1更新 $I+vv^*$}{rank-one-update}
+$A=I+vv^*$ とする。$v$ の方向では固有値 $1+\norm v^2$、$v^\perp$ では固有値 $1$ である。
+従って $\det(I+vv^*)=1+\norm v^2$ である。
+\end{proposition}
+
+\chapter{微分積分}
+\label{ch:calculus}
+
+\section{連続性と微分}
+
+\begin{definition}{連続・一様連続・Lipschitz 連続}{continuity-kinds}
+$f:X\to Y$ が $x$ で連続であるとは、任意の $\varepsilon>0$ に対し、ある $\delta>0$ が存在して
+$d_X(x,y)<\delta$ なら $d_Y(f(x),f(y))<\varepsilon$ となることをいう。
+$\delta$ を $x$ によらず選べるとき\textbf{一様連続}という。
+$d_Y(f(x),f(y))\le Ld_X(x,y)$ を満たす $L$ があるとき\textbf{$L$-Lipschitz 連続}という。
+\end{definition}
+
+\begin{theorem}{中間値・最大最小・一様連続性}{continuous-on-compact}
+実区間上の連続関数は中間値を全て取る。
+コンパクト集合上の実数値連続関数は最大値・最小値を取り、一様連続である。
+\end{theorem}
+
+\begin{proposition}{偏導関数と $C^1$ 級}{partial-c1}
+全ての1階偏導関数が存在して近傍で連続なら $f$ は $C^1$ 級であり、全微分可能である。
+逆に、偏導関数が一点で不連続であれば $C^1$ 級ではないが、全微分可能性まで直ちに否定できるとは限らない。
+\end{proposition}
+
+\section{積分と微分の交換}
+
+\begin{theorem}{微積分学の基本定理}{fundamental-calculus}
+$f$ が $[a,b]$ 上連続で $F(x)=\int_a^x f(t)\,\d t$ なら $F'(x)=f(x)$。
+また $G'=f$ なら $\int_a^b f=G(b)-G(a)$ である。
+\end{theorem}
+
+\begin{theorem}{Leibniz の積分則}{leibniz-rule}
+$f$ と $\partial f/\partial x$ が必要な領域で連続なら
+\[
+\frac{\d}{\d x}\int_{\phi(x)}^{\psi(x)}f(x,t)\,\d t
+=f(x,\psi(x))\psi'(x)-f(x,\phi(x))\phi'(x)
++\int_{\phi(x)}^{\psi(x)}\frac{\partial f}{\partial x}(x,t)\,\d t.
+\]
+固定端点なら最初の2項は消える。
+\end{theorem}
+
+\begin{proposition}{原点で消える滑らかな関数の分解}{hadamard-lemma}
+$f\in C^\infty(\R^n)$ かつ $f(0)=0$ なら
+\[
+  f(x)=\sum_{i=1}^n x_i g_i(x)
+\]
+となる滑らかな $g_i$ が存在する。実際
+$g_i(x)=\int_0^1(\partial_i f)(tx)\,\d t$ と取れる。
+\end{proposition}
+
+\section{広義積分・重積分・変数変換}
+
+\begin{definition}{広義積分}{improper-integral}
+端点で非有界、または区間が無限である積分は、有限区間の積分の極限として定義する。
+絶対値の積分が有限なら\textbf{絶対収束}するといい、絶対収束すれば元の積分も収束する。
+\end{definition}
+
+\begin{theorem}{比較判定}{comparison-test}
+$0\le f\le g$ で $\int g<\infty$ なら $\int f<\infty$。
+特に
+\[
+ \int_1^\infty x^a\,\d x<\infty\Longleftrightarrow a<-1,
+ \qquad
+ \int_0^1 x^a\,\d x<\infty\Longleftrightarrow a>-1.
+\]
+対数因子が付いても、臨界指数から離れていれば同じ冪比較が使える。
+\end{theorem}
+
+\begin{theorem}{多変数の変数変換}{change-variables}
+$C^1$ 級の一対一な変数変換 $(u,v)\mapsto(x,y)$ に対し
+\[
+ \iint_D f(x,y)\,\d x\d y
+ =\iint_{D'}f(x(u,v),y(u,v))
+ \left|\frac{\partial(x,y)}{\partial(u,v)}\right|\,\d u\d v.
+\]
+極座標 $x=r\cos\theta,y=r\sin\theta$ の Jacobian は $r$ である。
+3次元球座標の体積要素は $r^2\sin\theta\,\d r\d\theta\d\varphi$ である。
+\end{theorem}
+
+\begin{theorem}{Fubini--Tonelli の定理}{fubini-tonelli}
+非負可測関数では積分順序を交換できる（値が無限でもよい）。
+符号を持つ関数では $\iint|f|<\infty$ なら積分順序を交換できる。
+連続関数をコンパクトな長方形上で積分する場合は、この条件を自動的に満たす。
+\end{theorem}
+
+\begin{memo*}
+重積分では、まず領域を図示し、次に変数の範囲を場合分けし、最後に Jacobian を掛ける。
+積分順序の交換や極限との交換では、連続性だけでなく「非負」または「絶対可積分」の確認が必要である。
+\end{memo*}
+
+\chapter{距離空間と位相}
+\label{ch:metric-topology}
+
+\section{開集合・閉集合・閉包}
+
+\begin{definition}{距離空間と開球}{metric-space-ref}
+集合 $X$ 上の距離 $d$ は、正値性、対称性、三角不等式を満たす写像 $X\times X\to[0,\infty)$ である。
+$B(x,r)=\{y\mid d(x,y)<r\}$ を\textbf{開球}という。
+各点がその集合に含まれる開球を持つとき、その集合を\textbf{開集合}という。開集合の補集合を\textbf{閉集合}という。
+\end{definition}
+
+\begin{definition}{閉包・触点・稠密}{closure-dense}
+$A\subset X$ に対し、$A$ を含む最小の閉集合を\textbf{閉包} $\overline A$ という。
+$x\in\overline A$ は、全ての $r>0$ で $B(x,r)\cap A\ne\emptyset$ となることと同値であり、この $x$ を $A$ の\textbf{触点}という。
+$\overline A=X$ のとき $A$ は $X$ で\textbf{稠密}である。
+\end{definition}
+
+\begin{proposition}{閉包の基本法則}{closure-laws}
+\[
+ A\subset B\Longrightarrow\overline A\subset\overline B,
+ \qquad \overline{A\cup B}=\overline A\cup\overline B.
+\]
+一方、無限和について同じ等式が成り立つとは限らない。
+\end{proposition}
+
+\begin{theorem}{連続性の位相的特徴づけ}{continuity-preimage}
+$f:X\to Y$ が連続であることは、次の各条件と同値である。
+\begin{enumerate}
+  \item $Y$ の全ての開集合 $U$ に対し $f^{-1}(U)$ が開である。
+  \item $Y$ の全ての閉集合 $F$ に対し $f^{-1}(F)$ が閉である。
+\end{enumerate}
+このとき全ての $A\subset X$ に対し
+$f(\overline A)\subset\overline{f(A)}$ が成り立つ。
+\end{theorem}
+
+\section{コンパクト性と連結性}
+
+\begin{definition}{コンパクト空間}{compactness}
+空間 $K$ が\textbf{コンパクト}であるとは、任意の開被覆が有限部分被覆を持つことをいう。
+距離空間では、任意の点列が収束部分列を持つことと同値である。
+\end{definition}
+
+\begin{definition}{Hausdorff 空間}{hausdorff}
+異なる2点が互いに交わらない近傍で分離できる空間を\textbf{Hausdorff 空間}という。
+距離空間は Hausdorff である。
+\end{definition}
+
+\begin{theorem}{コンパクト性の標準事実}{compact-facts}
+次が成り立つ。
+\begin{enumerate}
+  \item コンパクト空間の閉部分集合はコンパクトである。
+  \item Hausdorff 空間のコンパクト部分集合は閉である。
+  \item コンパクト集合の連続像はコンパクトである。
+  \item $\R^n$ では、コンパクトであることと閉かつ有界であることが同値である。
+\end{enumerate}
+\end{theorem}
+
+\begin{definition}{連結・道連結}{connectedness}
+空間 $X$ が、互いに素な非空開集合 $U,V$ の和 $X=U\sqcup V$ に分解できないとき\textbf{連結}であるという。
+任意の2点を連続写像 $[0,1]\to X$ で結べるとき\textbf{道連結}である。
+道連結なら連結である。
+\end{definition}
+
+\begin{theorem}{連続像は連結性を保つ}{continuous-connected-image}
+連結空間の連続像は連結である。特に実数の区間の連続像は連結であり、実数の連結部分集合は区間である。
+\end{theorem}
+
+\section{集合までの距離}
+
+\begin{definition}{集合までの距離}{distance-to-set}
+空でない $A\subset X$ に対し
+\[
+ d(x,A)=\inf_{a\in A}d(x,a)
+\]
+と定める。
+\end{definition}
+
+\begin{proposition}{集合までの距離は1-Lipschitz}{distance-lipschitz}
+任意の $x,y\in X$ に対し
+\[
+  |d(x,A)-d(y,A)|\le d(x,y).
+\]
+従って $x\mapsto d(x,A)$ は連続であり、$d(x,A)=0$ と $x\in\overline A$ は同値である。
+\end{proposition}
+
+\begin{theorem}{コンパクト集合への最短点}{nearest-point-compact}
+$K$ が空でないコンパクト集合なら、各 $x$ に対し $d(x,K)=d(x,a)$ となる $a\in K$ が存在する。
+また $K\subset U$ で $U$ が開なら、ある $r>0$ が存在して $\{x\mid d(x,K)<r\}\subset U$ となる。
+\end{theorem}
+
+\begin{memo*}
+$\Q$ のような部分空間では、極限・閉性・コンパクト性を必ずその空間の中で考える。
+例えば $\Q$ 内の点列の極限候補が無理数なら、その点列は $\Q$ では収束しない。
+\end{memo*}
+
+\chapter{測度・積分・確率}
+\label{ch:measure-probability}
+
+\section{可測性とルベーグ積分}
+
+\begin{definition}{可測関数・ほとんど至る所}{measurable-ae}
+$f:X\to\R$ が\textbf{可測}であるとは、全ての開集合 $U\subset\R$ に対し $f^{-1}(U)$ が可測であることをいう。
+ある零集合を除いて性質が成り立つとき、\textbf{ほとんど至る所}成り立つといい、a.e. と略す。
+\end{definition}
+
+\begin{proposition}{可測関数の合成}{measurable-composition}
+$f$ が可測で $G:\R\to\R$ が連続なら $G\circ f$ は可測である。
+$f_n\to f$ a.e. なら、$G$ の連続性により $G(f_n)\to G(f)$ a.e. である。
+\end{proposition}
+
+\begin{definition}{$L^p$ 空間}{lp-space}
+$p>0$ に対し $\int_X|f|^p\,\d\mu<\infty$ となる可測関数を $L^p$ 可積分という。
+$p\ge1$ では $\norm f_p=(\int|f|^p)^{1/p}$ がノルムを定める。
+\end{definition}
+
+\begin{theorem}{単調収束定理}{monotone-convergence}
+$0\le f_1\le f_2\le\cdots$ かつ $f_n\to f$ a.e. なら
+\[
+  \lim_{n\to\infty}\int f_n\,\d\mu=\int f\,\d\mu.
+\]
+\end{theorem}
+
+\begin{theorem}{優収束定理}{dominated-convergence}
+$f_n\to f$ a.e. で、ある $g\in L^1$ が存在して $|f_n|\le g$ a.e. なら
+\[
+ \int f_n\to\int f,
+ \qquad \int|f_n-f|\to0.
+\]
+有限測度集合 $E$ 上で $|f_n|\le M$ なら $g=M\chi_E$ を使える。
+\end{theorem}
+
+\begin{theorem}{Chebyshev の不等式}{chebyshev-measure}
+$p>0$ と $f\in L^p$ に対し
+\[
+ \mu\{|f|\ge\varepsilon\}\le
+ \frac1{\varepsilon^p}\int|f|^p\,\d\mu.
+\]
+$p=1$ が解答編で頻出する形である。
+\end{theorem}
+
+\section{確率変数と収束}
+
+\begin{definition}{期待値・分散・独立}{expectation-variance}
+確率変数 $X$ の期待値と分散を
+\[
+ E[X]=\int X\,\d P,
+ \qquad V[X]=E[(X-E[X])^2]
+\]
+と定める。独立な確率変数では、分散が有限なら
+$V[X+Y]=V[X]+V[Y]$ である。
+\end{definition}
+
+\begin{definition}{概収束と確率収束}{probability-convergence}
+$P(X_n\to X)=1$ のとき $X_n$ は $X$ に\textbf{概収束}するという。
+全ての $\varepsilon>0$ に対し
+$P(|X_n-X|\ge\varepsilon)\to0$ のとき\textbf{確率収束}するという。
+概収束なら確率収束する。
+\end{definition}
+
+\begin{theorem}{Borel--Cantelli の補題}{borel-cantelli}
+事象列 $A_n$ が $\sum_nP(A_n)<\infty$ を満たすなら
+\[
+ P(A_n\text{ が無限回起こる})=0.
+\]
+従って確率収束する列からは、適切に速く収束する部分列を選ぶことで概収束部分列を取り出せる。
+\end{theorem}
+
+\begin{theorem}{Kolmogorov の収束定理（使用形）}{kolmogorov-convergence}
+独立な確率変数 $Y_n$ が $E[Y_n]=0$ と
+$\sum_nV[Y_n]<\infty$ を満たすなら、級数 $\sum_nY_n$ は概収束する。
+\end{theorem}
+
+\begin{theorem}{連続写像定理（確率収束）}{continuous-mapping-probability}
+$X_n\to X$ が確率収束し、$f:\R\to\R$ が連続なら $f(X_n)\to f(X)$ も確率収束する。
+証明では $X$ を高確率でコンパクト区間に閉じ込め、その上の $f$ の一様連続性を使う。
+\end{theorem}
+
+\chapter{群・環}
+\label{ch:algebra}
+
+\section{群・共役・群作用}
+
+\begin{definition}{部分群・正規部分群・商群}{subgroup-normal}
+$H\subset G$ が積と逆元で閉じるとき\textbf{部分群}という。
+全ての $g\in G$ で $gHg^{-1}=H$ となるとき\textbf{正規部分群}といい $H\triangleleft G$ と書く。
+このとき剰余類全体 $G/H$ に群構造が入る。
+\end{definition}
+
+\begin{definition}{中心・中心化群・正規化群}{centralizer-normalizer}
+\[
+ Z(G)=\{x\mid xg=gx\ (\forall g\in G)\},
+\]
+\[
+ C_G(a)=\{g\mid gag^{-1}=a\},\qquad
+ N_G(H)=\{g\mid gHg^{-1}=H\}.
+\]
+それぞれ中心、元 $a$ の中心化群、部分群 $H$ の正規化群という。
+\end{definition}
+
+\begin{definition}{共役類と群作用}{conjugacy-action}
+$G$ が集合 $X$ に作用するとは、$g(hx)=(gh)x$ と $1x=x$ を満たす対応である。
+$G$ が自身に $g\cdot x=gxg^{-1}$ で作用するとき、軌道を $x$ の\textbf{共役類}、安定化群を $C_G(x)$ という。
+\end{definition}
+
+\begin{theorem}{軌道・安定化群定理}{orbit-stabilizer}
+有限群 $G$ の作用に対し
+\[
+ |Gx|=[G:G_x]=\frac{|G|}{|G_x|}.
+\]
+特に共役類の大きさは $[G:C_G(x)]$ である。
+\end{theorem}
+
+\begin{definition}{交換子}{commutator}
+$[x,y]=x^{-1}y^{-1}xy$ を\textbf{交換子}という。
+$[x,y]=1$ と $xy=yx$ は同値である。
+$K\triangleleft H$ のとき $H/K$ が可換であることは、全ての $x,y\in H$ で $[x,y]\in K$ となることと同値である。
+\end{definition}
+
+\section{置換群と Sylow の定理}
+
+\begin{definition}{巡回置換の型}{cycle-type}
+置換は互いに素な巡回置換の積に一意に分解される。
+巡回置換の長さの多重集合を\textbf{型}という。対称群では、二つの置換が共役であることと型が同じことが同値である。
+\end{definition}
+
+\begin{proposition}{巡回置換の共役}{conjugate-cycle}
+\[
+ \rho(k_1\ k_2\ \cdots\ k_r)\rho^{-1}
+ =(\rho(k_1)\ \rho(k_2)\ \cdots\ \rho(k_r)).
+\]
+従って共役は巡回置換の台だけを付け替える。
+\end{proposition}
+
+\begin{definition}{Sylow 部分群}{sylow-subgroup}
+$|G|=p^am$、$p\nmid m$ とする。位数 $p^a$ の部分群を\textbf{Sylow $p$ 部分群}という。
+\end{definition}
+
+\begin{theorem}{Sylow の定理}{sylow-theorems}
+有限群 $G$ について次が成り立つ。
+\begin{enumerate}
+  \item Sylow $p$ 部分群は存在する。
+  \item Sylow $p$ 部分群は全て共役である。
+  \item その個数 $n_p$ は $n_p\equiv1\pmod p$ かつ $n_p\mid m$ を満たす。
+\end{enumerate}
+\end{theorem}
+
+\section{環・イデアル・局所化}
+
+\begin{definition}{イデアル・剰余環}{ideal-quotient}
+可換環 $R$ の加法部分群 $I$ が、全ての $r\in R,a\in I$ に対し $ra\in I$ を満たすとき\textbf{イデアル}という。
+$a_1,\ldots,a_n$ で生成されるイデアルを $(a_1,\ldots,a_n)$ と書く。
+剰余類全体の環を $R/I$ と書く。
+\end{definition}
+
+\begin{definition}{素イデアル・極大イデアル}{prime-maximal}
+真のイデアル $P$ が\textbf{素}であるとは、$ab\in P$ なら $a\in P$ または $b\in P$ となることをいう。
+真のイデアル $\mathfrak m$ が\textbf{極大}であるとは、それを真に含む真のイデアルがないことをいう。
+\end{definition}
+
+\begin{theorem}{剰余環による判定}{quotient-criteria}
+\[
+ P\text{ が素}\Longleftrightarrow R/P\text{ が整域},
+ \qquad
+ \mathfrak m\text{ が極大}\Longleftrightarrow R/\mathfrak m\text{ が体}.
+\]
+極大イデアルは素イデアルである。
+\end{theorem}
+
+\begin{theorem}{準同型定理}{homomorphism-theorem}
+環準同型 $\varphi:R\to S$ に対し
+\[
+ R/\ker\varphi\cong\operatorname{Im}\varphi.
+\]
+核はイデアルであり、像が整域なら核は素、像が体なら核は極大である。
+\end{theorem}
+
+\begin{definition}{局所化}{localization}
+乗法的集合 $S\subset R$ の元を分母として許した環を $S^{-1}R$ と書く。
+$r/1=0$ であることは、ある $s\in S$ が存在して $sr=0$ となることと同値である。
+\end{definition}
+
+\begin{definition}{冪零元・局所的な生成元数}{nilpotent-generator}
+$x^n=0$ となる $n\ge1$ がある元を\textbf{冪零元}という。
+極大イデアル $\mathfrak m$ の最小生成元数を調べるとき、ベクトル空間 $\mathfrak m/\mathfrak m^2$ の次元が下界を与える。
+特にこの次元が2なら $\mathfrak m$ は単項ではない。
+\end{definition}
+
+\chapter{複素解析}
+\label{ch:complex}
+
+\section{正則関数とべき級数}
+
+\begin{definition}{正則関数・零点の位数}{holomorphic-zero}
+複素微分可能な関数を\textbf{正則関数}という。
+正則関数 $f$ が
+$f(z)=(z-a)^m g(z)$、$g(a)\ne0$ と書けるとき、$a$ は $m$ 位の零点であるという。
+\end{definition}
+
+\begin{theorem}{正則関数の Taylor 展開}{holomorphic-taylor}
+正則関数は各点の近傍で収束べき級数に展開できる。
+$f(a)\ne0$ なら $1/f$ も $a$ の近傍で正則であり、収束べき級数に展開できる。
+\end{theorem}
+
+\begin{definition}{孤立特異点・極・留数}{pole-residue}
+$a$ の近傍で
+\[
+ f(z)=\sum_{n=-m}^{\infty}c_n(z-a)^n
+\]
+と Laurent 展開でき、$c_{-m}\ne0$ なら $a$ は $m$ 位の\textbf{極}である。
+$c_{-1}$ を $\operatorname{Res}(f;a)$ と書き\textbf{留数}という。
+単純極なら
+\[
+ \operatorname{Res}(f;a)=\lim_{z\to a}(z-a)f(z).
+\]
+\end{definition}
+
+\section{積分定理と零点の個数}
+
+\begin{theorem}{留数定理}{residue-theorem}
+正向き単純閉曲線 $C$ の内部の極が $a_1,\ldots,a_k$ だけなら
+\[
+ \int_C f(z)\,\d z=2\pi i\sum_{j=1}^k\operatorname{Res}(f;a_j).
+\]
+\end{theorem}
+
+\begin{theorem}{Rouché の定理}{rouche}
+単純閉曲線 $C$ 上で $|g(z)|<|f(z)|$ なら、$f$ と $f+g$ は $C$ の内部に重複度込みで同じ個数の零点を持つ。
+「主要項」と「残り」に分けて零点数を数えるときに使う。
+\end{theorem}
+
+\begin{theorem}{偏角原理}{argument-principle}
+$f$ が $C$ 上で零点・極を持たないとき
+\[
+ \frac1{2\pi i}\int_C\frac{f'(z)}{f(z)}\,\d z=N-P,
+\]
+ここで $N,P$ は内部の零点・極の個数を重複度込みで数えたものである。
+さらに $z^n f'/f$ を積分すると零点と極の $n$ 乗和を取り出せる。
+\end{theorem}
+
+\begin{theorem}{Cauchy の評価}{cauchy-estimate}
+$\overline{B(a,r)}$ 上で $f$ が正則で $|f|\le M$ なら
+\[
+ |f^{(n)}(a)|\le\frac{n!M}{r^n}.
+\]
+特に $|f'(a)|\le M/r$ である。
+\end{theorem}
+
+\begin{proposition}{Newton の公式（3次の使用形）}{newton-identities}
+$z^3+az+b$ の3根を重複度込みで $r_1,r_2,r_3$ とし $P_n=\sum_jr_j^n$ とおくと
+\[
+ P_0=3,\qquad P_1=0,\qquad P_2=-2a,\qquad P_3=-3b.
+\]
+判別式 $4a^3+27b^2$ が0であることは重根を持つことと同値である。
+\end{proposition}
+
+\chapter{常微分方程式}
+\label{ch:ode}
+
+\section{定数係数線形方程式}
+
+\begin{theorem}{2階同次線形方程式}{constant-linear-ode}
+$y''+ay'+by=0$ の特性方程式を $r^2+ar+b=0$ とする。
+\begin{itemize}
+  \item 相異なる実根 $r_1,r_2$: $y=C_1e^{r_1x}+C_2e^{r_2x}$。
+  \item 重根 $r$: $y=(C_1+C_2x)e^{rx}$。
+  \item 複素根 $\alpha\pm i\beta$: $y=e^{\alpha x}(C_1\cos\beta x+C_2\sin\beta x)$。
+\end{itemize}
+\end{theorem}
+
+\begin{definition}{共振}{resonance}
+非同次項の振動数が同次方程式の固有振動数と一致し、通常の形の特殊解が取れず $x$ 倍を要する現象を\textbf{共振}という。
+例えば $y''+\omega_0^2y=\cos(\omega x)$ では $|\omega|=\omega_0$ で $x\sin(\omega_0x)$ 型の項が現れる。
+\end{definition}
+
+\begin{proposition}{Euler 型方程式の変換}{euler-ode}
+$x>0$ で $x^2y''+pxy'+qy=0$ とし、$x=e^t$, $Y(t)=y(e^t)$ とおくと
+\[
+ Y''+(p-1)Y'+qY=0
+\]
+となる。Euler 型方程式を定数係数方程式へ直す標準変換である。
+\end{proposition}
+
+\section{存在・一意性と極大解}
+
+\begin{definition}{極大解}{maximal-solution}
+初期値問題の解で、より大きい区間へ同じ方程式の解として延長できないものを\textbf{極大解}という。
+\end{definition}
+
+\begin{theorem}{局所存在・一意性}{picard-lindelof}
+$y'=F(x,y)$ で $F$ が連続かつ $y$ について局所 Lipschitz なら、各初期値を通る局所解が存在して一意である。
+$F\in C^1$ ならこの仮定を満たす。
+\end{theorem}
+
+\begin{proposition}{有界な傾きによる延長}{bounded-derivative-extension}
+$|F(x,y)|\le M$ が全平面で成り立ち、局所存在・一意性が使えるなら、解は有限時間で $y$ 方向へ発散しない。
+従って極大解の定義域は $\R$ 全体になる。
+\end{proposition}
+
+\begin{memo*}
+非同次方程式の解が一つ $g$ 見つかれば、全ての解は「$g$＋同次方程式の一般解」である。
+無限遠での条件は、増大する同次解の係数を0にするために使う。
+\end{memo*}
+
+\chapter{位相幾何・微分幾何}
+\label{ch:topology-geometry}
+
+\section{基本群と被覆空間}
+
+\begin{definition}{道・ホモトピー・基本群}{fundamental-group}
+連続写像 $\gamma:[0,1]\to X$ を\textbf{道}、$\gamma(0)=\gamma(1)=x_0$ なら $x_0$ を基点とする\textbf{閉道}という。
+端点を固定したホモトピーで閉道を同一視し、連結と逆向きで群演算を入れたものを $\pi_1(X,x_0)$ と書く。
+これが自明な弧状連結空間を\textbf{単連結}という。
+\end{definition}
+
+\begin{theorem}{積空間の基本群}{fundamental-product}
+\[
+ \pi_1(X\times Y,(x_0,y_0))
+ \cong\pi_1(X,x_0)\times\pi_1(Y,y_0).
+\]
+特に $\pi_1(S^1)\cong\Z$ なので $\pi_1(S^1\times S^1)\cong\Z^2$ である。
+\end{theorem}
+
+\begin{definition}{被覆写像・普遍被覆}{covering-space}
+$p:\widetilde X\to X$ が\textbf{被覆写像}であるとは、各 $x\in X$ が開近傍 $U$ を持ち、$p^{-1}(U)$ が $U$ と同相に写る開集合の非交和になることをいう。
+$\widetilde X$ が単連結な被覆を\textbf{普遍被覆}という。
+\end{definition}
+
+\begin{definition}{被覆変換}{deck-transformation}
+被覆 $p:\widetilde X\to X$ に対し $p\circ h=p$ を満たす同相写像 $h:\widetilde X\to\widetilde X$ を\textbf{被覆変換}という。
+$\R\to S^1$, $t\mapsto(\cos t,\sin t)$ の被覆変換は $t\mapsto t+2\pi k$ で、群は $\Z$ である。
+\end{definition}
+
+\begin{theorem}{道とホモトピーの持ち上げ}{lifting-theorem}
+被覆写像では、始点を指定した道のリフトは存在して一意である。
+ホモトピーも初期リフトを指定すれば一意に持ち上がる。
+この一意性から、被覆が誘導する基本群準同型は単射になる。
+\end{theorem}
+
+\section{Betti 数}
+
+\begin{definition}{ホモロジーと Betti 数}{betti-number}
+体係数ホモロジー群 $H_k(X)$ の次元
+$b_k(X)=\dim H_k(X)$ を $k$ 次\textbf{Betti 数}という。
+$b_0$ は連結成分数、$b_1$ は独立な1次元の穴、$b_2$ は独立な空洞の数を測る。
+\end{definition}
+
+\begin{theorem}{基本例の Betti 数}{basic-betti}
+円板 $D^2$ は $(b_0,b_1,b_2)=(1,0,0)$、円周 $S^1$ は $(1,1,0)$、球面 $S^2$ は $(1,0,1)$ である。
+空間を二つの部分空間に分けたときは Mayer--Vietoris 完全系列が、和・共通部分・各部分のホモロジーを結ぶ。
+\end{theorem}
+
+\section{曲線の曲率と捩率}
+
+\begin{definition}{曲率・捩率}{curvature-torsion}
+正則曲線 $p(t)\subset\R^3$ に対し
+\[
+ \kappa=\frac{\norm{p'\times p''}}{\norm{p'}^3},
+ \qquad
+ \tau=\frac{(p'\times p'')\cdot p'''}{\norm{p'\times p''}^2}
+\]
+を曲率、捩率という（符号規約により捩率の符号が逆になる流儀もある）。
+\end{definition}
+
+\begin{definition}{測地的曲率}{geodesic-curvature}
+曲面上の単位速度曲線の加速度を、曲面の法線成分と接平面成分に分ける。
+接平面成分を\textbf{測地的曲率ベクトル}という。これが0の曲線を\textbf{測地線}という。
+\end{definition}
+
+\section{曲面の曲率}
+
+\begin{definition}{第1・第2基本形式と主曲率}{surface-curvature}
+正則パラメータ表示 $X(u,v)$ の第1基本形式は
+\[
+ I=E\,\d u^2+2F\,\d u\d v+G\,\d v^2,
+ \quad E=\inner{X_u}{X_u},\ F=\inner{X_u}{X_v},\ G=\inner{X_v}{X_v}.
+\]
+単位法線 $N$ に対する第2基本形式を
+\[
+ II=e\,\d u^2+2f\,\d u\d v+g\,\d v^2,
+ \quad e=\inner{X_{uu}}N,\ f=\inner{X_{uv}}N,\ g=\inner{X_{vv}}N
+\]
+とする。形作用素の固有値 $k_1,k_2$ を\textbf{主曲率}という。
+\end{definition}
+
+\begin{definition}{Gauss 曲率・平均曲率・法曲率}{gauss-mean-normal}
+\[
+ K=k_1k_2,\qquad H=\frac{k_1+k_2}{2}
+\]
+を Gauss 曲率、平均曲率という。
+接ベクトル $w$ 方向の法曲率は
+\[
+ k_n(w)=\frac{II(w,w)}{I(w,w)}
+\]
+である。法線の向きを逆にすると $k_1,k_2,H,k_n$ の符号は反転するが $K$ は変わらない。
+\end{definition}
+
+\begin{proposition}{グラフ曲面の曲率公式}{graph-curvature}
+$z=h(x,y)$、$W=\sqrt{1+h_x^2+h_y^2}$ とする。上向き法線に対し
+\[
+ K=\frac{h_{xx}h_{yy}-h_{xy}^2}{W^4},
+\]
+\[
+ H=\frac{(1+h_y^2)h_{xx}-2h_xh_yh_{xy}+(1+h_x^2)h_{yy}}{2W^3}.
+\]
+\end{proposition}
+
+\begin{memo*}
+曲面問題では法線の向きを最初に固定する。平均曲率の符号が模範解答と逆でも、法線規約の違いなら Gauss 曲率は一致する。
+測地線の判定は「単位速度曲線の加速度が曲面法線方向だけ」を示すのが最短である。
+\end{memo*}
