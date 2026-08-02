@@ -177,6 +177,49 @@ C_{ij}=(-1)^{i+j}|A_{ij}|
 （第 $i$ 行に沿った展開）が成り立つ。列に沿った展開も同様である。
 \end{proposition}
 
+\begin{example}{3次行列式を二通りで計算する}{tb-cofactor-example}
+\[
+A=\begin{pmatrix}1&2&3\\2&3&1\\3&1&2\end{pmatrix}
+\]
+とする。符号 $(-1)^{i+j}$ は
+\[
+\begin{pmatrix}+&-&+\\-&+&-\\+&-&+\end{pmatrix}
+\]
+と市松模様に並ぶ。第1行に沿って展開すると、各成分について
+その行と列を除いた $2\times2$ 行列式に上の符号を付けて
+\[
+C_{11}=+\begin{vmatrix}3&1\\1&2\end{vmatrix}=6-1=5,
+\quad
+C_{12}=-\begin{vmatrix}2&1\\3&2\end{vmatrix}=-(4-3)=-1,
+\quad
+C_{13}=+\begin{vmatrix}2&3\\3&1\end{vmatrix}=2-9=-7
+\]
+となる。従って
+\[
+|A|=a_{11}C_{11}+a_{12}C_{12}+a_{13}C_{13}
+=1\cdot5+2\cdot(-1)+3\cdot(-7)
+=5-2-21=-18.
+\]
+
+同じ値は、先に0を作ってから求める方が速い。
+行列式は、ある行に別の行の定数倍を加えても変わらないので、
+\[
+R_2\longleftarrow R_2-2R_1,\qquad
+R_3\longleftarrow R_3-3R_1
+\]
+と変形しても値は $-18$ のままである。実際に計算すると
+\[
+|A|=\begin{vmatrix}1&2&3\\0&-1&-5\\0&-5&-7\end{vmatrix}
+\]
+となり、第1列は $(1,0,0)^{\mathsf T}$ である。この列に沿って展開すれば、
+0を掛ける項が消えて $2\times2$ 行列式が一つ残るだけなので
+\[
+|A|=1\cdot\begin{vmatrix}-1&-5\\-5&-7\end{vmatrix}
+=(-1)(-7)-(-5)(-5)=7-25=-18
+\]
+と同じ値を得る。$2\times2$ 行列式を三つ計算する代わりに、一つで済んでいる。
+\end{example}
+
 \begin{theorem}{余因子行列と逆行列}{tb-adjugate}
 余因子を並べた行列 $(C_{ij})$ を\textbf{余因子行列}といい、その転置を
 \[
