@@ -157,6 +157,67 @@ f(A)\setminus f(A')\subset f(A\setminus A')
 という片側の包含しか成り立たない。$f$ が単射なら等号になる。
 \end{proposition}
 
+\begin{example}{$f(x)=x^2$ で確かめる}{tb-preimage-example}
+$f:\R\to\R$, $f(x)=x^2$ とし
+\[
+B_1=(1,9),\qquad B_2=(4,16)
+\]
+とおく。$0\le a<b$ のとき $x^2\in(a,b)$ は $\sqrt a<\abs x<\sqrt b$ と同値だから
+\[
+f^{-1}(B_1)=(-3,-1)\cup(1,3),
+\qquad
+f^{-1}(B_2)=(-4,-2)\cup(2,4).
+\]
+
+まず逆像の側を確かめる。$B_1\cup B_2=(1,16)$, $B_1\cap B_2=(4,9)$ なので、
+先に $Y$ 側で演算してから引き戻すと
+\[
+f^{-1}(B_1\cup B_2)=(-4,-1)\cup(1,4),
+\qquad
+f^{-1}(B_1\cap B_2)=(-3,-2)\cup(2,3)
+\]
+である。一方、先に引き戻してから $X$ 側で演算すると
+\begin{align*}
+f^{-1}(B_1)\cup f^{-1}(B_2)
+&=\bigl\{(-3,-1)\cup(-4,-2)\bigr\}
+ \cup\bigl\{(1,3)\cup(2,4)\bigr\}\\
+&=(-4,-1)\cup(1,4),\\
+f^{-1}(B_1)\cap f^{-1}(B_2)
+&=\bigl\{(-3,-1)\cap(-4,-2)\bigr\}
+ \cup\bigl\{(1,3)\cap(2,4)\bigr\}\\
+&=(-3,-2)\cup(2,3)
+\end{align*}
+となる。共通部分では、符号の異なる区間どうしは交わらないので、
+負の側どうしと正の側どうしだけが残る。どちらの順序でも同じ集合が得られている。
+補集合についても
+\[
+f^{-1}(\R\setminus B_1)
+=\{x\in\R\mid x^2\le1\ \text{または}\ x^2\ge9\}
+=(-\infty,-3]\cup[-1,1]\cup[3,\infty)
+\]
+であり、これは $\R\setminus f^{-1}(B_1)$ に一致する。
+
+次に像の側を見る。
+\[
+A=[0,1],\qquad A'=[-1,0]
+\]
+とおくと $f(A)=f(A')=[0,1]$ である。合併については
+\[
+f(A\cup A')=f([-1,1])=[0,1]=f(A)\cup f(A')
+\]
+と一致する。しかし共通部分と差では
+\[
+f(A\cap A')=f(\{0\})=\{0\}
+\subsetneq[0,1]=f(A)\cap f(A'),
+\]
+\[
+f(A)\setminus f(A')=\varnothing
+\subsetneq(0,1]=f(A\setminus A')
+\]
+となり、命題~\ref{prop:tb-image-operations} の片側の包含にとどまる。
+原因は $f(-1)=f(1)$、すなわち $f$ が単射でないことである。
+\end{example}
+
 \begin{memo*}
 連続性の定義が「開集合の\emph{逆像}が開」であるのは、
 定理~\ref{thm:tb-preimage-operations} の性質のよさによる。
