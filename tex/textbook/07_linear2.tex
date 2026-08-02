@@ -1,0 +1,350 @@
+\chapter{線形代数II：固有値・標準形・内積}
+\label{ch:tb-linear-two}
+
+\section{固有値と固有空間}
+
+\begin{definition}{固有値・固有ベクトル・固有空間}{tb-eigenvalue}
+正方行列 $A$ に対し
+\[
+Av=\lambda v,\qquad v\ne0
+\]
+を満たす $\lambda$ を\textbf{固有値}、$v$ を\textbf{固有ベクトル}という。
+固有値 $\lambda$ に対して
+\[
+W_\lambda=\ker(A-\lambda I)
+\]
+を\textbf{固有空間}という。$\dim W_\lambda$ を $\lambda$ の\textbf{幾何的重複度}という。
+\end{definition}
+
+\begin{proposition}{固有値の求め方}{tb-characteristic-polynomial}
+$(A-\lambda I)v=0$ が $v\ne0$ の解を持つことは
+$A-\lambda I$ が正則でないことと同値だから
+\[
+\lambda\ \text{が固有値}\iff |A-\lambda I|=0.
+\]
+$p_A(\lambda)=|A-\lambda I|$ を\textbf{特性多項式}という。
+$p_A$ における $\lambda$ の重複度を\textbf{代数的重複度}という。
+\end{proposition}
+
+\begin{proposition}{固有値と行列式・トレース}{tb-eigen-det-trace}
+固有値を重複度込みで $\lambda_1,\ldots,\lambda_n$ とすると
+\[
+|A|=\prod_{i=1}^n\lambda_i,
+\qquad
+\tr A=\sum_{i=1}^n\lambda_i.
+\]
+また $p_A(0)=|A|$ である。特性多項式を先に求めておけば、
+行列式は $\lambda=0$ を代入するだけで得られる。
+\end{proposition}
+
+\begin{theorem}{相異なる固有値の固有ベクトル}{tb-distinct-eigenvectors}
+相異なる固有値に属する固有ベクトルは一次独立である。
+特に $n$ 次行列が相異なる $n$ 個の固有値を持てば、固有ベクトルは基底をなす。
+\end{theorem}
+
+\begin{proposition}{幾何的重複度と代数的重複度}{tb-multiplicities}
+常に
+\[
+1\le\dim W_\lambda\le(\lambda\ \text{の代数的重複度})
+\]
+が成り立つ。両者が全ての固有値で一致することが、対角化可能の条件である。
+\end{proposition}
+
+\section{対角化}
+
+\begin{definition}{対角化}{tb-diagonalization}
+正則行列 $P$ が存在して $P^{-1}AP$ が対角行列になるとき、
+$A$ は\textbf{対角化可能}であるという。
+このとき $P$ の各列は $A$ の固有ベクトルであり、
+$P^{-1}AP$ の対角成分は対応する固有値である。
+\end{definition}
+
+\begin{theorem}{対角化可能の判定}{tb-diagonalizable-criterion}
+$n$ 次行列 $A$ について次は同値である。
+\begin{enumerate}
+  \item $A$ は対角化可能である。
+  \item 固有ベクトルからなる基底が取れる。
+  \item 各固有値で幾何的重複度と代数的重複度が一致する。
+\end{enumerate}
+十分条件として「固有値が全て相異なる」がある。
+\end{theorem}
+
+\begin{proposition}{対角化の応用：冪と漸化式}{tb-diagonalization-power}
+$P^{-1}AP=D=\diag(\lambda_1,\ldots,\lambda_n)$ なら
+\[
+A^n=PD^nP^{-1}=P\diag(\lambda_1^n,\ldots,\lambda_n^n)P^{-1}.
+\]
+また、定数係数線形漸化式
+\[
+x_{n+k}=c_{k-1}x_{n+k-1}+\cdots+c_0x_n
+\]
+の特性方程式 $r^k=c_{k-1}r^{k-1}+\cdots+c_0$ の根が相異なる
+$r_1,\ldots,r_k$ なら、一般解は
+\[
+x_n=\alpha_1r_1^n+\cdots+\alpha_kr_k^n
+\]
+である。係数は初期値を代入した連立方程式から決める。
+\end{proposition}
+
+\begin{theorem}{Cayley--Hamilton の定理}{tb-cayley-hamilton}
+任意の正方行列 $A$ は自身の特性多項式を満たす。すなわち $p_A(A)=O$ である。
+\end{theorem}
+
+\section{冪零行列と Jordan 標準形}
+
+\begin{definition}{冪零行列}{tb-nilpotent}
+ある $m\ge1$ で $N^m=O$ となる行列 $N$ を\textbf{冪零行列}という。
+\end{definition}
+
+\begin{proposition}{冪零行列の固有値}{tb-nilpotent-eigenvalue}
+冪零行列の固有値は0だけである。実際 $Nv=\mu v$（$v\ne0$）なら
+$0=N^mv=\mu^mv$ より $\mu=0$ である。
+従って $n$ 次冪零行列の特性多項式は $|\mu I-N|=\mu^n$ である。
+\end{proposition}
+
+\begin{definition}{Jordan ブロックと Jordan 標準形}{tb-jordan}
+\[
+J_k(\lambda)=
+\begin{pmatrix}
+\lambda&1&&0\\
+&\lambda&\ddots&\\
+&&\ddots&1\\
+0&&&\lambda
+\end{pmatrix}
+\quad(k\ \text{次})
+\]
+を\textbf{Jordan ブロック}という。
+複素数体上では、任意の正方行列は Jordan ブロックの直和へ相似変形できる。
+これを\textbf{Jordan 標準形}という。
+\end{definition}
+
+\begin{proposition}{ブロックの決め方}{tb-jordan-blocks}
+固有値 $\lambda$ について $N=A-\lambda I$ とおくと、次のように読める。
+\begin{enumerate}
+  \item $\dim\ker N$ が、固有値 $\lambda$ の Jordan ブロックの\textbf{個数}である。
+        各ブロックが核の自由度を一つずつ生むためである。
+  \item $N^{k}=O$ となる最小の $k$ が、最大のブロックの\textbf{大きさ}である。
+  \item ブロックの大きさの総和が、$\lambda$ の代数的重複度である。
+\end{enumerate}
+\end{proposition}
+
+\begin{example}{3次の場合の読み分け}{tb-jordan-3}
+固有値が $\lambda$ だけの3次行列で $N=A-\lambda I$ とすると
+\[
+\begin{array}{lll}
+N=O & \dim\ker N=3 & \text{標準形は}\ \diag(\lambda,\lambda,\lambda),\\
+N\ne O,\ N^2=O & \dim\ker N=2 & \text{標準形は}\ J_2(\lambda)\oplus(\lambda),\\
+N^2\ne O,\ N^3=O & \dim\ker N=1 & \text{標準形は}\ J_3(\lambda).
+\end{array}
+\]
+\end{example}
+
+\begin{memo*}
+2021年度 第1期 専門基礎 第1問は、$N=A+I$ が冪零であることを見抜き、
+$N^2$ が零になるかどうかで場合分けする問題である。
+$N^2,N^3$ を実際に計算し、$\dim\ker N$ も直接求めておくと答案が安全になる。
+\end{memo*}
+
+\section{不変部分空間}
+
+\begin{definition}{不変部分空間}{tb-invariant-subspace}
+$AW\subset W$ を満たす部分空間 $W$ を、$A$ の\textbf{不変部分空間}という。
+\end{definition}
+
+\begin{proposition}{1次元不変部分空間}{tb-invariant-1dim}
+$W=\langle w\rangle$ が不変であることは、$w$ が固有ベクトルであることと同値である。
+\end{proposition}
+
+\begin{proposition}{多項式による成分の取り出し}{tb-spectral-projection}
+$A$ の固有値が相異なる $\lambda_1,\ldots,\lambda_n$ のとき
+\[
+\Pi_k=\prod_{j\ne k}\frac{A-\lambda_jI}{\lambda_k-\lambda_j}
+\]
+とおくと、$\Pi_kv_j$ は $j=k$ のとき $v_k$、$j\ne k$ のとき $0$ である。
+従って $w=\sum_jc_jv_j$ に対して $\Pi_kw=c_kv_k$ となる。
+$W$ が $A$ で不変なら $A$ の多項式でも不変なので、
+$w\in W$ の各固有方向成分も $W$ に属する。
+\end{proposition}
+
+\begin{corollary}{不変部分空間の分類}{tb-invariant-classification}
+固有値が全て相異なるとき、$A$ の不変部分空間は
+固有直線たちの和で書けるものに限る。
+$k$ 次元の不変部分空間は、$n$ 個の固有方向から $k$ 個を選んだものである。
+\end{corollary}
+
+\begin{proposition}{不変旗と上三角化}{tb-triangularization}
+基底 $v_1,\ldots,v_n$ が $W_i=\langle v_1,\ldots,v_i\rangle$ について
+$AW_i\subset W_i$ を満たすなら、$P=(v_1\ \cdots\ v_n)$ に対し
+$P^{-1}AP$ は上三角行列である。
+\end{proposition}
+
+\section{内積空間と正規直交基底}
+
+\begin{definition}{内積とノルム}{tb-inner-product}
+実ベクトル空間では $\inner xy=x^{\mathsf T}y$、
+複素ベクトル空間では $\inner xy=x^{*}y$ を標準内積とし、
+$\norm x=\sqrt{\inner xx}$ をノルムという。
+$\inner xy=0$ のとき $x$ と $y$ は\textbf{直交}するという。
+\end{definition}
+
+\begin{definition}{正規直交系}{tb-orthonormal}
+$\norm{u_i}=1$ かつ $i\ne j$ で $\inner{u_i}{u_j}=0$ を満たす組を
+\textbf{正規直交系}という。正規直交系は自動的に一次独立である。
+\end{definition}
+
+\begin{proposition}{Gram--Schmidt の直交化}{tb-gram-schmidt}
+一次独立な $w_1,\ldots,w_k$ から
+\[
+u_1=\frac{w_1}{\norm{w_1}},
+\qquad
+\tilde u_i=w_i-\sum_{j<i}\inner{u_j}{w_i}u_j,
+\qquad
+u_i=\frac{\tilde u_i}{\norm{\tilde u_i}}
+\]
+として正規直交系を作れる。
+\end{proposition}
+
+\begin{proposition}{正規直交基底による展開}{tb-orthonormal-expansion}
+$u_1,\ldots,u_n$ が正規直交基底なら、任意の $x$ は
+\[
+x=\sum_{i=1}^nc_iu_i,\qquad c_i=\inner{u_i}{x}
+\]
+と書け、さらに
+\[
+\norm x^2=\sum_{i=1}^nc_i^2
+\]
+が成り立つ。係数が内積で直接読めることが、正規直交基底の利点である。
+\end{proposition}
+
+\section{直交行列とユニタリ行列}
+
+\begin{definition}{直交行列・ユニタリ行列}{tb-orthogonal-unitary}
+実行列 $P$ が $P^{\mathsf T}P=I$ を満たすとき\textbf{直交行列}、
+複素行列 $U$ が $U^{*}U=I$ を満たすとき\textbf{ユニタリ行列}という。
+このとき $P^{-1}=P^{\mathsf T}$、$U^{-1}=U^{*}$ である。
+\end{definition}
+
+\begin{theorem}{直交行列の同値条件}{tb-orthogonal-equivalent}
+実正方行列 $P$ について次は同値である。
+\begin{enumerate}
+  \item $P^{\mathsf T}P=I$。
+  \item $P$ の列が正規直交系をなす。
+  \item 全ての $x$ で $\norm{Px}=\norm x$（長さを保つ）。
+  \item 全ての $x,y$ で $\inner{Px}{Py}=\inner xy$（内積を保つ）。
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}{同値性のつなぎ方}{tb-orthogonal-proof}
+1.\ と 2.\ は、$P^{\mathsf T}P$ の $(j,k)$ 成分が
+「第 $j$ 列と第 $k$ 列の内積」であることから直ちに従う。
+3.\ から 4.\ へは、$\norm{x+y}^2=\norm x^2+2\inner xy+\norm y^2$ を展開する
+極化公式を使う。
+\end{remark}
+
+\section{対称行列・エルミート行列とスペクトル定理}
+
+\begin{definition}{対称・交代・エルミート}{tb-symmetric-hermitian}
+\[
+A^{\mathsf T}=A\ \text{（対称）},\qquad
+A^{\mathsf T}=-A\ \text{（交代）},\qquad
+A^{*}=A\ \text{（エルミート）}.
+\]
+交代行列では $a_{ii}=-a_{ii}$ より対角成分が全て0である。
+\end{definition}
+
+\begin{theorem}{スペクトル定理}{tb-spectral-theorem}
+実対称行列は直交行列で対角化でき、固有値は全て実数である。
+エルミート行列はユニタリ行列で対角化でき、固有値は全て実数である。
+また、相異なる固有値に属する固有ベクトルは自動的に直交する。
+\end{theorem}
+
+\begin{proposition}{エルミート行列の固有値が実数である理由}{tb-hermitian-real}
+$Ax=\lambda x$（$x\ne0$）に左から $x^{*}$ を掛けると
+\[
+x^{*}Ax=\lambda\,x^{*}x=\lambda\norm x^2.
+\]
+一方 $(x^{*}Ax)^{*}=x^{*}A^{*}x=x^{*}Ax$ なので $x^{*}Ax$ は実数であり、
+$\norm x^2>0$ も実数だから $\lambda$ は実数である。
+\end{proposition}
+
+\begin{remark}{直交対角化の手順}{tb-orthogonal-diagonalization}
+\begin{enumerate}
+  \item $|A-\lambda I|=0$ を解いて固有値を求める。
+  \item 各固有値について $(A-\lambda I)x=0$ を解き、固有空間を求める。
+  \item 各固有空間の中で Gram--Schmidt により正規直交基底を作る。
+        異なる固有値の間は自動的に直交するので、直交化は固有空間ごとに行えばよい。
+  \item 得られたベクトルを列に並べて $P$ とすると $P^{\mathsf T}AP=\diag(\lambda_1,\ldots,\lambda_n)$。
+\end{enumerate}
+逆に、直交行列で対角化される実行列は必ず対称である。
+$A=PDP^{\mathsf T}$ の転置を取れば $A^{\mathsf T}=PD^{\mathsf T}P^{\mathsf T}=A$ となるからである。
+\end{remark}
+
+\section{二次形式と最大最小}
+
+\begin{definition}{二次形式}{tb-quadratic-form}
+実対称行列 $A$ に対し $Q(x)=x^{\mathsf T}Ax$ を\textbf{二次形式}という。
+\end{definition}
+
+\begin{theorem}{単位球面上の最大最小}{tb-rayleigh}
+$A$ の固有値を $\lambda_{\min}\le\cdots\le\lambda_{\max}$ とすると
+\[
+\norm x=1\ \Longrightarrow\
+\lambda_{\min}\le x^{\mathsf T}Ax\le\lambda_{\max}
+\]
+であり、等号はそれぞれ $\lambda_{\min}$, $\lambda_{\max}$ の
+固有ベクトル（長さ1）で達成される。
+\end{theorem}
+
+\begin{remark}{証明の筋}{tb-rayleigh-proof}
+正規直交固有基底 $u_1,\ldots,u_n$ で $x=\sum_ic_iu_i$ と書くと
+$\norm x^2=\sum_ic_i^2=1$ かつ
+\[
+x^{\mathsf T}Ax=\sum_i\lambda_ic_i^2
+\]
+となる。右辺は $\lambda_i$ たちの重み付き平均だから、
+最小値と最大値は端の固有値で取る。
+等号成立条件も、この表示から $c_i$ の条件として読める。
+\end{remark}
+
+\section{トレースと Frobenius 内積}
+
+\begin{definition}{トレースと Frobenius 内積}{tb-trace-frobenius}
+$\tr A=\sum_ia_{ii}$ とし、行列の間の内積を
+\[
+\inner{C}{D}_F=\tr(C^{\mathsf T}D)
+\]
+で定める。これを\textbf{Frobenius 内積}という。
+\end{definition}
+
+\begin{proposition}{トレースの性質}{tb-trace-properties}
+\[
+\tr(AB)=\tr(BA),
+\qquad
+\tr(P^{-1}AP)=\tr A,
+\qquad
+\tr(xy^{\mathsf T})=y^{\mathsf T}x.
+\]
+特に $x,y$ が列ベクトルのとき
+\[
+\tr\left(xx^{\mathsf T}yy^{\mathsf T}\right)=(x^{\mathsf T}y)^2
+\]
+である。$xx^{\mathsf T}yy^{\mathsf T}=x(x^{\mathsf T}y)y^{\mathsf T}$ と
+スカラーをくくり出してから $\tr(xy^{\mathsf T})=y^{\mathsf T}x$ を使えばよい。
+\end{proposition}
+
+\begin{proposition}{対称行列全体の次元}{tb-symmetric-dimension}
+$n$ 次実対称行列全体は
+\[
+\frac{n(n+1)}2
+\]
+次元のベクトル空間である。$n$ 次交代行列全体は $n(n-1)/2$ 次元である。
+$n=3$ ではそれぞれ6次元、3次元になる。
+\end{proposition}
+
+\begin{memo*}
+2021年度 第2期 専門基礎 第1問は、
+$n$ 本のベクトルから作った $x_ix_i^{\mathsf T}$ が
+6次元の対称行列空間の中で一次独立だと示し、$n\le6$ を結論する問題である。
+Frobenius 内積を取ると行列の一次関係がスカラーの方程式へ変わる、
+という流れがそのまま解法になる。
+\end{memo*}

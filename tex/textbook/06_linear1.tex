@@ -1,0 +1,229 @@
+\chapter{線形代数I：空間・行列・行列式}
+\label{ch:tb-linear-one}
+
+\section{ベクトル空間と部分空間}
+
+\begin{definition}{ベクトル空間と部分空間}{tb-vector-space}
+体 $K$（本書では $\R$ または $\mathbb C$）上のベクトル空間 $V$ の
+空でない部分集合 $W$ が\textbf{部分空間}であるとは、
+\[
+x,y\in W,\ a,b\in K\ \Longrightarrow\ ax+by\in W
+\]
+が成り立つことをいう。このとき自動的に $0\in W$ である。
+\end{definition}
+
+\begin{remark}{部分空間であることの確認手順}{tb-subspace-check}
+答案では次の三つを順に書く。
+\begin{enumerate}
+  \item $0$ を含むこと（特に空でないこと）。
+  \item 和で閉じること。
+  \item スカラー倍で閉じること。
+\end{enumerate}
+2. と 3. はまとめて「$ax+by\in W$」の一行で済ませてよい。
+\end{remark}
+
+\begin{proposition}{共通部分と合併}{tb-intersection-union}
+部分空間 $W_1,W_2$ に対し $W_1\cap W_2$ は常に部分空間である。
+一方 $W_1\cup W_2$ が部分空間になるのは
+$W_1\subset W_2$ または $W_2\subset W_1$ のときに限る。
+\end{proposition}
+
+\begin{remark}{合併の証明の型}{tb-union-proof}
+どちらの包含も成り立たないと仮定して
+$u\in W_1\setminus W_2$, $v\in W_2\setminus W_1$ を取る。
+$u+v$ がどちらに入っても、差を取ることで矛盾が出る。
+2022年度 第2期 専門基礎 第3問がこの問題である。
+\end{remark}
+
+\section{一次独立・基底・次元}
+
+\begin{definition}{一次結合・生成・一次独立・基底}{tb-basis}
+$v_1,\ldots,v_k$ の一次結合全体を $\langle v_1,\ldots,v_k\rangle$ と書く。
+\[
+\sum_{i=1}^k a_iv_i=0\ \Longrightarrow\ a_1=\cdots=a_k=0
+\]
+が成り立つとき $v_1,\ldots,v_k$ は\textbf{一次独立}であるという。
+一次独立かつ $V$ を生成する組を\textbf{基底}といい、その本数を $\dim V$ と書く。
+\end{definition}
+
+\begin{proposition}{基底による表示の一意性}{tb-basis-uniqueness}
+$v_1,\ldots,v_n$ が基底なら、各 $v\in V$ は
+$v=\sum_ia_iv_i$ と\textbf{一意に}表される。
+実際、二通りの表示の差を取ると一次独立性から係数が一致する。
+\end{proposition}
+
+\begin{definition}{和と直和}{tb-direct-sum}
+$W_1+W_2=\{w_1+w_2\mid w_i\in W_i\}$ とする。
+$V=W_1+W_2$ かつ $W_1\cap W_2=\{0\}$ のとき $V=W_1\oplus W_2$ と書き、
+\textbf{直和}という。これは各 $v\in V$ の表示 $v=w_1+w_2$ が一意であることと同値である。
+\end{definition}
+
+\begin{proposition}{次元公式}{tb-dimension-formula}
+有限次元の部分空間 $W_1,W_2$ に対し
+\[
+\dim(W_1+W_2)=\dim W_1+\dim W_2-\dim(W_1\cap W_2).
+\]
+特に直和なら $\dim(W_1\oplus W_2)=\dim W_1+\dim W_2$ である。
+\end{proposition}
+
+\section{線形写像・核・像}
+
+\begin{definition}{線形写像・核・像}{tb-linear-map}
+$f(ax+by)=af(x)+bf(y)$ を満たす写像 $f:V\to W$ を\textbf{線形写像}という。
+\[
+\ker f=\{v\in V\mid f(v)=0\},
+\qquad
+\operatorname{Im}f=\{f(v)\mid v\in V\}
+\]
+をそれぞれ\textbf{核}、\textbf{像}という。どちらも部分空間である。
+$\dim\operatorname{Im}f$ を $f$ の\textbf{階数}という。
+\end{definition}
+
+\begin{theorem}{単射性と核}{tb-injective-kernel}
+線形写像 $f$ について
+\[
+f\ \text{が単射}\iff\ker f=\{0\}.
+\]
+実際 $f(x)=f(y)\iff f(x-y)=0\iff x-y\in\ker f$ である。
+\end{theorem}
+
+\begin{theorem}{次元定理}{tb-rank-nullity}
+$V$ が有限次元なら
+\[
+\dim V=\dim\ker f+\dim\operatorname{Im}f.
+\]
+特に $\dim V=\dim W$ のとき、単射・全射・全単射は互いに同値である。
+\end{theorem}
+
+\begin{definition}{表現行列と基底変換}{tb-representation-matrix}
+$V=\R^n$ の基底 $v_1,\ldots,v_n$ を列に並べた行列を $P=(v_1\ \cdots\ v_n)$ とする。
+$P$ は正則であり、$A$ の定める線形変換をこの基底で表した行列は $P^{-1}AP$ である。
+実際、$Av_i=\sum_jc_{ji}v_j$ と書けば、$C=(c_{ji})$ に対して
+\[
+AP=PC,\qquad P^{-1}AP=C
+\]
+となる。$AP$ の第 $i$ 列が $Av_i$、$PC$ の第 $i$ 列が $\sum_jc_{ji}v_j$ だからである。
+\end{definition}
+
+\begin{memo*}
+「基底ベクトルを列に並べる」という一手は、
+上三角化（2015年度 第1期 専門基礎 第1問）、
+対角化（2015年度 応用数理 第2問、2026年度 第2期 専門基礎 第1問）、
+直交対角化（年度不明、予想問題第1問）で共通に使う。
+$AP=PC$ を列ごとに確かめる一行を書けば、以降の議論が全て正当化される。
+\end{memo*}
+
+\section{行列・行基本変形・階数}
+
+\begin{definition}{行基本変形}{tb-row-operations}
+行列に対する次の三操作を\textbf{行基本変形}という。
+\begin{enumerate}
+  \item 二つの行を入れ替える。
+  \item 一つの行を0でないスカラー倍する。
+  \item 一つの行に、別の行のスカラー倍を加える。
+\end{enumerate}
+いずれも左から正則行列を掛ける操作なので、階数と解集合を変えない。
+\end{definition}
+
+\begin{proposition}{連立方程式の解法}{tb-linear-system}
+$Ax=b$ の解は、拡大係数行列 $(A\mid b)$ を行基本変形して
+行階段形にすることで求まる。
+解が存在する条件は $\operatorname{rank}A=\operatorname{rank}(A\mid b)$ であり、
+このとき自由変数の個数は $n-\operatorname{rank}A$ である。
+\end{proposition}
+
+\begin{remark}{同次方程式と固有空間}{tb-homogeneous}
+$Ax=0$ の解全体は $\ker A$ であり、常に $0$ を含む。
+$\dim\ker A=n-\operatorname{rank}A$ である。
+固有空間 $\ker(A-\lambda I)$ を求める計算は、この同次方程式を解く作業に他ならない。
+\end{remark}
+
+\section{行列式}
+
+\begin{definition}{行列式}{tb-determinant}
+$n$ 次正方行列 $A=(a_{ij})$ に対し
+\[
+|A|=\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)\prod_{i=1}^na_{i\sigma(i)}
+\]
+を\textbf{行列式}という。$\det A$ とも書くが、本書では $|A|$ を用いる。
+\end{definition}
+
+\begin{proposition}{行列式の性質}{tb-determinant-properties}
+\[
+|A^{\mathsf T}|=|A|,\qquad
+|AB|=|A|\,|B|,\qquad
+|cA|=c^n|A|,\qquad
+|A^{-1}|=\frac1{|A|}.
+\]
+さらに次が成り立つ。
+\begin{enumerate}
+  \item 二つの行（列）を入れ替えると符号が変わる。
+  \item 一つの行（列）を $c$ 倍すると行列式は $c$ 倍になる。
+  \item \textbf{ある行に別の行の定数倍を加えても行列式は変わらない}。
+  \item 同じ行（列）が二つあれば行列式は0である。
+  \item 三角行列の行列式は対角成分の積である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proposition}{余因子展開}{tb-cofactor-expansion}
+$A$ から第 $i$ 行と第 $j$ 列を除いた小行列を $A_{ij}$ とし
+\[
+C_{ij}=(-1)^{i+j}|A_{ij}|
+\]
+を $(i,j)$ \textbf{余因子}という。任意の $i$ について
+\[
+|A|=\sum_{j=1}^na_{ij}C_{ij}
+\]
+（第 $i$ 行に沿った展開）が成り立つ。列に沿った展開も同様である。
+\end{proposition}
+
+\begin{theorem}{余因子行列と逆行列}{tb-adjugate}
+余因子行列 $(C_{ij})$ の転置を $\operatorname{adj}A$（\textbf{随伴行列}）と書くと
+\[
+A\operatorname{adj}A=\operatorname{adj}A\,A=|A|I,
+\qquad
+|A|\ne0\ \Longrightarrow\ A^{-1}=\frac1{|A|}\operatorname{adj}A.
+\]
+\end{theorem}
+
+\begin{remark}{行列式を計算する順序}{tb-determinant-strategy}
+3次以上では、いきなり余因子展開せず、まず
+\textbf{ある行に別の行の定数倍を加えて0を作る}のが速い。
+0が多い行または列に沿って展開すれば、計算量が大きく減る。
+共通因子が現れたら、その行（列）からくくり出す。
+
+たとえば $A-\lambda I$ の行列式では、
+$R_2\leftarrow R_2-R_1$ のような変形で $(1-\lambda)$ のような共通因子が現れ、
+特性多項式が因数分解された形のまま得られることが多い。
+\end{remark}
+
+\begin{proposition}{正則性の同値条件}{tb-invertibility}
+$n$ 次正方行列 $A$ について次は同値である。
+\[
+A\ \text{は正則}
+\iff |A|\ne0
+\iff \operatorname{rank}A=n
+\iff \ker A=\{0\}
+\iff 0\ \text{は $A$ の固有値でない}.
+\]
+\end{proposition}
+
+\begin{example}{逆行列を多項式から作る}{tb-inverse-from-polynomial}
+$A^2+A-2I=O$ なら $A(A+I)=2I$ なので
+\[
+A^{-1}=\frac{A+I}2.
+\]
+また $A^m=O$（冪零）なら
+\[
+(I-A)(I+A+\cdots+A^{m-1})=I-A^m=I
+\]
+なので $I-A$ は正則である。$I+A$ についても $-A$ を代入して同様である。
+一方、冪零行列 $A$ 自身は正則でない。正則なら $A^m$ も正則になるが、$O$ は正則でないからである。
+\end{example}
+
+\begin{memo*}
+2015年度 応用数理 専門基礎 第1問は、
+掃き出し法・余因子による逆行列・多項式からの逆行列という
+三つの技法を一題で問う。$XA=B$ は右から $A^{-1}$、
+$AY=C$ は左から $A^{-1}$ を掛ける、という順序の区別に注意する。
+\end{memo*}

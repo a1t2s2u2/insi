@@ -1,0 +1,273 @@
+\chapter{初等関数と暗記すべき公式}
+\label{ch:tb-functions}
+
+この章は暗記が中心である。
+公式そのものが問われることは少ないが、公式を思い出せないと
+微分・積分の問題は最初の一行で止まる。
+
+\section{指数関数と対数関数}
+
+\begin{definition}{指数関数と対数関数}{tb-exp-log}
+$a>0$, $a\ne1$ に対し $a^x$ を指数関数、その逆関数を $\log_a x$ と書く。
+底が $e=2.718\ldots$ のときを\textbf{自然対数}といい、本書では単に $\log x$ と書く。
+定義域は $x>0$ である。
+\end{definition}
+
+\begin{proposition}{指数法則と対数法則}{tb-exp-log-laws}
+\[
+a^{x+y}=a^xa^y,\qquad
+(a^x)^y=a^{xy},\qquad
+a^{-x}=\frac1{a^x},
+\]
+\[
+\log(xy)=\log x+\log y,\qquad
+\log\frac xy=\log x-\log y,\qquad
+\log x^r=r\log x.
+\]
+また底の変換は $\log_a x=\dfrac{\log x}{\log a}$ である。
+\end{proposition}
+
+\begin{definition}{一般の冪 $x^{f(x)}$}{tb-general-power}
+$x>0$ のとき、指数が変数であっても
+\[
+x^{f(x)}=\exp\bigl(f(x)\log x\bigr)
+\]
+と定める。$x^{\sin x}$ のような関数は、この形へ直してから微分する。
+\end{definition}
+
+\section{三角関数}
+
+\begin{definition}{三角関数と、その逆数の三つ}{tb-trig-definition}
+単位円上の角 $\theta$ に対する $\sin\theta$, $\cos\theta$ から
+\[
+\tan\theta=\frac{\sin\theta}{\cos\theta},\qquad
+\sec\theta=\frac1{\cos\theta},\qquad
+\csc\theta=\frac1{\sin\theta},\qquad
+\cot\theta=\frac{\cos\theta}{\sin\theta}=\frac1{\tan\theta}
+\]
+と定める。それぞれ\textbf{正接}、\textbf{正割}、\textbf{余割}、\textbf{余接}という。
+定義域は分母が0にならない範囲であり、
+$\sec\theta$ と $\tan\theta$ は $\cos\theta\ne0$、
+$\csc\theta$ と $\cot\theta$ は $\sin\theta\ne0$ で定義される。
+\end{definition}
+
+\begin{remark}{$\sec$ を使う理由}{tb-why-sec}
+$1/\cos\theta$ と書いても同じだが、
+積分 $\int\sec\theta\,\d\theta$ や恒等式 $1+\tan^2\theta=\sec^2\theta$ のように、
+$\sec$ を一つの記号として扱った方が式が短くなる場面が多い。
+答案で使うときは初出時に $\sec\theta=1/\cos\theta$ と書いておけばよい。
+\end{remark}
+
+\begin{proposition}{相互関係}{tb-trig-identities}
+\[
+\sin^2\theta+\cos^2\theta=1,
+\qquad
+1+\tan^2\theta=\sec^2\theta,
+\qquad
+1+\cot^2\theta=\csc^2\theta.
+\]
+後の二つは、第一の式を $\cos^2\theta$ または $\sin^2\theta$ で割って得られる。
+\end{proposition}
+
+\begin{proposition}{加法定理と倍角・半角}{tb-trig-addition}
+\[
+\sin(\alpha\pm\beta)=\sin\alpha\cos\beta\pm\cos\alpha\sin\beta,
+\]
+\[
+\cos(\alpha\pm\beta)=\cos\alpha\cos\beta\mp\sin\alpha\sin\beta,
+\qquad
+\tan(\alpha\pm\beta)=\frac{\tan\alpha\pm\tan\beta}{1\mp\tan\alpha\tan\beta}.
+\]
+$\beta=\alpha$ とすれば倍角公式
+\[
+\sin2\alpha=2\sin\alpha\cos\alpha,
+\qquad
+\cos2\alpha=\cos^2\alpha-\sin^2\alpha=1-2\sin^2\alpha=2\cos^2\alpha-1
+\]
+を得る。これを解き直した
+\[
+\sin^2\alpha=\frac{1-\cos2\alpha}2,
+\qquad
+\cos^2\alpha=\frac{1+\cos2\alpha}2
+\]
+は、$\sin^2$ や $\cos^2$ を積分するときの標準手段である。
+\end{proposition}
+
+\begin{proposition}{積和・和積と合成}{tb-trig-product-sum}
+\[
+\sin\alpha\cos\beta=\frac12\{\sin(\alpha+\beta)+\sin(\alpha-\beta)\},
+\]
+\[
+\cos\alpha\cos\beta=\frac12\{\cos(\alpha+\beta)+\cos(\alpha-\beta)\},
+\qquad
+\sin\alpha\sin\beta=\frac12\{\cos(\alpha-\beta)-\cos(\alpha+\beta)\}.
+\]
+また
+\[
+a\sin\theta+b\cos\theta=\sqrt{a^2+b^2}\,\sin(\theta+\varphi),
+\qquad
+\tan\varphi=\frac ba
+\]
+と一つの正弦にまとめられる。
+\end{proposition}
+
+\begin{proposition}{覚えておく値}{tb-trig-values}
+\[
+\begin{array}{c|cccccc}
+\theta & 0 & \pi/6 & \pi/4 & \pi/3 & \pi/2\\\hline
+\sin\theta & 0 & 1/2 & \sqrt2/2 & \sqrt3/2 & 1\\
+\cos\theta & 1 & \sqrt3/2 & \sqrt2/2 & 1/2 & 0\\
+\tan\theta & 0 & 1/\sqrt3 & 1 & \sqrt3 & \text{なし}
+\end{array}
+\]
+特に $\cos\theta=1/2$ の解が $\theta=\pi/3$ であること、すなわち
+$\sec\theta=2$ となるのが $\theta=\pi/3$ であることは、
+積分区間を分ける場面で頻出する。
+\end{proposition}
+
+\section{逆三角関数}
+
+\begin{definition}{逆三角関数}{tb-inverse-trig}
+主値を次のように取る。
+\[
+\arcsin:[-1,1]\to\left[-\frac\pi2,\frac\pi2\right],
+\qquad
+\arccos:[-1,1]\to[0,\pi],
+\]
+\[
+\arctan:\R\to\left(-\frac\pi2,\frac\pi2\right).
+\]
+\end{definition}
+
+\begin{proposition}{逆三角関数の微分}{tb-inverse-trig-derivative}
+\[
+(\arcsin x)'=\frac1{\sqrt{1-x^2}},\qquad
+(\arccos x)'=-\frac1{\sqrt{1-x^2}},\qquad
+(\arctan x)'=\frac1{1+x^2}.
+\]
+\end{proposition}
+
+\section{双曲線関数}
+
+\begin{definition}{双曲線関数}{tb-hyperbolic}
+\[
+\sinh x=\frac{e^x-e^{-x}}2,\qquad
+\cosh x=\frac{e^x+e^{-x}}2,\qquad
+\tanh x=\frac{\sinh x}{\cosh x}.
+\]
+\end{definition}
+
+\begin{proposition}{双曲線関数の性質}{tb-hyperbolic-properties}
+\[
+\cosh^2x-\sinh^2x=1,
+\qquad
+(\sinh x)'=\cosh x,
+\qquad
+(\cosh x)'=\sinh x.
+\]
+また $\sinh$ の逆関数は
+\[
+\operatorname{arsinh}x=\log\left(x+\sqrt{x^2+1}\right)
+\]
+である。
+\end{proposition}
+
+\begin{example}{置換 $t=x+\sqrt{x^2+1}$}{tb-substitution-t}
+$t=x+\sqrt{x^2+1}$ とおくと
+\[
+\left(\sqrt{x^2+1}+x\right)\left(\sqrt{x^2+1}-x\right)=(x^2+1)-x^2=1
+\]
+なので $t^{-1}=\sqrt{x^2+1}-x$ である。従って
+\[
+x=\frac{t-t^{-1}}2,\qquad
+\sqrt{x^2+1}=\frac{t+t^{-1}}2,\qquad
+\d x=\frac{1+t^{-2}}2\,\d t.
+\]
+これは $x=\sinh u$, $t=e^u$ と置いたことに他ならない。
+$\sqrt{x^2+1}$ を含む積分は、この置換で有理式へ落ちる。
+\end{example}
+
+\begin{memo*}
+2015年度 応用数理 専門基礎 第3問では、
+$\int_0^1\d x/\sqrt{x^2+1}$ と $\int_0^1\sqrt{x^2+1}\,\d x$ を
+まさにこの置換で計算する。$t$ と $t^{-1}$ を足し引きするところが要点である。
+\end{memo*}
+
+\section{よく使う不等式}
+
+\begin{proposition}{基本不等式}{tb-basic-inequalities}
+\[
+\abs{\sin u}\le\abs u\quad(u\in\R),
+\qquad
+\abs{\sin u}\le1,
+\]
+\[
+1+x\le e^x\quad(x\in\R),
+\qquad
+\log x\le x-1\quad(x>0).
+\]
+\end{proposition}
+
+\begin{proposition}{相加平均・相乗平均}{tb-am-gm}
+$u,v\ge0$ に対して
+\[
+uv\le\left(\frac{u+v}2\right)^2,
+\qquad\text{すなわち}\qquad
+\sqrt{uv}\le\frac{u+v}2
+\]
+であり、等号は $u=v$ のときに限る。
+\end{proposition}
+
+\begin{proposition}{三角不等式と Cauchy--Schwarz の不等式}{tb-triangle-cauchy}
+実数・ベクトル・ノルムのいずれについても
+\[
+\abs{a+b}\le\abs a+\abs b,
+\qquad
+\bigl|\abs a-\abs b\bigr|\le\abs{a-b}
+\]
+が成り立つ。内積空間では
+\[
+\abs{\inner xy}\le\norm x\,\norm y
+\]
+であり、等号は $x,y$ が平行なときに限る。
+\end{proposition}
+
+\begin{remark}{評価の型}{tb-estimate-style}
+「$\abs{A-B}\le C$ を示せ」という問題は、
+まず $A\le B+C$ を示し、次に $A,B$ を入れ替えて $B\le A+C$ を示す、
+という二段構えで書くのが定型である。
+2026年度 第2期 専門基礎 第3問、2021年度 第2期 専門基礎 第3問、
+年度不明の距離空間の問題はいずれもこの型である。
+\end{remark}
+
+\section{覚えておく極限}
+
+\begin{proposition}{標準的な極限}{tb-standard-limits}
+\[
+\lim_{u\to0}\frac{\sin u}u=1,
+\qquad
+\lim_{u\to0}\frac{1-\cos u}{u^2}=\frac12,
+\qquad
+\lim_{u\to0}\frac{e^u-1}u=1,
+\]
+\[
+\lim_{u\to0}\frac{\log(1+u)}u=1,
+\qquad
+\lim_{n\to\infty}\left(1+\frac1n\right)^n=e,
+\]
+\[
+\lim_{x\to\infty}\frac{\log x}{x^\alpha}=0\ (\alpha>0),
+\qquad
+\lim_{x\to\infty}\frac{x^\alpha}{e^x}=0,
+\qquad
+\lim_{x\to+0}x^\alpha\log x=0\ (\alpha>0).
+\]
+最後の三つは「対数は冪より遅く、冪は指数より遅い」と覚える。
+\end{proposition}
+
+\begin{memo*}
+$\sin u/u\to1$ は、2021年度 第1期 専門基礎 第2問の偏微分の計算と、
+2015年度 専門科目 第7問の優収束定理の適用で使う。
+$\log x/x^\alpha\to0$ は、2015年度 第1期 専門基礎 第2問で
+広義積分 $\int_1^\infty u^a\log u\,\d u$ の収束を判定するときに使う。
+\end{memo*}

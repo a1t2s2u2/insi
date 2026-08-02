@@ -1,0 +1,247 @@
+\chapter{多変数の微分積分}
+\label{ch:tb-multivariable}
+
+\section{偏微分と $C^1$ 級}
+
+\begin{definition}{偏導関数}{tb-partial-derivative}
+$f(x,y)$ に対して
+\[
+f_x(a,b)=\frac{\partial f}{\partial x}(a,b)
+=\lim_{h\to0}\frac{f(a+h,b)-f(a,b)}h
+\]
+を $x$ に関する\textbf{偏導関数}という。$f_y$ も同様である。
+定義が差商の極限であることを忘れないこと。
+場合分けで定義された関数では、公式ではなく定義に戻って計算する必要がある。
+\end{definition}
+
+\begin{definition}{$C^1$ 級・$C^\infty$ 級}{tb-c1-class}
+全ての1階偏導関数が存在して連続なとき $f$ は\textbf{$C^1$ 級}であるという。
+任意の階数の偏導関数が存在して連続なとき $C^\infty$ 級（\textbf{滑らか}）という。
+\end{definition}
+
+\begin{theorem}{$C^1$ 級なら全微分可能}{tb-c1-differentiable}
+$C^1$ 級の関数は全微分可能であり、特に連続である。
+逆に、偏導関数が存在するだけでは連続とは限らない。
+\end{theorem}
+
+\begin{remark}{$C^1$ 級でないことの示し方}{tb-not-c1}
+$C^1$ 級を否定するには、偏導関数を実際に計算し、
+それが\textbf{不連続}である点を一つ示せばよい。
+2021年度 第1期 専門基礎 第2問では
+\[
+\frac{\partial f}{\partial y}(x,0)=1\ (x\ne0),
+\qquad
+\frac{\partial f}{\partial y}(0,0)=0
+\]
+となるので、原点で不連続であり $C^1$ 級でないと結論する。
+\end{remark}
+
+\begin{theorem}{連鎖律}{tb-chain-rule}
+$f$ が $C^1$ 級、$x(t),y(t)$ が微分可能なら
+\[
+\frac{\d}{\d t}f(x(t),y(t))
+=f_x(x(t),y(t))\,x'(t)+f_y(x(t),y(t))\,y'(t).
+\]
+特に $\varphi(t)=f(tx,ty)$ に対しては
+\[
+\varphi'(t)=x\,f_x(tx,ty)+y\,f_y(tx,ty)
+\]
+となり、右辺に係数 $x,y$ が現れる。
+\end{theorem}
+
+\begin{memo*}
+連鎖律で係数 $x,y$ が出ることは、
+2015年度 第2期 専門基礎 第2問（$f=xg+yh$ と分解する問題）の鍵である。
+$\varphi(1)-\varphi(0)=\int_0^1\varphi'(t)\,\d t$ と組み合わせると、
+求める形の分解がそのまま得られる。
+\end{memo*}
+
+\section{積分記号下の微分}
+
+\begin{theorem}{固定端点の Leibniz 則}{tb-leibniz-fixed}
+$f$ と $f_x$ が $[a,b]\times[c,d]$ 上連続なら
+\[
+\frac{\d}{\d x}\int_c^df(x,y)\,\d y=\int_c^df_x(x,y)\,\d y.
+\]
+\end{theorem}
+
+\begin{theorem}{可変端点の Leibniz 則}{tb-leibniz-variable}
+さらに $\phi,\psi$ が微分可能なら
+\[
+\frac{\d}{\d x}\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y
+=f(x,\psi(x))\psi'(x)-f(x,\phi(x))\phi'(x)
++\int_{\phi(x)}^{\psi(x)}f_x(x,y)\,\d y.
+\]
+右辺の三項は「上端の移動」「下端の移動」「被積分関数自身の変化」に対応する。
+\end{theorem}
+
+\begin{remark}{可変端点版の作り方}{tb-leibniz-derivation}
+$Q(x,v)=\int_c^vf(x,y)\,\d y$ とおくと、固定端点版と基本定理から
+\[
+Q_x(x,v)=\int_c^vf_x(x,y)\,\d y,\qquad Q_v(x,v)=f(x,v)
+\]
+である。$\int_{\phi(x)}^{\psi(x)}=Q(x,\psi(x))-Q(x,\phi(x))$ に
+連鎖律を使えば定理~\ref{thm:tb-leibniz-variable} が出る。
+公式を丸暗記するより、この二段構えを覚える方が安全である。
+\end{remark}
+
+\section{重積分}
+
+\begin{definition}{累次積分}{tb-iterated-integral}
+領域 $D=\{(x,y)\mid a\le x\le b,\ \phi(x)\le y\le\psi(x)\}$ に対して
+\[
+\iint_Df(x,y)\,\d x\d y=\int_a^b\left(\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y\right)\d x
+\]
+と計算する。どちらの変数を外側に取るかは、領域の記述しやすさで決める。
+\end{definition}
+
+\begin{theorem}{Fubini--Tonelli の定理}{tb-fubini-tonelli}
+被積分関数が\textbf{非負可測}なら、積分順序はいつでも交換してよい（Tonelli）。
+符号を持つ場合は、$\iint\abs f<\infty$（絶対可積分）を確かめてから交換してよい（Fubini）。
+\end{theorem}
+
+\begin{remark}{積分順序交換の書き方}{tb-fubini-style}
+答案では「非負なので Tonelli の定理により」または
+「絶対可積分なので Fubini の定理により」と、
+\textbf{どちらの定理をどの仮定で使ったか}を明記する。
+\end{remark}
+
+\begin{theorem}{変数変換}{tb-change-of-variables}
+$\Phi:(u,v)\mapsto(x,y)$ が $C^1$ 級の全単射で Jacobian が消えないとき
+\[
+\iint_Df(x,y)\,\d x\d y
+=\iint_{\Phi^{-1}(D)}f(\Phi(u,v))
+\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\d u\d v,
+\]
+\[
+\frac{\partial(x,y)}{\partial(u,v)}
+=\begin{vmatrix}
+\partial x/\partial u&\partial x/\partial v\\
+\partial y/\partial u&\partial y/\partial v
+\end{vmatrix}.
+\]
+掛けるのは Jacobian の\textbf{絶対値}である。
+\end{theorem}
+
+\begin{proposition}{よく使う変換}{tb-standard-transformations}
+平面の極座標
+\[
+x=r\cos\theta,\quad y=r\sin\theta,
+\qquad
+\frac{\partial(x,y)}{\partial(r,\theta)}=r,
+\qquad \d x\d y=r\,\d r\d\theta.
+\]
+空間の極座標
+\[
+x=r\sin\varphi\cos\theta,\quad
+y=r\sin\varphi\sin\theta,\quad
+z=r\cos\varphi,
+\qquad
+\d x\d y\d z=r^2\sin\varphi\,\d r\d\varphi\d\theta.
+\]
+一次変換 $\binom xy=M\binom uv$ では Jacobian は $|M|$ である。
+\end{proposition}
+
+\begin{remark}{変数変換の手順}{tb-transformation-procedure}
+\begin{enumerate}
+  \item 逆変換を求め、旧変数の不等式を新変数の不等式へ一つずつ書き換える。
+  \item 新しい積分領域を、外側の変数と内側の変数の順に決める。
+  \item Jacobian を計算し、その絶対値を掛ける。
+  \item 被積分関数を新変数で書き直す。
+\end{enumerate}
+上端が二つの式の小さい方になるときは、両者が等しくなる点で区間を分ける。
+2026年度 第2期 専門基礎 第2問では、$r$ の上端が $\min\{2,\sec\theta\}$ になり、
+$\sec\theta=2$ すなわち $\theta=\pi/3$ で分割する。
+\end{remark}
+
+\begin{proposition}{対称性による消去}{tb-symmetry-vanishing}
+領域 $V$ が原点対称で、被積分関数が奇関数（$f(-P)=-f(P)$）なら
+\[
+\iiint_Vf=0.
+\]
+実際、$T(P)=-P$ は $V$ を $V$ へ写し、Jacobian の絶対値は1なので、
+積分値 $J$ が $J=-J$ を満たすからである。
+\end{proposition}
+
+\section{Gamma 関数と Beta 関数}
+
+\begin{definition}{Gamma 関数・Beta 関数}{tb-gamma-beta}
+$p,q>0$ に対して
+\[
+\Gamma(p)=\int_0^\infty x^{p-1}e^{-x}\,\d x,
+\qquad
+B(p,q)=\int_0^1x^{p-1}(1-x)^{q-1}\,\d x.
+\]
+\end{definition}
+
+\begin{proposition}{基本性質}{tb-gamma-properties}
+\[
+\Gamma(1)=1,\qquad
+\Gamma(p+1)=p\,\Gamma(p),\qquad
+\Gamma(n)=(n-1)!\ (n\in\N),
+\qquad
+\Gamma\left(\frac12\right)=\sqrt\pi.
+\]
+\end{proposition}
+
+\begin{theorem}{Gamma と Beta の関係}{tb-beta-gamma-relation}
+\[
+B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)},
+\qquad\text{すなわち}\qquad
+\Gamma(p)\Gamma(q)=B(p,q)\Gamma(p+q).
+\]
+\end{theorem}
+
+\begin{remark}{関係式を導く二つの変換}{tb-beta-gamma-derivation}
+$\Gamma(p)\Gamma(q)$ を第1象限上の二重積分
+$\iint x^{p-1}y^{q-1}e^{-(x+y)}\,\d x\d y$ と書いてから、次のどちらかで分離する。
+\begin{enumerate}
+  \item $x=st$, $y=s(1-t)$。$s=x+y$ が合計、$t=x/(x+y)$ が割合で、
+        Jacobian の絶対値は $s$ である。
+  \item $x=(r\cos\theta)^2$, $y=(r\sin\theta)^2$。このとき $x+y=r^2$ であり、
+        Jacobian の絶対値は $4r^3\sin\theta\cos\theta$ である。
+        続けて $u=r^2$ と $t=\cos^2\theta$ で置換する。
+\end{enumerate}
+どちらも「$r$ だけの因子」と「$\theta$（または $t$）だけの因子」の積に分かれる点が要点である。
+\end{remark}
+
+\begin{proposition}{Beta 関数の三角形表示}{tb-beta-trig}
+$t=\cos^2\theta$ と置くことで
+\[
+\int_0^{\pi/2}\cos^{2p-1}\theta\,\sin^{2q-1}\theta\,\d\theta
+=\frac12B(p,q).
+\]
+\end{proposition}
+
+\begin{memo*}
+2021年度 第2期 専門基礎 第2問は、上の二つの変換を両方使わせる問題である。
+指数の勘定を落とさないこと。二つ目の変換では
+$(2p-2)+(2q-2)+3=2p+2q-1$ が $r$ の指数になる。
+\end{memo*}
+
+\section{収束定理}
+
+\begin{theorem}{単調収束定理}{tb-monotone-convergence}
+$0\le f_1\le f_2\le\cdots$ が可測で $f_n\to f$ なら
+\[
+\lim_{n\to\infty}\int f_n=\int f
+\]
+（値が $\infty$ でもよい）。
+\end{theorem}
+
+\begin{theorem}{優収束定理}{tb-dominated-convergence}
+$f_n\to f$ がほとんど至る所で成り立ち、可積分な $g$ が存在して
+全ての $n$ で $\abs{f_n}\le g$ なら
+\[
+\lim_{n\to\infty}\int f_n=\int f.
+\]
+\end{theorem}
+
+\begin{remark}{優関数を明示する}{tb-dominating-function}
+優収束定理を使う答案では、優関数 $g$ を具体的に書き、
+その可積分性を確かめる一行を必ず入れる。
+たとえば $\abs{\sin u}\le\abs u$ から $\abs{n\sin(f/n)}^p\le f^p$ とし、
+$\int f^p=1$ を根拠にする。
+また、領域を広げていく積分 $\int_{B(R)}$ では、被積分関数が非負なら
+単調収束定理で $R\to\infty$ の極限が存在することが言える。
+\end{remark}
