@@ -167,9 +167,38 @@ f(A)\setminus f(A')\subset f(A\setminus A')
 
 \begin{definition}{上界・下界・上限・下限}{tb-sup-inf}
 $S\subset\R$ が空でないとする。
-$M$ が $S$ の\textbf{上界}であるとは、全ての $s\in S$ で $s\le M$ となることをいう。
-上界のうち最小のものを\textbf{上限}といい $\sup S$ と書く。
-同様に、下界のうち最大のものを\textbf{下限}といい $\inf S$ と書く。
+$M\in\R$ が $S$ の\textbf{上界}、$m\in\R$ が $S$ の\textbf{下界}であるとは、それぞれ
+\[
+\forall s\in S:\ s\le M,
+\qquad
+\forall s\in S:\ m\le s
+\]
+が成り立つことをいう。上界の全体と下界の全体を
+\[
+U(S)=\{M\in\R\mid\forall s\in S,\ s\le M\},
+\qquad
+L(S)=\{m\in\R\mid\forall s\in S,\ m\le s\}
+\]
+と書く。$U(S)$ の最小元を $S$ の\textbf{上限}、$L(S)$ の最大元を $S$ の\textbf{下限}といい
+\[
+\sup S=\min U(S),
+\qquad
+\inf S=\max L(S)
+\]
+と書く。量化記号で書けば、$\alpha=\sup S$ とは
+\[
+(\forall s\in S:\ s\le\alpha)
+\quad\text{かつ}\quad
+(\forall M\in U(S):\ \alpha\le M)
+\]
+が成り立つこと、$\beta=\inf S$ とは
+\[
+(\forall s\in S:\ \beta\le s)
+\quad\text{かつ}\quad
+(\forall m\in L(S):\ m\le\beta)
+\]
+が成り立つことである。
+前半が「上界（下界）である」、後半が「上界（下界）の中で最小（最大）である」に対応する。
 \end{definition}
 
 \begin{theorem}{実数の連続性（上限の存在）}{tb-completeness}
