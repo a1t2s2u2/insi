@@ -15,27 +15,56 @@ P=\begin{pmatrix}
 \]
 は直交行列とする。$p,q,r,s$ を求め，$(P^{\mathsf T})^{10}P^{19}(P^{\mathsf T})^{10}$ を求めよ。さらに $A$ は $P$ で対角化され，固有多項式が $x^3+\sqrt[10]{2}x^2$，$(1,0,1)^{\mathsf T}$ が固有値 $-\sqrt[10]{2}$ の固有ベクトルであるとき $A^{10}$ を求めよ。直交行列で対角化される実行列が対称であることも示せ。
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+直交行列は $P^{\mathsf T}P=I$ を満たす行列である。これは、各列の長さが1で、
+異なる二列の内積が0であることと同値なので、その条件を式にして $p,q,r,s$ を順に決める。
+$P^{\mathsf T}=P^{-1}$ だから、中央の行列積は同じ底 $P$ の整数乗へ直して指数を加減できる。
+
+$A$ の固有値は固有多項式から0,0,$-\sqrt[10]{2}$ と分かる。
+非零固有値の単位固有ベクトルを $u$ とし、残り二本の単位固有ベクトルを加えて直交行列 $Q$ を作ると、
+$A=Q\diag(-\sqrt[10]{2},0,0)Q^{\mathsf T}$ である。この積を列ごとに展開すると
+$A=-\sqrt[10]{2}\,uu^{\mathsf T}$ となり、10乗を計算できる。
+\end{memo*}
 \begin{proof}[解答]
-直交行列の各列は正規直交系である。第1列と第2列の内積から
+直交行列は $P^{\mathsf T}P=I$ を満たす。この行列積の $(j,k)$ 成分は
+「第 $j$ 列と第 $k$ 列の内積」なので、同じ列の内積は1、
+異なる列の内積は0になる。つまり各列の長さは1で、異なる二列は直交する。
+この性質を「列が正規直交している」という。まず第1列と第2列の内積から
 \[
 \frac1{\sqrt6}+qr-\frac1{\sqrt6}=qr=0.
 \]
-第2列のノルムは $1/2+r^2+1/2=1$ なので $r=0$。第1列のノルムから
-$1/3+q^2+1/3=1$、従って $q=\varepsilon/\sqrt3$（$\varepsilon=\pm1$）である。
-第3列を $(p,s,-1/\sqrt6)^{\mathsf T}$ と書く。第2列との直交条件は
+第2列のノルムの2乗は $1/2+r^2+1/2=1+r^2$ であり、これが1に等しいので $r=0$。
+第1列のノルムの2乗は $1/3+q^2+1/3$ なので、これが1に等しいことから
+$q^2=1/3$、すなわち $q=\varepsilon/\sqrt3$（$\varepsilon=\pm1$）である。
+第3列を $(p,s,-1/\sqrt6)^{\mathsf T}$ と書く。$r=0$ なので、第2列との直交条件は
 \[
-\frac p{\sqrt2}-\frac1{\sqrt{12}}=0
+\frac p{\sqrt2}+r s-\frac1{\sqrt2}\cdot\frac1{\sqrt6}
+=\frac p{\sqrt2}-\frac1{\sqrt{12}}=0
 \]
-なので $p=1/\sqrt6$。第1列との直交条件は
+となる。両辺に $\sqrt2$ を掛けると
+$p=\sqrt2/\sqrt{12}=\sqrt{2/12}=1/\sqrt6$ である。第1列との直交条件は
 \[
-\frac p{\sqrt3}+qs+\frac1{\sqrt{18}}=0.
+\frac p{\sqrt3}+qs+\left(-\frac1{\sqrt3}\right)\left(-\frac1{\sqrt6}\right)
+=\frac p{\sqrt3}+qs+\frac1{\sqrt{18}}=0.
 \]
-$p=1/\sqrt6$, $q=\varepsilon/\sqrt3$ を代入すると
-$s=-\varepsilon\sqrt{2/3}$ となる。従って全ての組は
+$p=1/\sqrt6$ より第1項も $1/\sqrt{18}$ なので
+\[
+qs=-\frac2{\sqrt{18}}=-\frac2{3\sqrt2}=-\frac{\sqrt2}3
+\]
+であり、$q=\varepsilon/\sqrt3$ を代入して
+\[
+s=-\frac{\sqrt2}3\cdot\frac{\sqrt3}{\varepsilon}
+=-\varepsilon\frac{\sqrt6}3
+=-\varepsilon\sqrt{\frac23}
+\]
+を得る（$\varepsilon^{-1}=\varepsilon$ を使った）。従って全ての組は
 \[
 p=\frac1{\sqrt6},\quad q=\frac{\varepsilon}{\sqrt3},\quad r=0,
 \quad s=-\varepsilon\sqrt{\frac23}.
 \]
+実際、このとき第3列のノルムの2乗も
+$1/6+2/3+1/6=1$ となり、条件をすべて満たしている。
 $P^{\mathsf T}=P^{-1}$ なので、指数法則を使うと
 \begin{align*}
 (P^{\mathsf T})^{10}P^{19}(P^{\mathsf T})^{10}
@@ -44,16 +73,41 @@ $P^{\mathsf T}=P^{-1}$ なので、指数法則を使うと
 \end{align*}
 
 固有多項式は $x^2(x+\sqrt[10]{2})$ だから、固有値は0（重複度2）と
-$-\sqrt[10]{2}$（重複度1）である。$A$ は直交行列で対角化されるため、
-異なる固有空間は直交する。正規化した固有ベクトルを
-$u=(1,0,1)^{\mathsf T}/\sqrt2$ とすれば、$u$ 方向への直交射影は $uu^{\mathsf T}$ なので
+$-\sqrt[10]{2}$（重複度1）である。与えられた固有ベクトルを長さ $\sqrt2$ で割り
 \[
-A=-\sqrt[10]{2}\,uu^{\mathsf T}.
+u=\frac1{\sqrt2}(1,0,1)^{\mathsf T}
 \]
-ここで $(uu^{\mathsf T})^2=u(u^{\mathsf T}u)u^{\mathsf T}=uu^{\mathsf T}$ だから
+とする。$A$ は直交行列で対角化されるという仮定から、固有ベクトルだけでできた、
+長さ1で互いに直交する基底を選べる。そこで $u$ に直交する0固有空間から
+長さ1で互いに直交する二本を $u_2,u_3$ と選ぶ。
+$Q=(u\ u_2\ u_3)$ の各列は長さ1で互いに直交するため
+$Q^{\mathsf T}Q=I$、すなわち $Q$ は直交行列であり
+\begin{align*}
+A
+&=Q\diag(-\sqrt[10]{2},0,0)Q^{\mathsf T}\\
+&=-\sqrt[10]{2}\,uu^{\mathsf T}
+  +0\,u_2u_2^{\mathsf T}+0\,u_3u_3^{\mathsf T}\\
+&=-\sqrt[10]{2}\,uu^{\mathsf T}.
+\end{align*}
+ここで $u$ は長さ1なので $u^{\mathsf T}u=1$ であり
 \[
-A^{10}=(-\sqrt[10]{2})^{10}uu^{\mathsf T}
-=2uu^{\mathsf T}=\begin{pmatrix}1&0&1\\0&0&0\\1&0&1\end{pmatrix}.
+(uu^{\mathsf T})^2=u(u^{\mathsf T}u)u^{\mathsf T}=uu^{\mathsf T}
+\]
+である。これを繰り返せば全ての $k\ge1$ で $(uu^{\mathsf T})^k=uu^{\mathsf T}$ となる。従って
+\[
+A^{10}=(-\sqrt[10]{2})^{10}(uu^{\mathsf T})^{10}
+=2\,uu^{\mathsf T}.
+\]
+ここで
+\[
+uu^{\mathsf T}
+=\frac12\begin{pmatrix}1\\0\\1\end{pmatrix}
+\begin{pmatrix}1&0&1\end{pmatrix}
+=\frac12\begin{pmatrix}1&0&1\\0&0&0\\1&0&1\end{pmatrix}
+\]
+だから
+\[
+A^{10}=\begin{pmatrix}1&0&1\\0&0&0\\1&0&1\end{pmatrix}.
 \]
 最後に、直交行列 $P$ について $P^{-1}AP=D$ が実対角なら
 $A=PDP^{\mathsf T}$ である。転置すると
@@ -70,12 +124,49 @@ p(x)=\int_{x^2}^{x^3}\frac{\sin(xy)}y\,\d y\qquad(x>0)
 \]
 の導関数を求めよ。
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+固定端点とは積分区間 $[c,d]$ が $x$ によらない場合である。
+差商 $\{F(x+h)-F(x)\}/h$ を書き、$f$ の差だけを積分した形へ直す。
+一変数の微積分学の基本定理を $x$ 方向へ使うと、その差商は $f_x$ の平均になる。
+$f_x$ の連続性により平均が一様に $f_x(x,y)$ へ近づくため、極限と積分を交換できる。
+
+可変端点では $Q(x,v)=\int_c^v f(x,y)\,\d y$ と置き、
+$Q(x,\psi(x))-Q(x,\phi(x))$ を二変数の連鎖律で微分する。
+これにより、上端の移動、下端の移動、被積分関数自身の変化という三つの項が現れる。
+\end{memo*}
 \begin{proof}[解答]
-固定端点では差商と微積分学の基本定理から
-$\frac{d}{dx}\int_c^df(x,y)dy=\int_c^df_x(x,y)dy$。可変端点では上下端の細い区間を分けると
+固定端点の積分を
 \[
-\frac d{dx}\int_{\phi(x)}^{\psi(x)}f(x,y)dy
-=f(x,\psi)\psi'-f(x,\phi)\phi'+\int_\phi^\psi f_x(x,y)dy.
+F(x)=\int_c^d f(x,y)\,\d y
+\]
+とおく。微積分学の基本定理により
+\[
+\frac{f(x+h,y)-f(x,y)}h
+=\int_0^1 f_x(x+\theta h,y)\,\d\theta.
+\]
+$f_x$ の連続性により右辺は $h\to0$ で $f_x(x,y)$ へ一様に収束するから、
+\[
+F'(x)
+=\lim_{h\to0}\int_c^d\frac{f(x+h,y)-f(x,y)}h\,\d y
+=\int_c^d f_x(x,y)\,\d y.
+\]
+
+可変端点について
+\[
+Q(x,v)=\int_c^v f(x,y)\,\d y
+\]
+とおくと、固定端点の結果と微積分学の基本定理から
+\[
+Q_x(x,v)=\int_c^v f_x(x,y)\,\d y,\qquad
+Q_v(x,v)=f(x,v).
+\]
+$\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y
+=Q(x,\psi(x))-Q(x,\phi(x))$ に連鎖律を使えば
+\[
+\frac{\d}{\d x}\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y
+=f(x,\psi(x))\psi'(x)-f(x,\phi(x))\phi'(x)
++\int_{\phi(x)}^{\psi(x)} f_x(x,y)\,\d y.
 \]
 この公式を使うため
 \[
@@ -102,6 +193,19 @@ p'(x)=\frac{4\sin(x^4)-3\sin(x^3)}x.
 \begin{problem}{距離空間｜コンパクト集合の近傍}{unknown-3}
 コンパクト集合 $K$ までの距離 $\rho(x)=\inf_{z\in K}d(x,z)$ について，$|\rho(x)-\rho(y)|\le d(x,y)$，各 $x$ で最短点 $a\in K$ が存在することを示せ。また $K\subset L$ で $L$ が開なら，ある $r>0$ で $\{\rho<r\}\subset L$ を示せ。
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+$\rho(x)$ は、$x$ と $K$ の各点との距離の下限である。
+三角不等式を全ての $z\in K$ について書き、下限を取ると
+$|\rho(x)-\rho(y)|\le d(x,y)$ が得られる。
+最短点の存在は、連続関数 $z\mapsto d(x,z)$ がコンパクト集合 $K$ 上で最小値を取ることから示す。
+
+$K$ を含む開集合 $L$ の外側を $F=X\setminus L$ とする。
+$F$ が空なら $L=X$ なので、どの $r>0$ を選んでも $\{\rho<r\}\subset L$ である。
+$F$ が空でなければ、各 $z\in K$ と閉集合 $F$ の距離は正であり、
+それを $K$ 上で最小化した値 $\delta$ も正になる。$0<r<\delta$ を選べば、
+$K$ から距離 $r$ 未満の点が $F$ に入ることはできない。
+\end{memo*}
 \begin{proof}[解答]
 任意の $z\in K$ に対し三角不等式から
 \[
@@ -115,15 +219,24 @@ $x,y$ を交換した式と合わせて
 \]
 となる。
 
-$z\mapsto d(x,z)$ は上の評価と同様に1-Lipschitz、従って $K$ 上連続である。
+$z_1,z_2\in X$ に対しても三角不等式から
+\[
+|d(x,z_1)-d(x,z_2)|\le d(z_1,z_2)
+\]
+である。従って $z\mapsto d(x,z)$ は1-Lipschitz、特に $K$ 上連続である。
 $K$ はコンパクトなので最小値を取る点 $a\in K$ が存在し
 \[
 d(x,a)=\min_{z\in K}d(x,z)=\rho(x).
 \]
 
-最後に $F=X\setminus L$ とおく。$F$ は閉で $K\cap F=\varnothing$ である。
-$h(z)=d(z,F)$ は $K$ 上連続であり、各 $z\in K$ について $h(z)>0$ だから、
-コンパクト性により
+最後に $F=X\setminus L$ とおく。$F=\varnothing$ なら $L=X$ なので、任意の $r>0$ で
+$\{x\mid\rho(x)<r\}\subset L$ が成り立つ。以下では $F\ne\varnothing$ とする。
+$L$ が開なのでその補集合 $F$ は閉であり、$K\subset L$ より $K\cap F=\varnothing$ である。
+$h(z)=d(z,F)$ は、上と同じ三角不等式の評価により1-Lipschitz、特に $K$ 上連続である。
+また各 $z\in K$ については $h(z)>0$ である。実際 $h(z)=0$ なら、
+$d(z,f_n)<1/n$ を満たす $f_n\in F$ が取れて $f_n\to z$ となり、
+$F$ が閉であることから $z\in F$、これは $K\cap F=\varnothing$ に反する。
+従って連続関数 $h$ は空でないコンパクト集合 $K$ 上で最小値を取り、その値は正である。
 \[
 \delta:=\min_{z\in K}d(z,F)>0.
 \]
@@ -138,6 +251,13 @@ $\{x\mid\rho(x)<r\}\subset L$ を得る。
 \begin{problem}{回転面｜トーラス}{unknown-4}
 $R>r>0$ とし，円 $(x-R)^2+z^2=r^2$ を $z$ 軸の周りに回転したトーラス $S$ の Gauss 曲率と平均曲率を求め，測地線を一つ挙げよ。
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+回転角 $u$ と母円の角 $v$ で標準的にパラメータ表示する。
+二つの座標ベクトルは直交するため、第1・第2基本形式から主曲率を直接読める。
+測地線の例には外側の赤道 $v=0$ を選び、
+その加速度が曲面の法線方向だけであることを確認する。
+\end{memo*}
 \begin{proof}[解答]
 \[
 X(u,v)=((R+r\cos v)\cos u,(R+r\cos v)\sin u,r\sin v)
@@ -184,6 +304,13 @@ $v=0$ と固定した外側の赤道を $\gamma(u)=X(u,0)$ とおくと
 \begin{problem}{Euler 型微分方程式}{unknown-5}
 $x^2y''+pxy'+qy=0$ $(x\ge1)$，$y(1)=0,y'(1)=1$ を考える。$q=0,p\ne1$ の解，$x=e^t$ による変形，$p=2$ の解を求める。さらに $p=2$ で $x>1$ の零点が存在する $q$ の範囲と最小の零点を求めよ。
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+Euler 型方程式は対数変数 $t=\log x$ へ移すと定数係数方程式になる。
+$p=2$ では判別式 $d=1-4q$ の符号で、双曲線関数・重根・三角関数の三場合に分ける。
+$x>1$ は $t>0$ に対応し、零点が繰り返し現れるのは三角関数になる
+$d<0$、すなわち $q>1/4$ の場合だけである。
+\end{memo*}
 \begin{proof}[解答]
 $q=0$ では $x^2y''+pxy'=0$ である。$z=y'$ とおくと
 \[
@@ -258,6 +385,14 @@ g(x)=\frac1{1-\alpha}\int_0^x\phi(t)(x-t)^{1-\alpha}dt
 \]
 を示し，$g'(x)=\int_0^x\phi(t)(x-t)^{-\alpha}dt$ を示せ。
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+$\phi$ の有界性から原始関数 $f$ は Lipschitz 連続になる。
+$f(s)=\int_0^s\phi(t)\,\d t$ を代入すると三角形領域の二重積分になるので、
+$0<\alpha<1$ による絶対可積分性を確認して Fubini の定理を使う。
+導関数候補 $G$ を先に定め、$\int_0^xG(u)\,\d u=g(x)$ を示して
+微積分学の基本定理へ帰着する。
+\end{memo*}
 \begin{proof}[解答]
 $|f(y)-f(x)|\le\norm\phi_\infty|y-x|$ なので $f$ は連続。$f(s)=\int_0^s\phi(t)dt$ を代入し，Fubini で積分順序を交換すると
 \begin{align*}

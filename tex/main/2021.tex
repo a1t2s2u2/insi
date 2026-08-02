@@ -10,26 +10,101 @@ A=\begin{pmatrix}a-1&a&0\\-a&-a-1&0\\-1&1&-1\end{pmatrix}.
 \]
 固有多項式，固有値と固有空間の次元，Jordan 標準形を求めよ。
 \end{problem}
-\begin{proof}[解答]
-$N=A+I$ とおくと
-\[
-N=\begin{pmatrix}a&a&0\\-a&-a&0\\-1&1&0\end{pmatrix},\qquad
-N^2=\begin{pmatrix}0&0&0\\0&0&0\\-2a&-2a&0\end{pmatrix},\qquad N^3=O.
-\]
-$N^3=O$ なので $N$ の固有値は0だけであり、$A=N-I$ の固有値は $-1$ だけである。
-従って3次の固有多項式は $(\lambda+1)^3$ となる。
+\begin{memo*}
+\textbf{解答の見通し。}
+行列 $A$ の対角成分には全て $-1$ が含まれているので、$N=A+I_3$ とおいて
+$-I_3$ の部分を取り除く。実際に掛け算すると $N^3=O$ になる。
+このように何乗かすると零行列になる行列を冪零行列という。
+$Nx=\mu x$ なら $N^3x=\mu^3x=0$ なので、$N$ の固有値は0だけである。
+従って $A=N-I_3$ の固有値は $-1$ だけになる。
 
-$a\ne0$ なら $N^2\ne O$ かつ $N^3=O$ である。従って最大の Jordan ブロックの大きさは3で、
-全体の次元も3だから標準形は $J_3(-1)$ だけである。この場合
-$\dim\ker(A+I)=1$。
+Jordan ブロック $J_k(-1)$ に $I_k$ を足すと、上の対角線に1が並ぶ冪零ブロックになる。
+その $k$ 乗で初めて0になるため、$N^2$ と $N^3$ を調べれば最大ブロックの大きさが分かる。
+$a=0$ のときだけ $N^2$ が0になるので場合分けする。
+\end{memo*}
+\begin{proof}[解答]
+$N=A+I_3$ とおくと、$A$ の対角成分に $1$ を足して
+\[
+N=\begin{pmatrix}a&a&0\\-a&-a&0\\-1&1&0\end{pmatrix}
+\]
+である。この行列の冪を計算する。第1行 $(a,a,0)$ と $N$ の第1列 $(a,-a,-1)^{\mathsf T}$ の積は
+$a^2-a^2+0=0$ であり、第2列 $(a,-a,1)^{\mathsf T}$ との積も $a^2-a^2+0=0$、
+第3列は零ベクトルなので0である。第2行 $(-a,-a,0)$ は第1行の $-1$ 倍だから、
+その行も全て0になる。第3行 $(-1,1,0)$ については
+\[
+(-1)a+1\cdot(-a)+0=-2a,\qquad
+(-1)a+1\cdot(-a)+0=-2a
+\]
+となる。従って
+\[
+N^2=\begin{pmatrix}0&0&0\\0&0&0\\-2a&-2a&0\end{pmatrix}.
+\]
+さらに $N^3=N^2N$ の第3行は $(-2a,-2a,0)$ と $N$ の各列の積であり、
+第1列では $-2a\cdot a+(-2a)(-a)=-2a^2+2a^2=0$、第2列でも同様に0、第3列は0である。
+他の行はすでに0なので
+\[
+N^3=O
+\]
+である。
+
+$Nx=\mu x$ を満たす $x\ne0$ があれば
+\[
+0=N^3x=\mu^3x
+\]
+だから $\mu^3=0$、すなわち $\mu=0$ である。従って $N$ の固有値は0だけであり、
+3次の特性多項式は根を重複度込みで全て並べたものだから $|\mu I_3-N|=\mu^3$ となる。
+$A=N-I_3$ なので $\lambda I_3-A=(\lambda+1)I_3-N$ であり、上の式へ $\mu=\lambda+1$ を代入して
+\[
+|\lambda I_3-A|=(\lambda+1)^3.
+\]
+従って固有値は $-1$ のみ（重複度3）である。
+
+$a\ne0$ の場合を見る。このとき $N^2\ne O$ かつ $N^3=O$ である。
+大きさ $k$ の冪零 Jordan ブロックは $k$ 乗で初めて0になるので、
+最大の Jordan ブロックの大きさは3である。
+全体の大きさも3だから、標準形はブロック一つの $J_3(-1)$ に限る。
+固有空間の次元も直接分かる。$Nx=0$ は
+\[
+ax_1+ax_2=0,\qquad -ax_1-ax_2=0,\qquad -x_1+x_2=0
+\]
+であり、$a\ne0$ より第1式は $x_1+x_2=0$、第3式は $x_1=x_2$ だから $x_1=x_2=0$、
+$x_3$ は自由である。従って
+\[
+\ker(A+I_3)=\ker N=\left\langle(0,0,1)^{\mathsf T}\right\rangle,
+\qquad \dim\ker(A+I_3)=1.
+\]
 
 $a=0$ なら
 \[
 N=\begin{pmatrix}0&0&0\\0&0&0\\-1&1&0\end{pmatrix},
 \]
-従って $N\ne O$, $N^2=O$, $\operatorname{rank}N=1$ である。
-階数・退化次数の定理から $\dim\ker N=3-1=2$。
-大きさ2のブロックが一つ必要で、残りは大きさ1だから、標準形は
+従って $N\ne O$, $N^2=O$ である。
+$x=(x_1,x_2,x_3)^{\mathsf T}$ とすると
+\[
+Nx=\begin{pmatrix}0\\0\\-x_1+x_2\end{pmatrix}=0
+\quad\Longleftrightarrow\quad x_2=x_1.
+\]
+従って全ての解は
+\[
+x=x_1\begin{pmatrix}1\\1\\0\end{pmatrix}
+ +x_3\begin{pmatrix}0\\0\\1\end{pmatrix}
+\]
+と表され、自由に選べる数が $x_1,x_3$ の二つあるので
+$\dim\ker N=2$ である。
+$N\ne O$ なので大きさ2のブロックが少なくとも一つ必要である。
+大きさ $k$ の冪零 Jordan ブロック
+\[
+J_k(0)=\begin{pmatrix}
+0&1&&0\\
+&0&\ddots&\\
+&&\ddots&1\\
+0&&&0
+\end{pmatrix}
+\]
+では $J_k(0)y=0$ の解は $y=(y_1,0,\ldots,0)^{\mathsf T}$ であり、
+各ブロックが核の自由な数を一つずつ作る。従って
+$\dim\ker N=2$ は Jordan ブロックが2個あることを表す。
+全体の大きさは3だから、ブロックの大きさは2と1になり、標準形は
 $J_2(-1)\oplus(-1)$ となる。
 \end{proof}
 
@@ -45,27 +120,57 @@ f(x,y)=\begin{cases}\dfrac{\sin(x^2y)}{x^2+y^2},&(x,y)\ne(0,0),\\0,&(x,y)=(0,0).
   \item[(4)] $\partial f/\partial y(x,0)$ を求め，$f$ が $C^1$ 級か判定せよ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+極座標の半径 $r=\sqrt{x^2+y^2}$ は、点 $(x,y)$ と原点の距離であるため
+$|x|\le r$, $|y|\le r$ が成り立つ。
+$|\sin u|\le|u|$ を使うと $|f|\le r$ となり、原点へ近づくと0へ近づくことが分かる。
+一方、$|\sin u|\le1$ を使うと $|f|\le r^{-2}$ となり、遠方での減衰が分かる。
+半径1の内側と外側で二つの評価を使い分け、面積要素
+$\d x\d y=r\,\d r\d\theta$ を掛けた一変数積分が収束するか確認する。
+最後の偏導関数は公式を先に使わず、定義の差商を直接計算する。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] $|\sin u|\le|u|$ から $|f|\le |x^2y|/r^2\le r$。また $|\sin u|\le1$ から $|f|\le r^{-2}$。
-  \item[(2)] $|f|\le r\to0$。
+  \item[(1)] $r=\sqrt{x^2+y^2}>0$ とおくと $|x|\le r$, $|y|\le r$ である。
+  $|\sin u|\le|u|$ を $u=x^2y$ に使えば
+  \[
+  |f(x,y)|
+  \le\frac{|x|^2|y|}{x^2+y^2}
+  \le\frac{r^3}{r^2}=r.
+  \]
+  また $|\sin u|\le1$ より
+  \[
+  |f(x,y)|\le\frac1{x^2+y^2}=\frac1{r^2}.
+  \]
+  \item[(2)] 任意の $\varepsilon>0$ に対して $\delta=\varepsilon$ と取る。
+  $0<\sqrt{x^2+y^2}=r<\delta$ なら (1) より
+  \[
+  |f(x,y)-f(0,0)|=|f(x,y)|\le r<\varepsilon.
+  \]
+  従って $f$ は原点で連続である。
   \item[(3)] $r\le1$ では $|f|^p\le r^p$、$r\ge1$ では
   $|f|^p\le r^{-2p}$ である。極座標の面積要素は
   $\d x\d y=r\,\d r\d\theta$ だから
-  \[
+  \begin{align*}
   \iint_{r\le1}|f|^p\,\d x\d y
-  \le\int_0^{2\pi}\int_0^1r^p r\,\d r\d\theta
+  &\le\int_0^{2\pi}\int_0^1r^p\cdot r\,\d r\d\theta\\
+  &=2\pi\int_0^1r^{p+1}\,\d r
+  =2\pi\left[\frac{r^{p+2}}{p+2}\right]_0^1
   =\frac{2\pi}{p+2}<\infty,
-  \]
-  \[
+  \end{align*}
+  \begin{align*}
   \iint_{r\ge1}|f|^p\,\d x\d y
-  \le\int_0^{2\pi}\int_1^\infty r^{-2p}r\,\d r\d\theta
-  =2\pi\int_1^\infty r^{1-2p}\,\d r
+  &\le\int_0^{2\pi}\int_1^\infty r^{-2p}\cdot r\,\d r\d\theta\\
+  &=2\pi\int_1^\infty r^{1-2p}\,\d r
+  =2\pi\left[\frac{r^{2-2p}}{2-2p}\right]_1^\infty
   =\frac{2\pi}{2p-2}<\infty.
-  \]
-  最後の積分が収束する条件が $p>1$ である。従って
-  $|f|^p\in L^1(\R^2)$。また
-  $|f|^p\mathbf1_{B(R)}\uparrow|f|^p$ なので、単調収束定理より
+  \end{align*}
+  最後の広義積分では、上端で $r^{2-2p}\to0$ となるために指数の条件
+  $2-2p<0$、すなわち $p>1$ が必要であり、仮定はこれを満たしている。
+  従って $|f|^p\in L^1(\R^2)$。また
+  $R$ を増やすと円板 $B(R)$ は広がるので、非負関数
+  $|f|^p\mathbf1_{B(R)}$ は各点で $|f|^p$ へ単調に増加する。従って単調収束定理より
   \[
   \lim_{R\to\infty}I_p(R)=\iint_{\R^2}|f|^p\,\d x\d y<\infty.
   \]
@@ -82,8 +187,19 @@ f(x,y)=\begin{cases}\dfrac{\sin(x^2y)}{x^2+y^2},&(x,y)\ne(0,0),\\0,&(x,y)=(0,0).
   &=\lim_{h\to0}
     \frac{\sin(x^2h)}{x^2h}\frac{x^2}{x^2+h^2}=1.
   \end{align*}
-  $x=0$ では $f(0,h)=0$ なので同じ差商は0である。
-  この偏導関数は原点で不連続なので $C^1$ 級ではない。
+  最後の等号では $\sin u/u\to1$（$u=x^2h\to0$）と
+  $x^2/(x^2+h^2)\to1$（$x\ne0$ を固定）を使った。
+  $x=0$ では、全ての $h$ について $f(0,h)=\sin0/h^2=0$ かつ $f(0,0)=0$ なので、
+  同じ差商は0であり $\partial f/\partial y(0,0)=0$ である。
+
+  $C^1$ 級とは、全ての1階偏導関数が存在して連続になることである。
+  いま $x\to0$（$x\ne0$）とすると
+  \[
+  \frac{\partial f}{\partial y}(x,0)=1
+  \longrightarrow1
+  \ne0=\frac{\partial f}{\partial y}(0,0)
+  \]
+  だから、$\partial f/\partial y$ は原点で不連続である。従って $f$ は $C^1$ 級ではない。
 \end{enumerate}
 \end{proof}
 
@@ -94,6 +210,16 @@ f(x,y)=\begin{cases}\dfrac{\sin(x^2y)}{x^2+y^2},&(x,y)\ne(0,0),\\0,&(x,y)=(0,0).
   \item[(3)] 連続写像によるコンパクト集合の像はコンパクトか。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+(1) で、全射は「終域の全ての元が像に現れる」、単射は
+「異なる二点が同じ値へ写らない」、全単射は両方を満たすことを意味する。
+一元集合と二元集合を使えば、各条件を元を列挙して確認できる。
+(2) の連結とは、空でない二つの相対開集合へ分割できないことである。
+像が分割できると仮定し、その二集合の逆像を取ると元の集合まで分割される。
+(3) のコンパクト性は、任意の開被覆から有限部分被覆を選べることとして使う。
+像の開被覆を逆像へ戻して定義域を覆い、選んだ有限個を再び像へ戻す。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
   \item[(1)] $X=Z=\{0\}$、$Y=\{0,1\}$ とし
@@ -146,6 +272,13 @@ $\Phi(f)=f(t^2,t^3,t^4)$ で定め，$I=\ker\Phi$，$R=\mathbb C[X,Y,Z]/I$ と�
   \item[(5)] $\mathfrak m$ が単項イデアルでないことを示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+準同型の像を $\mathbb C[t^2,t^3]$ と同定して商環を具体化する。
+核ではまず $Z=X^2$ を消去し、次に $Y^2=X^3$ で割った余りを偶数次数・奇数次数に分ける。
+極大性は原点での値写像、生成元の最小個数は
+$\mathfrak m/\mathfrak m^2$ のベクトル空間次元で判定する。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
   \item[(1)] $t^4=(t^2)^2$ だから
@@ -187,7 +320,7 @@ $\Phi(f)=f(t^2,t^3,t^4)$ で定め，$I=\ker\Phi$，$R=\mathbb C[X,Y,Z]/I$ と�
   \item[(3)] $R\cong\mathbb C[t^2,t^3]$ のもとで
   $\mathfrak m=(t^2,t^3)$ に対応する。定数項を取る準同型
   \[
-  \mathbb C[t^2,t^3]\longrightarrow\mathbb C,qquad h(t)\longmapsto h(0)
+  \mathbb C[t^2,t^3]\longrightarrow\mathbb C,\qquad h(t)\longmapsto h(0)
   \]
   は全射で、核は $(t^2,t^3)$ である。従って
   $R/\mathfrak m\cong\mathbb C$ は体だから $\mathfrak m$ は極大である。
@@ -222,6 +355,13 @@ $p(t)=(\cos t,\sin t,\cosh t)$ と円柱面 $S=\{x^2+y^2=1\}$ を考える。
   \item[(3)] $p$ の $S$ における測地的曲率ベクトルを求めよ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+(1) は $p',p'',p'''$ を曲率・捩率の公式へ代入する。
+(2) では円柱の二つの主方向へ $p'$ を分解し、内積から角度条件を作る。
+(3) は単位接ベクトルを弧長で微分して曲率ベクトルを求め、
+そこから円柱の法線方向成分を引けば測地的曲率ベクトルになる。
+\end{memo*}
 \begin{proof}[解答]
 まず
 \[
@@ -307,6 +447,13 @@ $\varphi(z)=\sum_{n=0}^\infty a_nz^n$ は収束べき級数で $a_0\ne0$ とす�
   \item[(4)] $n=0,1,2,3$ に対し $\displaystyle\int_{|z|=1}\frac{\d z}{z^n\sin^2z}$ を求めよ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+$\varphi(0)\ne0$ なら逆数は原点近くで正則だが、その収束半径は
+$\varphi$ 自身の収束半径ではなく、逆数が最初に出会う特異点で決まる。
+係数は積が1になる条件から再帰的に求める。
+積分では $1/\sin^2z$ を必要な次数まで Laurent 展開し、$z^{-1}$ の係数だけを読む。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
 \item[(1)] $\varphi(0)\ne0$ なので、連続性により0の十分小さい近傍で $\varphi(z)\ne0$。
@@ -372,6 +519,13 @@ $E\subset\R^d$ は可測で $|E|<\infty$，$f_n$ は $E$ 上可測とする。$A
   \item[(4)] 全ての $\varepsilon>0$ で $|A_{n,\varepsilon}|\to0$ なら，ほとんど至る所で0に収束する部分列があることを示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+(1), (2) は集合の定義関数を積分して Chebyshev 型の評価を得る。
+(3) は被積分関数が1以下なので、有限測度という仮定が優関数を与える。
+(4) は閾値を $1/k$、例外集合の測度を $2^{-k}$ とする部分列を選び、
+例外集合へ無限回入る点が零集合であることを使う。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
 \item[(1)] $F=\{|g|\ge1\}$ 上では $1\le|g|$ だから、$E$ 上で
@@ -430,35 +584,69 @@ $x_1,\ldots,x_n\in\R^3$ が $|(x_i,x_j)|=r$ $(i\ne j)$，$|(x_i,x_i)|=1$ を満�
   \item[(4)] $n\le6$ を示せ。
 \end{enumerate}
 \end{problem}
-\begin{proof}[解答]
-(1) 実対称行列は
+\begin{memo*}
+\textbf{解答の見通し。}
+内積 $(x_i,x_j)=x_i^{\mathsf T}x_j$ は二つのベクトルの角度を測る数である。
+目標の $n\le6$ を得るには、$n$ 個の対象を6次元の空間へ入れて一次独立だと示せばよい。
+そこで各ベクトルから $3\times3$ 対称行列 $X_i=x_ix_i^{\mathsf T}$ を作る。
+行列の一次関係 $\sum_i a_iX_i=O$ に $X_j$ との Frobenius 内積を取ると、
 \[
-\begin{pmatrix}a&d&e\\d&b&f\\e&f&c\end{pmatrix}
+\operatorname{tr}(X_iX_j)=(x_i^{\mathsf T}x_j)^2
 \]
-と一意に書ける。自由な成分は $a,b,c,d,e,f$ の6個なので次元は6である。
+となり、問題文 (2) のスカラー方程式へ変わる。
+従って (2) から $X_i$ が一次独立だと分かり、その個数は対称行列空間の次元6以下になる。
+\end{memo*}
+\begin{proof}[解答]
+(1) 3次実対称行列は $S^{\mathsf T}=S$、すなわち $s_{ji}=s_{ij}$ を満たす行列である。
+従って対角成分3個と、対角より上の成分3個を決めれば残りも決まり、
+\[
+S=\begin{pmatrix}a&d&e\\d&b&f\\e&f&c\end{pmatrix}
+\]
+と一意に書ける。この表示は
+\[
+S=aE_{11}+bE_{22}+cE_{33}
+ +d(E_{12}+E_{21})+e(E_{13}+E_{31})+f(E_{23}+E_{32})
+\]
+と同じであり、右辺の6個の行列は対称行列全体を生成し、
+係数が成分としてそのまま現れるので一次独立でもある。従って次元は6である。
 
-(2) 仮定の式で $(x_j,x_j)^2=1$、$i\ne j$ では $(x_i,x_j)^2=r^2$ だから
+(2) 仮定より $(x_j,x_j)^2=|(x_j,x_j)|^2=1$、$i\ne j$ では $(x_i,x_j)^2=|(x_i,x_j)|^2=r^2$
+である。従って $j$ を固定した式の $i=j$ の項と $i\ne j$ の項を分けると
 \begin{align*}
 0
+&=\sum_i a_i(x_i,x_j)^2\\
 &=a_j+r^2\sum_{i\ne j}a_i\\
 &=(1-r^2)a_j+r^2\sum_i a_i. \tag{$*$}
 \end{align*}
-$j,k$ に対する式の差を取ると
-$(1-r^2)(a_j-a_k)=0$。$r\ne1$ なので全ての $a_j$ は同じ値 $a$ である。
-これを元の式へ代入すると
+最後の等号では $\sum_{i\ne j}a_i=\sum_i a_i-a_j$ を使った。
+$r=|(x_i,x_j)|\ge0$ と $r\ne1$ より $r^2\ne1$、すなわち $1-r^2\ne0$ である。
+式 ($*$) の右辺第2項は $j$ によらないので、$j,k$ に対する二式の差を取れば
+\[
+(1-r^2)(a_j-a_k)=0,
+\]
+従って全ての $a_j$ は同じ値 $a$ である。これを ($*$) の前の行へ代入すると
 \[
 0=a+(n-1)r^2a=\{1+(n-1)r^2\}a.
 \]
-係数は正なので $a=0$、従って全ての $a_i$ は0である。
+$n\ge1$, $r\ge0$ なので係数 $1+(n-1)r^2$ は正であり、$a=0$、
+従って全ての $a_i$ は0である。
 
 (3) $\sum_i a_ix_ix_i^{\mathsf T}=O$ と仮定する。行列の Frobenius 内積
-$\langle C,D\rangle_F=\operatorname{tr}(C^{\mathsf T}D)$ を取り、各 $j$ について
+$\langle C,D\rangle_F=\operatorname{tr}(C^{\mathsf T}D)$ を取る。
+$x_ix_i^{\mathsf T}$ は対称なので $C^{\mathsf T}=C$ として扱えて、各 $j$ について
 \begin{align*}
 0
 &=\left\langle\sum_i a_ix_ix_i^{\mathsf T},x_jx_j^{\mathsf T}\right\rangle_F\\
 &=\sum_i a_i\operatorname{tr}(x_ix_i^{\mathsf T}x_jx_j^{\mathsf T})\\
 &=\sum_i a_i(x_i^{\mathsf T}x_j)^2.
 \end{align*}
+最後の等式は
+\[
+x_ix_i^{\mathsf T}x_jx_j^{\mathsf T}
+=x_i(x_i^{\mathsf T}x_j)x_j^{\mathsf T},\qquad
+\operatorname{tr}(x_ix_j^{\mathsf T})=x_j^{\mathsf T}x_i
+\]
+を順に用いたものである。
 これは (2) の式なので全ての $a_i$ は0、従って $x_ix_i^{\mathsf T}$ は一次独立である。
 
 (4) これらは6次元の実対称行列空間に属する $n$ 個の一次独立な元なので $n\le6$。
@@ -472,8 +660,19 @@ $p,q>0$ とし
 \]
 $\Gamma(p)\Gamma(q)=B(p,q)\Gamma(p+q)$ を，二重積分に (1) $x=st,y=s(1-t)$，(2) $x=(r\cos\theta)^2,y=(r\sin\theta)^2$ を用いる二通りで示せ。
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+まず二つの一変数積分の積を、第1象限 $x>0,y>0$ 上の二重積分として書く。
+被積分関数が非負なので、Tonelli の定理により積分順序を変えても値は変わらない。
+変数変換では、面積が何倍になるかを表す Jacobian の絶対値も必ず掛ける。
+
+一つ目では $s=x+y$ が二点の合計、$t=x/(x+y)$ が合計に占める $x$ の割合であり、
+$s$ だけの積分と $t$ だけの積分へ分離できる。
+二つ目では $x,y$ を平方付き極座標で表し、動径 $r$ と角度 $\theta$ の積分へ分ける。
+最後に $u=r^2$ と $t=\cos^2\theta$ を代入して、定義された Gamma・Beta 積分へ戻す。
+\end{memo*}
 \begin{proof}[解答]
-まず Tonelli の定理により、非負関数なので積分順序・変数変換を安全に行える。
+積の中の積分変数を区別して $x,y$ と書く。被積分関数は非負なので、Tonelli の定理から
 \[
 \Gamma(p)\Gamma(q)
 =\int_0^\infty\int_0^\infty x^{p-1}y^{q-1}e^{-(x+y)}\,\d x\d y.
@@ -481,8 +680,10 @@ $\Gamma(p)\Gamma(q)=B(p,q)\Gamma(p+q)$ を，二重積分に (1) $x=st,y=s(1-t)$
 
 (1) $x=st$, $y=s(1-t)$ とおくと、$s=x+y>0$, $t=x/(x+y)\in(0,1)$ であり、
 \[
-\left|\frac{\partial(x,y)}{\partial(s,t)}\right|
-=\left|\det\begin{pmatrix}t&s\\1-t&-s\end{pmatrix}\right|=s.
+\frac{\partial(x,y)}{\partial(s,t)}
+=\begin{vmatrix}t&s\\1-t&-s\end{vmatrix}=-s,
+\qquad
+\left|\frac{\partial(x,y)}{\partial(s,t)}\right|=s.
 \]
 従って
 \begin{align*}
@@ -494,8 +695,17 @@ $\Gamma(p)\Gamma(q)=B(p,q)\Gamma(p+q)$ を，二重積分に (1) $x=st,y=s(1-t)$
 &=\Gamma(p+q)B(p,q).
 \end{align*}
 
-(2) $x=(r\cos\theta)^2$, $y=(r\sin\theta)^2$ とおくと
-$0<r<\infty$, $0<\theta<\pi/2$ である。各偏微分は
+(2) $x=(r\cos\theta)^2$, $y=(r\sin\theta)^2$ とおく。
+$x,y>0$ から $r>0$ かつ $0<\theta<\pi/2$ であり、逆に
+\[
+r=\sqrt{x+y},\qquad \theta=\arctan\sqrt{\frac yx}
+\]
+と一意に定まるので、この対応は $(0,\infty)\times(0,\pi/2)$ と第1象限の間の全単射である。
+また、後で使うため
+\[
+x+y=r^2(\cos^2\theta+\sin^2\theta)=r^2
+\]
+に注意しておく。各偏微分は
 \[
 x_r=2r\cos^2\theta,\quad x_\theta=-2r^2\sin\theta\cos\theta,
 \]
@@ -506,26 +716,53 @@ y_r=2r\sin^2\theta,\quad y_\theta=2r^2\sin\theta\cos\theta
 \begin{align*}
 \left|\frac{\partial(x,y)}{\partial(r,\theta)}\right|
 &=\left|x_ry_\theta-x_\theta y_r\right|\\
+&=\left|4r^3\sin\theta\cos^3\theta
+ +4r^3\sin^3\theta\cos\theta\right|\\
 &=4r^3\sin\theta\cos\theta
 (\cos^2\theta+\sin^2\theta)\\
 &=4r^3\sin\theta\cos\theta.
 \end{align*}
-従って
+最後で絶対値が外れるのは $0<\theta<\pi/2$ で $\sin\theta,\cos\theta>0$ だからである。
+被積分関数を新しい変数で書き直すと
+\begin{align*}
+x^{p-1}y^{q-1}e^{-(x+y)}
+&=(r^2\cos^2\theta)^{p-1}(r^2\sin^2\theta)^{q-1}e^{-r^2}\\
+&=r^{2p-2}\cos^{2p-2}\theta\cdot
+  r^{2q-2}\sin^{2q-2}\theta\cdot e^{-r^2}
+\end{align*}
+なので、Jacobian を掛けると
+\begin{align*}
+&x^{p-1}y^{q-1}e^{-(x+y)}
+ \left|\frac{\partial(x,y)}{\partial(r,\theta)}\right|\\
+&\qquad=4r^{(2p-2)+(2q-2)+3}
+ \cos^{(2p-2)+1}\theta\,\sin^{(2q-2)+1}\theta\,e^{-r^2}\\
+&\qquad=4r^{2p+2q-1}
+ \cos^{2p-1}\theta\,\sin^{2q-1}\theta\,e^{-r^2}
+\end{align*}
+となる。この式は $r$ だけの因子と $\theta$ だけの因子の積なので、積分は分離して
 \begin{align*}
 \Gamma(p)\Gamma(q)
 &=4\int_0^\infty r^{2p+2q-1}e^{-r^2}\,\d r
 \int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\,\d\theta.
 \end{align*}
-第1積分で $u=r^2$, $\d u=2r\,\d r$ とおけば
+第1積分では $u=r^2$, $\d u=2r\,\d r$ とおく。
+$r^{2p+2q-1}\,\d r=r^{2p+2q-2}\cdot r\,\d r=u^{p+q-1}\cdot\frac{\d u}2$ だから
 \[
 \int_0^\infty r^{2p+2q-1}e^{-r^2}\,\d r
+=\frac12\int_0^\infty u^{p+q-1}e^{-u}\,\d u
 =\frac12\Gamma(p+q).
 \]
-第2積分で $t=\cos^2\theta$, $\d t=-2\sin\theta\cos\theta\,\d\theta$ とおけば
-\[
+第2積分では $t=\cos^2\theta$, $\d t=-2\sin\theta\cos\theta\,\d\theta$ とおく。
+このとき $\sin^2\theta=1-t$ であり、
+$\theta=0,\pi/2$ がそれぞれ $t=1,0$ に対応するので
+\begin{align*}
 \int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\,\d\theta
+&=\int_0^{\pi/2}\cos^{2p-2}\theta\sin^{2q-2}\theta
+  \cdot\sin\theta\cos\theta\,\d\theta\\
+&=\int_1^0t^{p-1}(1-t)^{q-1}\left(-\frac{\d t}2\right)\\
+&=\frac12\int_0^1t^{p-1}(1-t)^{q-1}\,\d t
 =\frac12B(p,q).
-\]
+\end{align*}
 係数も含めて $4\cdot(1/2)\cdot(1/2)=1$ なので、再び
 $\Gamma(p)\Gamma(q)=\Gamma(p+q)B(p,q)$ を得る。
 \end{proof}
@@ -538,6 +775,15 @@ $\Gamma(p)\Gamma(q)=\Gamma(p+q)B(p,q)$ を得る。
   \item[(3)] 任意の $A\subset X$ に対し $f(\overline A)\subset\overline{f(A)}$ を示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+(1) の開球 $B_X(x,\delta)$ は、$x$ からの距離が $\delta$ 未満の点全体である。
+連続とは、出力側で許す誤差 $\varepsilon$ を先に指定したとき、
+入力側の十分小さい誤差 $\delta$ を選べることをいう。量化記号はこの順序で書く。
+(2) は $x\notin f^{-1}(F)$ を一つ取り、その周りに逆像の補集合へ含まれる開球を作る。
+(3) の $x\in\overline A$ は、$x$ のどんな開球にも $A$ の点があるという意味である。
+連続性が与える $\delta$-球からその点を取り、像が任意の $\varepsilon$-球へ入ることを示す。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
 \item[(1)] $B_X(x,\delta)=\{y\in X\mid d_X(x,y)<\delta\}$ とする。
@@ -554,7 +800,17 @@ d_Y(f(x),f(y))<\varepsilon
 が成り立つことである。
 
 \item[(2)] $F\subset Y$ を閉集合とすると $Y\setminus F$ は開集合である。
-$f$ は連続なので $f^{-1}(Y\setminus F)$ は $X$ の開集合であり、
+$x\in f^{-1}(Y\setminus F)$ を取ると $f(x)\in Y\setminus F$ である。
+補集合は開なので、ある $\varepsilon>0$ に対して
+\[
+B_Y(f(x),\varepsilon)\subset Y\setminus F
+\]
+となる。$x$ における連続性から、ある $\delta>0$ が存在して
+\[
+f(B_X(x,\delta))\subset B_Y(f(x),\varepsilon)
+\]
+となる。従って $B_X(x,\delta)\subset f^{-1}(Y\setminus F)$ である。
+各点 $x$ の周りにこのような開球が取れるので $f^{-1}(Y\setminus F)$ は開であり、
 \[
 f^{-1}(Y\setminus F)=X\setminus f^{-1}(F)
 \]

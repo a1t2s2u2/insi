@@ -19,6 +19,13 @@ Z_{S_6}(\sigma)=\{\tau\in S_6\mid \tau\sigma\tau^{-1}=\sigma\}
   \item[(5)] $H=\langle(1\ 2),(3\ 4),(5\ 6)\rangle$ が $Z_{S_6}(\sigma)$ の正規部分群であることを示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+(1) は置換を抽象的に動かすのではなく、各文字に作用させて左右が一致することを確かめる。
+(2) では「6文字を三つの組に分ける」と読み替え、組の順序と組内の順序による重複を除く。
+(3) は共役作用の軌道・安定化群定理、(4) は三つの組を巡回させる元、
+(5) は中心化群の元が三つの組そのものを置換することが要点である。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
   \item[(1)] $c=(k_1\ k_2\ \cdots\ k_r)$ とおき、添字を巡回的に読むため
@@ -32,7 +39,7 @@ Z_{S_6}(\sigma)=\{\tau\in S_6\mid \tau\sigma\tau^{-1}=\sigma\}
   一方、巡回置換 $(\rho(k_1)\ \cdots\ \rho(k_r))$ も
   $\rho(k_i)$ を $\rho(k_{i+1})$ に写す。
   また $x\notin\{\rho(k_1),\ldots,\rho(k_r)\}$ なら
-  $\rho^{-1}(x)\notin\{k_1,ldots,k_r\}$ なので
+  $\rho^{-1}(x)\notin\{k_1,\ldots,k_r\}$ なので
   \[
   (\rho c\rho^{-1})(x)=\rho(\rho^{-1}(x))=x,
   \]
@@ -134,6 +141,12 @@ $S^1\subset\R^2$ を単位円，$x_0=(1,0)$ とする。
   \item[(3)] $S^1\times S^1$ の被覆空間で，基本群が $\Z$ と同型なものを構成せよ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+トーラスの二つの円周方向を別々に扱う。
+(1) では閉道とホモトピーを成分に分け、(2) では各円周を実数直線でほどく。
+(3) では一方だけをほどいて $S^1\times\R$ を作れば、被覆でありながら基本群を一つ残せる。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
   \item[(1)] $S^1\times S^1$ の基点付き閉道 $\gamma$ は
@@ -209,16 +222,56 @@ f(z)=\frac{\sin z}{e^z-1-z},\qquad C=\{z\mid |z|=1\}
   \item[(3)] $\displaystyle\int_C f(z)\,\d z$ を求めよ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+分母の先頭項は $z^2/2$ である。
+単位円上で残りの項が $z^2/2$ より真に小さいことを示せば、Rouch\'e の定理により
+分母の零点は重複度込みで2個と分かる。(1) で $0$ がすでに2位の零点なので、
+積分で考える極は $0$ だけになる。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] 展開すると
+  \item[(1)] 指数関数の Maclaurin 展開から
   \[
-  g(z)=\sum_{n=2}^{\infty}\frac{z^n}{n!}
-      =z^2\sum_{k=0}^{\infty}\frac{z^k}{(k+2)!}.
+  e^z=1+z+\frac{z^2}{2!}+\frac{z^3}{3!}+\cdots
   \]
-  後ろの級数は $z=0$ で $1/2$ だから，位数は $2$。
-  \item[(2)] 三角不等式から左辺は $\sum_{n=3}^{\infty}1/n!=e-5/2<1/2=|z^2/2|$。Rouché の定理により $g=z^2/2+(g-z^2/2)$ と $z^2/2$ は円内の零点数が同じく2。$0$ が既に2位の零点なので，他にはない。
-  \item[(3)] 円内の極は $0$ のみで1位。よって
+  である。従って
+  \[
+  g(z)=e^z-1-z
+      =\sum_{n=2}^{\infty}\frac{z^n}{n!}
+      =z^2\underbrace{\sum_{k=0}^{\infty}\frac{z^k}{(k+2)!}}_{=:q(z)}.
+  \]
+  $q$ は整関数であり $q(0)=1/2\ne0$ だから、$g$ の $0$ における
+  最初の非零項は $z^2/2$ である。よって $0$ は $g$ の2位の零点である。
+
+  \item[(2)] $|z|=1$ とする。(1) の級数から
+  \begin{align*}
+  \left|e^z-1-z-\frac{z^2}{2}\right|
+  &=\left|\sum_{n=3}^{\infty}\frac{z^n}{n!}\right|\\
+  &\le\sum_{n=3}^{\infty}\frac{|z|^n}{n!}
+  =\sum_{n=3}^{\infty}\frac1{n!}\\
+  &=e-\left(1+1+\frac12\right)
+  =e-\frac52.
+  \end{align*}
+  さらに $e<2.8$ より
+  \[
+  e-\frac52<2.8-2.5=0.3<\frac12
+  =\left|\frac{z^2}{2}\right|.
+  \]
+  ここで
+  \[
+  F(z)=\frac{z^2}{2},\qquad
+  H(z)=g(z)-F(z)
+  \]
+  とおくと、単位円 $C$ 上で $|H(z)|<|F(z)|$ である。
+  Rouch\'e の定理により、$g=F+H$ と $F$ は $C$ の内部に同じ個数の零点を持つ
+  （重複度も数える）。$F$ の零点は2位の零点 $0$ だけなので、その個数は2である。
+  一方、(1) より $g$ も $0$ に2位の零点を持つ。従って $g$ は
+  $C$ の内部に $0$ 以外の零点を持たない。
+
+  \item[(3)] (2) より、$C$ の内部で分母が零になるのは $0$ だけである。
+  分子 $\sin z$ は $0$ に1位の零点、分母 $g(z)$ は $0$ に2位の零点を持つから、
+  $f$ は $0$ に1位の極を持つ。実際、
   \[
   \sin z=z+O(z^3),\qquad
   e^z-1-z=\frac{z^2}{2}+O(z^3)
@@ -249,6 +302,13 @@ $G:\R\to\R$ は有界連続関数，$M=\sup_{x\in\R}|G(x)|$ とする。$f_n,f:\
   を示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+(1) は「連続写像による開集合の逆像は開集合」と可測性の定義をつなぐ。
+(2) は収束が成り立つ零集合の外で連続性を使う。
+(3) では積分領域を定義関数 $\chi_E$ に移し、有界性から得られる
+$M\chi_E$ を優関数として優収束定理を適用する。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
   \item[(1)] $I\subset\R$ は開集合であり、$G$ は連続だから $G^{-1}(I)$ も開集合である。
@@ -305,150 +365,339 @@ A=\begin{pmatrix}
 \end{pmatrix}.
 \]
 \begin{enumerate}
-  \item[(1)] $\det A$ を求めよ。
+  \item[(1)] $|A|$ を求めよ。
   \item[(2)] 固有値と各固有空間を求めよ。
   \item[(3)] $A$ をユニタリ行列で対角化せよ。
   \item[(4)] エルミート行列の固有値がすべて実数であることを示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+数 $\lambda$ が $A$ の固有値であるとは、$0$ でないベクトル $x$ が存在して
+$Ax=\lambda x$、すなわち $(A-\lambda I_4)x=0$ となることである。
+この同次連立方程式が非零解を持つための必要十分条件は
+$|A-\lambda I_4|=0$ なので、まずこの行列式を計算する。
+
+$\lambda I_4$ の対角成分は全て $\lambda$、それ以外の成分は0である。
+従って $A-\lambda I_4$ では、$A$ の対角成分だけが
+$2$ から $2-\lambda$ に変わる。その行列に
+$R_2\leftarrow R_2-iR_1$、$R_3\leftarrow R_3-R_1$、
+$R_4\leftarrow R_4+iR_1$ を行うと、第2行から第4行の全てに
+$1-\lambda$ が共通因子として現れる。この因子をくくり出し、
+さらに第1行を簡約化すると $(1-\lambda)^3(5-\lambda)$ が得られる。
+従って固有値の候補は1と5になる。
+
+各固有空間は、$\lambda=1,5$ をそれぞれ $(A-\lambda I_4)x=0$ へ代入し、
+現れた連立方程式を直接解いて求める。
+最後に、各固有空間から長さ1で互いに直交する固有ベクトルを合計4本選ぶ。
+これらを列に並べた行列 $P$ は $P^*P=I_4$ を満たし、
+$P^*AP$ が対角行列になる。これが問題文の「ユニタリ行列による対角化」である。
+\end{memo*}
 \begin{proof}[解答]
-$A$ の対角成分を $2=1+1$ と分けると
+固有値を求めるため、まず特性多項式
 \[
-A=I_4+B,
+p_A(\lambda)=|A-\lambda I_4|
 \]
-ただし
+を計算する。まず
 \[
-B:=A-I_4
+\lambda I_4=\begin{pmatrix}
+\lambda&0&0&0\\
+0&\lambda&0&0\\
+0&0&\lambda&0\\
+0&0&0&\lambda
+\end{pmatrix}
+\]
+なので、$A-\lambda I_4$ では対角成分からだけ $\lambda$ を引き、
+対角成分以外は元のままになる。従って
+\[
+A-\lambda I_4
 =\begin{pmatrix}
-1&-i&1&i\\ i&1&i&-1\\ 1&-i&1&i\\ -i&-1&-i&1
+2-\lambda&-i&1&i\\
+i&2-\lambda&i&-1\\
+1&-i&2-\lambda&i\\
+-i&-1&-i&2-\lambda
 \end{pmatrix}.
 \]
-この $B$ に行基本変形
+行列式では、ある行に別の行の定数倍を加えても値は変わらない。
 \[
 R_2\longleftarrow R_2-iR_1,\qquad
 R_3\longleftarrow R_3-R_1,\qquad
 R_4\longleftarrow R_4+iR_1
 \]
-を施すと
-\[
-\begin{pmatrix}
-1&-i&1&i\\ i&1&i&-1\\ 1&-i&1&i\\ -i&-1&-i&1
-\end{pmatrix}
-\longrightarrow
-\begin{pmatrix}
-1&-i&1&i\\0&0&0&0\\0&0&0&0\\0&0&0&0
-\end{pmatrix}.
-\]
-従って $\operatorname{rank}B=1$ である。
-
-第4列は非零であり、その第4成分は1である。そこで、この列を
-\[
-v=Be_4=\begin{pmatrix}i\\-1\\i\\1\end{pmatrix}
-\]
-とおく。$\operatorname{rank}B=1$ なので $B$ の各列は $v$ のスカラー倍である。実際に各列を比較すると
-\[
-Be_1=-iv,\qquad Be_2=-v,\qquad Be_3=-iv,\qquad Be_4=v.
-\]
-従って、任意の $x=(x_1,x_2,x_3,x_4)^{\mathsf T}\in\mathbb C^4$ に対し
+を行うと、行列式は
 \begin{align*}
-Bx
-&=x_1Be_1+x_2Be_2+x_3Be_3+x_4Be_4\\
-&=(-ix_1-x_2-ix_3+x_4)v.
+p_A(\lambda)
+&=\begin{vmatrix}
+2-\lambda&-i&1&i\\
+i&2-\lambda&i&-1\\
+1&-i&2-\lambda&i\\
+-i&-1&-i&2-\lambda
+\end{vmatrix}\\
+&=\begin{vmatrix}
+2-\lambda&-i&1&i\\
+-i(1-\lambda)&1-\lambda&0&0\\
+-(1-\lambda)&0&1-\lambda&0\\
+i(1-\lambda)&0&0&1-\lambda
+\end{vmatrix}\\
+&=(1-\lambda)^3\begin{vmatrix}
+2-\lambda&-i&1&i\\
+-i&1&0&0\\
+-1&0&1&0\\
+i&0&0&1
+\end{vmatrix}.
 \end{align*}
-一方
+最後の等号では、第2、第3、第4行から $1-\lambda$ を一つずつくくり出した。
+続いて
 \[
-v^*=\begin{pmatrix}-i&-1&-i&1\end{pmatrix},\qquad
-v^*x=-ix_1-x_2-ix_3+x_4
+R_1\longleftarrow R_1+iR_2-R_3-iR_4
 \]
-であるから、全ての $x$ について $Bx=v(v^*x)=vv^*x$ が成り立つ。よって
-\[
-B=vv^*,\qquad A=I_4+vv^*.
-\]
+を行うと
+\begin{align*}
+p_A(\lambda)
+&=(1-\lambda)^3\begin{vmatrix}
+5-\lambda&0&0&0\\
+-i&1&0&0\\
+-1&0&1&0\\
+i&0&0&1
+\end{vmatrix}\\
+&=(1-\lambda)^3(5-\lambda).
+\end{align*}
 \begin{enumerate}
-  \item[(1)] まず
+  \item[(1)] 特性多項式の定義
+  $p_A(\lambda)=|A-\lambda I_4|$ に $\lambda=0$ を代入すると
   \[
-  v^*v=(-i)i+(-1)(-1)+(-i)i+1\cdot1=4
+  p_A(0)=|A-0I_4|
+  \]
+  となる。$0I_4$ は全ての成分が0の行列なので
+  \[
+  A-0I_4=A,
+  \qquad
+  p_A(0)=|A|
   \]
   である。従って
   \[
-  Av=(I_4+vv^*)v=v+v(v^*v)=v+4v=5v.
-  \]
-  また $x\in v^\perp$、すなわち $v^*x=0$ なら
-  \[
-  Ax=x+v(v^*x)=x.
-  \]
-  $\mathbb C^4=\langle v\rangle\oplus v^\perp$ で
-  $\dim v^\perp=3$ だから、この直和に適合する基底に関する $A$ の行列は
-  $\diag(5,1,1,1)$ である。従って
-  \[
-  \det A=5\cdot1\cdot1\cdot1=5.
+  |A|=p_A(0)=1^3\cdot5=5.
   \]
 
-  \item[(2)] (1) の計算から固有値は $5$ と $1$ である。
-  $Ax=5x$ なら $vv^*x=4x$ であり、左辺は $\langle v\rangle$ に属するので
-  $x\in\langle v\rangle$。逆に $Av=5v$ だから
+  \item[(2)] 固有値は $p_A(\lambda)=0$ を満たす数なので
+  \[
+  \lambda=1,\qquad \lambda=5
+  \]
+  である。
+
+  固有値 $\lambda$ に対する固有空間とは、方程式
+  $(A-\lambda I_4)x=0$ の解を全て集めた集合である。
+  記号 $\ker M$ は「$Mx=0$ となる全ての $x$」を表すので、
+  この固有空間を $W_\lambda=\ker(A-\lambda I_4)$ と書く。
+
+  まず $\lambda=1$ の固有空間を求める。
+  \[
+  A-I_4
+  =\begin{pmatrix}
+  1&-i&1&i\\
+  i&1&i&-1\\
+  1&-i&1&i\\
+  -i&-1&-i&1
+  \end{pmatrix}.
+  \]
+  ここで
+  \[
+  R_2\longleftarrow R_2-iR_1,\qquad
+  R_3\longleftarrow R_3-R_1,\qquad
+  R_4\longleftarrow R_4+iR_1
+  \]
+  と行基本変形すると
+  \[
+  A-I_4\ \longrightarrow\
+  \begin{pmatrix}
+  1&-i&1&i\\
+  0&0&0&0\\
+  0&0&0&0\\
+  0&0&0&0
+  \end{pmatrix}.
+  \]
+  従って $(A-I_4)x=0$ は一つの方程式
+  \[
+  x_1-ix_2+x_3+ix_4=0
+  \]
+  と同値である。よって
+  \[
+  W_1=\ker(A-I_4)
+  =\left\{
+  \begin{pmatrix}x_1\\x_2\\x_3\\x_4\end{pmatrix}\in\mathbb C^4
+  \mathrel{}\middle|\mathrel{}
+  x_1-ix_2+x_3+ix_4=0
+  \right\},
+  \qquad \dim W_1=3.
+  \]
+  最後の次元が3であるのは、$x_2,x_3,x_4$ の三つを自由に選べば
+  \[
+  x_1=ix_2-x_3-ix_4
+  \]
+  と一意に決まり、自由に選べる複素数が三つあるためである。
+
+  次に $\lambda=5$ の固有空間を求める。
+  $x=(x_1,x_2,x_3,x_4)^{\mathsf T}$ とおくと、
+  $(A-5I_4)x=0$ は
+  \[
+  \begin{cases}
+  -3x_1-ix_2+x_3+ix_4=0, &\text{第1式},\\
+  ix_1-3x_2+ix_3-x_4=0, &\text{第2式},\\
+  x_1-ix_2-3x_3+ix_4=0, &\text{第3式},\\
+  -ix_1-x_2-ix_3-3x_4=0. &\text{第4式}
+  \end{cases}
+  \]
+  第1式から第3式を引くと
+  \[
+  -4x_1+4x_3=0,
+  \]
+  したがって $x_3=x_1$ である。これを第1式と第2式へ代入すると
+  \[
+  -2x_1-ix_2+ix_4=0,
+  \qquad
+  2ix_1-3x_2-x_4=0.
+  \]
+  左の式から
+  \[
+  x_4=x_2-2ix_1
+  \]
+  を得る。これを右の式へ代入すると
+  \[
+  2ix_1-3x_2-(x_2-2ix_1)=0
+  \quad\Longleftrightarrow\quad
+  4ix_1-4x_2=0,
+  \]
+  よって
+  \[
+  x_2=ix_1,
+  \qquad
+  x_4=-ix_1.
+  \]
+
+  $x_1=t$ と書けば、解は
+  \[
+  x=t\begin{pmatrix}1\\i\\1\\-i\end{pmatrix}
+  \quad(t\in\mathbb C)
+  \]
+  である。ここまでの計算で第1式から第3式は満たされている。
+  第4式についても
+  \[
+  -it-it-it-3(-it)=0
+  \]
+  となるので、この形のベクトルは元の4式を全て満たす。
+  従ってこれが解の全体である。$t=i$ と選んだベクトルを
+  \[
+  v=\begin{pmatrix}i\\-1\\i\\1\end{pmatrix}
+  \]
+
+  と書けば
   \[
   W_5=\ker(A-5I_4)=\langle v\rangle.
   \]
-  また
+
+  ここで $\langle v\rangle$ は
+  $\{tv\mid t\in\mathbb C\}$、すなわち $v$ の全ての複素数倍を表す。
+
+  \item[(3)] 複素数 $a+bi$ の共役を
+  $\overline{a+bi}=a-bi$ とする。列ベクトル
+  $z=(z_1,z_2,z_3,z_4)^{\mathsf T}$ に対して
   \[
-  Ax=x
-  \Longleftrightarrow vv^*x=0
-  \Longleftrightarrow v^*x=0
+  z^*=(\overline{z_1},\overline{z_2},\overline{z_3},\overline{z_4})
   \]
-  である。最後の同値では $v\ne0$ を用いた。従って
+  と書く。二つの複素ベクトル $z,w$ に対して
   \[
-  W_1=\ker(A-I_4)=v^\perp
-  =\{x\in\mathbb C^4\mid -ix_1-x_2-ix_3+x_4=0\}.
+  z^*w=0
   \]
-  よって固有値 $5$ の重複度は1、固有値 $1$ の重複度は3である。
-  \item[(3)] まず $W_1=v^\perp$ の条件
+  なら「$z$ と $w$ は直交する」という。また $z^*z=1$ なら $z$ の長さは1である。
+  行列 $P$ が
   \[
-  -ix_1-x_2-ix_3+x_4=0
+  P^*P=I_4
   \]
-  を満たす二つのベクトルとして
+  を満たすとき $P$ をユニタリ行列という。これは $P$ の各列の長さが1で、
+  異なる列同士が直交することを意味する。実際、$P$ の列を
+  $p_1,\ldots,p_4$ とすると、$P^*P$ の第 $(j,k)$ 成分は $p_j^*p_k$ なので、
+  対角成分が1、その他が0になる条件がそのまま現れる。
+
+  「$A$ をユニタリ行列で対角化する」とは、この条件を満たす $P$ を作り、
+  $P^*AP$ を対角行列にすることである。そのために、長さ1で互いに直交する
+  固有ベクトルを4本作り、それらを $P$ の列に並べる。
+
+  まず $W_1$ の方程式
+  \[
+  x_1-ix_2+x_3+ix_4=0
+  \]
+  を満たすベクトルとして
   \[
   w_1=(1,-i,0,0)^{\mathsf T},\qquad
   w_2=(0,0,1,i)^{\mathsf T}
   \]
-  を取る。実際
+  を選ぶ。実際、$w_1$ を方程式の左辺へ代入すると
   \[
-  v^*w_1=-i+i=0,\qquad v^*w_2=-i+i=0,
-  \qquad w_1^*w_2=0.
+  1-i(-i)+0+i\cdot0=1+i^2=0,
   \]
-  $w_1,w_2$ の両方に直交する $W_1$ のベクトル
-  $x=(x_1,x_2,x_3,x_4)^{\mathsf T}$ を求めると、満たすべき方程式は
+  $w_2$ を代入すると
+  \[
+  0-i\cdot0+1+i(i)=1+i^2=0
+  \]
+  となるので、どちらも $W_1$ に属する。また
+  \[
+  w_1^*w_2=(1,i,0,0)
+  \begin{pmatrix}0\\0\\1\\i\end{pmatrix}=0
+  \]
+  なので互いに直交する。
+
+  三本目は、$W_1$ に属し、さらに $w_1,w_2$ の両方に直交するように決める。
+  $x=(x_1,x_2,x_3,x_4)^{\mathsf T}$ とおくと、必要な式は
   \[
   \begin{cases}
   w_1^*x=x_1+ix_2=0,\\
   w_2^*x=x_3-ix_4=0,\\
-  v^*x=-ix_1-x_2-ix_3+x_4=0.
+  x_1-ix_2+x_3+ix_4=0.
   \end{cases}
   \]
-  第1、2式から $x_1=-ix_2$, $x_3=ix_4$。これらを第3式へ代入すると
+
+  第1、第2式から $x_1=-ix_2$, $x_3=ix_4$ である。これを第3式へ代入すると
   \[
-  -i(-ix_2)-x_2-i(ix_4)+x_4=-2x_2+2x_4=0,
+  -ix_2-ix_2+ix_4+ix_4=0,
   \]
-  従って $x_4=x_2$ である。$x_2=1$ と選べば
+  すなわち $x_4=x_2$ となる。$x_2=1$ と選べば
   \[
   w_3=(-i,1,i,1)^{\mathsf T}
   \]
-  を得る。各ノルムは
+  を得る。
+
+  各ベクトルの長さは
   \[
-  \norm{w_1}^2=2,\qquad \norm{w_2}^2=2,
-  \qquad \norm{w_3}^2=4,\qquad \norm v^2=4
+  \|w_1\|=\sqrt{1+|-i|^2}=\sqrt2,\qquad
+  \|w_2\|=\sqrt{1+|i|^2}=\sqrt2,
   \]
-  だから、正規化して
   \[
-  u_1=\frac1{\sqrt2}(1,-i,0,0)^{\mathsf T},\quad
+  \|w_3\|=\sqrt{|-i|^2+1+|i|^2+1}=2,
+  \qquad
+  \|v\|=\sqrt{|i|^2+|-1|^2+|i|^2+1}=2
+  \]
+  である。各ベクトルをその長さで割ると
+  \[
+  u_1=\frac1{\sqrt2}(1,-i,0,0)^{\mathsf T},\qquad
   u_2=\frac1{\sqrt2}(0,0,1,i)^{\mathsf T},
   \]
   \[
-  u_3=\frac12(-i,1,i,1)^{\mathsf T},\quad
-  u_4=\frac12(i,-1,i,1)^{\mathsf T}.
+  u_3=\frac12(-i,1,i,1)^{\mathsf T},\qquad
+  u_4=\frac12(i,-1,i,1)^{\mathsf T}
   \]
-  構成から $u_1,u_2,u_3$ は $W_1$ の正規直交基底であり、
-  $u_4=v/2$ は $W_5$ の単位ベクトルである。従って
+  となる。$u_1,u_2,u_3$ は、いずれも長さ1で、異なる二本の内積が0である。
+  この性質をまとめて「正規直交」という。また、この三本は固有値1の固有ベクトルであり、
+  $u_4=v/2$ は固有値5の単位固有ベクトルである。異なる固有空間同士の直交性も
+  \[
+  u_1^*u_4=\frac{i-i}{2\sqrt2}=0,\qquad
+  u_2^*u_4=\frac{i-i}{2\sqrt2}=0,
+  \]
+  \[
+  u_3^*u_4=\frac{-1-1+1+1}{4}=0
+  \]
+  と成分から確認できる。
+
+  従って
   \[
   P=(u_1\ u_2\ u_3\ u_4)
   =\begin{pmatrix}
@@ -458,14 +707,25 @@ B=vv^*,\qquad A=I_4+vv^*.
   0&i/\sqrt2&1/2&1/2
   \end{pmatrix}
   \]
-  は $P^*P=I_4$ を満たすユニタリ行列である。また
-  $Au_1=u_1$, $Au_2=u_2$, $Au_3=u_3$, $Au_4=5u_4$ だから
+  は $P^*P=I_4$ を満たすユニタリ行列である。
+  $P$ の各列は固有ベクトルなので、行列積を列ごとに書くと
+  \begin{align*}
+  AP
+  &=(Au_1\ Au_2\ Au_3\ Au_4)\\
+  &=(u_1\ u_2\ u_3\ 5u_4)\\
+  &=P\diag(1,1,1,5).
+  \end{align*}
+  ここで $\diag(1,1,1,5)$ は、対角成分が順に $1,1,1,5$ で、
+  それ以外の成分が0である行列を表す。
+  $P^*P=I_4$ だから $P^*$ は $P$ の逆行列 $P^{-1}$ である。
+  $AP=P\diag(1,1,1,5)$ の左から $P^*$ を掛けると
   \[
-  AP=P\diag(1,1,1,5),\qquad
-  P^*AP=\diag(1,1,1,5).
+  P^*AP=\diag(1,1,1,5)
   \]
-
-  \item[(4)] $X=X^*$ とし、$Xw=\lambda w$, $w\ne0$ とする。左から $w^*$ を掛けると
+  を得る。
+  \item[(4)] $X=X^*$ とし、$Xw=\lambda w$, $w\ne0$ とする。
+  $X=X^*$ は、$X$ が自分の共役転置と等しいというエルミート条件である。
+  固有値 $\lambda$ を一つの数として取り出すため、等式の左から $w^*$ を掛けると
   \[
   w^*Xw=\lambda w^*w.
   \]
@@ -490,10 +750,34 @@ D=\{(x,y)\in\R^2\mid1\le x^2+y^2\le4,\ 0\le x\le1,\ y\ge0\}.
   \item[(3)] $\displaystyle\iint_D\frac{x}{\sqrt{x^2+y^2}}\,\d x\d y$ を求めよ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+不等式を一つずつ図形へ直す。$1\le x^2+y^2\le4$ は半径1の円の外側かつ
+半径2の円の内側、$0\le x$ と $y\ge0$ は第1象限、$x\le1$ は直線 $x=1$ の左側を表す。
+
+極座標 $x=r\cos\theta$, $y=r\sin\theta$ では、半径の条件は $1\le r\le2$、
+直線の条件は $r\cos\theta\le1$、すなわち $r\le\sec\theta$ になる。
+$r$ の上端は $2$ と $\sec\theta$ の小さい方なので、両者が等しくなる
+$\theta=\pi/3$ で積分区間を分ける。面積要素は Jacobian により
+$\d x\d y=r\,\d r\d\theta$ へ変わる。
+(2) で $\int\sec\theta\,\d\theta$ の原始関数を先に求め、(3) で利用する。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] $x\ge0$, $y\ge0$ より第1象限にあり、円
-  $x^2+y^2=1$ と $x^2+y^2=4$ の間を直線 $x=1$ で切った領域である。
+  \item[(1)] 条件を一つずつ図形へ直す。
+  $1\le x^2+y^2$ は原点中心・半径1の円の周と外側、
+  $x^2+y^2\le4$ は原点中心・半径2の円の周と内側を表す。
+  $0\le x\le1$ は二直線 $x=0$ と $x=1$ に挟まれた帯、$y\ge0$ は上半平面である。
+  従って $D$ は、二つの同心円に挟まれた輪帯のうち、第1象限にあって
+  さらに直線 $x=1$ より左側にある部分である。
+
+  境界は四つの部分からなる。半径1の円弧
+  $x^2+y^2=1$ $(0\le x\le1,\ y\ge0)$、半径2の円弧
+  $x^2+y^2=4$ $(0\le x\le1,\ y\ge0)$、$y$ 軸上の線分
+  $x=0$ $(1\le y\le2)$、および直線上の線分
+  $x=1$ $(0\le y\le\sqrt3)$ である。
+  最後の線分の上端は、$x=1$ を $x^2+y^2=4$ へ代入した $y=\sqrt3$ であり、
+  下端は $x=1$, $y=0$、すなわち半径1の円と直線 $x=1$ の交点 $(1,0)$ である。
   \item[(2)] $h(\theta)=\tan\theta+\sec\theta$ とおく。
   $-\pi/2<\theta<\pi/2$ では
   $h=(1+\sin\theta)/\cos\theta>0$ なので対数を微分できる。
@@ -513,7 +797,8 @@ D=\{(x,y)\in\R^2\mid1\le x^2+y^2\le4,\ 0\le x\le1,\ y\ge0\}.
   \[
   x=r\cos\theta,\qquad y=r\sin\theta
   \]
-  とおく。$x\ge0$, $y\ge0$ から $0\le\theta\le\pi/2$ であり、
+  とおく。ここで $r=\sqrt{x^2+y^2}$ は原点からの距離、$\theta$ は正の $x$ 軸からの角度である。
+  $x\ge0$, $y\ge0$ から $0\le\theta\le\pi/2$ であり、
   $1\le x^2+y^2\le4$ は $1\le r\le2$ となる。また $x\le1$ は
   \[
   r\cos\theta\le1
@@ -531,14 +816,15 @@ D=\{(x,y)\in\R^2\mid1\le x^2+y^2\le4,\ 0\le x\le1,\ y\ge0\}.
   \]
   Jacobian は
   \[
-  \left|\det\begin{pmatrix}
+  \frac{\partial(x,y)}{\partial(r,\theta)}
+  =\begin{vmatrix}
   \partial x/\partial r&\partial x/\partial\theta\\
   \partial y/\partial r&\partial y/\partial\theta
-  \end{pmatrix}\right|
-  =\left|\det\begin{pmatrix}
+  \end{vmatrix}
+  =\begin{vmatrix}
   \cos\theta&-r\sin\theta\\
   \sin\theta&r\cos\theta
-  \end{pmatrix}\right|=r.
+  \end{vmatrix}=r.
   \]
   さらに $x/\sqrt{x^2+y^2}=\cos\theta$ なので、積分を
   \[
@@ -579,6 +865,17 @@ $d(x,A)=\inf\{d(x,a)\mid a\in A\}$ とおく。
   \item[(3)] $x$ が $A$ の触点であることと $d(x,A)=0$ が同値であることを示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+$d(x,A)$ は、$x$ と $A$ の各点との距離を集めた集合
+$\{d(x,a)\mid a\in A\}$ の下限である。下限は実際の最小値として達成されるとは限らないが、
+全ての $a\in A$ に対して $d(x,A)\le d(x,a)$ が成り立つ。
+
+(1) では三角不等式 $d(x,a)\le d(x,y)+d(y,a)$ を全ての $a$ について使い、
+右辺の $d(y,a)$ の下限を取る。得られるのは差の一方向の評価なので、$x,y$ を交換して反対方向も得る。
+(2) はこの評価へ $d(x,y)<\delta$ を代入して連続性の定義を確認する。
+(3) では「下限が0」と「どんな半径の開球にも $A$ の点がある」を両方向に示す。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
   \item[(1)] 任意の $a\in A$ に対し、三角不等式から

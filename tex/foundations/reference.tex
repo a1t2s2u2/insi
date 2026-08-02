@@ -103,26 +103,26 @@ $V=U+W$ かつ $U\cap W=\{0\}$ のとき $V=U\oplus W$ と書く。
 
 \section{行列式・固有値・対角化}
 
-\begin{definition}{固有値・固有空間・固有多項式}{eigenvalue}
+\begin{definition}{固有値・固有空間・特性多項式}{eigenvalue}
 正方行列 $A$ に対し $Av=\lambda v$ を満たす $v\ne0$ があるとき、$\lambda$ を\textbf{固有値}、
 $\ker(A-\lambda I)$ を\textbf{固有空間}という。
-$\det(\lambda I-A)$ を\textbf{固有多項式}という。
+$p_A(\lambda)=|A-\lambda I|$ を\textbf{特性多項式}という。
 \end{definition}
 
 \begin{proposition}{行列式と固有値}{determinant-eigenvalues}
 固有値を重複度込みで $\lambda_1,\ldots,\lambda_n$ とすると
 \[
-  \det A=\prod_{i=1}^n\lambda_i,
+  |A|=\prod_{i=1}^n\lambda_i,
   \qquad \tr A=\sum_{i=1}^n\lambda_i.
 \]
-また $A$ が正則であること、$\det A\ne0$、$0$ が固有値でないことは同値である。
+また $A$ が正則であること、$|A|\ne0$、$0$ が固有値でないことは同値である。
 \end{proposition}
 
 \begin{definition}{余因子・随伴行列}{cofactor-adjugate}
 $A=(a_{ij})$ を $n$ 次行列とする。$A$ から第 $i$ 行と第 $j$ 列を除いた小行列を
 $A_{ij}$ とするとき
 \[
-C_{ij}=(-1)^{i+j}\det A_{ij}
+C_{ij}=(-1)^{i+j}|A_{ij}|
 \]
 を $(i,j)$ \textbf{余因子}という。余因子行列 $(C_{ij})$ を転置した
 \[
@@ -136,11 +136,11 @@ C_{ij}=(-1)^{i+j}\det A_{ij}
 \[
 A\operatorname{adj}A
 =\operatorname{adj}A\,A
-=(\det A)I
+=|A|I
 \]
-が成り立つ。従って $\det A\ne0$ なら
+が成り立つ。従って $|A|\ne0$ なら
 \[
-A^{-1}=\frac1{\det A}\operatorname{adj}A.
+A^{-1}=\frac1{|A|}\operatorname{adj}A.
 \]
 \end{proposition}
 
@@ -244,7 +244,7 @@ $\inner{xx^{\mathsf T}}{yy^{\mathsf T}}_F=(x^{\mathsf T}y)^2$ である。
 
 \begin{proposition}{階数1更新 $I+vv^*$}{rank-one-update}
 $A=I+vv^*$ とする。$v$ の方向では固有値 $1+\norm v^2$、$v^\perp$ では固有値 $1$ である。
-従って $\det(I+vv^*)=1+\norm v^2$ である。
+従って $|I+vv^*|=1+\norm v^2$ である。
 
 $v\ne0$ なら
 \[

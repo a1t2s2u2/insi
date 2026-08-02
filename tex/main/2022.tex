@@ -11,13 +11,29 @@ $n$ 次単位行列を $E_n$ とする。
   \item[(3)] $A\ne O$ が ${}^{\mathsf T}A=-A$ を満たすとき，$P^{-1}AP$ を対角行列にする実正則行列 $P$ は存在しないことを示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+行列の等式は成分が多く、そのままでは比較しにくい。そこで、行列式や
+$x^{\mathsf T}(\cdot)x$ を使って、行列の等式を一つの実数の等式へ変える。
+(1) では $|BC|=|B|\,|C|$ により $A^2=-E_n$ を
+$|A|^2=(-1)^n$ へ変え、左右の符号を比べる。
+(2) では $x^{\mathsf T}A^{\mathsf T}Ax=\norm{Ax}^2\ge0$ なのに、
+右辺は $-\norm{x}^2<0$ になることを使う。
+(3) の $A^{\mathsf T}=-A$ は交代行列の条件であり、まず全ての実固有値が0だと示す。
+もし実数上で対角化できれば、対角成分は全て0となって $A=O$ になり、仮定と矛盾する。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] $A^2=-E_n$ より $A$ は正則である。両辺の行列式を取ると
+  \item[(1)] $A^2=-E_n$ なら
   \[
-  (\det A)^2=\det(A^2)=\det(-E_n)=(-1)^n.
+  A(-A)=(-A)A=E_n
   \]
-  $A$ は正則だから $(\det A)^2>0$ であり、従って $(-1)^n=1$ でなければならない。
+  だから、$-A$ が $A$ の逆行列であり、$A$ は正則である。両辺の行列式を取ると
+  \[
+  |A|^2=|A^2|=|-E_n|=(-1)^n.
+  \]
+  $A$ は正則だから $|A|\ne0$、従って $|A|^2>0$ である。
+  よって $(-1)^n=1$ でなければならない。
   よって $n$ は偶数である。$n=2$ では
   \[
   J=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\qquad
@@ -29,7 +45,7 @@ $n$ 次単位行列を $E_n$ とする。
   が一例である。
 
   \item[(2)] $A^{\mathsf T}A=-E_n$ を満たす実行列 $A$ が存在すると仮定する。
-  $0\ne x\in\R^n$ を取って両辺を二次形式で評価すると
+  $0\ne x\in\R^n$ を一つ取る。等式の左から $x^{\mathsf T}$、右から $x$ を掛けると
   \[
   x^{\mathsf T}A^{\mathsf T}Ax
   =(Ax)^{\mathsf T}(Ax)=\norm{Ax}^2\ge0
@@ -50,8 +66,9 @@ $n$ 次単位行列を $E_n$ とする。
   \]
   よって $v^{\mathsf T}Av=0$ である。
 
-  もし実正則行列 $P$ により $P^{-1}AP=D$ が実対角行列になるなら、$D$ の各対角成分は
-  $A$ の実固有値である。実固有値 $\lambda$ と対応する実固有ベクトル $0\ne v$ に対して
+  もし実正則行列 $P$ により $P^{-1}AP=D$ が実対角行列になるなら、
+  $P$ の各列は $A$ の実固有ベクトルであり、$D$ の各対角成分は対応する実固有値である。
+  実固有値 $\lambda$ と対応する実固有ベクトル $0\ne v$ に対して
   \[
   0=v^{\mathsf T}Av=v^{\mathsf T}(\lambda v)
   =\lambda\norm v^2
@@ -72,15 +89,51 @@ $f:\R\to\R$ が $f(x+y)=f(x)+f(y)$ を満たす。
   \item[(3)] $f$ が $\R$ 上連続なら，ある $c\in\R$ により $f(x)=cx$ と書けることを示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+条件 $f(x+y)=f(x)+f(y)$ は、入力の足し算が出力の足し算へ移るという意味である。
+まず式へ $x=y=0$ を入れて $f(0)$ を決め、次に $y=-x$ を入れて負号の扱いを決める。
+同じ $x$ を繰り返し足せば整数倍、$x=n(x/n)$ と書けば $1/n$ 倍、両者を組み合わせれば
+有理数倍に対する式が得られる。最後に、任意の実数 $x$ へ近づく有理数列を取り、
+連続性によって有理数上の公式 $f(r)=f(1)r$ を実数全体へ移す。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] $f(0)=f(0+0)=2f(0)$ より $f(0)=0$。
-  また $0=f(0)=f(x+(-x))=f(x)+f(-x)$ より $f(-x)=-f(x)$。
-  \item[(2)] $n\in\N$ なら帰納法で $f(nx)=nf(x)$。負の整数については (1) を使う。
-  $n\ge1$ に対し $f(x)=f(n(x/n))=nf(x/n)$ だから $f(x/n)=f(x)/n$。
-  従って $r=m/n\in\Q$ に対し
+  \item[(1)] 与えられた式へ $x=y=0$ を代入すると
   \[
-  f(rx)=f\left(m\frac{x}{n}\right)=m f(x/n)=\frac mn f(x)=rf(x).
+  f(0)=f(0+0)=f(0)+f(0)=2f(0)
+  \]
+  である。両辺から $f(0)$ を引けば $f(0)=0$ を得る。
+  次に $y=-x$ を代入すると
+  \[
+  0=f(0)=f(x+(-x))=f(x)+f(-x)
+  \]
+  なので $f(-x)=-f(x)$ である。
+
+  \item[(2)] まず $n\in\N$ に対する $f(nx)=nf(x)$ を、$n$ についての帰納法で示す。
+  $n=1$ では両辺とも $f(x)$ である。$n$ で成り立つと仮定すると
+  \[
+  f((n+1)x)=f(nx+x)=f(nx)+f(x)=nf(x)+f(x)=(n+1)f(x)
+  \]
+  なので $n+1$ でも成り立つ。従って全ての $n\in\N$ で成り立つ。
+  負の整数 $-n$ については、(1) の $f(-u)=-f(u)$ を $u=nx$ に使って
+  \[
+  f((-n)x)=f(-(nx))=-f(nx)=-nf(x)
+  \]
+  となる。$n=0$ の場合は (1) の $f(0)=0$ である。よって全ての整数 $m$ で
+  $f(mx)=mf(x)$ が成り立つ。
+
+  次に、$n\ge1$ に対して $x=n\cdot(x/n)$ と書き、いま示した式を $x/n$ へ使うと
+  \[
+  f(x)=f\left(n\cdot\frac xn\right)=nf\left(\frac xn\right),
+  \qquad\text{すなわち}\qquad
+  f\left(\frac xn\right)=\frac{f(x)}n.
+  \]
+  従って $r=m/n$（$m\in\Z$, $n\in\N$）に対し
+  \[
+  f(rx)=f\left(m\cdot\frac{x}{n}\right)
+  =m f\left(\frac xn\right)
+  =\frac mn f(x)=rf(x).
   \]
   \item[(3)] $c=f(1)$ とおくと (2) より $f(r)=cr$ $(r\in\Q)$。
   任意の $x\in\R$ に対し $r_n\in\Q$, $r_n\to x$ を取る。
@@ -101,11 +154,19 @@ $f:\R\to\R$ が $f(x+y)=f(x)+f(y)$ を満たす。
   \item[(3)] $f$ が全射なら，稠密集合 $V\subset Y$ の逆像 $f^{-1}(V)$ は $X$ で稠密である。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+反例とは、仮定を全て満たすのに結論だけが失敗する具体例である。
+連続性が直接保証するのは「開集合の\emph{逆像}が開」であり、開集合の像や
+コンパクト集合の逆像ではない。(1), (2) は全ての点を0へ送る定数写像で、この違いを示す。
+(3) では全射性も必要なので、実数直線はそのまま恒等的に写し、別に加えた孤立点 $p$ だけを0へ送る。
+孤立点とは一元集合 $\{p\}$ 自身が開になる点であり、これが逆像の稠密性を壊す。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
   \item[(1)] $X=Y=\R$ とし、定数写像
   \[
-  f:\R\to\R,qquad f(x)=0
+  f:\R\to\R,\qquad f(x)=0
   \]
   を考える。任意の開集合 $O\subset\R$ に対して
   \[
@@ -124,7 +185,10 @@ $f:\R\to\R$ が $f(x+y)=f(x)+f(y)$ を満たす。
   \]
   はコンパクトでない。実際、開被覆 $\{(-n,n)\}_{n\ge1}$ は有限部分被覆を持たない。
 
-  \item[(3)] $X=\R\sqcup\{p\}$ に直和位相を入れ、$Y=\R$ とする。写像 $f:X\to Y$ を
+  \item[(3)] $X=\R\sqcup\{p\}$ とする。$X$ の部分集合を、
+  $\R$ の開集合 $O$ と $E=\varnothing$ または $E=\{p\}$ を用いて
+  $O\sqcup E$ と書けるときに開と定める。これがここでいう直和位相であり、特に $\{p\}$ は開である。
+  $Y=\R$ とし、写像 $f:X\to Y$ を
   \[
   f(x)=x\quad(x\in\R),\qquad f(p)=0
   \]
@@ -159,6 +223,13 @@ $G=S_5$，$P=\langle(1\ 2\ 3\ 4\ 5)\rangle$ とする。また $\Omega$ を $G$ 
   \item[(4)] $S_6$ に，指数6で互いに共役でない二つの部分群があることを示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+位数5の部分群を数えると、$S_5$ が6個の Sylow $5$ 部分群へ作用することが分かる。
+この共役作用から通常とは異なる $S_5\hookrightarrow S_6$ を作り、
+最後に「6点へ推移的に作用するか、1点を固定するか」という共役で変わらない性質で
+二つの指数6部分群を区別する。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
   \item[(1)] $C_5=\langle a\rangle$ とする。自己同型は生成元 $a$ の像によって一意に決まり、
@@ -258,6 +329,13 @@ $\omega_p(u,v)=\inner p{u\times v}$ と定める。
   \item[(3)] $T(\theta,h)=(r\cos\theta,r\sin\theta,h)$ とおくとき，$\omega_{T(\theta,h)}(T_\theta,T_h)$ を求めよ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+(1) の反対称性は外積の順序交換から従う。非退化性では
+$v=p\times u$ と選ぶと、三重積が $\norm{u}^2p$ になって $u$ の長さを取り出せる。
+(2), (3) では高さ $h$ の緯線の半径を球面の方程式から決め、
+座標ベクトルの外積が外向き法線 $T$ に一致することを確かめる。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
   \item[(1)] 外積の反対称性 $v\times u=-(u\times v)$ より
@@ -323,10 +401,32 @@ $f$ を $\R$ 上有界連続とし，$y''-y=f(x)$ を考える。
   \item[(5)] $f(x)=1-e^{-x}$ $(x\ge0)$，$f(x)=0$ $(x<0)$ のとき，$y(x)\to-1$ $(x\to\infty)$ を満たす解を全て求めよ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+最初に同次方程式の二つの基本解 $e^x,e^{-x}$ を確認する。
+(3) の積分表示は二つの積分を別々に微分すると交差項が消えるよう設計されている。
+(4) は $f=1+(f-1)$ と分けて優収束定理を使い、
+(5) は $x<0$ と $x\ge0$ で解いた後、$x=0$ で $y,y'$ を接続する。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] $y=C_1e^x+C_2e^{-x}$。
-  \item[(2)] $|f|\le M$ とすれば $\int_a^\infty|e^{-x}f(x)|\,\d x\le Me^{-a}$。
+  \item[(1)] 特性方程式は
+  \[
+  \lambda^2-1=(\lambda-1)(\lambda+1)=0
+  \]
+  であり、相異なる特性根は $1,-1$ である。従って一般解は
+  \[
+  y(x)=C_1e^x+C_2e^{-x}\qquad(C_1,C_2\in\R)
+  \]
+  である。
+  \item[(2)] $f$ は有界だから、ある $M\ge0$ が存在して
+  $|f(x)|\le M$ が全ての $x$ で成り立つ。任意の $a\in\R$ に対して
+  \[
+  \int_a^\infty|e^{-x}f(x)|\,\d x
+  \le M\int_a^\infty e^{-x}\,\d x
+  =Me^{-a}<\infty.
+  \]
+  よって $e^{-x}f(x)$ は $[a,\infty)$ 上で絶対可積分であり、広義積分可能である。
   \item[(3)]
   \[
   A(x)=\int_x^\infty e^{-t}f(t)\,\d t,\qquad
@@ -414,6 +514,13 @@ $t>0$ とする。
   \item[(4)] $\displaystyle\lim_{t\to\infty}\int_0^t\frac{\sin x}{x}\,\d x$ を求めよ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+$\sin x/x$ は原点の除去可能特異点を埋めれば連続になる。
+次に $1/x=\int_0^\infty e^{-xy}\,\d y$ を使って二重積分へ移し、
+Fubini の定理で積分順序を交換する。
+最後は明示式の誤差項が $1/t+1/t^2$ 以下になることを示せばよい。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
   \item[(1)] $\lim_{x\to0}\sin x/x=1$ なので、$x=0$ で値を1と定めれば $[0,t]$ 上連続になる。
@@ -475,6 +582,16 @@ $t>0$ とする。
   \item[(3)] 全射連続写像 $F:S\to T$ について，$S$ が連結なら $T$ も連結であることを示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+(1) の閉包 $\overline A$ は「$A$ を含む最小の閉集合」である。
+二つの集合が等しいことは、左が右に含まれることと、右が左に含まれることを別々に示せばよい。
+(2) の Hausdorff 性は異なる二点を交わらない開近傍で分けられる性質、
+コンパクト性は任意の開被覆から有限個を選べる性質である。
+点 $x\notin K$ と各 $y\in K$ をまず個別に分け、有限個の近傍だけで $K$ 全体を覆う。
+(3) の連結とは、空でない二つの開集合へ分割できないことである。
+像が分割できると仮定し、連続写像の逆像を取ると定義域まで分割されることを示す。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
 \item[(1)] 閉包 $\overline{A\cup B}$ は $A\cup B$ を含む最小の閉集合である。
@@ -504,18 +621,32 @@ K\subset V_{y_1}\cup\cdots\cup V_{y_m}
 \[
 U=U_{y_1}\cap\cdots\cap U_{y_m}
 \]
-とおくと、$U$ は $x$ の開近傍であり $U\cap K=\varnothing$ である。
-従って $X\setminus K$ は開集合であり、$K$ は閉集合である。
+とおく。$U$ は有限個の開集合の共通部分なので開であり、
+各 $U_{y_i}$ が $x$ を含むので $x\in U$ である。すなわち $U$ は $x$ の開近傍である。
+さらに $U$ は $K$ と交わらない。実際、$z\in U\cap K$ があるとすると、
+$K\subset V_{y_1}\cup\cdots\cup V_{y_m}$ よりある $i$ について $z\in V_{y_i}$ であり、
+一方 $z\in U\subset U_{y_i}$ でもあるから
+\[
+z\in U_{y_i}\cap V_{y_i}=\varnothing
+\]
+となって矛盾する。従って $U\subset X\setminus K$ である。
+$x\in X\setminus K$ は任意だったので $X\setminus K$ は開集合であり、$K$ は閉集合である。
 
 \item[(3)] $T$ が連結でないと仮定すると、非空な開集合 $U,V\subset T$ により
 \[
-T=U\sqcup V
+T=U\cup V,\qquad U\cap V=\varnothing
 \]
-と書ける。$F$ は連続なので $F^{-1}(U),F^{-1}(V)$ は $S$ の開集合であり、全射なのでどちらも非空である。さらに
+と書ける。$F$ は連続なので $F^{-1}(U),F^{-1}(V)$ は $S$ の開集合である。
+また $F$ は全射だから、$U\ne\varnothing$ の点は像に現れ、$F^{-1}(U)\ne\varnothing$、
+同様に $F^{-1}(V)\ne\varnothing$ である。さらに逆像は合併と共通部分を保つので
 \[
-S=F^{-1}(T)=F^{-1}(U)\sqcup F^{-1}(V)
+F^{-1}(U)\cup F^{-1}(V)=F^{-1}(U\cup V)=F^{-1}(T)=S,
 \]
-となり、$S$ が連結であることに矛盾する。従って $T$ は連結である。
+\[
+F^{-1}(U)\cap F^{-1}(V)=F^{-1}(U\cap V)=F^{-1}(\varnothing)=\varnothing.
+\]
+従って $S$ も空でない二つの開集合へ分割され、$S$ が連結であることに矛盾する。
+よって $T$ は連結である。
 \end{enumerate}
 \end{proof}
 
@@ -527,32 +658,85 @@ $a<b$，$u$ は $[a,b]^2$ 上連続とする。
   $\displaystyle g(x)=\iint_{D_x}s(1-2st)\,\d s\d t$ とおく。$x>0$ における最大値を求めよ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+(1) では内側の積分全体を $F(s)=\int_a^s u(s,t)\,\d t$ と名付ける。
+すると $f(x)=\int_a^xF(s)\,\d s$ なので、$F$ が連続だと確認できれば
+微積分学の基本定理から $f'(x)=F(x)$ となる。
+$F$ では積分区間と被積分関数の両方が $s$ とともに変わるため、差を二つに分けて連続性を示す。
+(2) の不等式 $0\le s\le t\le x$ は、外側で $t$ を $0$ から $x$ まで動かし、
+各 $t$ を固定した内側で $s$ を $0$ から $t$ まで動かす、という積分順序を表す。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] $F(s)=\int_a^s u(s,t)\,\d t$ とおく。
-$u$ の連続性から $F$ も連続であり $f(x)=\int_a^xF(s)\,\d s$ だから、微積分学の基本定理より
+\item[(1)] $F(s)=\int_a^s u(s,t)\,\d t$ とおく。$F$ の連続性を確認する。
+$s,s+h\in[a,b]$ とし、まず $h>0$ の場合には
+\begin{align*}
+F(s+h)-F(s)
+&=\int_a^s\{u(s+h,t)-u(s,t)\}\,\d t
+  +\int_s^{s+h}u(s+h,t)\,\d t.
+\end{align*}
+$u$ はコンパクト集合 $[a,b]^2$ 上連続なので一様連続かつ有界であり、
+$|u|\le M$ となる $M\ge0$ と、任意の $\varepsilon>0$ に対して
+\[
+|s-s'|<\eta\quad\Longrightarrow\quad
+|u(s,t)-u(s',t)|<\varepsilon\qquad(t\in[a,b])
+\]
+を満たす $\eta>0$ が取れる。従って $0<h<\eta$ なら
+\[
+|F(s+h)-F(s)|
+\le\int_a^s|u(s+h,t)-u(s,t)|\,\d t
+ +\int_s^{s+h}|u(s+h,t)|\,\d t
+\le\varepsilon(b-a)+Mh.
+\]
+右辺は $\varepsilon\to0$, $h\to0$ で0へ近づくので、第1項も第2項も0へ収束する。
+$h<0$ でも積分区間の向きを入れ替えれば同じ評価ができるので、$F$ は連続である。
+
+$f(x)=\int_a^xF(s)\,\d s$ だから、微積分学の基本定理より
 \[
 f'(x)=F(x)=\int_a^x u(x,t)\,\d t.
 \]
-\item[(2)] 積分領域は $0\le s\le t\le x$ なので
+\item[(2)] 積分領域の条件 $0\le s\le t\le x$ は、外側で $t$ を $0$ から $x$ まで動かし、
+各 $t$ を固定した内側で $s$ を $0$ から $t$ まで動かすことを表す。
+被積分関数は $s(1-2st)=s-2s^2t$ だから
 \begin{align*}
 g(x)
 &=\int_0^x\int_0^t (s-2s^2t)\,\d s\d t\\
 &=\int_0^x\left[\frac{s^2}{2}-\frac{2ts^3}{3}\right]_{s=0}^{s=t}\d t\\
 &=\int_0^x\left(\frac{t^2}{2}-\frac{2t^4}{3}\right)\d t\\
-&=\frac{x^3}{6}-\frac{2x^5}{15}.
+&=\left[\frac{t^3}{6}-\frac{2t^5}{15}\right]_{t=0}^{t=x}
+=\frac{x^3}{6}-\frac{2x^5}{15}.
 \end{align*}
 従って
 \[
 g'(x)=\frac{x^2}{2}-\frac{2x^4}{3}
 =x^2\left(\frac12-\frac{2x^2}{3}\right).
 \]
-$x>0$ では $x=\sqrt3/2$ の前で正、後で負であり、$g(x)\to-\infty$ $(x\to\infty)$ だからここで最大になる。
+$x>0$ では $x^2>0$ なので、$g'(x)$ の符号は括弧の中だけで決まる。
+\[
+\frac12-\frac{2x^2}{3}=0
+\quad\Longleftrightarrow\quad
+x^2=\frac34
+\quad\Longleftrightarrow\quad
+x=\frac{\sqrt3}{2}\quad(x>0)
+\]
+であり、括弧の中は $x$ について単調減少だから、
+$0<x<\sqrt3/2$ では $g'(x)>0$、$x>\sqrt3/2$ では $g'(x)<0$ である。
+従って $g$ は $x=\sqrt3/2$ で最大になる。この点では
+\[
+x^2=\frac34,\qquad
+x^3=\frac34\cdot\frac{\sqrt3}{2}=\frac{3\sqrt3}{8},\qquad
+x^5=\left(\frac34\right)^2\frac{\sqrt3}{2}=\frac{9\sqrt3}{32}
+\]
+なので
 \[
 g\left(\frac{\sqrt3}{2}\right)
+=\frac16\cdot\frac{3\sqrt3}{8}-\frac{2}{15}\cdot\frac{9\sqrt3}{32}
 =\frac{\sqrt3}{16}-\frac{3\sqrt3}{80}
+=\frac{5\sqrt3-3\sqrt3}{80}
 =\frac{\sqrt3}{40}.
 \]
+よって $x>0$ における最大値は $\sqrt3/40$ である。
 \end{enumerate}
 \end{proof}
 
@@ -563,6 +747,16 @@ g\left(\frac{\sqrt3}{2}\right)
   \item[(3)] $M_3(\R)$ の交代行列全体 $W=\{A\mid A^{\mathsf T}=-A\}$ の基底と次元を求めよ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+部分空間であることは、零ベクトルを含み、任意の $x,y$ とスカラー $a,b$ に対して
+$ax+by$ も集合内に残ることを確認すればよい。
+合併の問題では、どちらにも含まれないベクトルを一つずつ取ると、その和が矛盾を生む。
+核 $\ker f$ は0へ写るベクトル全体である。単射の条件 $f(x)=f(y)\Rightarrow x=y$ を、
+線形性により $f(x-y)=0$ へ直すと核との関係が見える。
+交代行列では $A^{\mathsf T}=-A$ を各成分の式 $a_{ji}=-a_{ij}$ に直し、
+対角成分と下三角成分が上三角成分から決まることを読む。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
 \item[(1)] $W_1,W_2$ は部分空間なので $0\in W_1\cap W_2$ である。また
@@ -601,16 +795,26 @@ $\ker f=\{0\}$ となる。
 \[
 a_{ji}=-a_{ij}\qquad(1\le i,j\le3)
 \]
-を意味する。$i=j$ とすれば $a_{ii}=-a_{ii}$ より $a_{ii}=0$ であるから、$A$ は
+を意味する。$i=j$ とすれば $a_{ii}=-a_{ii}$、すなわち $2a_{ii}=0$ より $a_{ii}=0$ である。
+また $i<j$ の成分を $a_{12}=a$, $a_{13}=b$, $a_{23}=c$ とおけば、
+残りの成分は $a_{21}=-a$, $a_{31}=-b$, $a_{32}=-c$ と決まる。従って $A$ は
 \[
 A=\begin{pmatrix}
 0&a&b\\
 -a&0&c\\
 -b&-c&0
 \end{pmatrix}
-=a(E_{12}-E_{21})+b(E_{13}-E_{31})+c(E_{23}-E_{32})
+=aF_{12}+bF_{13}+cF_{23},
+\qquad
+F_{ij}=E_{ij}-E_{ji}
 \]
-と一意的に書ける。従って
+と書ける。ここで $E_{ij}$ は $(i,j)$ 成分だけが1で、他の成分が0の行列である。
+逆に $F_{12},F_{13},F_{23}$ はいずれも $F_{ij}^{\mathsf T}=-F_{ij}$ を満たすので $W$ に属し、
+その一次結合も $W$ に属する。よって $F_{12},F_{13},F_{23}$ は $W$ を生成する。
+
+一次独立性を見る。$aF_{12}+bF_{13}+cF_{23}=O$ とすると、上の行列表示の
+$(1,2),(1,3),(2,3)$ 成分を読めばそれぞれ $a=0$, $b=0$, $c=0$ である。
+従って $F_{12},F_{13},F_{23}$ は一次独立であり、$W$ の基底である。よって
 \[
 E_{12}-E_{21},\quad E_{13}-E_{31},\quad E_{23}-E_{32}
 \]

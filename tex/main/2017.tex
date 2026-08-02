@@ -10,36 +10,115 @@ f(x)=\begin{pmatrix}1&0&0\\1&3&-3\\-2&2&-4\end{pmatrix}x
 \]
 で定める。$f(W)\subset W$ となる1次元および2次元の部分空間 $W$ を全て求めよ。
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+$f(W)\subset W$ は、$W$ のベクトルへ行列 $A$ を掛けても結果が $W$ の外へ出ない、という意味である。
+まず $|\lambda I-A|=0$ から三つの固有値を求め、各連立方程式
+$(A-\lambda I)x=0$ を解いて固有方向を得る。
+1次元不変部分空間では、生成ベクトル $w$ に対して $Aw$ が $w$ の定数倍になるため、
+$w$ は固有ベクトルでなければならない。
+
+2次元の場合に「固有方向二つの組」以外がないことは、固有値ごとの成分を取り出す
+多項式 $\Pi_j(A)$ を具体的に作って示す。$W$ は $A$ で不変なら $A$ の多項式でも不変なので、
+$w\in W$ の各固有方向成分も $W$ に入る。
+\end{memo*}
 \begin{proof}[解答]
-行列を $A$ と書く。まず特性多項式を第1行で展開すると
+行列を $A$ と書く。数 $\lambda$ が固有値であるとは、$(\lambda I-A)x=0$ が
+$x\ne0$ の解を持つこと、すなわち $|\lambda I-A|=0$ となることである。まず
+\[
+\lambda I-A
+=\begin{pmatrix}
+\lambda-1&0&0\\
+-1&\lambda-3&3\\
+2&-2&\lambda+4
+\end{pmatrix}
+\]
+である。第1行は $(1,1)$ 成分以外が0なので、第1行に沿って余因子展開すると
 \begin{align*}
-\det(\lambda I-A)
-&=(\lambda-1)\det\begin{pmatrix}\lambda-3&3\\-2&\lambda+4\end{pmatrix}\\
+|\lambda I-A|
+&=(\lambda-1)\begin{vmatrix}\lambda-3&3\\-2&\lambda+4\end{vmatrix}\\
 &=(\lambda-1)\{(\lambda-3)(\lambda+4)+6\}\\
+&=(\lambda-1)(\lambda^2+\lambda-6)\\
 &=(\lambda-1)(\lambda-2)(\lambda+3).
 \end{align*}
-従って固有値は $1,2,-3$ で相異なる。各方程式 $(A-\lambda I)x=0$ を解くと、対応する固有ベクトルを
+従って固有値は $1,2,-3$ の三つで、互いに相異なる。
+
+各固有空間を、連立方程式 $(A-\lambda I)x=0$ を解いて求める。
+$\lambda=1$ では
+\[
+A-I=\begin{pmatrix}0&0&0\\1&2&-3\\-2&2&-5\end{pmatrix}
+\]
+なので、方程式は
+\[
+x+2y-3z=0,\qquad -2x+2y-5z=0
+\]
+の二本である。第1式を $x=3z-2y$ と解いて第2式へ代入すると
+\[
+-2(3z-2y)+2y-5z=6y-11z=0
+\]
+となる。分数を避けるため $z=6t$ と取れば $y=11t$、$x=18t-22t=-4t$ である。
+$\lambda=2$ では
+\[
+A-2I=\begin{pmatrix}-1&0&0\\1&1&-3\\-2&2&-6\end{pmatrix}
+\]
+であり、第1行から $x=0$、第2行から $y=3z$ が従う。第3行はこの二つから
+自動的に満たされるので、新しい条件を与えない。
+$\lambda=-3$ では
+\[
+A+3I=\begin{pmatrix}4&0&0\\1&6&-3\\-2&2&-1\end{pmatrix}
+\]
+であり、第1行から $x=0$、第2行から $z=2y$ が従う。第3行 $-2x+2y-z=0$ は
+同じ条件である。以上より、各固有空間は1次元で、固有ベクトルを
 \[
 v_1=(-4,11,6)^{\mathsf T},\quad v_2=(0,3,1)^{\mathsf T},\quad
 v_3=(0,1,2)^{\mathsf T}
 \]
-と取れる。
+と取れる。相異なる固有値に属する固有ベクトルは一次独立なので、
+$v_1,v_2,v_3$ は $\R^3$ の基底である。
 
 1次元部分空間 $W=\langle w\rangle$ が不変なら $Aw\in\langle w\rangle$ だから、
 $Aw=\lambda w$ となり、$w$ は固有ベクトルである。各固有空間は1次元なので、
 1次元不変部分空間は
 $\langle v_1\rangle,\langle v_2\rangle,\langle v_3\rangle$ に限る。
 
-2次元不変部分空間 $W$ について、$A$ の最小多項式
-$(t-1)(t-2)(t+3)$ は $A|_W$ も零化する。これは重根を持たないので
-$A|_W$ は対角化可能であり、$W$ は $A$ の固有ベクトルからなる基底を持つ。
-各固有空間は1次元だから、その基底は相異なる二つの固有値に属する。従って
+2次元不変部分空間 $W$ を考える。$v_1,v_2,v_3$ は基底なので、任意の $w\in\R^3$ は
+\[
+w=c_1v_1+c_2v_2+c_3v_3
+\]
+と一意に書ける。この分解の各項を取り出すため、固有値 $\lambda_1,\lambda_2,\lambda_3=1,2,-3$ に対して
+\[
+\Pi_1=\frac{(A-2I)(A+3I)}{(1-2)(1+3)},\qquad
+\Pi_2=\frac{(A-I)(A+3I)}{(2-1)(2+3)},\qquad
+\Pi_3=\frac{(A-I)(A-2I)}{(-3-1)(-3-2)}
+\]
+とおく。各 $\Pi_k$ は、分子で $\lambda_k$ 以外の固有値の因子を掛け、
+分母でその値を1に正規化した行列である。実際、$Av_j=\lambda_jv_j$ より
+$(A-\mu I)v_j=(\lambda_j-\mu)v_j$ なので
+\[
+\Pi_1v_j=\frac{(\lambda_j-2)(\lambda_j+3)}{(1-2)(1+3)}\,v_j
+\]
+となる。$j=1$ では係数は $((1-2)(1+3))/((1-2)(1+3))=1$、
+$j=2,3$ では分子に因子 $\lambda_j-2$ または $\lambda_j+3$ が0として現れるため係数は0である。従って
+\[
+\Pi_1v_1=v_1,\qquad \Pi_1v_2=\Pi_1v_3=0,
+\qquad\text{すなわち}\qquad
+\Pi_1w=c_1v_1.
+\]
+同じ計算により $\Pi_2w=c_2v_2$、$\Pi_3w=c_3v_3$ である。
+
+$W$ が $A$ で不変なら、$w\in W$ に対し $Aw\in W$、これを繰り返して $A^2w\in W$ であり、
+部分空間は和と定数倍で閉じているので、$A$ の多項式で書けた $\Pi_k$ についても
+$\Pi_kw\in W$ となる。従って $w$ の各成分 $c_kv_k$ は $W$ に属する。
+すなわち $W$ は、$W$ の元に現れる固有方向 $v_k$ たちで生成される。
+$\dim W=2$ であり各 $\langle v_k\rangle$ は1次元だから、現れる固有方向はちょうど二つである。よって
 \[
 \langle v_1,v_2\rangle,\qquad
 \langle v_1,v_3\rangle,\qquad
 \langle v_2,v_3\rangle
 \]
-が全てである。実際、各空間は固有ベクトルで生成されるので $A$ で不変である。
+のいずれかに限る。逆にこれら三つは固有ベクトルで生成されるので、
+$A(av_i+bv_j)=\lambda_iav_i+\lambda_jbv_j$ より $A$ で不変である。
+従って2次元不変部分空間はこの三つで全てである。
 \end{proof}
 
 \begin{problem}{第2問｜近似恒等核}{2017-b-2}
@@ -51,57 +130,125 @@ $I_n=\int_0^\infty n f(x)e^{-nx}\,\d x$ とおく。
   \item[(3)] $I_n\to f(0)$ を示せ。
 \end{enumerate}
 \end{problem}
-\begin{proof}[解答]
-$|f(x)|\le M$ とする。(1) は
-\[
-\int_0^\infty|nf(x)e^{-nx}|\,\d x
-\le M\int_0^\infty ne^{-nx}\,\d x
-=M[-e^{-nx}]_0^\infty=M
-\]
-より絶対収束する。(2) も同様に
-\[
-\left|\int_\delta^\infty nf(x)e^{-nx}\,\d x\right|
-\le M\int_\delta^\infty ne^{-nx}\,\d x
-=Me^{-n\delta}\longrightarrow0.
-\]
+\begin{memo*}
+\textbf{解答の見通し。}
+有界とは、ある定数 $M$ が存在して全ての $x\ge0$ で $|f(x)|\le M$ となることである。
+重み $ne^{-nx}$ は非負で、$[0,\infty)$ 上の積分が1になる。
+さらに固定した $\delta>0$ より右側の積分は $e^{-n\delta}$ なので、$n\to\infty$ で0になる。
 
-(3) $\int_0^\infty ne^{-nx}\,\d x=1$ より
+$I_n-f(0)$ を一つの積分として書き、$[0,\delta]$ と $[\delta,\infty)$ に分ける。
+前半では0における連続性により $f(x)-f(0)$ が小さく、後半では $f$ の有界性と
+指数関数の減衰により積分全体が小さくなる。この二つを別々に $\varepsilon/2$ 未満へ抑える。
+\end{memo*}
+\begin{proof}[解答]
+$f$ が有界であるとは、ある定数 $M\ge0$ が存在して、全ての $x\ge0$ で
+$|f(x)|\le M$ となることである。以下で繰り返し使うため、重み $ne^{-nx}$ の積分を先に計算しておく。
+$a\ge0$ に対して
 \[
-I_n-f(0)=\int_0^\infty n(f(x)-f(0))e^{-nx}\,\d x.
+\int_a^\infty ne^{-nx}\,\d x
+=\lim_{R\to\infty}\left[-e^{-nx}\right]_{x=a}^{x=R}
+=\lim_{R\to\infty}\left(e^{-na}-e^{-nR}\right)
+=e^{-na}.
 \]
-任意の $\varepsilon>0$ を取る。$f$ の0での連続性から、ある $\delta>0$ があり
-$0\le x\le\delta$ なら $|f(x)-f(0)|<\varepsilon/2$ となる。一方
-$|f(x)-f(0)|\le2M$ なので、積分を $[0,\delta]$ と $[\delta,\infty)$ に分けると
-\begin{align*}
-|I_n-f(0)|
-&\le\frac\varepsilon2\int_0^\delta ne^{-nx}\,\d x
-+2M\int_\delta^\infty ne^{-nx}\,\d x\\
-&\le\frac\varepsilon2+2Me^{-n\delta}.
-\end{align*}
-$n$ を十分大きくすれば右辺は $\varepsilon$ 未満になるので $I_n\to f(0)$ である。
+特に $a=0$ とすれば
+\[
+\int_0^\infty ne^{-nx}\,\d x=1
+\]
+であり、この重みは全体で1になる。
+\begin{enumerate}
+  \item[(1)] 全ての $x\ge0$ で
+  \[
+  |nf(x)e^{-nx}|=n|f(x)|e^{-nx}\le Mne^{-nx}
+  \]
+  であるから、上で計算した積分を使うと
+  \[
+  \int_0^\infty|nf(x)e^{-nx}|\,\d x
+  \le M\int_0^\infty ne^{-nx}\,\d x=M<\infty.
+  \]
+  よって積分は絶対収束し、$I_n$ は有限の値を取る。
+
+  \item[(2)] 同じ評価を区間 $[\delta,\infty)$ で行うと
+  \[
+  \left|\int_\delta^\infty nf(x)e^{-nx}\,\d x\right|
+  \le M\int_\delta^\infty ne^{-nx}\,\d x
+  =Me^{-n\delta}.
+  \]
+  $\delta>0$ は $n$ によらず固定されているので、$n\to\infty$ のとき
+  $e^{-n\delta}\to0$ である。従って左辺も0へ収束する。
+
+  \item[(3)] 重みの積分が1であることから
+  $f(0)=\int_0^\infty nf(0)e^{-nx}\,\d x$ なので、差を一つの積分にまとめて
+  \[
+  I_n-f(0)=\int_0^\infty n\{f(x)-f(0)\}e^{-nx}\,\d x
+  \]
+  と書ける。任意の $\varepsilon>0$ を取る。$f$ は0で連続だから、ある $\delta>0$ が存在して
+  \[
+  0\le x\le\delta\quad\Longrightarrow\quad
+  |f(x)-f(0)|<\frac\varepsilon2
+  \]
+  となる。一方、全ての $x\ge0$ で
+  $|f(x)-f(0)|\le|f(x)|+|f(0)|\le2M$ である。
+  積分区間を $[0,\delta]$ と $[\delta,\infty)$ に分け、前半には連続性から得た評価、
+  後半には有界性から得た評価を使うと
+  \begin{align*}
+  |I_n-f(0)|
+  &\le\int_0^\delta n|f(x)-f(0)|e^{-nx}\,\d x
+    +\int_\delta^\infty n|f(x)-f(0)|e^{-nx}\,\d x\\
+  &\le\frac\varepsilon2\int_0^\delta ne^{-nx}\,\d x
+    +2M\int_\delta^\infty ne^{-nx}\,\d x\\
+  &\le\frac\varepsilon2+2Me^{-n\delta}.
+  \end{align*}
+  最後の行では、被積分関数が非負であることから
+  $\int_0^\delta ne^{-nx}\,\d x\le\int_0^\infty ne^{-nx}\,\d x=1$ を使った。
+  ここで $\delta$ は $n$ によらず定まっているので、
+  $2Me^{-n\delta}<\varepsilon/2$ となる $N$ を取れる。$n\ge N$ なら
+  $|I_n-f(0)|<\varepsilon$ である。$\varepsilon>0$ は任意だったから $I_n\to f(0)$ である。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第3問｜有理数の部分空間}{2017-b-3}
 $\Q$ に通常の距離を入れ，$A=\{x\in\Q\mid1\le x<2\}$ とする。$A$ は閉，コンパクト，連結か。
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+ここでの全体空間は $\R$ ではなく $\Q$ なので、閉・コンパクト・連結は全て $\Q$ の中で判定する。
+閉集合なら、その集合内の収束列の極限も集合内に残る。そこで $A$ の点からなる列を作り、
+$\Q$ 内の点 $2\notin A$ へ収束させる。
+距離空間では「コンパクトなら閉」が成り立つので、閉でないことからコンパクトでもないと分かる。
+
+連結でないことを示すには、$A$ を交わらない二つの非空な相対開集合へ分ける。
+$1<c<2$ となる無理数 $c$ を境界に選べば、$c$ 自身は $\Q$ に存在しないため、
+左側と右側の間に点を残さず分割できる。
+\end{memo*}
 \begin{proof}[解答]
-閉でもコンパクトでも連結でもない。
+閉でもコンパクトでも連結でもない。全体空間は $\R$ ではなく $\Q$ なので、
+以下の判定は全て距離空間 $\Q$ の中で行う。
 
-まず $n\ge2$ に対して $x_n=2-1/n$ とおくと
+まず $A$ が $\Q$ の閉集合でないことを示す。$n\ge2$ に対して
 \[
-x_n\in A,\qquad d_{\Q}(x_n,2)=|x_n-2|=\frac1n\longrightarrow0
+x_n=2-\frac1n
 \]
-である。一方、$2\in\Q$ であるが $2\notin A$ なので、$A$ は $\Q$ の閉集合ではない。
-距離空間は Hausdorff 空間であり、そのコンパクト部分集合は閉集合である。
-従って、閉集合でない $A$ はコンパクトでもない。
+とおくと、$x_n$ は有理数で $1\le x_n<2$ を満たすので $x_n\in A$ である。また
+\[
+d_{\Q}(x_n,2)=|x_n-2|=\frac1n\longrightarrow0
+\]
+だから、$\Q$ の中で $x_n\to2$ である。閉集合は、その集合内の点からなる収束列の
+極限を含む。ところが極限 $2$ は $\Q$ の点でありながら $2\notin A$ である。
+従って $A$ は $\Q$ の閉集合ではない。
 
-次に、無理数 $c\in(1,2)$ を一つ取り
+距離空間は Hausdorff 空間であり、Hausdorff 空間のコンパクト部分集合は閉集合である。
+$A$ は閉集合でないから、その対偶により $A$ はコンパクトでもない。
+
+次に連結性を見る。$1<c<2$ を満たす無理数 $c$ を一つ取る（例えば $c=\sqrt2$）。
 \[
-U=A\cap(-\infty,c),\qquad V=A\cap(c,\infty)
+U=A\cap\{x\in\Q\mid x<c\},\qquad
+V=A\cap\{x\in\Q\mid x>c\}
 \]
-とおく。ここで区間との共通部分は $\Q$ の相対位相で開であるから、
-$U,V$ は $A$ の相対位相で開である。また有理数の稠密性より $U,V$ はともに空でなく、
-$c\notin\Q$ だから
+とおく。$\{x\in\Q\mid x<c\}$ と $\{x\in\Q\mid x>c\}$ は $\Q$ の開集合なので、
+$U,V$ は $A$ の相対位相で開である。
+$1\in U$ であり、有理数の稠密性から $c<x<2$ を満たす有理数 $x$ が取れて $x\in V$ だから、
+$U,V$ はともに空でない。さらに $c\notin\Q$ なので、$A$ の各点は $x<c$ と $x>c$ の
+ちょうど一方だけを満たす。従って
 \[
 A=U\sqcup V
 \]
@@ -119,6 +266,12 @@ $X=\{x\in G\mid[x,h]\in K\ (\forall h\in H)\}$，$[x,y]=x^{-1}y^{-1}xy$ とお�
   \item[(3)] $K\triangleleft H$ かつ $H/K$ が可換であることと $H\subset X$ が同値であることを示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+$[x,k]\in K$ を変形すると、$x$ が共役によって $K$ を保つことが分かる。
+この正規化の事実と積・逆元に対する交換子公式を組み合わせて $X$ の部分群性を示す。
+最後は「商群で可換」と「全ての交換子が $K$ に入る」が同値であることを使う。
+\end{memo*}
 \begin{proof}[解答]
 (1) $k\in K\subset H$ とすると $[x,k]=x^{-1}k^{-1}xk\in K$ である。
 従って $x^{-1}k^{-1}x=[x,k]k^{-1}\in K$、逆元を取って $x^{-1}kx\in K$。
@@ -150,6 +303,13 @@ $R$ を可換環，$a\in R$，$S=\{a^n\mid n\ge0\}$ とする。自然な写像 
   \item[(2)] $\tau$ が全射なら $\ker\pi+\ker\tau=R$ を示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+局所化で $x/1=0$ とは、ある $a^m$ を掛けると $x$ が0になることを意味する。
+(1) ではさらに $x=ar$ を使って $x$ 自身の冪を0にする。
+(2) では全射性により局所化の元 $1/a$ を $R$ の元で表し、
+そこから $1$ を二つの核の元の和として書く。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
   \item[(1)] $x\in\ker\pi$ であることは $x\in(a)$ を意味するので、ある $r\in R$ により
@@ -195,6 +355,13 @@ $R$ を可換環，$a\in R$，$S=\{a^n\mid n\ge0\}$ とする。自然な写像 
   \item[(2)] 四面体の境界のうち，三つの面からなる複体を $K_1$，残り一面を $K_2$ とする。$K_1\cap K_2,K_1,K_2,K_1\cup K_2$ の Betti 数を求めよ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+被覆写像の確認では短い円弧の逆像が $2\pi$ ごとの区間へ分かれることを明示する。
+被覆変換は $F(T(\theta))=F(\theta)$ から差が $2\pi$ の整数倍と分かり、
+連結性によってその整数が一定になる。
+複体はそれぞれ $D^2,S^1,S^2$ のどれと同相かを見抜けば Betti 数を読める。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
 \item[(1)] $z_0=F(\theta_0)\in S^1$ を任意に取り、$0<\varepsilon<\pi$ とする。
@@ -252,6 +419,13 @@ p(u,v)=(u,u^2/2,0)+\frac{a\cos v}{\sqrt{u^2+1}}(-u,1,0)+a\sin v(0,0,1).
 \]
 これが曲面であることを示し，Gauss 曲率・平均曲率を求めよ。また $q(s)=p(u_0,s/a)$ が測地線であることを示せ。
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+与式を中心曲線 $c$ の法平面内に半径 $a$ の円を動かした管状曲面として読む。
+Frenet 標構で $p_u,p_v$ を表せば、正則性と主方向が同時に分かる。
+単位法線の微分から二つの主曲率を求め、その積と平均を取る。
+$u=u_0$ の円では、単位速度曲線の加速度が曲面法線方向だけになることを示す。
+\end{memo*}
 \begin{proof}[解答]
 中心曲線を $c(u)=(u,u^2/2,0)$ とし、
 \[
@@ -316,6 +490,13 @@ $S=\{z\in\mathbb C\mid0<|z|<r,\ \alpha<\arg z<\beta\}$，$\beta<\alpha+2\pi$ と
   \item[(3)] $f$ が $S$ 上有界正則なら，境界から $\varepsilon$ だけ離した小扇形 $T_\varepsilon$ 上で $|f'(z)|\le M_\varepsilon/|z|$ となることを示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+角度が $2\pi$ 未満なので対数の枝を取り、平方根で (1) の例を作る。
+境界から角度 $\varepsilon$ だけ離れた点 $z$ では、
+半径を $c_\varepsilon|z|$ とする円板を扇形内に一様に取れる。
+その円周上で Cauchy の微分公式を使うと、半径の逆数 $1/|z|$ が現れる。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
 \item[(1)] 扇形の角度は $2\pi$ 未満なので、$S$ 上で正則な対数の枝を取れる。
@@ -369,6 +550,12 @@ $M_\varepsilon=B/c_\varepsilon$ とおけば求める評価を得る。
   \item[(2)] $y''+2y=\cos(\omega x)$，$y(0)=0,y'(0)=1$ の解が $x>0$ で非有界となる $\omega$ と，その解を求めよ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+(1) は複素特性根から減衰振動の形を作り、三角関数の位相をずらして零点を読む。
+(2) は外力の角振動数 $|\omega|$ が固有角振動数 $\sqrt2$ と一致するときだけ共振する。
+共振時は通常の三角関数に $x$ を掛けた特殊解を選び、初期条件を合わせる。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
 \item[(1)] 特性方程式は
@@ -420,6 +607,12 @@ $f$ は $(0,\infty)$ 上可測で $\int_0^\infty x|f(x)|\,\d x<\infty$ を満た
 \lim_{a\downarrow0}\frac1a\int_0^\infty(\log(1+ax)-ax)f(x)\,\d x.
 \]
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+固定した $x$ では $\log(1+ax)-ax=o(a)$ なので被積分関数は0へ収束する。
+積分と極限を交換するには、$0\le u-\log(1+u)\le u$ を使って
+絶対値を仮定中の可積分関数 $x|f(x)|$ で抑える。
+\end{memo*}
 \begin{proof}[解答]
 $u=ax\ge0$ とおく。$a\downarrow0$ のとき $u\to0$ であり、
 $\log(1+u)=u+o(u)$ だから、各 $x>0$ について
@@ -446,6 +639,13 @@ $\log(1+u)=u+o(u)$ だから、各 $x>0$ について
   \item[(2)] $X_n\to X$ が確率収束し，$f:\R\to\R$ が連続なら $f(X_n)\to f(X)$ も確率収束することを示せ。
 \end{enumerate}
 \end{problem}
+\begin{memo*}
+\textbf{解答の見通し。}
+まず実確率変数 $X$ が大きなコンパクト区間の外へ出る確率を小さくできることを示す。
+その区間を少し広げた上で連続関数 $f$ の一様連続性を使う。
+$f(X_n)$ の誤差事象を「$X$ が区間外」と「$X_n-X$ が大きい」の和集合に含めれば、
+二つの確率を別々に小さくできる。
+\end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
 \item[(1)] $A_N=\{|X|>N\}$ とおくと
