@@ -70,6 +70,19 @@
   fonttitle=\bfseries, title={Memo},
   breakable
 }
+% 証明の直後が enumerate でも、最初の項目だけ見出しの横へずれないようにする。
+% 通常の文章で始まる証明は従来どおり見出しと同じ行から始まる。
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep\itshape #1\@addpunct{.}]\ignorespaces\leavevmode
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
 % 証明環境の装飾
 \tcolorboxenvironment{proof}{
   colback=white, colframe=black!20,

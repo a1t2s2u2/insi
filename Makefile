@@ -5,12 +5,13 @@
 
 SITE := node tools/site
 
-.PHONY: help all site pdf pdf-combined open clean
+.PHONY: help all site pdf pdf-basic-combined pdf-combined open clean
 
 help:
 	@echo "make site   tex から Web サイトを生成（site/dist/index.html）"
-	@echo "make pdf    専門基礎・専門・補足資料の3 PDFを生成"
-	@echo "make pdf-combined  全問題をまとめた従来版 PDF を生成"
+	@echo "make pdf    分冊と専門基礎専用統合版の5 PDFを生成"
+	@echo "make pdf-basic-combined  専門基礎の過去問と予想問題だけをまとめた PDF を生成"
+	@echo "make pdf-combined  過去問と予想問題をまとめた PDF を生成"
 	@echo "make all    site と pdf の両方"
 	@echo "make open   生成したサイトをブラウザで開く"
 	@echo "make clean  生成物を削除"
@@ -24,7 +25,11 @@ site:
 
 pdf:
 	node tools/split-pdf-sources.mjs .
-	cd tex && latexmk kumadai-basic.tex kumadai-specialized.tex kumadai-reference.tex
+	cd tex && latexmk kumadai-basic.tex kumadai-specialized.tex kumadai-reference.tex kumadai-prediction.tex kumadai-basic-prediction.tex
+
+pdf-basic-combined:
+	node tools/split-pdf-sources.mjs .
+	cd tex && latexmk kumadai-basic-prediction.tex
 
 pdf-combined:
 	cd tex && latexmk main.tex

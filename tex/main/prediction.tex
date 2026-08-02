@@ -1,0 +1,462 @@
+\chapter{専門基礎科目の出題傾向と予想問題集}
+\label{ch:prediction}
+
+\begin{memo*}
+この章は、収録済みの2015・2017・2021・2022・2026年度の問題から、
+繰り返し現れる分野と解法を整理して作成した非公式の予想問題集である。
+実際の出題を保証するものではない。まず問題だけを時間を測って解き、
+その後に「解答の見通し」と解答を確認する使い方を想定している。
+三題を必修と想定し、一題40分を目安にすると、120分の試験として練習できる。
+\end{memo*}
+
+\section{過去問から見える傾向}
+
+\subsection{専門基礎科目}
+
+年度によって募集期や問題数に違いはあるが、数学コースの専門基礎では
+次の三分野が繰り返し組み合わされている。
+\begin{enumerate}
+  \item \textbf{線形代数}：
+  固有値・固有空間、対角化、Jordan 標準形、不変部分空間、直交行列・ユニタリ行列。
+  単に答えを出すだけでなく、基底を具体的に構成する問題が多い。
+  \item \textbf{微分積分}：
+  多変数関数、広義積分、重積分、Gamma・Beta 関数、積分記号下の微分。
+  積分領域の分割や変数変換を自分で選ぶ力が問われる。
+  \item \textbf{位相・距離空間}：
+  コンパクト性、連結性、連続写像、部分空間、集合までの距離。
+  定義を量化記号の順序まで正確に使う証明が中心である。
+\end{enumerate}
+特に2021・2022年度の複数の募集期と2026年度第2期では、
+この三分野がほぼ一題ずつ並んでいる。従って、予想問題も三題必修の形にした。
+
+\section{予想問題（専門基礎3題必修を想定）}
+
+\begin{problem}{予想第1問｜実対称行列の直交対角化}{prediction-b-1}
+\[
+A=\begin{pmatrix}
+2&1&1\\
+1&2&1\\
+1&1&2
+\end{pmatrix}
+\]
+とする。
+\begin{enumerate}
+  \item[(1)] $|A|$ を求めよ。
+  \item[(2)] $A$ の固有値と各固有空間を求めよ。
+  \item[(3)] $A$ を直交行列によって対角化せよ。
+  \item[(4)] $x^2+y^2+z^2=1$ のもとで
+  \[
+  Q(x,y,z)=
+  \begin{pmatrix}x&y&z\end{pmatrix}
+  A
+  \begin{pmatrix}x\\y\\z\end{pmatrix}
+  \]
+  の最大値と最小値を求め、等号成立条件も述べよ。
+\end{enumerate}
+\end{problem}
+\begin{memo*}
+\textbf{出題根拠。}
+固有値、固有空間、直交対角化は、収録した専門基礎の線形代数で最も反復の多い流れである。
+
+\textbf{解答の見通し。}
+固有値 $\lambda$ は、連立方程式
+$(A-\lambda I_3)\boldsymbol{x}=\boldsymbol{0}$ が
+零ベクトル以外の解をもつような数である。その条件は
+$|A-\lambda I_3|=0$ である。
+そこで、まず $A-\lambda I_3$ を書き、
+第2行と第3行から第1行を引く。この行基本変形によって
+特性多項式を $(1-\lambda)^2(4-\lambda)$ まで因数分解する。
+次に $\lambda=1,4$ を一つずつ
+$(A-\lambda I_3)\boldsymbol{x}=\boldsymbol{0}$ へ代入して固有空間を求める。
+最後に、各固有空間から互いに直交する長さ1のベクトルを選び、
+それらを列に並べて直交行列を作る。
+\end{memo*}
+\begin{proof}[解答]
+\begin{enumerate}
+  \item[(1)] 行列式では、ある行に別の行の定数倍を加えても値は変わらない。
+  第2行、第3行からそれぞれ第1行を引くと
+  \[
+  |A|
+  =\begin{vmatrix}
+  2&1&1\\1&2&1\\1&1&2
+  \end{vmatrix}
+  =\begin{vmatrix}
+  2&1&1\\-1&1&0\\-1&0&1
+  \end{vmatrix}.
+  \]
+  右辺を第1行で展開すると
+  \[
+  |A|
+  =2\begin{vmatrix}1&0\\0&1\end{vmatrix}
+  -1\begin{vmatrix}-1&0\\-1&1\end{vmatrix}
+  +1\begin{vmatrix}-1&1\\-1&0\end{vmatrix}
+  =2+1+1=4.
+  \]
+
+  \item[(2)] $I_3$ は対角成分が1、その他の成分が0である単位行列なので、
+  $A-\lambda I_3$ では $A$ の対角成分だけから $\lambda$ を引く。従って
+  \[
+  A-\lambda I_3
+  =\begin{pmatrix}
+  2-\lambda&1&1\\
+  1&2-\lambda&1\\
+  1&1&2-\lambda
+  \end{pmatrix}.
+  \]
+  この行列式で $R_2\leftarrow R_2-R_1$、
+  $R_3\leftarrow R_3-R_1$ と変形すると
+  \begin{align*}
+  |A-\lambda I_3|
+  &=\begin{vmatrix}
+  2-\lambda&1&1\\
+  \lambda-1&1-\lambda&0\\
+  \lambda-1&0&1-\lambda
+  \end{vmatrix}\\
+  &=(1-\lambda)^2
+  \begin{vmatrix}
+  2-\lambda&1&1\\
+  -1&1&0\\
+  -1&0&1
+  \end{vmatrix}\\
+  &=(1-\lambda)^2\{(2-\lambda)+1+1\}\\
+  &=(1-\lambda)^2(4-\lambda).
+  \end{align*}
+  2行目と3行目では
+  $\lambda-1=-(1-\lambda)$ であるため、
+  各行から $1-\lambda$ を一つずつくくり出した。
+  よって固有方程式は
+  \[
+  (1-\lambda)^2(4-\lambda)=0
+  \]
+  であり、固有値は $\lambda=1,4$ である。
+
+  $\lambda=1$ のとき
+  \[
+  (A-I_3)\begin{pmatrix}x\\y\\z\end{pmatrix}
+  =\begin{pmatrix}
+  1&1&1\\1&1&1\\1&1&1
+  \end{pmatrix}
+  \begin{pmatrix}x\\y\\z\end{pmatrix}
+  =\begin{pmatrix}x+y+z\\x+y+z\\x+y+z\end{pmatrix}.
+  \]
+  従って $(A-I_3)\boldsymbol{x}=\boldsymbol{0}$ は
+  $x+y+z=0$ と同値であり、
+  \[
+  W_1=\ker(A-I_3)
+  =\left\{
+  \begin{pmatrix}x\\y\\z\end{pmatrix}\in\R^3
+  \mathrel{}\middle|\mathrel{} x+y+z=0
+  \right\}.
+  \]
+  $\lambda=4$ のとき、連立方程式は
+  \[
+  \begin{cases}
+  -2x+y+z=0,\\
+  x-2y+z=0,\\
+  x+y-2z=0.
+  \end{cases}
+  \]
+  第1式から第2式を引くと $-3x+3y=0$ なので $x=y$、
+  第2式から第3式を引くと $-3y+3z=0$ なので $y=z$ である。従って
+  \[
+  W_4=\ker(A-4I_3)
+  =\left\langle
+  \begin{pmatrix}1\\1\\1\end{pmatrix}
+  \right\rangle.
+  \]
+
+  \item[(3)] 長さが1で、異なる二本の内積が0であるベクトルの組を
+  「正規直交している」という。$W_1$ からそのような二本を選び、
+  $W_4$ から長さ1の一本を選ぶと
+  \[
+  \boldsymbol{u}_1=\frac1{\sqrt2}
+  \begin{pmatrix}1\\-1\\0\end{pmatrix},
+  \qquad
+  \boldsymbol{u}_2=\frac1{\sqrt6}
+  \begin{pmatrix}1\\1\\-2\end{pmatrix},
+  \qquad
+  \boldsymbol{u}_3=\frac1{\sqrt3}
+  \begin{pmatrix}1\\1\\1\end{pmatrix}
+  \]
+  を取る。互いの内積は
+  \[
+  \boldsymbol{u}_1^{\mathsf T}\boldsymbol{u}_2
+  =\frac{1-1+0}{\sqrt{12}}=0,\qquad
+  \boldsymbol{u}_1^{\mathsf T}\boldsymbol{u}_3
+  =\frac{1-1+0}{\sqrt6}=0,
+  \]
+  \[
+  \boldsymbol{u}_2^{\mathsf T}\boldsymbol{u}_3
+  =\frac{1+1-2}{\sqrt{18}}=0
+  \]
+  であり、長さについても
+  \[
+  \|\boldsymbol{u}_1\|^2=\frac{1+1}{2}=1,\quad
+  \|\boldsymbol{u}_2\|^2=\frac{1+1+4}{6}=1,\quad
+  \|\boldsymbol{u}_3\|^2=\frac{1+1+1}{3}=1
+  \]
+  と確認できる。
+  従って
+  \[
+  P=(\boldsymbol{u}_1\ \boldsymbol{u}_2\ \boldsymbol{u}_3)
+  \]
+  は直交行列である。また
+  \[
+  A\boldsymbol{u}_1=\boldsymbol{u}_1,\quad
+  A\boldsymbol{u}_2=\boldsymbol{u}_2,\quad
+  A\boldsymbol{u}_3=4\boldsymbol{u}_3
+  \]
+  だから
+  \[
+  P^{\mathsf T}AP=\diag(1,1,4).
+  \]
+
+  \item[(4)] 単位ベクトル
+  $\boldsymbol{x}=(x,y,z)^{\mathsf T}$ を
+  \[
+  \boldsymbol{x}=c_1\boldsymbol{u}_1+
+  c_2\boldsymbol{u}_2+c_3\boldsymbol{u}_3
+  \]
+  と表す。$\boldsymbol{u}_1,\boldsymbol{u}_2,\boldsymbol{u}_3$ は
+  長さ1で互いに直交する基底なので
+  $c_1^2+c_2^2+c_3^2=1$ であり、(3) より
+  \begin{align*}
+  Q(x,y,z)
+  &=c_1^2+c_2^2+4c_3^2\\
+  &=1+3c_3^2.
+  \end{align*}
+  従って最小値は $1$、最大値は $4$ である。
+  ここで
+  \[
+  c_3=\boldsymbol{u}_3^{\mathsf T}\boldsymbol{x}
+  =\frac{x+y+z}{\sqrt3}
+  \]
+  だから、最小値は $c_3=0$、すなわち $x+y+z=0$ のときに成立する。
+  最大値は $c_3^2=1$ のときに成立する。このとき
+  $c_1^2+c_2^2=0$ なので $c_1=c_2=0$ であり、
+  \[
+  (x,y,z)=\pm\frac1{\sqrt3}(1,1,1)
+  \]
+  のときに成立する。
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{予想第2問｜重積分と変数変換}{prediction-b-2}
+\[
+D=\{(x,y)\in\R^2\mid x\ge0,\ y\ge0,\ 1\le x+y\le2\}
+\]
+とし
+\[
+u=x+y,\qquad v=x-y
+\]
+とおく。
+\begin{enumerate}
+  \item[(1)] $x,y$ を $u,v$ で表し、
+  $\left|\dfrac{\partial(x,y)}{\partial(u,v)}\right|$ を求めよ。
+  \item[(2)] $D$ に対応する $uv$ 平面上の領域を求めよ。
+  \item[(3)] 次の重積分を求めよ。
+  \[
+  \iint_D\frac{(x-y)^2}{x+y}\,\d x\d y
+  \]
+\end{enumerate}
+\end{problem}
+\begin{memo*}
+\textbf{出題根拠。}
+積分領域を読み取り、変数変換の Jacobian と積分区間を決める問題は繰り返し出題されている。
+
+\textbf{解答の見通し。}
+$u=x+y$, $v=x-y$ の二式を足し引きすると
+\[
+x=\frac{u+v}{2},\qquad y=\frac{u-v}{2}
+\]
+となる。この逆変換を使って
+$x\ge0$, $y\ge0$, $1\le x+y\le2$ を一つずつ書き換えると
+\[
+1\le u\le2,\qquad -u\le v\le u
+\]
+を得る。また面積要素は
+\[
+\frac{\partial(x,y)}{\partial(u,v)}
+=\begin{vmatrix}1/2&1/2\\1/2&-1/2\end{vmatrix}
+=-\frac12,
+\qquad
+\left|\frac{\partial(x,y)}{\partial(u,v)}\right|=\frac12
+\]
+だから、$\d x\d y=(1/2)\,\d u\d v$ と変換する。
+最後に、被積分関数の $x+y$ を $u$、$x-y$ を $v$ に置き換え、
+$u$ を外側、$v$ を内側の変数として積分する。
+\end{memo*}
+\begin{proof}[解答]
+\begin{enumerate}
+  \item[(1)] 二式を辺々加えると $u+v=2x$、
+  $u$ から $v$ を引くと $u-v=2y$ なので
+  \[
+  x=\frac{u+v}{2},\qquad y=\frac{u-v}{2}.
+  \]
+  従って
+  \[
+  \frac{\partial(x,y)}{\partial(u,v)}
+  =
+  \begin{vmatrix}
+  1/2&1/2\\
+  1/2&-1/2
+  \end{vmatrix}
+  =-\frac12
+  \]
+  であり、その絶対値は
+  \[
+  \left|\frac{\partial(x,y)}{\partial(u,v)}\right|=\frac12
+  \]
+  である。
+
+  \item[(2)] $1\le x+y\le2$ は
+  \[
+  1\le u\le2
+  \]
+  となる。また
+  \[
+  x=\frac{u+v}{2}\ge0\quad\Longleftrightarrow\quad v\ge-u,
+  \]
+  \[
+  y=\frac{u-v}{2}\ge0\quad\Longleftrightarrow\quad v\le u.
+  \]
+  従って対応する領域は
+  \[
+  \Omega=\{(u,v)\in\R^2\mid1\le u\le2,\ -u\le v\le u\}
+  \]
+  である。
+
+  \item[(3)] 被積分関数は
+  \[
+  \frac{(x-y)^2}{x+y}=\frac{v^2}{u}
+  \]
+  となる。(1), (2) より
+  \begin{align*}
+  \iint_D\frac{(x-y)^2}{x+y}\,\d x\d y
+  &=\int_1^2\int_{-u}^{u}
+  \frac{v^2}{u}\cdot\frac12\,\d v\d u\\
+  &=\int_1^2\frac1{2u}
+  \left[\frac{v^3}{3}\right]_{-u}^{u}\d u\\
+  &=\int_1^2\frac{u^2}{3}\,\d u\\
+  &=\frac13\left[\frac{u^3}{3}\right]_1^2
+  =\frac79.
+  \end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{予想第3問｜コンパクト集合と距離}{prediction-b-3}
+$(X,d)$ を距離空間、$K\subset X$ を空でないコンパクト集合とし
+\[
+d(x,K)=\inf\{d(x,k)\mid k\in K\}
+\]
+とおく。
+\begin{enumerate}
+  \item[(1)] 任意の $x,y\in X$ に対し
+  \[
+  |d(x,K)-d(y,K)|\le d(x,y)
+  \]
+  を示せ。
+  \item[(2)] 任意の $x\in X$ に対し、
+  $d(x,K)=d(x,k_x)$ となる $k_x\in K$ が存在することを示せ。
+  \item[(3)] $F\subset X$ が空でない閉集合で $K\cap F=\varnothing$ を満たすとき
+  \[
+  d(K,F):=\inf\{d(k,f)\mid k\in K,\ f\in F\}>0
+  \]
+  を示せ。
+  \item[(4)] $U$ が $K$ を含む開集合なら、ある $\varepsilon>0$ が存在して
+  \[
+  \{x\in X\mid d(x,K)<\varepsilon\}\subset U
+  \]
+  となることを示せ。
+\end{enumerate}
+\end{problem}
+\begin{memo*}
+\textbf{出題根拠。}
+連続性、コンパクト性、閉集合、距離関数を定義からつなぐ証明は専門基礎で頻出している。
+
+\textbf{解答の見通し。}
+集合 $S$ までの距離は
+\[
+d(x,S)=\inf_{s\in S}d(x,s)
+\]
+である。ここで下限とは、全ての $d(x,s)$ 以下にある数のうち最大のものである。
+(1) では三角不等式
+$d(x,s)\le d(x,y)+d(y,s)$ の両辺で $s\in S$ に関する下限を取る。
+(2) では $d(x,S)$ に近づく $s_n\in S$ を選び、コンパクト性から収束部分列を取る。
+(3) では連続関数 $x\mapsto d(x,F)$ を $K$ 上で最小化して
+$d(K,F)=\min_{x\in K}d(x,F)>0$ を示す。
+(4) は $F=X\setminus U$ と置き、(3) の正の距離より小さい $\varepsilon$ を選ぶ。
+\end{memo*}
+\begin{proof}[解答]
+\begin{enumerate}
+  \item[(1)] 任意の $k\in K$ に対して三角不等式より
+  \[
+  d(x,k)\le d(x,y)+d(y,k).
+  \]
+  $d(x,K)\le d(x,k)$ でもあるから、全ての $k\in K$ について
+  \[
+  d(x,K)\le d(x,y)+d(y,k)
+  \]
+  が成り立つ。右辺について $k\in K$ の下限を取ると
+  \[
+  d(x,K)\le d(x,y)+d(y,K).
+  \]
+  従って
+  \[
+  d(x,K)-d(y,K)\le d(x,y).
+  \]
+  $x,y$ を交換して
+  \[
+  d(y,K)-d(x,K)\le d(x,y)
+  \]
+  も得られるので、二式を合わせれば結論を得る。
+
+  \item[(2)] 下限の定義により、各 $n\in\N$ に対して $k_n\in K$ を
+  \[
+  d(x,K)\le d(x,k_n)<d(x,K)+\frac1n
+  \]
+  となるように取れる。$K$ はコンパクトだから、ある部分列
+  $(k_{n_j})$ と $k_x\in K$ が存在して $k_{n_j}\to k_x$ となる。
+  (1) と同じ三角不等式から写像 $k\mapsto d(x,k)$ は連続なので
+  \[
+  d(x,k_x)
+  =\lim_{j\to\infty}d(x,k_{n_j})
+  =d(x,K).
+  \]
+
+  \item[(3)] (1) の $K$ を $F$ に置き換えると
+  $h(k)=d(k,F)$ は連続である。連続関数 $h$ はコンパクト集合 $K$ 上で
+  最小値を取るから、ある $k_0\in K$ が存在して
+  \[
+  \inf_{k\in K}d(k,F)=\min_{k\in K}d(k,F)=d(k_0,F)
+  \]
+  となる。
+  一方、二重の下限を順に取れば
+  \[
+  d(K,F)
+  =\inf_{k\in K}\inf_{f\in F}d(k,f)
+  =\inf_{k\in K}d(k,F)
+  \]
+  である。従って $d(K,F)=d(k_0,F)$ である。
+
+  もし $d(k_0,F)=0$ なら、各 $n$ に対して $f_n\in F$ を
+  $d(k_0,f_n)<1/n$ となるように取れる。すると $f_n\to k_0$ である。
+  $F$ は閉集合だから $k_0\in F$ となり、$k_0\in K$ と合わせて
+  $K\cap F\ne\varnothing$ となる。これは仮定に反する。
+  従って $d(K,F)>0$ である。
+
+  \item[(4)] $F=X\setminus U$ とおく。$F=\varnothing$ なら任意の
+  $\varepsilon>0$ で結論が成り立つ。$F\ne\varnothing$ とする。
+  $U$ は開集合だから $F$ は閉集合であり、$K\subset U$ より
+  $K\cap F=\varnothing$ である。(3) により
+  \[
+  \delta=d(K,F)>0.
+  \]
+  $\varepsilon=\delta/2$ と取る。もし $d(x,K)<\varepsilon$ かつ
+  $x\notin U$ なら $x\in F$ なので
+  \[
+  \delta=d(K,F)\le d(x,K)<\frac{\delta}{2},
+  \]
+  となり矛盾する。従って $d(x,K)<\varepsilon$ なら $x\in U$ である。
+\end{enumerate}
+\end{proof}
