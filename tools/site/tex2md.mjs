@@ -5,7 +5,7 @@
 //
 // 例: node tools/site/tex2md.mjs seminar/cuturi
 //
-// --strict を付けると lint 警告（未解決の \ref・未変換マクロ）で失敗する。CI 用。
+// --strict を付けると lint 警告（未解決の \ref・未変換マクロ）で失敗する。公開前の検査用。
 
 import { loadConfig } from "./lib/config.mjs";
 import { Converter } from "./lib/tex2md.mjs";
