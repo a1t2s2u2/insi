@@ -1,0 +1,199 @@
+\chapter{一変数の微分}
+\label{ch:tb-differential}
+
+\section{極限と連続}
+
+\begin{definition}{関数の極限と連続}{tb-function-limit}
+$f$ が点 $a$ で\textbf{連続}であるとは
+\[
+\forall\varepsilon>0\ \exists\delta>0:\quad
+\abs{x-a}<\delta\ \Longrightarrow\ \abs{f(x)-f(a)}<\varepsilon
+\]
+が成り立つことをいう。定義域の全ての点で連続なとき、単に連続という。
+\end{definition}
+
+\begin{definition}{一様連続と Lipschitz 連続}{tb-uniform-lipschitz}
+$f$ が\textbf{一様連続}であるとは
+\[
+\forall\varepsilon>0\ \exists\delta>0\ \forall x,y:\quad
+\abs{x-y}<\delta\ \Longrightarrow\ \abs{f(x)-f(y)}<\varepsilon
+\]
+が成り立つことをいう。$\delta$ が $x$ に依存しない点が連続との違いである。
+また、ある $L\ge0$ が存在して
+\[
+\abs{f(x)-f(y)}\le L\abs{x-y}
+\]
+が全ての $x,y$ で成り立つとき、$f$ は\textbf{$L$-Lipschitz 連続}であるという。
+\end{definition}
+
+\begin{proposition}{三つの連続性の関係}{tb-continuity-hierarchy}
+\[
+\text{Lipschitz 連続}\ \Longrightarrow\ \text{一様連続}\ \Longrightarrow\ \text{連続}
+\]
+であり、逆はいずれも成り立たない。
+\end{proposition}
+
+\begin{proof}
+Lipschitz なら、任意の $\varepsilon>0$ に対し $\delta=\varepsilon/L$（$L>0$ のとき）と取れば
+一様連続の定義を満たす。特に $L=1$ のときは $\delta=\varepsilon$ と取れる。
+一様連続なら、$\delta$ を各点で使えば連続である。
+\end{proof}
+
+\begin{theorem}{中間値の定理}{tb-intermediate-value}
+$f$ が閉区間 $[a,b]$ 上連続で $f(a)\ne f(b)$ なら、
+$f(a)$ と $f(b)$ の間の任意の値 $y$ に対して $f(c)=y$ となる $c\in[a,b]$ が存在する。
+\end{theorem}
+
+\begin{theorem}{最大値・最小値の定理}{tb-extreme-value}
+コンパクト集合（$\R^d$ では有界閉集合）の上の連続な実数値関数は、
+最大値と最小値を実際に取る。
+\end{theorem}
+
+\begin{theorem}{コンパクト集合上の一様連続性}{tb-heine-cantor}
+コンパクト集合の上で連続な関数は一様連続である。
+\end{theorem}
+
+\begin{memo*}
+定理~\ref{thm:tb-extreme-value} は、下限や上限が\emph{達成される}ことを言う点が本質である。
+2015年度 第1期 専門基礎 第3問（二重周期関数の最大最小）、
+年度不明の距離空間の問題（最短点の存在）はいずれもこの定理に帰着する。
+定理~\ref{thm:tb-heine-cantor} は 2022年度 第2期 専門基礎 第2問で、
+$[a,b]^2$ 上の $u(s,t)$ の評価に使う。
+\end{memo*}
+
+\section{微分の定義と計算}
+
+\begin{definition}{微分係数と導関数}{tb-derivative}
+\[
+f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}h
+\]
+が存在するとき $f$ は $a$ で\textbf{微分可能}という。
+$x\mapsto f'(x)$ を\textbf{導関数}という。
+微分可能なら連続だが、逆は成り立たない。
+\end{definition}
+
+\begin{proposition}{基本的な導関数}{tb-derivative-table}
+\[
+\begin{array}{ll}
+(x^\alpha)'=\alpha x^{\alpha-1}, &
+(e^x)'=e^x,\\[2pt]
+(a^x)'=a^x\log a, &
+(\log\abs x)'=\dfrac1x,\\[4pt]
+(\sin x)'=\cos x, &
+(\cos x)'=-\sin x,\\[4pt]
+(\tan x)'=\sec^2x=\dfrac1{\cos^2x}, &
+(\cot x)'=-\csc^2x,\\[4pt]
+(\sec x)'=\sec x\tan x, &
+(\csc x)'=-\csc x\cot x.
+\end{array}
+\]
+$(\sec x)'$ は $\sec x=(\cos x)^{-1}$ に合成関数の微分を使えば
+$-(\cos x)^{-2}(-\sin x)=\sec x\tan x$ として得られる。
+\end{proposition}
+
+\begin{proposition}{微分の演算法則}{tb-derivative-rules}
+\[
+(fg)'=f'g+fg',
+\qquad
+\left(\frac fg\right)'=\frac{f'g-fg'}{g^2},
+\qquad
+(f\circ g)'(x)=f'(g(x))g'(x).
+\]
+逆関数については、$f$ が単調で微分可能かつ $f'(a)\ne0$ なら
+\[
+(f^{-1})'(f(a))=\frac1{f'(a)}.
+\]
+\end{proposition}
+
+\begin{proposition}{対数微分法}{tb-logarithmic-derivative}
+$u>0$ のとき
+\[
+\bigl(\log\abs{u(x)}\bigr)'=\frac{u'(x)}{u(x)}
+\]
+である。積や冪が入り組んだ関数は、両辺の対数を取ってから微分すると簡単になる。
+特に
+\[
+\bigl(x^{f(x)}\bigr)'
+=\bigl(\exp(f(x)\log x)\bigr)'
+=x^{f(x)}\left(f'(x)\log x+\frac{f(x)}x\right)
+\]
+である。
+\end{proposition}
+
+\begin{example}{$\log\abs{\tan x}$ の微分}{tb-log-tan}
+$u=\tan x$ として対数微分法を使うと
+\[
+\frac{\d}{\d x}\log\abs{\tan x}
+=\frac{\sec^2x}{\tan x}
+=\frac{1/\cos^2x}{\sin x/\cos x}
+=\frac1{\sin x\cos x}
+\]
+である。分母を払う計算を省かずに書くのが答案での作法である。
+\end{example}
+
+\section{平均値定理と関数の増減}
+
+\begin{theorem}{平均値の定理}{tb-mean-value}
+$f$ が $[a,b]$ で連続、$(a,b)$ で微分可能なら
+\[
+\frac{f(b)-f(a)}{b-a}=f'(c)
+\]
+となる $c\in(a,b)$ が存在する。
+\end{theorem}
+
+\begin{corollary}{導関数の符号と増減}{tb-monotonicity}
+区間上で $f'>0$ なら $f$ は狭義単調増加、$f'<0$ なら狭義単調減少、
+$f'\equiv0$ なら定数である。
+\end{corollary}
+
+開区間や半直線での最大・最小は、次の順で書く。
+\begin{enumerate}
+  \item $f'(x)=0$ を解いて候補を求める。
+  \item 候補の前後で $f'$ の符号がどう変わるかを述べる。
+  \item 区間の端（または $x\to\infty$）での挙動を確認する。
+  \item 最大値を与える点で実際に値を計算する。
+\end{enumerate}
+2022年度 第2期 専門基礎 第2問では、$g'(x)=x^2(1/2-2x^2/3)$ の
+符号が括弧の中だけで決まることを述べたうえで $x=\sqrt3/2$ を求める。
+
+\section{Taylor の定理}
+
+\begin{theorem}{Taylor の定理（Lagrange の剰余）}{tb-taylor}
+$f$ が $n+1$ 回微分可能なら、$a$ と $x$ の間のある $\xi$ が存在して
+\[
+f(x)=\sum_{k=0}^n\frac{f^{(k)}(a)}{k!}(x-a)^k
++\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-a)^{n+1}.
+\]
+$a=0$ の場合を Maclaurin 展開という。
+\end{theorem}
+
+\begin{proposition}{覚えておく展開}{tb-taylor-table}
+$\abs x$ が小さいとき
+\[
+e^x=1+x+\frac{x^2}2+\frac{x^3}6+\cdots,
+\qquad
+\log(1+x)=x-\frac{x^2}2+\frac{x^3}3-\cdots,
+\]
+\[
+\sin x=x-\frac{x^3}6+\frac{x^5}{120}-\cdots,
+\qquad
+\cos x=1-\frac{x^2}2+\frac{x^4}{24}-\cdots,
+\]
+\[
+\frac1{1-x}=1+x+x^2+\cdots,
+\qquad
+(1+x)^\alpha=1+\alpha x+\frac{\alpha(\alpha-1)}2x^2+\cdots.
+\]
+\end{proposition}
+
+\begin{definition}{ランダウの記号}{tb-landau}
+$x\to0$ で $g(x)/x^n$ が有界のとき $g(x)=O(x^n)$ と書く。
+$g(x)/x^n\to0$ のときは $g(x)=o(x^n)$ と書く。
+展開を「必要な次数まで」書くときに使う。
+\end{definition}
+
+\begin{memo*}
+Taylor 展開は、$0/0$ 型の極限を処理する最も安全な道具である。
+$\sin(x^2h)/h$ のような差商も、$u=x^2h$ とおいて $\sin u=u+O(u^3)$ を使えば
+極限が一行で決まる（2021年度 第1期 専門基礎 第2問）。
+\end{memo*}

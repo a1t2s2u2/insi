@@ -1,0 +1,360 @@
+\chapter{論理・集合・写像・実数}
+\label{ch:tb-foundations}
+
+線形代数も微分積分も位相も、この章の言葉で書かれている。
+特に「量化記号の順序」と「上限・下限」は、専門基礎の証明問題で毎年のように問われる。
+
+\section{証明の型}
+
+\begin{definition}{対偶・逆・裏}{tb-contraposition}
+命題「$P\Longrightarrow Q$」に対し
+\[
+\text{対偶：}\ \lnot Q\Longrightarrow\lnot P,\qquad
+\text{逆：}\ Q\Longrightarrow P,\qquad
+\text{裏：}\ \lnot P\Longrightarrow\lnot Q
+\]
+という。ここで $\lnot P$ は $P$ の否定である。
+\end{definition}
+
+\begin{proposition}{対偶の同値性}{tb-contraposition-equiv}
+$P\Longrightarrow Q$ と、その対偶 $\lnot Q\Longrightarrow\lnot P$ は同値である。
+一方、逆と裏は元の命題と同値とは限らない。
+\end{proposition}
+
+入試で使う型はほぼ次の三つに尽きる。
+\begin{enumerate}
+  \item \textbf{直接証明}：仮定から結論へ、定義と定理をつないで進む。
+  \item \textbf{対偶証明}：結論の否定から仮定の否定を導く。
+        「〜でないなら〜でない」の形の方が扱いやすいときに使う。
+  \item \textbf{背理法}：結論の否定を仮定して矛盾を導く。
+        「存在しない」「一意である」「無理数である」を示すときに有効である。
+\end{enumerate}
+また「反例を挙げよ」と問われたら、\textbf{仮定をすべて満たし結論だけが破れる}
+具体例を一つ作ればよい。一般論を述べる必要はない。
+
+\begin{definition}{量化記号の順序}{tb-quantifier-order}
+$\forall$ と $\exists$ は交換できない。
+\[
+\forall x\,\exists y\,P(x,y)
+\quad\text{と}\quad
+\exists y\,\forall x\,P(x,y)
+\]
+は別の命題である。前者では $y$ を $x$ ごとに選び直せるが、
+後者では一つの $y$ が全ての $x$ で通用しなければならない。
+\end{definition}
+
+\begin{definition}{否定の作り方}{tb-negation}
+量化記号を含む命題の否定は、記号を入れ替えて内側を否定する。
+\[
+\lnot\bigl(\forall x\,P(x)\bigr)=\exists x\,\lnot P(x),
+\qquad
+\lnot\bigl(\exists x\,P(x)\bigr)=\forall x\,\lnot P(x).
+\]
+不等式の否定は $\lnot(a<b)$ が $a\ge b$ であることに注意する。
+\end{definition}
+
+\begin{example}{連続と一様連続の違い}{tb-continuity-quantifier}
+関数 $f:X\to\R$ について
+\[
+\text{各点連続：}\ \forall x\,\forall\varepsilon>0\,\exists\delta>0\ \cdots
+\]
+\[
+\text{一様連続：}\ \forall\varepsilon>0\,\exists\delta>0\,\forall x\ \cdots
+\]
+である。前者の $\delta$ は $x$ に依存してよいが、後者の $\delta$ は
+全ての $x$ に共通でなければならない。
+順序を書き間違えると別の命題を証明したことになる。
+\end{example}
+
+\begin{definition}{数学的帰納法}{tb-induction}
+自然数 $n$ に関する命題 $P(n)$ について
+\[
+P(1)\ \text{が成り立ち},\qquad
+P(n)\Longrightarrow P(n+1)\ \text{が全ての $n$ で成り立つ}
+\]
+なら、全ての $n\in\N$ で $P(n)$ が成り立つ。これを\textbf{数学的帰納法}という。
+\end{definition}
+
+\begin{memo*}
+帰納法は答案で「帰納法より」と一言で済ませず、
+$n=1$ の確認と、$P(n)$ から $P(n+1)$ を導く一行を必ず書く。
+2022年度 第1期 専門基礎 第2問（Cauchy の関数方程式）では、
+$f(nx)=nf(x)$ をこの形で示すことが要求される。
+\end{memo*}
+
+\section{集合の演算}
+
+\begin{definition}{集合の演算}{tb-set-operations}
+\[
+A\cup B,\quad A\cap B,\quad A\setminus B,\quad A^{c}=X\setminus A,\quad
+A\times B=\{(a,b)\mid a\in A,\ b\in B\}
+\]
+をそれぞれ合併、共通部分、差、補集合（全体集合 $X$ の中で）、直積という。
+$A\subset B$ は「$x\in A$ なら $x\in B$」を意味する。
+\end{definition}
+
+\begin{proposition}{ド・モルガンの法則}{tb-de-morgan}
+添字集合 $\Lambda$ と部分集合の族 $\{A_\lambda\}_{\lambda\in\Lambda}$ に対して
+\[
+\left(\bigcup_{\lambda}A_\lambda\right)^{c}=\bigcap_{\lambda}A_\lambda^{c},
+\qquad
+\left(\bigcap_{\lambda}A_\lambda\right)^{c}=\bigcup_{\lambda}A_\lambda^{c}.
+\]
+\end{proposition}
+
+$A=B$ を示すには $A\subset B$ と $B\subset A$ を\textbf{別々に}示す。
+片方だけ示して終える答案が多いので注意する。
+2022年度 第2期 専門基礎 第1問の $\overline{A\cup B}=\overline A\cup\overline B$ はこの型である。
+
+\section{写像・像・逆像}
+
+\begin{definition}{写像と像・逆像}{tb-map-image}
+写像 $f:X\to Y$ と $A\subset X$, $B\subset Y$ に対し
+\[
+f(A)=\{f(a)\mid a\in A\},\qquad
+f^{-1}(B)=\{x\in X\mid f(x)\in B\}
+\]
+をそれぞれ $A$ の\textbf{像}、$B$ の\textbf{逆像}という。
+$f^{-1}(B)$ は $f$ が可逆でなくても定義される。
+\end{definition}
+
+\begin{definition}{単射・全射・全単射}{tb-injective-surjective}
+\[
+\text{単射：}\ f(x)=f(x')\Longrightarrow x=x',
+\qquad
+\text{全射：}\ f(X)=Y
+\]
+であり、両方を満たすとき\textbf{全単射}という。
+\end{definition}
+
+\begin{theorem}{逆像は演算を保つ}{tb-preimage-operations}
+任意の写像 $f:X\to Y$ と $B,C\subset Y$、および族 $\{B_\lambda\}$ に対して
+\[
+f^{-1}\left(\bigcup_\lambda B_\lambda\right)=\bigcup_\lambda f^{-1}(B_\lambda),
+\qquad
+f^{-1}\left(\bigcap_\lambda B_\lambda\right)=\bigcap_\lambda f^{-1}(B_\lambda),
+\]
+\[
+f^{-1}(Y\setminus B)=X\setminus f^{-1}(B).
+\]
+\end{theorem}
+
+\begin{proposition}{像は演算を保つとは限らない}{tb-image-operations}
+像については
+\[
+f(A\cup A')=f(A)\cup f(A')
+\]
+は常に成り立つが、共通部分と差については一般に
+\[
+f(A\cap A')\subset f(A)\cap f(A'),
+\qquad
+f(A)\setminus f(A')\subset f(A\setminus A')
+\]
+という片側の包含しか成り立たない。$f$ が単射なら等号になる。
+\end{proposition}
+
+\begin{example}{$f(x)=x^2$ で確かめる}{tb-preimage-example}
+$f:\R\to\R$, $f(x)=x^2$ とし
+\[
+B_1=(1,9),\qquad B_2=(4,16)
+\]
+とおく。$0\le a<b$ のとき $x^2\in(a,b)$ は $\sqrt a<\abs x<\sqrt b$ と同値だから
+\[
+f^{-1}(B_1)=(-3,-1)\cup(1,3),
+\qquad
+f^{-1}(B_2)=(-4,-2)\cup(2,4).
+\]
+
+まず逆像の側を確かめる。$B_1\cup B_2=(1,16)$, $B_1\cap B_2=(4,9)$ なので、
+先に $Y$ 側で演算してから引き戻すと
+\[
+f^{-1}(B_1\cup B_2)=(-4,-1)\cup(1,4),
+\qquad
+f^{-1}(B_1\cap B_2)=(-3,-2)\cup(2,3)
+\]
+である。一方、先に引き戻してから $X$ 側で演算すると
+\begin{align*}
+f^{-1}(B_1)\cup f^{-1}(B_2)
+&=\bigl\{(-3,-1)\cup(-4,-2)\bigr\}
+ \cup\bigl\{(1,3)\cup(2,4)\bigr\}\\
+&=(-4,-1)\cup(1,4),\\
+f^{-1}(B_1)\cap f^{-1}(B_2)
+&=\bigl\{(-3,-1)\cap(-4,-2)\bigr\}
+ \cup\bigl\{(1,3)\cap(2,4)\bigr\}\\
+&=(-3,-2)\cup(2,3)
+\end{align*}
+となる。共通部分では、符号の異なる区間どうしは交わらないので、
+負の側どうしと正の側どうしだけが残る。どちらの順序でも同じ集合が得られている。
+補集合についても
+\[
+f^{-1}(\R\setminus B_1)
+=\{x\in\R\mid x^2\le1\ \text{または}\ x^2\ge9\}
+=(-\infty,-3]\cup[-1,1]\cup[3,\infty)
+\]
+であり、これは $\R\setminus f^{-1}(B_1)$ に一致する。
+
+次に像の側を見る。
+\[
+A=[0,1],\qquad A'=[-1,0]
+\]
+とおくと $f(A)=f(A')=[0,1]$ である。合併については
+\[
+f(A\cup A')=f([-1,1])=[0,1]=f(A)\cup f(A')
+\]
+と一致する。しかし共通部分と差では
+\[
+f(A\cap A')=f(\{0\})=\{0\}
+\subsetneq[0,1]=f(A)\cap f(A'),
+\]
+\[
+f(A)\setminus f(A')=\varnothing
+\subsetneq(0,1]=f(A\setminus A')
+\]
+となり、命題~\ref{prop:tb-image-operations} の片側の包含にとどまる。
+原因は $f(-1)=f(1)$、すなわち $f$ が単射でないことである。
+\end{example}
+
+\begin{memo*}
+連続性の定義が「開集合の\emph{逆像}が開」であるのは、
+定理~\ref{thm:tb-preimage-operations} の性質のよさによる。
+2022年度 第1期 専門基礎 第3問は、像の側では同じ性質が壊れることを反例で問う問題である。
+\end{memo*}
+
+\section{実数の基本性質}
+
+\begin{definition}{上界・下界・上限・下限}{tb-sup-inf}
+$S\subset\R$ が空でないとする。
+$M\in\R$ が $S$ の\textbf{上界}、$m\in\R$ が $S$ の\textbf{下界}であるとは、それぞれ
+\[
+\forall s\in S:\ s\le M,
+\qquad
+\forall s\in S:\ m\le s
+\]
+が成り立つことをいう。上界の全体と下界の全体を
+\[
+U(S)=\{M\in\R\mid\forall s\in S,\ s\le M\},
+\qquad
+L(S)=\{m\in\R\mid\forall s\in S,\ m\le s\}
+\]
+と書く。$U(S)$ の最小元を $S$ の\textbf{上限}、$L(S)$ の最大元を $S$ の\textbf{下限}といい
+\[
+\sup S=\min U(S),
+\qquad
+\inf S=\max L(S)
+\]
+と書く。量化記号で書けば、$\alpha=\sup S$ とは
+\[
+(\forall s\in S:\ s\le\alpha)
+\quad\text{かつ}\quad
+(\forall M\in U(S):\ \alpha\le M)
+\]
+が成り立つこと、$\beta=\inf S$ とは
+\[
+(\forall s\in S:\ \beta\le s)
+\quad\text{かつ}\quad
+(\forall m\in L(S):\ m\le\beta)
+\]
+が成り立つことである。
+前半が「上界（下界）である」、後半が「上界（下界）の中で最小（最大）である」に対応する。
+\end{definition}
+
+\begin{theorem}{実数の連続性（上限の存在）}{tb-completeness}
+空でなく上に有界な $S\subset\R$ には上限 $\sup S$ が存在する。
+下に有界なら下限 $\inf S$ が存在する。
+\end{theorem}
+
+\begin{proposition}{上限・下限の特徴づけ}{tb-sup-characterization}
+$\alpha=\sup S$ であることは、次の二つが同時に成り立つことと同値である。
+\begin{enumerate}
+  \item 全ての $s\in S$ で $s\le\alpha$（$\alpha$ は上界）。
+  \item 任意の $\varepsilon>0$ に対し、ある $s\in S$ が存在して $s>\alpha-\varepsilon$。
+\end{enumerate}
+下限 $\beta=\inf S$ については
+\begin{enumerate}
+  \item 全ての $s\in S$ で $\beta\le s$。
+  \item 任意の $\varepsilon>0$ に対し、ある $s\in S$ が存在して $s<\beta+\varepsilon$。
+\end{enumerate}
+特に、各 $n\in\N$ に対して $s_n\in S$ を $s_n<\beta+1/n$ となるように選べる。
+\end{proposition}
+
+下限は最小値とは限らない。$S=(0,1)$ では $\inf S=0$ だが $0\notin S$ である。
+「下限を達成する点が存在する」ことは別に証明を要する。
+コンパクト集合の上の連続関数については、定理~\ref{thm:tb-extreme-value} によって達成が保証される。
+
+\begin{proposition}{下限に関する基本不等式}{tb-inf-inequality}
+$S$ の全ての元 $s$ について $s\le c$ が成り立つなら $\inf S\le c$ である。
+また、全ての $s$ について $c\le s$ なら $c\le\inf S$ である。
+\end{proposition}
+
+下限を含む不等式を示すときは、まず「全ての元について成り立つ不等式」を作り、
+そのうえで下限を取る、という順序を守る。
+
+\begin{theorem}{アルキメデスの原理と有理数の稠密性}{tb-archimedes-density}
+任意の $x\in\R$ に対し $n>x$ となる $n\in\N$ が存在する。
+また任意の実数 $a<b$ に対し、$a<q<b$ を満たす有理数 $q$ が存在する。
+さらに $a<c<b$ を満たす無理数 $c$ も存在する。
+\end{theorem}
+
+\begin{definition}{床関数}{tb-floor}
+$x\in\R$ に対し、$x$ 以下の最大の整数を $\lfloor x\rfloor$ と書き\textbf{床関数}という。
+定義から
+\[
+\lfloor x\rfloor\le x<\lfloor x\rfloor+1,
+\qquad\text{すなわち}\qquad
+0\le x-\lfloor x\rfloor<1
+\]
+が成り立つ。
+\end{definition}
+
+\begin{memo*}
+「無理数を一つ取る」という手筋は、$\Q$ の中の位相を扱う問題で決定的に効く。
+2017年度 専門基礎 第3問では、$1<c<2$ の無理数 $c$ を境にして
+$A=\{x\in\Q\mid1\le x<2\}$ を二つの開集合へ分け、非連結性を示す。
+床関数は 2015年度 第1期 専門基礎 第3問で、
+二重周期関数の議論を基本領域 $[0,1]^2$ へ移すために使う。
+\end{memo*}
+
+\section{数列と級数}
+
+\begin{definition}{数列の収束}{tb-sequence-limit}
+$a_n\to\alpha$ とは
+\[
+\forall\varepsilon>0\ \exists N\in\N\ \forall n\ge N:\ \abs{a_n-\alpha}<\varepsilon
+\]
+が成り立つことをいう。
+\end{definition}
+
+\begin{theorem}{単調有界列の収束}{tb-monotone-convergence-seq}
+上に有界な単調増加列は収束し、その極限は $\sup_n a_n$ である。
+下に有界な単調減少列も同様に収束する。
+\end{theorem}
+
+\begin{theorem}{Bolzano--Weierstrass の定理}{tb-bolzano-weierstrass}
+$\R^d$ の有界な数列は、収束する部分列を持つ。
+\end{theorem}
+
+\begin{theorem}{はさみうちの原理}{tb-squeeze}
+$a_n\le b_n\le c_n$ かつ $a_n\to\alpha$, $c_n\to\alpha$ なら $b_n\to\alpha$ である。
+\end{theorem}
+
+\begin{proposition}{覚えておく級数}{tb-standard-series}
+\[
+\sum_{n=0}^\infty r^n=\frac1{1-r}\quad(\abs r<1),
+\qquad
+\sum_{n=1}^\infty\frac1{n}=\infty,
+\]
+\[
+\sum_{n=1}^\infty\frac1{n^p}<\infty\iff p>1.
+\]
+また有限和では
+\[
+\sum_{k=0}^{m-1}r^k=\frac{1-r^m}{1-r}\quad(r\ne1)
+\]
+であり、行列でも $(I-A)(I+A+\cdots+A^{m-1})=I-A^m$ の形で使える。
+\end{proposition}
+
+\begin{memo*}
+「$p>1$ なら収束」という判定は、広義積分の収束
+（命題~\ref{prop:tb-improper-power}）と同じ形で繰り返し使う。
+有限等比和の行列版は 2015年度 応用数理 第1問で、$I\pm A$ の逆行列を作るのに使う。
+\end{memo*}
