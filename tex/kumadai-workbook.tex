@@ -1,0 +1,94 @@
+\documentclass[uplatex, dvipdfmx]{jsreport}
+
+\input{preamble}
+
+\usepackage[top=18mm, bottom=14mm, left=20mm, right=20mm, headsep=5mm]{geometry}
+\usepackage{fancyhdr}
+
+% ============================================================
+%  演習用のレイアウト
+%
+%  見出しは本文に出さず、柱（左上）と目次にだけ回す。
+%  問題文が終わったところから、そのページの残りがそのまま解答欄になる。
+%  原稿 generated/workbook/*.tex は tools/split-pdf-sources.mjs が生成する。
+% ============================================================
+
+% 目次は「年度・区分」までにとどめて1ページに収め、
+% 問題名は PDF のしおりからだけ辿れるようにする。
+\hypersetup{bookmarksdepth=2}
+
+\makeatletter
+
+\newcommand{\wb@year}{}
+\newcommand{\wb@sec}{}
+\newcommand{\wb@prob}{}
+\newcommand{\wb@sep}{\,\textbar\,}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\normalfont\footnotesize\textcolor{black!60}{%
+  \wb@year\wb@sep\wb@sec\wb@sep\textbf{\wb@prob}}}
+\fancyhead[R]{\normalfont\footnotesize\textcolor{black!60}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[R]{\normalfont\footnotesize\textcolor{black!60}{\thepage}}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+% 章・節は柱の材料と目次の見出しにするだけで、本文には何も出さない。
+\newcommand{\wbchapter}[1]{%
+  \clearpage
+  \renewcommand{\wb@year}{#1}%
+  \phantomsection\addcontentsline{toc}{chapter}{#1}%
+}
+\newcommand{\wbsection}[1]{%
+  \clearpage
+  \renewcommand{\wb@sec}{#1}%
+  \phantomsection\addcontentsline{toc}{section}{#1}%
+}
+% 問題は必ず新しいページから始める。題名は柱と目次へ送る。
+\newcommand{\wbproblem}[1]{%
+  \clearpage
+  \renewcommand{\wb@prob}{#1}%
+  \phantomsection\addcontentsline{toc}{subsection}{#1}%
+  \par\noindent\ignorespaces
+}
+% 問題文の終わりを細い罫線で示し、以降そのページの残りを解答欄にする。
+\newcommand{\answerspace}{%
+  \par\medskip
+  \noindent\textcolor{black!25}{\rule{\linewidth}{0.4pt}}%
+  \par
+}
+
+\makeatother
+
+\title{熊本大学 数学系大学院 入試対策\\{\Large 専門基礎科目｜演習用（問題と解答欄のみ）}}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{memo*}
+専門基礎科目として出題された過去問31題と、過去の出題傾向から作成した
+専門基礎の予想問題6題を、解答・解説・解答の見通しを伏せて収録した演習用の冊子である。
+1問1ページで、細い罫線から下がその問題の解答欄になっている。
+どの年度のどの問題かは各ページ左上の柱に出しているので、本文には見出しを置いていない。
+
+専門基礎科目は3題必修・120分なので、1セット3題を通しで解くと本番と同じ時間配分になる。
+答え合わせには「専門基礎科目専用｜過去問と予想問題」（\texttt{kumadai-basic-prediction.pdf}）を使う。
+\end{memo*}
+
+\tableofcontents
+
+\input{generated/workbook/2026}
+\input{generated/workbook/2022}
+\input{generated/workbook/2021}
+\input{generated/workbook/2017}
+\input{generated/workbook/2015}
+\input{generated/workbook/unknown}
+\input{generated/workbook/prediction}
+
+\end{document}

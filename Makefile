@@ -5,14 +5,15 @@
 
 SITE := node tools/site
 
-.PHONY: help all site pdf pdf-textbook pdf-basic-combined pdf-combined open clean
+.PHONY: help all site pdf pdf-textbook pdf-basic-combined pdf-combined pdf-workbook open clean
 
 help:
 	@echo "make site   tex から Web サイトを生成（site/dist/index.html）"
-	@echo "make pdf    分冊・教科書・専門基礎専用統合版の6 PDFを生成"
+	@echo "make pdf    分冊・教科書・専門基礎専用統合版・演習用の7 PDFを生成"
 	@echo "make pdf-textbook  専門基礎科目のための教科書だけを生成"
 	@echo "make pdf-basic-combined  専門基礎の過去問と予想問題だけをまとめた PDF を生成"
 	@echo "make pdf-combined  過去問と予想問題をまとめた PDF を生成"
+	@echo "make pdf-workbook  解答を伏せた演習用（問題と解答欄のみ）の PDF を生成"
 	@echo "make all    site と pdf の両方"
 	@echo "make open   生成したサイトをブラウザで開く"
 	@echo "make clean  生成物を削除"
@@ -26,7 +27,7 @@ site:
 
 pdf:
 	node tools/split-pdf-sources.mjs .
-	cd tex && latexmk kumadai-basic.tex kumadai-specialized.tex kumadai-reference.tex kumadai-textbook.tex kumadai-prediction.tex kumadai-basic-prediction.tex
+	cd tex && latexmk kumadai-basic.tex kumadai-specialized.tex kumadai-reference.tex kumadai-textbook.tex kumadai-prediction.tex kumadai-basic-prediction.tex kumadai-workbook.tex
 
 pdf-textbook:
 	cd tex && latexmk kumadai-textbook.tex
@@ -37,6 +38,10 @@ pdf-basic-combined:
 
 pdf-combined:
 	cd tex && latexmk main.tex
+
+pdf-workbook:
+	node tools/split-pdf-sources.mjs .
+	cd tex && latexmk kumadai-workbook.tex
 
 open: site
 	@open site/dist/index.html 2>/dev/null || xdg-open site/dist/index.html
