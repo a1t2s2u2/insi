@@ -1,0 +1,45 @@
+\documentclass[uplatex, dvipdfmx]{jsreport}
+
+\input{preamble}
+\input{workbook-layout}
+
+% 罫線の下に、解答の見通しと解答を続ける。
+\newcommand{\wbend}{\wbrule}
+
+% 見通しの箱も題字バーを外して詰める。本文が「解答の見通し。」で始まるので、
+% Memo という題字はここでは要らない。
+\renewtcolorbox{memo*}{
+  colback=black!4, colframe=black!25,
+  boxrule=0.4pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  before skip=8pt, after skip=8pt,
+  breakable
+}
+
+\title{熊本大学 数学系大学院 入試対策\\{\Large 専門基礎科目｜演習用 解答編}}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{memo*}
+演習用（\texttt{kumadai-workbook.pdf}）の解答編である。
+過去問31題と予想問題6題を、演習用とまったく同じ順序・同じ柱で並べ、
+各問題の罫線の下に「解答の見通し」と解答を置いた。
+
+先に見通しだけを読んで方針を確かめ、それでも進まないときに解答へ進む使い方を想定している。
+解答で使う用語・定理を確認したいときは別冊「用語・定義・定理 補足資料」を、
+前提から積み上げて学び直したいときは別冊「専門基礎科目のための教科書」を参照されたい。
+\end{memo*}
+
+\tableofcontents
+
+\input{generated/answers/2026}
+\input{generated/answers/2022}
+\input{generated/answers/2021}
+\input{generated/answers/2017}
+\input{generated/answers/2015}
+\input{generated/answers/unknown}
+\input{generated/answers/prediction}
+
+\end{document}

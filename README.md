@@ -24,7 +24,7 @@ open site/dist/index.html
 make pdf
 ```
 
-次の7冊を `tex/out/` に生成します。
+次の8冊を `tex/out/` に生成します。
 
 - `kumadai-basic.pdf` — 専門基礎科目（31題）
 - `kumadai-specialized.pdf` — 専門科目（31題）
@@ -33,6 +33,7 @@ make pdf
 - `kumadai-prediction.pdf` — 専門基礎の出題傾向と予想問題集（模擬2回分・全6題）
 - `kumadai-basic-prediction.pdf` — 専門基礎の過去問31題＋予想問題6題の専用統合版
 - `kumadai-workbook.pdf` — 上と同じ37題から解答・解説を伏せた演習用（問題と解答欄のみ）
+- `kumadai-workbook-answers.pdf` — 演習用と同じ並び・同じ紙面の解答編
 
 教科書は、専門基礎の問題を解くのに必要な知識を前提から積み上げた一冊です。
 `sec` の定義や微分積分の公式表から、行列式・固有値・コンパクト性までを収め、
@@ -49,7 +50,11 @@ make pdf
 解答欄を最大限に取れます。目次は年度・区分までにとどめてありますが、
 PDF のしおりからは37題を個別に辿れます。
 1セット3題を通して時間を計るとそのまま本番の練習になります。
-単独で作るときは `make pdf-workbook` を使います。
+
+解答編は演習用とまったく同じ順序・同じ柱で並んでいるので、
+解いた問題のページをそのまま突き合わせて答え合わせできます。
+罫線から下が、演習用では解答欄、解答編では「解答の見通し」と解答になります。
+二冊とも `make pdf-workbook` で生成します。
 
 ## 原稿と生成物
 
@@ -59,7 +64,8 @@ PDF のしおりからは37題を個別に辿れます。
 - `tex/foundations/reference.tex`: 用語・定義・定理の補足原稿
 - `tex/textbook/`: 専門基礎科目のための教科書の原稿（章ごとに分割）
 - `tex/kumadai-*.tex`: 分冊 PDF 用ルート原稿
-- `tools/split-pdf-sources.mjs`: 年度別原稿を専門基礎・専門へ分け、演習用原稿も作るビルド処理
+- `tools/split-pdf-sources.mjs`: 年度別原稿を専門基礎・専門へ分け、演習用・解答編の原稿も作るビルド処理
+- `tex/workbook-layout.tex`: 演習用と解答編で共通の紙面設計
 - `site.config.mjs`: 年度の並び、タイトル、表示設定
 - `site/content/`: 自動生成される中間 Markdown
 - `site/dist/`: 自動生成される公開用サイト
@@ -73,4 +79,4 @@ node tools/site/tex2md.mjs . --strict
 make pdf
 ```
 
-前者は未変換の LaTeX や参照エラーを検査します。後者は7冊の PDF を生成します。
+前者は未変換の LaTeX や参照エラーを検査します。後者は8冊の PDF を生成します。
