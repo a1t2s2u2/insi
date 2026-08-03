@@ -121,16 +121,94 @@ $\sec\theta=2$ となるのが $\theta=\pi/3$ であることは、
 \section{逆三角関数}
 
 \begin{definition}{逆三角関数}{tb-inverse-trig}
-主値を次のように取る。
+$\sin,\cos,\tan$ は $\R$ 全体では単射でないので、単調な区間を一つ選び、
+そこへ制限した写像の逆関数を考える。選ぶ区間は
+\[
+\sin:\left[-\frac\pi2,\frac\pi2\right]\to[-1,1],
+\qquad
+\cos:[0,\pi]\to[-1,1],
+\qquad
+\tan:\left(-\frac\pi2,\frac\pi2\right)\to\R
+\]
+とし、その逆関数を $\arcsin,\arccos,\arctan$ と書く。すなわち
 \[
 \arcsin:[-1,1]\to\left[-\frac\pi2,\frac\pi2\right],
 \qquad
 \arccos:[-1,1]\to[0,\pi],
+\qquad
+\arctan:\R\to\left(-\frac\pi2,\frac\pi2\right)
 \]
-\[
-\arctan:\R\to\left(-\frac\pi2,\frac\pi2\right).
-\]
+である。この値域を\textbf{主値}という。
 \end{definition}
+
+\begin{remark}{区間の選び方}{tb-inverse-trig-branch}
+$\sin$ は $[-\pi/2,\pi/2]$ で $-1$ から $1$ へ単調増加し、この区間は原点を含む。
+$\cos$ は同じ区間では $\cos(-\theta)=\cos\theta$ より単射でないので、
+単調減少する $[0,\pi]$ を取る。$\arcsin$ と $\arccos$ で区間が違うのはこのためである。
+$\tan$ は $(-\pi/2,\pi/2)$ で $-\infty$ から $\infty$ へ単調増加する。
+\end{remark}
+
+\begin{remark}{グラフは直線 $y=x$ に関する折り返し}{tb-inverse-trig-graph}
+点 $(a,b)$ が $y=\sin x$ 上にあることと、点 $(b,a)$ が $y=\arcsin x$ 上にあることは同値である。
+従って逆関数のグラフは、元のグラフを直線 $y=x$ に関して折り返したものになる。
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  axis lines=middle,
+  xmin=-2.1, xmax=2.1, ymin=-2.1, ymax=2.1,
+  xtick={-1.5708,-1,1,1.5708},
+  xticklabels={$-\frac{\pi}{2}$,$-1$,$1$,$\frac{\pi}{2}$},
+  ytick={-1.5708,-1,1,1.5708},
+  yticklabels={$-\frac{\pi}{2}$,$-1$,$1$,$\frac{\pi}{2}$},
+  width=6cm, height=6cm, scale only axis,
+  tick label style={font=\scriptsize},
+  legend style={at={(0.03,0.97)}, anchor=north west,
+                font=\scriptsize, draw=none, fill=none},
+  legend cell align=left,
+]
+\addplot[gray, dotted, domain=-2:2, samples=2] {x};
+\addlegendentry{$y=x$}
+\addplot[thick, domain=-1.5708:1.5708, samples=80] {sin(deg(x))};
+\addlegendentry{$y=\sin x$}
+\addplot[thick, dashed, domain=-1:1, samples=80] {rad(asin(x))};
+\addlegendentry{$y=\arcsin x$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+この折り返しから、次のことが公式を覚えなくても読める。
+\begin{itemize}
+  \item 定義域と値域が入れ替わる。$\sin$ の $[-\pi/2,\pi/2]\to[-1,1]$ が
+        $\arcsin$ の $[-1,1]\to[-\pi/2,\pi/2]$ になる。
+  \item 単調増加は折り返しても単調増加である。
+        $\cos$ は $[0,\pi]$ で単調減少なので、$\arccos$ も単調減少になる。
+  \item $\sin$ は $x=\pm\pi/2$ で接線が水平である。
+        折り返すと傾きが逆数になるので、$\arcsin$ は $x=\pm1$ で接線が\emph{垂直}になる。
+        導関数が端点で発散するのはこのためで、$\sqrt{1-x^2}$ が分母に来ることと対応する。
+\end{itemize}
+
+$\tan$ は $x=\pm\pi/2$ に垂直漸近線を持つので、折り返した $\arctan$ は
+$y=\pm\pi/2$ を水平漸近線に持つ。
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  axis lines=middle,
+  xmin=-6, xmax=6, ymin=-2.2, ymax=2.2,
+  xtick={-4,-2,2,4},
+  ytick={-1.5708,1.5708},
+  yticklabels={$-\frac{\pi}{2}$,$\frac{\pi}{2}$},
+  width=8cm, height=3.6cm, scale only axis,
+  tick label style={font=\scriptsize},
+]
+\addplot[gray, dashed, domain=-6:6, samples=2] {1.5708};
+\addplot[gray, dashed, domain=-6:6, samples=2] {-1.5708};
+\addplot[thick, domain=-6:6, samples=120] {rad(atan(x))};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{remark}
 
 \begin{proposition}{逆三角関数の微分}{tb-inverse-trig-derivative}
 \[
@@ -138,6 +216,66 @@ $\sec\theta=2$ となるのが $\theta=\pi/3$ であることは、
 (\arccos x)'=-\frac1{\sqrt{1-x^2}},\qquad
 (\arctan x)'=\frac1{1+x^2}.
 \]
+\end{proposition}
+
+\begin{remark}{直角三角形から導く}{tb-inverse-trig-triangle}
+公式は覚えなくても、その場で作れる。
+$\theta=\arcsin x$ とおくと $\sin\theta=x$ であり、両辺を $x$ で微分すると
+\[
+\cos\theta\cdot\frac{\d\theta}{\d x}=1,
+\qquad\text{すなわち}\qquad
+\frac{\d\theta}{\d x}=\frac1{\cos\theta}.
+\]
+分母の $\cos\theta$ を $x$ で表せばよい。斜辺が $1$、$\theta$ の対辺が $x$ の
+直角三角形を描くと、残る辺は三平方の定理から $\sqrt{1-x^2}$ である。
+
+\begin{center}
+\begin{tikzpicture}[scale=1.4, line join=round]
+\draw[thick] (0,0) -- (1.7,0) -- (1.7,1.15) -- cycle;
+\draw (1.55,0) rectangle (1.7,0.15);
+\node[below, font=\small] at (0.85,0) {$\sqrt{1-x^2}$};
+\node[right, font=\small] at (1.7,0.575) {$x$};
+\node[above left, font=\small] at (0.85,0.575) {$1$};
+\node[right, font=\small] at (0.2,0.09) {$\theta$};
+\node[font=\small] at (0.85,-0.62) {$\theta=\arcsin x$};
+\begin{scope}[xshift=4.6cm]
+\draw[thick] (0,0) -- (1.7,0) -- (1.7,1.15) -- cycle;
+\draw (1.55,0) rectangle (1.7,0.15);
+\node[below, font=\small] at (0.85,0) {$1$};
+\node[right, font=\small] at (1.7,0.575) {$x$};
+\node[above left, font=\small] at (0.85,0.575) {$\sqrt{1+x^2}$};
+\node[right, font=\small] at (0.2,0.09) {$\theta$};
+\node[font=\small] at (0.85,-0.62) {$\theta=\arctan x$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+主値では $-\pi/2\le\theta\le\pi/2$ なので $\cos\theta\ge0$ であり、
+$\cos\theta=\sqrt{1-x^2}$ と符号が決まる。これで
+$(\arcsin x)'=1/\sqrt{1-x^2}$ を得る。
+
+$\arctan$ も同じ手順である。$\theta=\arctan x$ なら $\tan\theta=x$ で
+\[
+\sec^2\theta\cdot\frac{\d\theta}{\d x}=1,
+\qquad
+\frac{\d\theta}{\d x}=\frac1{\sec^2\theta}=\cos^2\theta.
+\]
+対辺が $x$、隣辺が $1$ の直角三角形では斜辺が $\sqrt{1+x^2}$ なので
+$\cos\theta=1/\sqrt{1+x^2}$、従って $(\arctan x)'=1/(1+x^2)$ である。
+\end{remark}
+
+\begin{proposition}{$\arcsin$ と $\arccos$ の関係}{tb-arcsin-arccos}
+$-1\le x\le1$ に対して
+\[
+\arcsin x+\arccos x=\frac\pi2.
+\]
+実際 $\theta=\arcsin x$ とすると $\cos(\pi/2-\theta)=\sin\theta=x$ であり、
+$-\pi/2\le\theta\le\pi/2$ から $0\le\pi/2-\theta\le\pi$ なので、
+$\pi/2-\theta$ は $\arccos x$ の主値の範囲に入る。従って $\pi/2-\theta=\arccos x$ である。
+
+この式の両辺を微分すれば $(\arccos x)'=-(\arcsin x)'$ となる。
+$\arccos$ の導関数が $\arcsin$ と符号だけ違うのは、
+二つが $\pi/2$ を挟んで折り返しの関係にあるからである。
 \end{proposition}
 
 \section{双曲線関数}
