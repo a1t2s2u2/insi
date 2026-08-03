@@ -31,9 +31,13 @@ $f$ が\textbf{一様連続}であるとは
 \text{Lipschitz 連続}\ \Longrightarrow\ \text{一様連続}\ \Longrightarrow\ \text{連続}
 \]
 であり、逆はいずれも成り立たない。
-Lipschitz なら、任意の $\varepsilon>0$ に対し $\delta=\varepsilon/L$（$L>0$ のとき）と取ればよい。
-特に $L=1$ のときは $\delta=\varepsilon$ と取れる。
 \end{proposition}
+
+\begin{proof}
+Lipschitz なら、任意の $\varepsilon>0$ に対し $\delta=\varepsilon/L$（$L>0$ のとき）と取れば
+一様連続の定義を満たす。特に $L=1$ のときは $\delta=\varepsilon$ と取れる。
+一様連続なら、$\delta$ を各点で使えば連続である。
+\end{proof}
 
 \begin{theorem}{中間値の定理}{tb-intermediate-value}
 $f$ が閉区間 $[a,b]$ 上連続で $f(a)\ne f(b)$ なら、
@@ -142,7 +146,6 @@ $f$ が $[a,b]$ で連続、$(a,b)$ で微分可能なら
 $f'\equiv0$ なら定数である。
 \end{corollary}
 
-\begin{remark}{最大値を求める手順}{tb-maximum-procedure}
 開区間や半直線での最大・最小は、次の順で書く。
 \begin{enumerate}
   \item $f'(x)=0$ を解いて候補を求める。
@@ -152,7 +155,6 @@ $f'\equiv0$ なら定数である。
 \end{enumerate}
 2022年度 第2期 専門基礎 第2問では、$g'(x)=x^2(1/2-2x^2/3)$ の
 符号が括弧の中だけで決まることを述べたうえで $x=\sqrt3/2$ を求める。
-\end{remark}
 
 \section{Taylor の定理}
 

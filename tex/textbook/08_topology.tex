@@ -28,12 +28,10 @@ $B(x,\varepsilon)\subset U$ となる $\varepsilon>0$ が存在することを�
 「$F$ の点からなる収束列の極限が必ず $F$ に属する」ことが同値である。
 \end{proposition}
 
-\begin{remark}{閉でないことの示し方}{tb-not-closed}
 $F$ が閉でないことを示すには、$F$ の点からなる列で、
 極限が\textbf{全体空間には属するが $F$ には属さない}ものを一つ作ればよい。
 2017年度 専門基礎 第3問では、全体空間が $\Q$ であることに注意して
 $x_n=2-1/n\in A$ と $2\in\Q\setminus A$ を使う。
-\end{remark}
 
 \section{閉包・内部・稠密}
 
@@ -75,11 +73,9 @@ A\subset B\Longrightarrow\overline A\subset\overline B,
 最後の包含は一般に等号にならない。
 \end{proposition}
 
-\begin{remark}{稠密でないことの示し方}{tb-not-dense}
 $A$ が稠密でないことを示すには、$A$ と交わらない空でない開集合を一つ挙げればよい。
 2022年度 第1期 専門基礎 第3問では、孤立点 $p$（$\{p\}$ 自身が開になる点）を
 空間に加えることで、この開集合を人工的に作る。
-\end{remark}
 
 \section{連続性}
 
@@ -104,11 +100,9 @@ $f:X\to Y$ について次は同値である。
 2.\ と 3.\ が同値なのは $f^{-1}(Y\setminus F)=X\setminus f^{-1}(F)$ による。
 \end{theorem}
 
-\begin{remark}{開集合の像は開とは限らない}{tb-open-image}
-連続性が保証するのは\textbf{逆像}の側だけである。
+開集合の像は開とは限らない。連続性が保証するのは\textbf{逆像}の側だけである。
 定数写像 $f\equiv0$ は連続だが、$f(\R)=\{0\}$ は開でない。
 同じ写像で $f^{-1}(\{0\})=\R$ はコンパクトでない。
-\end{remark}
 
 \section{相対位相と部分空間}
 
@@ -117,13 +111,11 @@ $A\subset X$ に対し、$X$ の開集合 $U$ を用いて $A\cap U$ と書け�
 $A$ の\textbf{相対開集合}という。これにより $A$ 自身が位相空間になる。
 \end{definition}
 
-\begin{remark}{全体空間を明示する}{tb-ambient-space}
 「$A$ は閉か」という問いは、$A$ をどの空間の部分集合と見るかで答が変わる。
 $A=\{x\in\Q\mid1\le x<2\}$ は $\Q$ の中で閉でないが、
 $\R$ の中で考えても閉ではない。一方
 $\Q$ 自身は $\Q$ の中では閉かつ開である。
 答案では「$\Q$ の中で」と毎回書くのが安全である。
-\end{remark}
 
 \begin{definition}{直和位相}{tb-disjoint-union-topology}
 互いに交わらない位相空間 $X_1,X_2$ の合併 $X_1\sqcup X_2$ に対し、
@@ -147,10 +139,14 @@ $\varnothing,X\in\mathcal O$、任意個の合併で閉じる、有限個の共�
 \end{definition}
 
 \begin{proposition}{Hausdorff 空間では一点集合が閉}{tb-hausdorff-point-closed}
+Hausdorff 空間 $X$ の各点 $p$ について、一点集合 $\{p\}$ は閉である。
+\end{proposition}
+
+\begin{proof}
 $q\ne p$ を取ると、Hausdorff 性から交わらない開近傍 $U\ni p$, $V\ni q$ があり
 $V\subset X\setminus\{p\}$ となる。従って $X\setminus\{p\}$ は開であり、
 $\{p\}$ は閉である。
-\end{proposition}
+\end{proof}
 
 \section{コンパクト性}
 
@@ -184,19 +180,17 @@ $\R^d$ の部分集合について
 \end{enumerate}
 \end{theorem}
 
-\begin{remark}{2.\ の証明の型}{tb-compact-closed-proof}
-$x\notin K$ を固定し、各 $y\in K$ に対して交わらない開近傍
+\begin{proof}
+2.\ を示す。$x\notin K$ を固定し、各 $y\in K$ に対して交わらない開近傍
 $U_y\ni x$, $V_y\ni y$ を取る。$\{V_y\}$ は $K$ の開被覆だから
 有限個 $V_{y_1},\ldots,V_{y_m}$ で覆える。
 $U=U_{y_1}\cap\cdots\cap U_{y_m}$ は $x$ の開近傍で、$K$ と交わらない。
 \textbf{有限個に絞ったからこそ共通部分が開になる}点が要点である。
-\end{remark}
+\end{proof}
 
-\begin{remark}{コンパクトでないことの示し方}{tb-not-compact}
 有限部分被覆を持たない開被覆を一つ具体的に挙げる。
 $\R$ に対しては $\{(-n,n)\}_{n\ge1}$ が定番である。
 あるいは「コンパクトなら閉」の対偶を使い、閉でないことから結論してもよい。
-\end{remark}
 
 \section{連結性}
 
@@ -215,11 +209,9 @@ $f:X\to Y$ が連続で $X$ が連結なら $f(X)$ は連結である。
 特に全射連続写像の終域は連結になる。
 \end{theorem}
 
-\begin{remark}{非連結性の示し方}{tb-disconnection}
 非空な相対開集合 $U,V$ で $A=U\sqcup V$ となるものを具体的に作る。
 $\Q$ や $\Q^2$ では、\textbf{無理数を境界に選ぶ}と
 境界上に点が残らないため、この分割がきれいに作れる。
-\end{remark}
 
 \section{集合までの距離}
 
@@ -239,12 +231,12 @@ $d(K,F)=\inf\{d(k,f)\mid k\in K,\ f\in F\}$ で定める。
 従って $x\mapsto d(x,A)$ は連続である。
 \end{proposition}
 
-\begin{remark}{証明の書き方}{tb-distance-proof}
+\begin{proof}
 任意の $a\in A$ について三角不等式
 $d(x,a)\le d(x,y)+d(y,a)$ を書き、左辺を $d(x,A)$ で下から押さえてから、
 右辺で $a$ に関する下限を取る。得られるのは片側の不等式なので、
 $x,y$ を交換してもう一方も出す。
-\end{remark}
+\end{proof}
 
 \begin{proposition}{触点との関係}{tb-distance-closure}
 \[
@@ -254,9 +246,12 @@ d(x,A)=0\iff x\in\overline A.
 
 \begin{theorem}{コンパクト集合への最短点}{tb-nearest-point}
 $K$ がコンパクトなら、各 $x$ に対して $d(x,k_x)=d(x,K)$ を満たす
-$k_x\in K$ が存在する。$z\mapsto d(x,z)$ が連続で、
-コンパクト集合上で最小値を取るからである。
+$k_x\in K$ が存在する。
 \end{theorem}
+
+\begin{proof}
+$z\mapsto d(x,z)$ は連続で、コンパクト集合 $K$ 上で最小値を取る。
+\end{proof}
 
 \begin{theorem}{コンパクト集合と閉集合の距離}{tb-compact-closed-distance}
 $K$ がコンパクト、$F$ が閉で $K\cap F=\varnothing$ なら $d(K,F)>0$ である。
@@ -267,12 +262,10 @@ $K$ がコンパクト、$F$ が閉で $K\cap F=\varnothing$ なら $d(K,F)>0$ �
 となる。
 \end{theorem}
 
-\begin{remark}{$F=\varnothing$ の場合を落とさない}{tb-empty-case}
 上の主張で $U=X$ のときは $F=X\setminus U=\varnothing$ となり、
 $d(K,F)$ が定義できない。この場合は任意の $\varepsilon>0$ で結論が成り立つので、
 答案では最初に「$F=\varnothing$ なら明らか」と場合を分けておく。
 細かいが、減点されやすい箇所である。
-\end{remark}
 
 \begin{memo*}
 集合までの距離は、2026年度 第2期 専門基礎 第3問、

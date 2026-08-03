@@ -12,7 +12,6 @@ x,y\in W,\ a,b\in K\ \Longrightarrow\ ax+by\in W
 が成り立つことをいう。このとき自動的に $0\in W$ である。
 \end{definition}
 
-\begin{remark}{部分空間であることの確認手順}{tb-subspace-check}
 答案では次の三つを順に書く。
 \begin{enumerate}
   \item $0$ を含むこと（特に空でないこと）。
@@ -20,7 +19,6 @@ x,y\in W,\ a,b\in K\ \Longrightarrow\ ax+by\in W
   \item スカラー倍で閉じること。
 \end{enumerate}
 2. と 3. はまとめて「$ax+by\in W$」の一行で済ませてよい。
-\end{remark}
 
 \begin{proposition}{共通部分と合併}{tb-intersection-union}
 部分空間 $W_1,W_2$ に対し $W_1\cap W_2$ は常に部分空間である。
@@ -28,12 +26,10 @@ x,y\in W,\ a,b\in K\ \Longrightarrow\ ax+by\in W
 $W_1\subset W_2$ または $W_2\subset W_1$ のときに限る。
 \end{proposition}
 
-\begin{remark}{合併の証明の型}{tb-union-proof}
 どちらの包含も成り立たないと仮定して
 $u\in W_1\setminus W_2$, $v\in W_2\setminus W_1$ を取る。
 $u+v$ がどちらに入っても、差を取ることで矛盾が出る。
 2022年度 第2期 専門基礎 第3問がこの問題である。
-\end{remark}
 
 \section{一次独立・基底・次元}
 
@@ -49,8 +45,11 @@ $v_1,\ldots,v_k$ の一次結合全体を $\langle v_1,\ldots,v_k\rangle$ と書
 \begin{proposition}{基底による表示の一意性}{tb-basis-uniqueness}
 $v_1,\ldots,v_n$ が基底なら、各 $v\in V$ は
 $v=\sum_ia_iv_i$ と\textbf{一意に}表される。
-実際、二通りの表示の差を取ると一次独立性から係数が一致する。
 \end{proposition}
+
+\begin{proof}
+二通りの表示の差を取ると一次独立性から係数が一致する。
+\end{proof}
 
 \begin{definition}{和と直和}{tb-direct-sum}
 $W_1+W_2=\{w_1+w_2\mid w_i\in W_i\}$ とする。
@@ -84,8 +83,11 @@ $\dim\operatorname{Im}f$ を $f$ の\textbf{階数}という。
 \[
 f\ \text{が単射}\iff\ker f=\{0\}.
 \]
-実際 $f(x)=f(y)\iff f(x-y)=0\iff x-y\in\ker f$ である。
 \end{theorem}
+
+\begin{proof}
+$f(x)=f(y)\iff f(x-y)=0\iff x-y\in\ker f$ である。
+\end{proof}
 
 \begin{theorem}{次元定理}{tb-rank-nullity}
 $V$ が有限次元なら
@@ -132,11 +134,9 @@ $Ax=b$ の解は、拡大係数行列 $(A\mid b)$ を行基本変形して
 このとき自由変数の個数は $n-\operatorname{rank}A$ である。
 \end{proposition}
 
-\begin{remark}{同次方程式と固有空間}{tb-homogeneous}
 $Ax=0$ の解全体は $\ker A$ であり、常に $0$ を含む。
 $\dim\ker A=n-\operatorname{rank}A$ である。
 固有空間 $\ker(A-\lambda I)$ を求める計算は、この同次方程式を解く作業に他ならない。
-\end{remark}
 
 \section{行列式}
 
@@ -233,7 +233,6 @@ A\operatorname{adj}A=\operatorname{adj}A\,A=|A|I,
 \]
 \end{theorem}
 
-\begin{remark}{行列式を計算する順序}{tb-determinant-strategy}
 3次以上では、いきなり余因子展開せず、まず
 \textbf{ある行に別の行の定数倍を加えて0を作る}のが速い。
 0が多い行または列に沿って展開すれば、計算量が大きく減る。
@@ -242,7 +241,6 @@ A\operatorname{adj}A=\operatorname{adj}A\,A=|A|I,
 たとえば $A-\lambda I$ の行列式では、
 $R_2\leftarrow R_2-R_1$ のような変形で $(1-\lambda)$ のような共通因子が現れ、
 特性多項式が因数分解された形のまま得られることが多い。
-\end{remark}
 
 \begin{proposition}{正則性の同値条件}{tb-invertibility}
 $n$ 次正方行列 $A$ について次は同値である。

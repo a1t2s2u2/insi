@@ -21,7 +21,6 @@ $P\Longrightarrow Q$ と、その対偶 $\lnot Q\Longrightarrow\lnot P$ は同�
 一方、逆と裏は元の命題と同値とは限らない。
 \end{proposition}
 
-\begin{remark}{証明の三つの型}{tb-proof-styles}
 入試で使う型はほぼ次の三つに尽きる。
 \begin{enumerate}
   \item \textbf{直接証明}：仮定から結論へ、定義と定理をつないで進む。
@@ -32,7 +31,6 @@ $P\Longrightarrow Q$ と、その対偶 $\lnot Q\Longrightarrow\lnot P$ は同�
 \end{enumerate}
 また「反例を挙げよ」と問われたら、\textbf{仮定をすべて満たし結論だけが破れる}
 具体例を一つ作ればよい。一般論を述べる必要はない。
-\end{remark}
 
 \begin{definition}{量化記号の順序}{tb-quantifier-order}
 $\forall$ と $\exists$ は交換できない。
@@ -104,11 +102,9 @@ $A\subset B$ は「$x\in A$ なら $x\in B$」を意味する。
 \]
 \end{proposition}
 
-\begin{remark}{集合の等号を示す型}{tb-set-equality}
 $A=B$ を示すには $A\subset B$ と $B\subset A$ を\textbf{別々に}示す。
 片方だけ示して終える答案が多いので注意する。
 2022年度 第2期 専門基礎 第1問の $\overline{A\cup B}=\overline A\cup\overline B$ はこの型である。
-\end{remark}
 
 \section{写像・像・逆像}
 
@@ -281,18 +277,17 @@ $\alpha=\sup S$ であることは、次の二つが同時に成り立つこと�
 特に、各 $n\in\N$ に対して $s_n\in S$ を $s_n<\beta+1/n$ となるように選べる。
 \end{proposition}
 
-\begin{remark}{下限は最小値とは限らない}{tb-inf-not-min}
-$S=(0,1)$ では $\inf S=0$ だが $0\notin S$ である。
+下限は最小値とは限らない。$S=(0,1)$ では $\inf S=0$ だが $0\notin S$ である。
 「下限を達成する点が存在する」ことは別に証明を要する。
 コンパクト集合の上の連続関数については、定理~\ref{thm:tb-extreme-value} によって達成が保証される。
-\end{remark}
 
 \begin{proposition}{下限に関する基本不等式}{tb-inf-inequality}
 $S$ の全ての元 $s$ について $s\le c$ が成り立つなら $\inf S\le c$ である。
 また、全ての $s$ について $c\le s$ なら $c\le\inf S$ である。
+\end{proposition}
+
 下限を含む不等式を示すときは、まず「全ての元について成り立つ不等式」を作り、
 そのうえで下限を取る、という順序を守る。
-\end{proposition}
 
 \begin{theorem}{アルキメデスの原理と有理数の稠密性}{tb-archimedes-density}
 任意の $x\in\R$ に対し $n>x$ となる $n\in\N$ が存在する。

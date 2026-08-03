@@ -24,7 +24,6 @@ $C^1$ 級の関数は全微分可能であり、特に連続である。
 逆に、偏導関数が存在するだけでは連続とは限らない。
 \end{theorem}
 
-\begin{remark}{$C^1$ 級でないことの示し方}{tb-not-c1}
 $C^1$ 級を否定するには、偏導関数を実際に計算し、
 それが\textbf{不連続}である点を一つ示せばよい。
 2021年度 第1期 専門基礎 第2問では
@@ -34,7 +33,6 @@ $C^1$ 級を否定するには、偏導関数を実際に計算し、
 \frac{\partial f}{\partial y}(0,0)=0
 \]
 となるので、原点で不連続であり $C^1$ 級でないと結論する。
-\end{remark}
 
 \begin{theorem}{連鎖律}{tb-chain-rule}
 $f$ が $C^1$ 級、$x(t),y(t)$ が微分可能なら
@@ -75,7 +73,7 @@ $f$ と $f_x$ が $[a,b]\times[c,d]$ 上連続なら
 右辺の三項は「上端の移動」「下端の移動」「被積分関数自身の変化」に対応する。
 \end{theorem}
 
-\begin{remark}{可変端点版の作り方}{tb-leibniz-derivation}
+\begin{proof}
 $Q(x,v)=\int_c^vf(x,y)\,\d y$ とおくと、固定端点版と基本定理から
 \[
 Q_x(x,v)=\int_c^vf_x(x,y)\,\d y,\qquad Q_v(x,v)=f(x,v)
@@ -83,7 +81,7 @@ Q_x(x,v)=\int_c^vf_x(x,y)\,\d y,\qquad Q_v(x,v)=f(x,v)
 である。$\int_{\phi(x)}^{\psi(x)}=Q(x,\psi(x))-Q(x,\phi(x))$ に
 連鎖律を使えば定理~\ref{thm:tb-leibniz-variable} が出る。
 公式を丸暗記するより、この二段構えを覚える方が安全である。
-\end{remark}
+\end{proof}
 
 \section{重積分}
 
@@ -100,11 +98,9 @@ Q_x(x,v)=\int_c^vf_x(x,y)\,\d y,\qquad Q_v(x,v)=f(x,v)
 符号を持つ場合は、$\iint\abs f<\infty$（絶対可積分）を確かめてから交換してよい（Fubini）。
 \end{theorem}
 
-\begin{remark}{積分順序交換の書き方}{tb-fubini-style}
 答案では「非負なので Tonelli の定理により」または
 「絶対可積分なので Fubini の定理により」と、
 \textbf{どちらの定理をどの仮定で使ったか}を明記する。
-\end{remark}
 
 \begin{theorem}{変数変換}{tb-change-of-variables}
 $\Phi:(u,v)\mapsto(x,y)$ が $C^1$ 級の全単射で Jacobian が消えないとき
@@ -136,7 +132,7 @@ x=r\cos\theta,\quad y=r\sin\theta,
 $u=x+y$, $v=x-y$ のような和と差の置き換えはこの形で処理できる。
 \end{proposition}
 
-\begin{remark}{変数変換の手順}{tb-transformation-procedure}
+変数変換は次の順で行う。
 \begin{enumerate}
   \item 逆変換を求め、旧変数の不等式を新変数の不等式へ一つずつ書き換える。
   \item 新しい積分領域を、外側の変数と内側の変数の順に決める。
@@ -146,16 +142,18 @@ $u=x+y$, $v=x-y$ のような和と差の置き換えはこの形で処理でき
 上端が二つの式の小さい方になるときは、両者が等しくなる点で区間を分ける。
 2026年度 第2期 専門基礎 第2問では、$r$ の上端が $\min\{2,\sec\theta\}$ になり、
 $\sec\theta=2$ すなわち $\theta=\pi/3$ で分割する。
-\end{remark}
 
 \begin{proposition}{対称性による消去}{tb-symmetry-vanishing}
 領域 $V$ が原点対称で、被積分関数が奇関数（$f(-P)=-f(P)$）なら
 \[
 \iiint_Vf=0.
 \]
-実際、$T(P)=-P$ は $V$ を $V$ へ写し、Jacobian の絶対値は1なので、
-積分値 $J$ が $J=-J$ を満たすからである。
 \end{proposition}
+
+\begin{proof}
+$T(P)=-P$ は $V$ を $V$ へ写し、Jacobian の絶対値は1なので、
+積分値 $J$ が $J=-J$ を満たす。従って $J=0$ である。
+\end{proof}
 
 \section{Gamma 関数と Beta 関数}
 
@@ -186,7 +184,7 @@ B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)},
 \]
 \end{theorem}
 
-\begin{remark}{関係式を導く二つの変換}{tb-beta-gamma-derivation}
+\begin{proof}
 $\Gamma(p)\Gamma(q)$ を第1象限上の二重積分
 $\iint x^{p-1}y^{q-1}e^{-(x+y)}\,\d x\d y$ と書いてから、次のどちらかで分離する。
 \begin{enumerate}
@@ -197,7 +195,7 @@ $\iint x^{p-1}y^{q-1}e^{-(x+y)}\,\d x\d y$ と書いてから、次のどちら�
         続けて $u=r^2$ と $t=\cos^2\theta$ で置換する。
 \end{enumerate}
 どちらも「$r$ だけの因子」と「$\theta$（または $t$）だけの因子」の積に分かれる点が要点である。
-\end{remark}
+\end{proof}
 
 \begin{proposition}{Beta 関数の三角関数表示}{tb-beta-trig}
 $t=\cos^2\theta$ と置くことで
@@ -231,7 +229,6 @@ $f_n\to f$ がほとんど至る所で成り立ち、可積分な $g$ が存在�
 \]
 \end{theorem}
 
-\begin{remark}{優関数を明示する}{tb-dominating-function}
 優収束定理を使う答案では、優関数 $g$ を具体的に書き、
 その可積分性を確かめる一行を必ず入れる。
 たとえば $\abs{\sin x}\le\abs x$ を $x=f/n$ に使って
@@ -239,4 +236,3 @@ $\abs{n\sin(f/n)}^p\le f^p$ とし、
 $\int f^p=1$ を根拠にする。
 また、領域を広げていく積分 $\int_{B(R)}$ では、被積分関数が非負なら
 単調収束定理で $R\to\infty$ の極限が存在することが言える。
-\end{remark}

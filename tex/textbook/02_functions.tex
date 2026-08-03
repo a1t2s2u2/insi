@@ -51,12 +51,10 @@ $\sec\theta$ と $\tan\theta$ は $\cos\theta\ne0$、
 $\csc\theta$ と $\cot\theta$ は $\sin\theta\ne0$ で定義される。
 \end{definition}
 
-\begin{remark}{$\sec$ を使う理由}{tb-why-sec}
 $1/\cos\theta$ と書いても同じだが、
 積分 $\int\sec\theta\,\d\theta$ や恒等式 $1+\tan^2\theta=\sec^2\theta$ のように、
 $\sec$ を一つの記号として扱った方が式が短くなる場面が多い。
 答案で使うときは初出時に $\sec\theta=1/\cos\theta$ と書いておけばよい。
-\end{remark}
 
 \begin{proposition}{相互関係}{tb-trig-identities}
 \[
@@ -141,14 +139,11 @@ $\sin,\cos,\tan$ は $\R$ 全体では単射でないので、単調な区間を
 である。この値域を\textbf{主値}という。
 \end{definition}
 
-\begin{remark}{区間の選び方}{tb-inverse-trig-branch}
 $\sin$ は $[-\pi/2,\pi/2]$ で $-1$ から $1$ へ単調増加し、この区間は原点を含む。
 $\cos$ は同じ区間では $\cos(-\theta)=\cos\theta$ より単射でないので、
 単調減少する $[0,\pi]$ を取る。$\arcsin$ と $\arccos$ で区間が違うのはこのためである。
 $\tan$ は $(-\pi/2,\pi/2)$ で $-\infty$ から $\infty$ へ単調増加する。
-\end{remark}
 
-\begin{remark}{グラフは直線 $y=x$ に関する折り返し}{tb-inverse-trig-graph}
 点 $(a,b)$ が $y=\sin x$ 上にあることと、点 $(b,a)$ が $y=\arcsin x$ 上にあることは同値である。
 従って逆関数のグラフは、元のグラフを直線 $y=x$ に関して折り返したものになる。
 
@@ -208,7 +203,6 @@ $y=\pm\pi/2$ を水平漸近線に持つ。
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\end{remark}
 
 \begin{proposition}{逆三角関数の微分}{tb-inverse-trig-derivative}
 \[
@@ -218,7 +212,7 @@ $y=\pm\pi/2$ を水平漸近線に持つ。
 \]
 \end{proposition}
 
-\begin{remark}{直角三角形から導く}{tb-inverse-trig-triangle}
+\begin{proof}
 公式は覚えなくても、その場で作れる。
 $\theta=\arcsin x$ とおくと $\sin\theta=x$ であり、両辺を $x$ で微分すると
 \[
@@ -262,21 +256,24 @@ $\arctan$ も同じ手順である。$\theta=\arctan x$ なら $\tan\theta=x$ �
 \]
 対辺が $x$、隣辺が $1$ の直角三角形では斜辺が $\sqrt{1+x^2}$ なので
 $\cos\theta=1/\sqrt{1+x^2}$、従って $(\arctan x)'=1/(1+x^2)$ である。
-\end{remark}
+\end{proof}
 
 \begin{proposition}{$\arcsin$ と $\arccos$ の関係}{tb-arcsin-arccos}
 $-1\le x\le1$ に対して
 \[
 \arcsin x+\arccos x=\frac\pi2.
 \]
-実際 $\theta=\arcsin x$ とすると $\cos(\pi/2-\theta)=\sin\theta=x$ であり、
+\end{proposition}
+
+\begin{proof}
+$\theta=\arcsin x$ とすると $\cos(\pi/2-\theta)=\sin\theta=x$ であり、
 $-\pi/2\le\theta\le\pi/2$ から $0\le\pi/2-\theta\le\pi$ なので、
 $\pi/2-\theta$ は $\arccos x$ の主値の範囲に入る。従って $\pi/2-\theta=\arccos x$ である。
+\end{proof}
 
 この式の両辺を微分すれば $(\arccos x)'=-(\arcsin x)'$ となる。
 $\arccos$ の導関数が $\arcsin$ と符号だけ違うのは、
 二つが $\pi/2$ を挟んで折り返しの関係にあるからである。
-\end{proposition}
 
 \section{双曲線関数}
 
@@ -363,13 +360,11 @@ uv\le\left(\frac{u+v}2\right)^2,
 であり、等号は $x,y$ が平行なときに限る。
 \end{proposition}
 
-\begin{remark}{評価の型}{tb-estimate-style}
 「$\abs{A-B}\le C$ を示せ」という問題は、
 まず $A\le B+C$ を示し、次に $A,B$ を入れ替えて $B\le A+C$ を示す、
 という二段構えで書くのが定型である。
 2026年度 第2期 専門基礎 第3問、2021年度 第2期 専門基礎 第3問、
 年度不明の距離空間の問題はいずれもこの型である。
-\end{remark}
 
 \section{覚えておく極限}
 
@@ -394,6 +389,7 @@ uv\le\left(\frac{u+v}2\right)^2,
 \lim_{x\to+0}x^\alpha\log x=0\ (\alpha>0).
 \]
 最後の三つは「対数は冪より遅く、冪は指数より遅い」と覚える。
+\end{proposition}
 
 これらの $x$ は、$0$ または $\infty$ へ向かう任意の式で置き換えてよい。
 たとえば $h\to0$ のとき $x^2h\to0$ なので、$\lim_{x\to0}\sin x/x=1$ は
@@ -402,7 +398,6 @@ uv\le\left(\frac{u+v}2\right)^2,
 \]
 の形で使える。置き換えた式が本当に $0$ または $\infty$ へ向かうことを、
 使う前に確かめること。
-\end{proposition}
 
 \begin{memo*}
 $\sin x/x\to1$ は、2021年度 第1期 専門基礎 第2問の偏微分の計算と、

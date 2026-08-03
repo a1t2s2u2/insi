@@ -97,10 +97,14 @@ x_n=\alpha_1r_1^n+\cdots+\alpha_kr_k^n
 \end{definition}
 
 \begin{proposition}{冪零行列の固有値}{tb-nilpotent-eigenvalue}
-冪零行列の固有値は0だけである。実際 $Nv=\mu v$（$v\ne0$）なら
-$0=N^mv=\mu^mv$ より $\mu=0$ である。
+冪零行列の固有値は0だけである。
 従って $n$ 次冪零行列の特性多項式は $|\mu I-N|=\mu^n$ である。
 \end{proposition}
+
+\begin{proof}
+$Nv=\mu v$（$v\ne0$）なら $0=N^mv=\mu^mv$ より $\mu=0$ である。
+特性多項式は固有値を重複度込みで並べたものなので $|\mu I-N|=\mu^n$ となる。
+\end{proof}
 
 \begin{definition}{Jordan ブロックと Jordan 標準形}{tb-jordan}
 \[
@@ -235,12 +239,12 @@ x=\sum_{i=1}^nc_iu_i,\qquad c_i=\inner{u_i}{x}
 \end{enumerate}
 \end{theorem}
 
-\begin{remark}{同値性のつなぎ方}{tb-orthogonal-proof}
+\begin{proof}
 1.\ と 2.\ は、$P^{\mathsf T}P$ の $(j,k)$ 成分が
 「第 $j$ 列と第 $k$ 列の内積」であることから直ちに従う。
 3.\ から 4.\ へは、$\norm{x+y}^2=\norm x^2+2\inner xy+\norm y^2$ を展開する
 極化公式を使う。
-\end{remark}
+\end{proof}
 
 \section{対称行列・エルミート行列とスペクトル定理}
 
@@ -259,16 +263,18 @@ A^{*}=A\ \text{（エルミート）}.
 また、相異なる固有値に属する固有ベクトルは自動的に直交する。
 \end{theorem}
 
-\begin{proposition}{エルミート行列の固有値が実数である理由}{tb-hermitian-real}
+スペクトル定理のうち、固有値が実数であることは次のように確かめられる。
+
+\begin{proof}
 $Ax=\lambda x$（$x\ne0$）に左から $x^{*}$ を掛けると
 \[
 x^{*}Ax=\lambda\,x^{*}x=\lambda\norm x^2.
 \]
 一方 $(x^{*}Ax)^{*}=x^{*}A^{*}x=x^{*}Ax$ なので $x^{*}Ax$ は実数であり、
 $\norm x^2>0$ も実数だから $\lambda$ は実数である。
-\end{proposition}
+\end{proof}
 
-\begin{remark}{直交対角化の手順}{tb-orthogonal-diagonalization}
+直交対角化は次の順で行う。
 \begin{enumerate}
   \item $|A-\lambda I|=0$ を解いて固有値を求める。
   \item 各固有値について $(A-\lambda I)x=0$ を解き、固有空間を求める。
@@ -278,7 +284,6 @@ $\norm x^2>0$ も実数だから $\lambda$ は実数である。
 \end{enumerate}
 逆に、直交行列で対角化される実行列は必ず対称である。
 $A=PDP^{\mathsf T}$ の転置を取れば $A^{\mathsf T}=PD^{\mathsf T}P^{\mathsf T}=A$ となるからである。
-\end{remark}
 
 \section{二次形式と最大最小}
 
@@ -296,7 +301,7 @@ $A$ の固有値を $\lambda_{\min}\le\cdots\le\lambda_{\max}$ とすると
 固有ベクトル（長さ1）で達成される。
 \end{theorem}
 
-\begin{remark}{証明の筋}{tb-rayleigh-proof}
+\begin{proof}
 正規直交固有基底 $u_1,\ldots,u_n$ で $x=\sum_ic_iu_i$ と書くと
 $\norm x^2=\sum_ic_i^2=1$ かつ
 \[
@@ -305,7 +310,7 @@ x^{\mathsf T}Ax=\sum_i\lambda_ic_i^2
 となる。右辺は $\lambda_i$ たちの重み付き平均だから、
 最小値と最大値は端の固有値で取る。
 等号成立条件も、この表示から $c_i$ の条件として読める。
-\end{remark}
+\end{proof}
 
 \section{トレースと Frobenius 内積}
 
