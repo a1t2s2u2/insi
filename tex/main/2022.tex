@@ -575,78 +575,85 @@ Fubini の定理で積分順序を交換する。
 
 \section{第2期・専門基礎科目（3題必修）}
 
-\begin{problem}{第1問｜位相空間}{2022-2-1}
+\begin{problem}{第1問｜線形空間}{2022-2-1}
 \begin{enumerate}
-  \item[(1)] 位相空間 $X$ の部分集合 $A,B$ に対し $\overline{A\cup B}=\overline A\cup\overline B$ を示せ。
-  \item[(2)] Hausdorff 空間のコンパクト部分集合は閉集合であることを示せ。
-  \item[(3)] 全射連続写像 $F:S\to T$ について，$S$ が連結なら $T$ も連結であることを示せ。
+  \item[(1)] 部分空間 $W_1,W_2\subset V$ に対し $W_1\cap W_2$ は部分空間であること，また $W_1\cup W_2$ が部分空間なら $W_1\subset W_2$ または $W_2\subset W_1$ であることを示せ。
+  \item[(2)] 線形写像 $f:U\to V$ に対し $\ker f$ は部分空間であり，$f$ が単射であることと $\ker f=\{0\}$ が同値であることを示せ。
+  \item[(3)] $M_3(\R)$ の交代行列全体 $W=\{A\mid A^{\mathsf T}=-A\}$ の基底と次元を求めよ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
-(1) の閉包 $\overline A$ は「$A$ を含む最小の閉集合」である。
-二つの集合が等しいことは、左が右に含まれることと、右が左に含まれることを別々に示せばよい。
-(2) の Hausdorff 性は異なる二点を交わらない開近傍で分けられる性質、
-コンパクト性は任意の開被覆から有限個を選べる性質である。
-点 $x\notin K$ と各 $y\in K$ をまず個別に分け、有限個の近傍だけで $K$ 全体を覆う。
-(3) の連結とは、空でない二つの開集合へ分割できないことである。
-像が分割できると仮定し、連続写像の逆像を取ると定義域まで分割されることを示す。
+部分空間であることは、零ベクトルを含み、任意の $x,y$ とスカラー $a,b$ に対して
+$ax+by$ も集合内に残ることを確認すればよい。
+合併の問題では、どちらにも含まれないベクトルを一つずつ取ると、その和が矛盾を生む。
+核 $\ker f$ は0へ写るベクトル全体である。単射の条件 $f(x)=f(y)\Rightarrow x=y$ を、
+線形性により $f(x-y)=0$ へ直すと核との関係が見える。
+交代行列では $A^{\mathsf T}=-A$ を各成分の式 $a_{ji}=-a_{ij}$ に直し、
+対角成分と下三角成分が上三角成分から決まることを読む。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] 閉包 $\overline{A\cup B}$ は $A\cup B$ を含む最小の閉集合である。
-$\overline A\cup\overline B$ は閉集合であり $A\cup B$ を含むので
+\item[(1)] $W_1,W_2$ は部分空間なので $0\in W_1\cap W_2$ である。また
+$x,y\in W_1\cap W_2$、$a,b$ をスカラーとすると、$x,y$ は $W_1,W_2$ の両方に属するから
 \[
-\overline{A\cup B}\subset\overline A\cup\overline B.
+ax+by\in W_1,\qquad ax+by\in W_2.
 \]
-逆に $A\subset A\cup B$ と $B\subset A\cup B$ に閉包の単調性を用いると
-\[
-\overline A\subset\overline{A\cup B},\qquad
-\overline B\subset\overline{A\cup B}.
-\]
-従って $\overline A\cup\overline B\subset\overline{A\cup B}$ であり、両方の包含から
-\[
-\overline{A\cup B}=\overline A\cup\overline B
-\]
-を得る。
+従って $ax+by\in W_1\cap W_2$ であり、$W_1\cap W_2$ は部分空間である。
 
-\item[(2)] $K\subset X$ をコンパクト部分集合とし、$x\in X\setminus K$ を取る。
-$X$ は Hausdorff 空間なので、各 $y\in K$ に対して互いに交わらない開近傍
-$U_y\ni x$ と $V_y\ni y$ を取れる。$\{V_y\}_{y\in K}$ は $K$ の開被覆だから、
-コンパクト性より $y_1,\ldots,y_m\in K$ が存在して
+次に $W_1\cup W_2$ が部分空間であると仮定する。
+$W_1\not\subset W_2$ かつ $W_2\not\subset W_1$ なら、
 \[
-K\subset V_{y_1}\cup\cdots\cup V_{y_m}
+u\in W_1\setminus W_2,
+\qquad v\in W_2\setminus W_1
 \]
-となる。ここで
-\[
-U=U_{y_1}\cap\cdots\cap U_{y_m}
-\]
-とおく。$U$ は有限個の開集合の共通部分なので開であり、
-各 $U_{y_i}$ が $x$ を含むので $x\in U$ である。すなわち $U$ は $x$ の開近傍である。
-さらに $U$ は $K$ と交わらない。実際、$z\in U\cap K$ があるとすると、
-$K\subset V_{y_1}\cup\cdots\cup V_{y_m}$ よりある $i$ について $z\in V_{y_i}$ であり、
-一方 $z\in U\subset U_{y_i}$ でもあるから
-\[
-z\in U_{y_i}\cap V_{y_i}=\varnothing
-\]
-となって矛盾する。従って $U\subset X\setminus K$ である。
-$x\in X\setminus K$ は任意だったので $X\setminus K$ は開集合であり、$K$ は閉集合である。
+を取れる。合併が部分空間なら $u+v\in W_1\cup W_2$ である。
+もし $u+v\in W_1$ なら $v=(u+v)-u\in W_1$ となって矛盾し、
+もし $u+v\in W_2$ なら $u=(u+v)-v\in W_2$ となって矛盾する。
+従って、必ず $W_1\subset W_2$ または $W_2\subset W_1$ である。
 
-\item[(3)] $T$ が連結でないと仮定すると、非空な開集合 $U,V\subset T$ により
+\item[(2)] $x,y\in\ker f$ とスカラー $a,b$ に対し
 \[
-T=U\cup V,\qquad U\cap V=\varnothing
+f(ax+by)=af(x)+bf(y)=0
 \]
-と書ける。$F$ は連続なので $F^{-1}(U),F^{-1}(V)$ は $S$ の開集合である。
-また $F$ は全射だから、$U\ne\varnothing$ の点は像に現れ、$F^{-1}(U)\ne\varnothing$、
-同様に $F^{-1}(V)\ne\varnothing$ である。さらに逆像は合併と共通部分を保つので
+なので $ax+by\in\ker f$ である。また $f(0)=0$ だから $0\in\ker f$ であり、$\ker f$ は部分空間である。
+また
 \[
-F^{-1}(U)\cup F^{-1}(V)=F^{-1}(U\cup V)=F^{-1}(T)=S,
+f(x)=f(y)\Longleftrightarrow f(x-y)=0
+\Longleftrightarrow x-y\in\ker f.
 \]
+従って、$\ker f=\{0\}$ なら $f(x)=f(y)$ から $x=y$ が従い、$f$ は単射である。
+逆に $f$ が単射なら、$x\in\ker f$ に対して $f(x)=0=f(0)$ だから $x=0$ であり、
+$\ker f=\{0\}$ となる。
+
+\item[(3)] $A=(a_{ij})\in W$ とする。条件 $A^{\mathsf T}=-A$ は
 \[
-F^{-1}(U)\cap F^{-1}(V)=F^{-1}(U\cap V)=F^{-1}(\varnothing)=\varnothing.
+a_{ji}=-a_{ij}\qquad(1\le i,j\le3)
 \]
-従って $S$ も空でない二つの開集合へ分割され、$S$ が連結であることに矛盾する。
-よって $T$ は連結である。
+を意味する。$i=j$ とすれば $a_{ii}=-a_{ii}$、すなわち $2a_{ii}=0$ より $a_{ii}=0$ である。
+また $i<j$ の成分を $a_{12}=a$, $a_{13}=b$, $a_{23}=c$ とおけば、
+残りの成分は $a_{21}=-a$, $a_{31}=-b$, $a_{32}=-c$ と決まる。従って $A$ は
+\[
+A=\begin{pmatrix}
+0&a&b\\
+-a&0&c\\
+-b&-c&0
+\end{pmatrix}
+=aF_{12}+bF_{13}+cF_{23},
+\qquad
+F_{ij}=E_{ij}-E_{ji}
+\]
+と書ける。ここで $E_{ij}$ は $(i,j)$ 成分だけが1で、他の成分が0の行列である。
+逆に $F_{12},F_{13},F_{23}$ はいずれも $F_{ij}^{\mathsf T}=-F_{ij}$ を満たすので $W$ に属し、
+その一次結合も $W$ に属する。よって $F_{12},F_{13},F_{23}$ は $W$ を生成する。
+
+一次独立性を見る。$aF_{12}+bF_{13}+cF_{23}=O$ とすると、上の行列表示の
+$(1,2),(1,3),(2,3)$ 成分を読めばそれぞれ $a=0$, $b=0$, $c=0$ である。
+従って $F_{12},F_{13},F_{23}$ は一次独立であり、$W$ の基底である。よって
+\[
+E_{12}-E_{21},\quad E_{13}-E_{31},\quad E_{23}-E_{32}
+\]
+が基底で，$\dim W=3$。
 \end{enumerate}
 \end{proof}
 
@@ -740,84 +747,77 @@ g\left(\frac{\sqrt3}{2}\right)
 \end{enumerate}
 \end{proof}
 
-\begin{problem}{第3問｜線形空間}{2022-2-3}
+\begin{problem}{第3問｜位相空間}{2022-2-3}
 \begin{enumerate}
-  \item[(1)] 部分空間 $W_1,W_2\subset V$ に対し $W_1\cap W_2$ は部分空間であること，また $W_1\cup W_2$ が部分空間なら $W_1\subset W_2$ または $W_2\subset W_1$ であることを示せ。
-  \item[(2)] 線形写像 $f:U\to V$ に対し $\ker f$ は部分空間であり，$f$ が単射であることと $\ker f=\{0\}$ が同値であることを示せ。
-  \item[(3)] $M_3(\R)$ の交代行列全体 $W=\{A\mid A^{\mathsf T}=-A\}$ の基底と次元を求めよ。
+  \item[(1)] 位相空間 $X$ の部分集合 $A,B$ に対し $\overline{A\cup B}=\overline A\cup\overline B$ を示せ。
+  \item[(2)] Hausdorff 空間のコンパクト部分集合は閉集合であることを示せ。
+  \item[(3)] 全射連続写像 $F:S\to T$ について，$S$ が連結なら $T$ も連結であることを示せ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
-部分空間であることは、零ベクトルを含み、任意の $x,y$ とスカラー $a,b$ に対して
-$ax+by$ も集合内に残ることを確認すればよい。
-合併の問題では、どちらにも含まれないベクトルを一つずつ取ると、その和が矛盾を生む。
-核 $\ker f$ は0へ写るベクトル全体である。単射の条件 $f(x)=f(y)\Rightarrow x=y$ を、
-線形性により $f(x-y)=0$ へ直すと核との関係が見える。
-交代行列では $A^{\mathsf T}=-A$ を各成分の式 $a_{ji}=-a_{ij}$ に直し、
-対角成分と下三角成分が上三角成分から決まることを読む。
+(1) の閉包 $\overline A$ は「$A$ を含む最小の閉集合」である。
+二つの集合が等しいことは、左が右に含まれることと、右が左に含まれることを別々に示せばよい。
+(2) の Hausdorff 性は異なる二点を交わらない開近傍で分けられる性質、
+コンパクト性は任意の開被覆から有限個を選べる性質である。
+点 $x\notin K$ と各 $y\in K$ をまず個別に分け、有限個の近傍だけで $K$ 全体を覆う。
+(3) の連結とは、空でない二つの開集合へ分割できないことである。
+像が分割できると仮定し、連続写像の逆像を取ると定義域まで分割されることを示す。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] $W_1,W_2$ は部分空間なので $0\in W_1\cap W_2$ である。また
-$x,y\in W_1\cap W_2$、$a,b$ をスカラーとすると、$x,y$ は $W_1,W_2$ の両方に属するから
+\item[(1)] 閉包 $\overline{A\cup B}$ は $A\cup B$ を含む最小の閉集合である。
+$\overline A\cup\overline B$ は閉集合であり $A\cup B$ を含むので
 \[
-ax+by\in W_1,\qquad ax+by\in W_2.
+\overline{A\cup B}\subset\overline A\cup\overline B.
 \]
-従って $ax+by\in W_1\cap W_2$ であり、$W_1\cap W_2$ は部分空間である。
+逆に $A\subset A\cup B$ と $B\subset A\cup B$ に閉包の単調性を用いると
+\[
+\overline A\subset\overline{A\cup B},\qquad
+\overline B\subset\overline{A\cup B}.
+\]
+従って $\overline A\cup\overline B\subset\overline{A\cup B}$ であり、両方の包含から
+\[
+\overline{A\cup B}=\overline A\cup\overline B
+\]
+を得る。
 
-次に $W_1\cup W_2$ が部分空間であると仮定する。
-$W_1\not\subset W_2$ かつ $W_2\not\subset W_1$ なら、
+\item[(2)] $K\subset X$ をコンパクト部分集合とし、$x\in X\setminus K$ を取る。
+$X$ は Hausdorff 空間なので、各 $y\in K$ に対して互いに交わらない開近傍
+$U_y\ni x$ と $V_y\ni y$ を取れる。$\{V_y\}_{y\in K}$ は $K$ の開被覆だから、
+コンパクト性より $y_1,\ldots,y_m\in K$ が存在して
 \[
-u\in W_1\setminus W_2,
-\qquad v\in W_2\setminus W_1
+K\subset V_{y_1}\cup\cdots\cup V_{y_m}
 \]
-を取れる。合併が部分空間なら $u+v\in W_1\cup W_2$ である。
-もし $u+v\in W_1$ なら $v=(u+v)-u\in W_1$ となって矛盾し、
-もし $u+v\in W_2$ なら $u=(u+v)-v\in W_2$ となって矛盾する。
-従って、必ず $W_1\subset W_2$ または $W_2\subset W_1$ である。
+となる。ここで
+\[
+U=U_{y_1}\cap\cdots\cap U_{y_m}
+\]
+とおく。$U$ は有限個の開集合の共通部分なので開であり、
+各 $U_{y_i}$ が $x$ を含むので $x\in U$ である。すなわち $U$ は $x$ の開近傍である。
+さらに $U$ は $K$ と交わらない。実際、$z\in U\cap K$ があるとすると、
+$K\subset V_{y_1}\cup\cdots\cup V_{y_m}$ よりある $i$ について $z\in V_{y_i}$ であり、
+一方 $z\in U\subset U_{y_i}$ でもあるから
+\[
+z\in U_{y_i}\cap V_{y_i}=\varnothing
+\]
+となって矛盾する。従って $U\subset X\setminus K$ である。
+$x\in X\setminus K$ は任意だったので $X\setminus K$ は開集合であり、$K$ は閉集合である。
 
-\item[(2)] $x,y\in\ker f$ とスカラー $a,b$ に対し
+\item[(3)] $T$ が連結でないと仮定すると、非空な開集合 $U,V\subset T$ により
 \[
-f(ax+by)=af(x)+bf(y)=0
+T=U\cup V,\qquad U\cap V=\varnothing
 \]
-なので $ax+by\in\ker f$ である。また $f(0)=0$ だから $0\in\ker f$ であり、$\ker f$ は部分空間である。
-また
+と書ける。$F$ は連続なので $F^{-1}(U),F^{-1}(V)$ は $S$ の開集合である。
+また $F$ は全射だから、$U\ne\varnothing$ の点は像に現れ、$F^{-1}(U)\ne\varnothing$、
+同様に $F^{-1}(V)\ne\varnothing$ である。さらに逆像は合併と共通部分を保つので
 \[
-f(x)=f(y)\Longleftrightarrow f(x-y)=0
-\Longleftrightarrow x-y\in\ker f.
+F^{-1}(U)\cup F^{-1}(V)=F^{-1}(U\cup V)=F^{-1}(T)=S,
 \]
-従って、$\ker f=\{0\}$ なら $f(x)=f(y)$ から $x=y$ が従い、$f$ は単射である。
-逆に $f$ が単射なら、$x\in\ker f$ に対して $f(x)=0=f(0)$ だから $x=0$ であり、
-$\ker f=\{0\}$ となる。
-
-\item[(3)] $A=(a_{ij})\in W$ とする。条件 $A^{\mathsf T}=-A$ は
 \[
-a_{ji}=-a_{ij}\qquad(1\le i,j\le3)
+F^{-1}(U)\cap F^{-1}(V)=F^{-1}(U\cap V)=F^{-1}(\varnothing)=\varnothing.
 \]
-を意味する。$i=j$ とすれば $a_{ii}=-a_{ii}$、すなわち $2a_{ii}=0$ より $a_{ii}=0$ である。
-また $i<j$ の成分を $a_{12}=a$, $a_{13}=b$, $a_{23}=c$ とおけば、
-残りの成分は $a_{21}=-a$, $a_{31}=-b$, $a_{32}=-c$ と決まる。従って $A$ は
-\[
-A=\begin{pmatrix}
-0&a&b\\
--a&0&c\\
--b&-c&0
-\end{pmatrix}
-=aF_{12}+bF_{13}+cF_{23},
-\qquad
-F_{ij}=E_{ij}-E_{ji}
-\]
-と書ける。ここで $E_{ij}$ は $(i,j)$ 成分だけが1で、他の成分が0の行列である。
-逆に $F_{12},F_{13},F_{23}$ はいずれも $F_{ij}^{\mathsf T}=-F_{ij}$ を満たすので $W$ に属し、
-その一次結合も $W$ に属する。よって $F_{12},F_{13},F_{23}$ は $W$ を生成する。
-
-一次独立性を見る。$aF_{12}+bF_{13}+cF_{23}=O$ とすると、上の行列表示の
-$(1,2),(1,3),(2,3)$ 成分を読めばそれぞれ $a=0$, $b=0$, $c=0$ である。
-従って $F_{12},F_{13},F_{23}$ は一次独立であり、$W$ の基底である。よって
-\[
-E_{12}-E_{21},\quad E_{13}-E_{31},\quad E_{23}-E_{32}
-\]
-が基底で，$\dim W=3$。
+従って $S$ も空でない二つの開集合へ分割され、$S$ が連結であることに矛盾する。
+よって $T$ は連結である。
 \end{enumerate}
 \end{proof}

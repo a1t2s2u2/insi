@@ -590,36 +590,85 @@ $0<y<\pi$ の範囲で変数分離すると
 \end{proof}
 
 \begin{problem}{第7問｜収束定理}{2015-s-7}
-$p>0$，$0<f<\infty$，$\int_Xf^p\,\d\mu=1$ とする。次を求めよ。
+$p>0$ を定数とする。測度空間 $(X,\mathfrak B,\mu)$ 上の $p$ 乗可積分関数 $f$ は
+$0<f<\infty$ かつ $\int_Xf^p\,\d\mu=1$ を満たしているとする。このとき次の値を求めよ。
 \[
-\lim_{n\to\infty}\int_X\left|n\sin\left(\frac{f(x)}n\right)\right|^p\,\d\mu(x).
+\lim_{n\to\infty}\int_X n\left|\sin\left(\frac{f(x)}n\right)\right|^p\,\d\mu(x).
 \]
+（収束定理を使う場合はその根拠を述べよ。）
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
-固定した $x$ では $\sin u/u\to1$ により
-$n\sin(f(x)/n)\to f(x)$ となる。
-一方 $|\sin u|\le|u|$ から、被積分関数全体を可積分な $f^p$ で抑えられる。
-この二点を確認して優収束定理を適用する。
+被積分関数の $n$ の効き方を先に取り出す。$u_n=f(x)/n$ とおくと
+$|\sin u_n|^p=u_n^p(|\sin u_n|/u_n)^p$ であり、$u_n^p=f(x)^p/n^p$ だから
+被積分関数は $n^{1-p}f(x)^p$ に、1へ収束する因子を掛けた形になる。
+従って $n^{1-p}$ の挙動、すなわち $p$ と1の大小で結論が三つに分かれる。
+
+$|\sin u|\le|u|$ による上からの評価 $n|\sin u_n|^p\le n^{1-p}f^p$ は、
+$p>1$ ならそのまま積分して0を与える。$p=1$ ではこの評価が可積分な優関数 $f$ を与えるので
+優収束定理が使える。$p<1$ では被積分関数が各点で $\infty$ へ発散するので、
+下から評価する Fatou の補題を使う。
 \end{memo*}
 \begin{proof}[解答]
-各 $x$ について $u_n=f(x)/n\to0$ であり、$\sin u/u\to1$ だから
+各 $x\in X$ について $u_n=f(x)/n$ とおく。$0<f(x)<\infty$ だから $u_n>0$ かつ $u_n\to0$ であり、
+$\sin u/u\to1$ $(u\to0)$ より
 \[
-n\sin\left(\frac{f(x)}n\right)
-=f(x)\frac{\sin u_n}{u_n}\longrightarrow f(x).
+\frac{|\sin u_n|}{u_n}\longrightarrow1.
 \]
-従って被積分関数は点ごとに $f(x)^p$ へ収束する。また $f>0$ と
-$|\sin u|\le|u|$ から
+$|\sin u_n|^p=u_n^p\left(|\sin u_n|/u_n\right)^p$ と $u_n^p=f(x)^p/n^p$ を使うと
 \[
-\left|n\sin\left(\frac{f(x)}n\right)\right|^p
-\le f(x)^p.
+n\left|\sin\left(\frac{f(x)}n\right)\right|^p
+=n^{1-p}f(x)^p
+\left(\frac{|\sin u_n|}{u_n}\right)^p
+\tag{$*$}
 \]
-仮定より $f^p$ は可積分で、その積分は1である。よって優収束定理を適用でき
+であり、右端の因子は各点で1へ収束する。
+また $u\ge0$ で $|\sin u|\le u$ だから
 \[
-\lim_{n\to\infty}\int_X
-\left|n\sin\left(\frac{f(x)}n\right)\right|^p\,\d\mu
-=\int_Xf(x)^p\,\d\mu=1.
+0\le n\left|\sin\left(\frac{f(x)}n\right)\right|^p
+\le n\,u_n^p=n^{1-p}f(x)^p
+\tag{$**$}
 \]
+が全ての $n$ と $x$ で成り立つ。以下、$p$ と1の大小で場合を分ける。
+
+$p>1$ のとき。式 ($**$) を積分し、仮定 $\int_Xf^p\,\d\mu=1$ を使うと
+\[
+0\le\int_X n\left|\sin\left(\frac{f(x)}n\right)\right|^p\,\d\mu
+\le n^{1-p}\int_Xf^p\,\d\mu=n^{1-p}.
+\]
+$1-p<0$ だから $n^{1-p}\to0$ であり、はさみうちにより極限は $0$ である。
+
+$p=1$ のとき。式 ($**$) は $n|\sin(f(x)/n)|\le f(x)$ となり、
+$\int_Xf\,\d\mu=1<\infty$ だから $f$ は可積分な優関数である。
+一方 式 ($*$) で $n^{1-p}=1$ なので、被積分関数は各点で $f(x)$ へ収束する。
+よって優収束定理を適用でき
+\[
+\lim_{n\to\infty}\int_X n\left|\sin\left(\frac{f(x)}n\right)\right|\,\d\mu
+=\int_Xf\,\d\mu=1.
+\]
+
+$0<p<1$ のとき。$1-p>0$ だから $n^{1-p}\to\infty$ であり、$f(x)^p>0$ と
+式 ($*$) から、被積分関数は各点で $\infty$ へ発散する。
+被積分関数は非負なので Fatou の補題が使えて
+\[
+\liminf_{n\to\infty}\int_X n\left|\sin\left(\frac{f(x)}n\right)\right|^p\,\d\mu
+\ge\int_X\liminf_{n\to\infty}
+n\left|\sin\left(\frac{f(x)}n\right)\right|^p\,\d\mu
+=\int_X\infty\,\d\mu.
+\]
+ここで $\int_Xf^p\,\d\mu=1\ne0$ より $\mu(X)>0$ だから右辺は $\infty$ である。
+従って極限は $+\infty$ である。
+
+以上をまとめると、求める極限は
+\[
+\lim_{n\to\infty}\int_X n\left|\sin\left(\frac{f(x)}n\right)\right|^p\,\d\mu
+=\begin{cases}
++\infty,&0<p<1,\\
+1,&p=1,\\
+0,&p>1
+\end{cases}
+\]
+である。
 \end{proof}
 
 \begin{problem}{第8問｜独立確率変数の級数}{2015-s-8}
