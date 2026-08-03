@@ -31,7 +31,7 @@ LaTeX で書いた日本語数学ノートから PDF と Web サイトを生成�
 ## ビルド
 
 - tex を変更したら、サイトのビルドまで実施する（`make site`）
-- 公開前の検査は `node tools/site/tex2md.mjs . --strict`（CI と同じ）
+- 公開前の検査は `node tools/site/tex2md.mjs . --strict`
 - PDF は `make pdf`
 
 ## Git 運用

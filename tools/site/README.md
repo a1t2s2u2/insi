@@ -26,13 +26,13 @@ node tools/site/build.mjs  <文書のディレクトリ>
 ```
 
 文書がリポジトリ直下にあるなら `.`、複数の文書を並べているなら `seminar/cuturi` のように渡す。
-`--strict` は lint 警告（未解決の `\ref`・数式の外に残った未変換マクロ）で失敗する。CI 用。
+`--strict` は lint 警告（未解決の `\ref`・数式の外に残った未変換マクロ）で失敗する。公開前の検査用。
 
 ## 文書を追加する
 
 1. `<ディレクトリ>/tex/` に `main.tex` / `preamble.tex` / `main/` / `foundations/` を置く
 2. `<ディレクトリ>/site.config.mjs` を書く（下記）
-3. `Makefile` と GitHub Actions のワークフローにターゲットを足す
+3. `Makefile` にターゲットを足す
 
 ## site.config.mjs
 
