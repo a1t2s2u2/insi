@@ -1,0 +1,66 @@
+% ============================================================
+%  演習用・解答編で共通の紙面設計
+%
+%  見出しは本文に出さず、柱（左上）と目次にだけ回す。
+%  本文に残るのは問題文と、その終わりを示す細い罫線だけにする。
+%  原稿 generated/{workbook,answers}/*.tex は
+%  tools/split-pdf-sources.mjs が生成する。
+%
+%  この後で \wbend を定義すると紙面が決まる。
+%    演習用 … 罫線から下をそのまま解答欄にする（何も足さない）
+%    解答編 … 罫線の下に見通しと解答を続ける
+% ============================================================
+
+\usepackage[top=18mm, bottom=14mm, left=20mm, right=20mm, headsep=5mm]{geometry}
+\usepackage{fancyhdr}
+
+% 目次は「年度・区分」までにとどめて1ページに収め、
+% 問題名は PDF のしおりからだけ辿れるようにする。
+\hypersetup{bookmarksdepth=2}
+
+\makeatletter
+
+\newcommand{\wb@year}{}
+\newcommand{\wb@sec}{}
+\newcommand{\wb@prob}{}
+\newcommand{\wb@sep}{\,\textbar\,}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\normalfont\footnotesize\textcolor{black!60}{%
+  \wb@year\wb@sep\wb@sec\wb@sep\textbf{\wb@prob}}}
+\fancyhead[R]{\normalfont\footnotesize\textcolor{black!60}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[R]{\normalfont\footnotesize\textcolor{black!60}{\thepage}}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+% 章・節は柱の材料と目次の見出しにするだけで、本文には何も出さない。
+\newcommand{\wbchapter}[1]{%
+  \clearpage
+  \renewcommand{\wb@year}{#1}%
+  \phantomsection\addcontentsline{toc}{chapter}{#1}%
+}
+\newcommand{\wbsection}[1]{%
+  \clearpage
+  \renewcommand{\wb@sec}{#1}%
+  \phantomsection\addcontentsline{toc}{section}{#1}%
+}
+% 問題は必ず新しいページから始める。題名は柱と目次へ送る。
+\newcommand{\wbproblem}[1]{%
+  \clearpage
+  \renewcommand{\wb@prob}{#1}%
+  \phantomsection\addcontentsline{toc}{subsection}{#1}%
+  \par\noindent\ignorespaces
+}
+% 問題文の終わりを示す細い罫線。
+\newcommand{\wbrule}{%
+  \par\medskip
+  \noindent\textcolor{black!25}{\rule{\linewidth}{0.4pt}}%
+  \par
+}
+
+\makeatother

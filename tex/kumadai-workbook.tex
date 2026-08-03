@@ -1,0 +1,36 @@
+\documentclass[uplatex, dvipdfmx]{jsreport}
+
+\input{preamble}
+\input{workbook-layout}
+
+% 罫線から下は何も置かず、そのページの残りをそのまま解答欄にする。
+\newcommand{\wbend}{\wbrule}
+
+\title{熊本大学 数学系大学院 入試対策\\{\Large 専門基礎科目｜演習用（問題と解答欄のみ）}}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{memo*}
+専門基礎科目として出題された過去問31題と、過去の出題傾向から作成した
+専門基礎の予想問題6題を、解答・解説・解答の見通しを伏せて収録した演習用の冊子である。
+1問1ページで、細い罫線から下がその問題の解答欄になっている。
+どの年度のどの問題かは各ページ左上の柱に出しているので、本文には見出しを置いていない。
+
+専門基礎科目は3題必修・120分なので、1セット3題を通しで解くと本番と同じ時間配分になる。
+答え合わせには同じ並びの解答編（\texttt{kumadai-workbook-answers.pdf}）を使う。
+\end{memo*}
+
+\tableofcontents
+
+\input{generated/workbook/2026}
+\input{generated/workbook/2022}
+\input{generated/workbook/2021}
+\input{generated/workbook/2017}
+\input{generated/workbook/2015}
+\input{generated/workbook/unknown}
+\input{generated/workbook/prediction}
+
+\end{document}
