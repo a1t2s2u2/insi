@@ -190,9 +190,9 @@ $\int_0^1\d x/\sqrt{x^2+1}$ と $\int_0^1\sqrt{x^2+1}\,\d x$ を
 
 \begin{proposition}{基本不等式}{tb-basic-inequalities}
 \[
-\abs{\sin u}\le\abs u\quad(u\in\R),
+\abs{\sin x}\le\abs x\quad(x\in\R),
 \qquad
-\abs{\sin u}\le1,
+\abs{\sin x}\le1,
 \]
 \[
 1+x\le e^x\quad(x\in\R),
@@ -237,14 +237,14 @@ uv\le\left(\frac{u+v}2\right)^2,
 
 \begin{proposition}{標準的な極限}{tb-standard-limits}
 \[
-\lim_{u\to0}\frac{\sin u}u=1,
+\lim_{x\to0}\frac{\sin x}x=1,
 \qquad
-\lim_{u\to0}\frac{1-\cos u}{u^2}=\frac12,
+\lim_{x\to0}\frac{1-\cos x}{x^2}=\frac12,
 \qquad
-\lim_{u\to0}\frac{e^u-1}u=1,
+\lim_{x\to0}\frac{e^x-1}x=1,
 \]
 \[
-\lim_{u\to0}\frac{\log(1+u)}u=1,
+\lim_{x\to0}\frac{\log(1+x)}x=1,
 \qquad
 \lim_{n\to\infty}\left(1+\frac1n\right)^n=e,
 \]
@@ -256,10 +256,18 @@ uv\le\left(\frac{u+v}2\right)^2,
 \lim_{x\to+0}x^\alpha\log x=0\ (\alpha>0).
 \]
 最後の三つは「対数は冪より遅く、冪は指数より遅い」と覚える。
+
+これらの $x$ は、$0$ または $\infty$ へ向かう任意の式で置き換えてよい。
+たとえば $h\to0$ のとき $x^2h\to0$ なので、$\lim_{x\to0}\sin x/x=1$ は
+\[
+\frac{\sin(x^2h)}{x^2h}\longrightarrow1
+\]
+の形で使える。置き換えた式が本当に $0$ または $\infty$ へ向かうことを、
+使う前に確かめること。
 \end{proposition}
 
 \begin{memo*}
-$\sin u/u\to1$ は、2021年度 第1期 専門基礎 第2問の偏微分の計算と、
+$\sin x/x\to1$ は、2021年度 第1期 専門基礎 第2問の偏微分の計算と、
 2015年度 専門科目 第7問の優収束定理の適用で使う。
 $\log x/x^\alpha\to0$ は、2015年度 第1期 専門基礎 第2問で
 広義積分 $\int_1^\infty u^a\log u\,\d u$ の収束を判定するときに使う。
