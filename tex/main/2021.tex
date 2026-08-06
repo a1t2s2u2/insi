@@ -4,11 +4,16 @@
 \section{第1期・専門基礎科目（3題必修）}
 
 \begin{problem}{第1問｜Jordan 標準形}{2021-1-1}
-$a\in\mathbb C$ とし
+$a$ を複素数とし，行列
 \[
-A=\begin{pmatrix}a-1&a&0\\-a&-a-1&0\\-1&1&-1\end{pmatrix}.
+A=\begin{pmatrix}a-1&a&0\\-a&-a-1&0\\-1&1&-1\end{pmatrix}
 \]
-固有多項式，固有値と固有空間の次元，Jordan 標準形を求めよ。
+を考える。
+\begin{enumerate}
+  \item[(1)] $A$ の固有多項式を求めよ。
+  \item[(2)] $A$ の固有値を求め，対応する固有空間の次元を求めよ。
+  \item[(3)] $A$ のジョルダン標準形を与えよ。（変換行列は求めなくてもよい。）
+\end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
@@ -47,7 +52,8 @@ N^3=O
 \]
 である。
 
-$Nx=\mu x$ を満たす $x\ne0$ があれば
+\begin{enumerate}
+\item[(1)] $Nx=\mu x$ を満たす $x\ne0$ があれば
 \[
 0=N^3x=\mu^3x
 \]
@@ -57,13 +63,9 @@ $A=N-I_3$ なので $\lambda I_3-A=(\lambda+1)I_3-N$ であり、上の式へ $\
 \[
 |\lambda I_3-A|=(\lambda+1)^3.
 \]
-従って固有値は $-1$ のみ（重複度3）である。
+\item[(2)] 従って固有値は $-1$ のみ（重複度3）である。固有空間の次元を $a$ で場合分けして求める。
 
-$a\ne0$ の場合を見る。このとき $N^2\ne O$ かつ $N^3=O$ である。
-大きさ $k$ の冪零 Jordan ブロックは $k$ 乗で初めて0になるので、
-最大の Jordan ブロックの大きさは3である。
-全体の大きさも3だから、標準形はブロック一つの $J_3(-1)$ に限る。
-固有空間の次元も直接分かる。$Nx=0$ は
+$a\ne0$ の場合を見る。$Nx=0$ は
 \[
 ax_1+ax_2=0,\qquad -ax_1-ax_2=0,\qquad -x_1+x_2=0
 \]
@@ -90,8 +92,14 @@ x=x_1\begin{pmatrix}1\\1\\0\end{pmatrix}
  +x_3\begin{pmatrix}0\\0\\1\end{pmatrix}
 \]
 と表され、自由に選べる数が $x_1,x_3$ の二つあるので
-$\dim\ker N=2$ である。
-$N\ne O$ なので大きさ2のブロックが少なくとも一つ必要である。
+$\dim\ker(A+I_3)=\dim\ker N=2$ である。
+
+\item[(3)] $a\ne0$ のとき、$N^2\ne O$ かつ $N^3=O$ である。
+大きさ $k$ の冪零 Jordan ブロックは $k$ 乗で初めて0になるので、
+最大の Jordan ブロックの大きさは3である。
+全体の大きさも3だから、標準形はブロック一つの $J_3(-1)$ に限る。
+
+$a=0$ のときは $N\ne O$ なので大きさ2のブロックが少なくとも一つ必要である。
 大きさ $k$ の冪零 Jordan ブロック
 \[
 J_k(0)=\begin{pmatrix}
@@ -106,6 +114,7 @@ J_k(0)=\begin{pmatrix}
 $\dim\ker N=2$ は Jordan ブロックが2個あることを表す。
 全体の大きさは3だから、ブロックの大きさは2と1になり、標準形は
 $J_2(-1)\oplus(-1)$ となる。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第2問｜二変数関数}{2021-1-2}
@@ -205,9 +214,9 @@ $\d x\d y=r\,\d r\d\theta$ を掛けた一変数積分が収束するか確認�
 
 \begin{problem}{第3問｜連続像}{2021-1-3}
 \begin{enumerate}
-  \item[(1)] 集合と写像 $f:X\to Y$, $g:Y\to Z$ で，$f$ は全射でなく，$g$ は単射でなく，$g\circ f$ は全単射となる例を挙げよ。
-  \item[(2)] 連続写像による連結集合の像は連結か。
-  \item[(3)] 連続写像によるコンパクト集合の像はコンパクトか。
+  \item[(1)] 集合 $X,Y,Z$，写像 $f:X\to Y$, $g:Y\to Z$ で，$f$ は全射ではない，$g$ は単射ではない，$g\circ f$ は全単射である，という条件を全て満たす例をあげよ。
+  \item[(2)] $X,Y$ を位相空間とし，$f:X\to Y$ を連続写像とする。$X$ の連結な部分集合 $U$ に対して，$f(U)$ は連結であるか。連結であれば，そのことを示せ。そうでなければ，反例を挙げよ。
+  \item[(3)] $X,Y$ を位相空間とし，$f:X\to Y$ を連続写像とする。$X$ のコンパクトな部分集合 $U$ に対して，$f(U)$ はコンパクトであるか。コンパクトであれば，そのことを示せ。そうでなければ，反例を挙げよ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
@@ -265,8 +274,8 @@ $\d x\d y=r\,\d r\d\theta$ を掛けた一変数積分が収束するか確認�
 $\Phi:\mathbb C[X,Y,Z]\to\mathbb C[t]$ を
 $\Phi(f)=f(t^2,t^3,t^4)$ で定め，$I=\ker\Phi$，$R=\mathbb C[X,Y,Z]/I$ とする。
 \begin{enumerate}
-  \item[(1)] $I$ は素イデアルか。
-  \item[(2)] $I$ の生成元を求めよ。
+  \item[(1)] $I$ は素イデアルかどうか，理由も含め答えよ。
+  \item[(2)] $I$ の生成元を求めよ。それらの元が $I$ を生成することも示せ。
   \item[(3)] $\bar X,\bar Y,\bar Z$ で生成される $R$ のイデアル $\mathfrak m$ が極大であることを示せ。
   \item[(4)] $\mathfrak m$ が2元で生成されることを示せ。
   \item[(5)] $\mathfrak m$ が単項イデアルでないことを示せ。
@@ -442,8 +451,8 @@ $\d s/\d t=\norm{p'}=\cosh t$ より $\d/\d s=\operatorname{sech}t\,\d/\d t$。
 $\varphi(z)=\sum_{n=0}^\infty a_nz^n$ は収束べき級数で $a_0\ne0$ とする。
 \begin{enumerate}
   \item[(1)] $1/\varphi(z)$ が $z=0$ で収束べき級数に展開できることを示せ。
-  \item[(2)] その収束半径が $\varphi$ の収束半径より真に小さくなることはあるか。
-  \item[(3)] $1/\varphi(z)=\sum b_nz^n$ とするとき $b_0,b_1,b_2$ を求めよ。
+  \item[(2)] $1/\varphi(z)$ の $z=0$ におけるべき級数展開の収束半径が $\varphi(z)$ の収束半径より真に小さくなることはあるか。あるとするならその理由を述べ，ないとするならそれを証明せよ。
+  \item[(3)] $1/\varphi(z)=\sum_{n=0}^\infty b_nz^n$ とおくとき，$b_0,b_1,b_2$ を $a_n$ $(n=0,1,2,\ldots)$ を用いて表せ。
   \item[(4)] $n=0,1,2,3$ に対し $\displaystyle\int_{|z|=1}\frac{\d z}{z^n\sin^2z}$ を求めよ。
 \end{enumerate}
 \end{problem}
