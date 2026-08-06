@@ -4,16 +4,23 @@
 \section{第1期・専門基礎科目（3題必修）}
 
 \begin{problem}{第1問｜基底と上三角化}{2015-b-1}
-$V$ を有限次元実ベクトル空間とする。$V$ の元の組が一次独立であること，および $V$ の基底であることを定義せよ。$v_1,\ldots,v_n$ を $V$ の基底，$f:V\to V$ を実ベクトル空間としての同型写像とするとき，$f(v_1),\ldots,f(v_n)$ も $V$ の基底であることを示せ。さらに $V=\R^n$，$W_i=\langle v_1,\ldots,v_i\rangle$ $(1\le i\le n)$ とし，$n$ 次正方行列 $A$ が全ての $i$ で $AW_i\subset W_i$ を満たすなら，$P^{-1}AP$ が上三角行列となる $n$ 次実正則行列 $P$ が存在することを示せ。
+$V$ を有限次元実ベクトル空間とする。
+\begin{enumerate}
+  \item[(1)] 次の定義を述べよ。
+  \begin{enumerate}
+    \item[(i)] $\{w_1,w_2,\ldots,w_m\}\subset V$ が一次独立であること。
+    \item[(ii)] $\{v_1,v_2,\ldots,v_n\}\subset V$ が $V$ の基底であること。
+  \end{enumerate}
+  \item[(2)] $\{v_1,\ldots,v_n\}$ を $V$ の基底とし，$f:V\to V$ を実ベクトル空間としての同型写像とする。このとき $\{f(v_1),\ldots,f(v_n)\}$ も $V$ の基底であることを示せ。
+  \item[(3)] $V=\R^n$ として，$\{v_1,\ldots,v_n\}$ を $V$ の基底とする。各 $i$ $(1\le i\le n)$ に対して $W_i$ を $v_1,\ldots,v_i$ で生成される部分空間とする。$n$ 次正方行列 $A$ が与えられ，各 $i$ に対して $AW_i\subset W_i$ が成り立っているとする。このとき，$n$ 次正則行列 $P$ と $n$ 次上三角行列 $T$ が存在して $P^{-1}AP=T$ とできることを示せ。
+\end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
 一次独立とは、線形結合が0になる方法が係数を全て0にする場合しかないこと、
 基底とは、一次独立で空間全体を生成するベクトルの組である。
-同型写像は線形な全単射である。ここで使う線形性は
-$\sum_ia_if(v_i)=f(\sum_ia_iv_i)$ という一つの式に尽きるので、それを先に書いておく。
-すると基底の二条件は、左辺が0になる場合として単射性から、
-右辺が $V$ 全体を動くこととして全射性から、それぞれ読める。
+同型写像は線形な全単射である。線形性で一次結合を $f$ の内側へ入れ、
+一次独立性には単射性を、生成することには全射性を使う。
 
 上三角化では、基底ベクトルを列に並べた $P=(v_1\ \cdots\ v_n)$ を作る。
 $P^{-1}AP$ は、線形変換 $A$ を基底 $v_1,\ldots,v_n$ の座標で表した行列である。
@@ -21,39 +28,52 @@ $Av_i\in\langle v_1,\ldots,v_i\rangle$ を係数表示すると、その係数�
 $P^{-1}AP$ の第 $i$ 列になり、第 $i$ 成分より下が全て0になる。
 \end{memo*}
 \begin{proof}[解答]
-$v_1,\ldots,v_n\in V$ が\textbf{一次独立}であるとは、任意の $a_1,\ldots,a_n\in\R$ について
+\begin{enumerate}
+\item[(1)] (i) $w_1,\ldots,w_m\in V$ が\textbf{一次独立}であるとは、
+任意の $a_1,\ldots,a_m\in\R$ について
 \[
-\sum_{i=1}^n a_iv_i=0\quad\Longrightarrow\quad
-a_1=\cdots=a_n=0
+\sum_{i=1}^m a_iw_i=0\quad\Longrightarrow\quad
+a_1=\cdots=a_m=0
 \]
-が成り立つことをいう。また、$v_1,\ldots,v_n\in V$ が $V$ の\textbf{基底}であるとは、
-一次独立であり、かつ $V$ を生成する、すなわち任意の $v\in V$ に対して
+が成り立つことをいう。
+
+(ii) $v_1,\ldots,v_n\in V$ が $V$ の\textbf{基底}であるとは、$v_1,\ldots,v_n$ が一次独立であり、
+かつ $V$ を生成する、すなわち任意の $v\in V$ に対して
 ある $a_1,\ldots,a_n\in\R$ が存在して $v=\sum_{i=1}^n a_iv_i$ と書けることをいう。
 $v_1,\ldots,v_k\in V$ の一次結合全体を $\langle v_1,\ldots,v_k\rangle$ と書けば、
 生成することは $\langle v_1,\ldots,v_n\rangle=V$ と書ける。
 
-次に $f(v_1),\ldots,f(v_n)$ が基底であることを示す。$f$ の線形性から、
-任意の $a_1,\ldots,a_n\in\R$ に対して
+\item[(2)] まず一次独立性を見る。$a_1,\ldots,a_n\in\R$ が
 \[
-\sum_{i=1}^n a_if(v_i)=f\left(\sum_{i=1}^n a_iv_i\right)
-\tag{$*$}
+a_1f(v_1)+\cdots+a_nf(v_n)=0
 \]
-が成り立つ。すなわち $f(v_1),\ldots,f(v_n)$ の一次結合は、同じ係数による
-$v_1,\ldots,v_n$ の一次結合の像に他ならない。基底の二条件は、どちらもこの一つの式から従う。
-
-一次独立性は $f$ の単射性から従う。($*$) の左辺が $0$ ならば右辺も $0=f(0)$ なので、
-単射性より $\sum_i a_iv_i=0$ であり、$v_1,\ldots,v_n$ の一次独立性から
-$a_1=\cdots=a_n=0$ となる。
-
-生成することは $f$ の全射性から従う。($*$) は
-$\langle f(v_1),\ldots,f(v_n)\rangle=f(\langle v_1,\ldots,v_n\rangle)$ を意味するので、
-$v_1,\ldots,v_n$ が $V$ を生成することと $f$ が全射であることから
+を満たすとする。$f$ は線形写像なので左辺は $f(a_1v_1+\cdots+a_nv_n)$ に等しい。
+また線形写像は $f(0)=0$ を満たすから
 \[
-\langle f(v_1),\ldots,f(v_n)\rangle=f(V)=V
+f(a_1v_1+\cdots+a_nv_n)=f(0)
 \]
-となる。よって $f(v_1),\ldots,f(v_n)$ は $V$ の基底である。
+である。$f$ は同型写像だから単射であり、従って
+\[
+a_1v_1+\cdots+a_nv_n=0
+\]
+となる。$v_1,\ldots,v_n$ は $V$ の基底なので一次独立であり、$a_1=\cdots=a_n=0$ を得る。
+よって $f(v_1),\ldots,f(v_n)$ は一次独立である。
 
-最後に、基底ベクトルを列に並べた
+次に $V=\langle f(v_1),\ldots,f(v_n)\rangle$ を示す。任意の $v\in V$ を取る。
+$f$ は同型写像だから全射であり、$v=f(w)$ となる $w\in V$ が存在する。
+$w\in V$ で $v_1,\ldots,v_n$ は $V$ の基底だから、ある $a_1,\ldots,a_n\in\R$ を用いて
+$w=a_1v_1+\cdots+a_nv_n$ と書ける。すると $f$ の線形性から
+\[
+v=f(a_1v_1+\cdots+a_nv_n)
+=a_1f(v_1)+\cdots+a_nf(v_n)
+\in\langle f(v_1),\ldots,f(v_n)\rangle
+\]
+である。$v\in V$ は任意だったので $V=\langle f(v_1),\ldots,f(v_n)\rangle$ であり、
+$f(v_1),\ldots,f(v_n)$ は $V$ を生成する。
+
+以上より $f(v_1),\ldots,f(v_n)$ は $V$ の基底である。
+
+\item[(3)] 基底ベクトルを列に並べた
 \[
 P=(v_1\ \cdots\ v_n)
 \]
@@ -78,6 +98,8 @@ AP=PC.
 左から $P^{-1}$ を掛けると $P^{-1}AP=C$ である。$C$ の第 $i$ 列は
 $(c_{1i},\ldots,c_{ii},0,\ldots,0)^{\mathsf T}$ であり、
 第 $i$ 成分より下は全て0だから、$C$ は上三角行列である。
+よって $T=C$ とおけば、$n$ 次正則行列 $P$ と $n$ 次上三角行列 $T$ が $P^{-1}AP=T$ を満たす。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第2問｜広義積分}{2015-b-2}
