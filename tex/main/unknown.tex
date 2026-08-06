@@ -8,12 +8,22 @@
 \section{専門基礎科目と思われる問題}
 
 \begin{problem}{行列｜直交対角化}{unknown-1}
+行列
 \[
 P=\begin{pmatrix}
-1/\sqrt3&1/\sqrt2&p\\q&r&s\\-1/\sqrt3&1/\sqrt2&-1/\sqrt6
+1/\sqrt3&1/\sqrt2&p\\
+q&r&s\\
+-1/\sqrt3&1/\sqrt2&-1/\sqrt6
 \end{pmatrix}
+\qquad(p,q,r,s\in\R)
 \]
-は直交行列とする。$p,q,r,s$ を求め，$(P^{\mathsf T})^{10}P^{19}(P^{\mathsf T})^{10}$ を求めよ。さらに $A$ は $P$ で対角化され，固有多項式が $x^3+\sqrt[10]{2}x^2$，$(1,0,1)^{\mathsf T}$ が固有値 $-\sqrt[10]{2}$ の固有ベクトルであるとき $A^{10}$ を求めよ。直交行列で対角化される実行列が対称であることも示せ。
+は直交行列であるとする。
+\begin{enumerate}
+  \item[(1)] $p,q,r,s$ の取りうる組み合わせを全て求めよ。
+  \item[(2)] 行列 ${}^{\mathsf T}(P^{10})\,P^{19}\,({}^{\mathsf T}P)^{10}$ を求めよ。
+  \item[(3)] 行列 $A$ は $P$ で対角化されるとし，$A$ の固有多項式 $g_A(x)$ は $x^3+\sqrt[10]{2}\,x^2$ であるとする。また，ベクトル $(1,0,1)^{\mathsf T}$ は固有値 $-\sqrt[10]{2}$ に属する $A$ の固有ベクトルであるとする。このとき $A^{10}$ を求めよ。
+  \item[(4)] 直交行列で対角化される行列は対称行列であることを証明せよ。
+\end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
@@ -27,7 +37,8 @@ $A=Q\diag(-\sqrt[10]{2},0,0)Q^{\mathsf T}$ である。この積を列ごとに�
 $A=-\sqrt[10]{2}\,uu^{\mathsf T}$ となり、10乗を計算できる。
 \end{memo*}
 \begin{proof}[解答]
-直交行列は $P^{\mathsf T}P=I$ を満たす。この行列積の $(j,k)$ 成分は
+\begin{enumerate}
+\item[(1)] 直交行列は $P^{\mathsf T}P=I$ を満たす。この行列積の $(j,k)$ 成分は
 「第 $j$ 列と第 $k$ 列の内積」なので、同じ列の内積は1、
 異なる列の内積は0になる。つまり各列の長さは1で、異なる二列は直交する。
 この性質を「列が正規直交している」という。まず第1列と第2列の内積から
@@ -65,14 +76,14 @@ p=\frac1{\sqrt6},\quad q=\frac{\varepsilon}{\sqrt3},\quad r=0,
 \]
 実際、このとき第3列のノルムの2乗も
 $1/6+2/3+1/6=1$ となり、条件をすべて満たしている。
-$P^{\mathsf T}=P^{-1}$ なので、指数法則を使うと
+\item[(2)] $P^{\mathsf T}=P^{-1}$ なので、指数法則を使うと
 \begin{align*}
 (P^{\mathsf T})^{10}P^{19}(P^{\mathsf T})^{10}
 &=P^{-10}P^{19}P^{-10}\\
 &=P^{-1}=P^{\mathsf T}.
 \end{align*}
 
-固有多項式は $x^2(x+\sqrt[10]{2})$ だから、固有値は0（重複度2）と
+\item[(3)] 固有多項式は $x^2(x+\sqrt[10]{2})$ だから、固有値は0（重複度2）と
 $-\sqrt[10]{2}$（重複度1）である。与えられた固有ベクトルを長さ $\sqrt2$ で割り
 \[
 u=\frac1{\sqrt2}(1,0,1)^{\mathsf T}
@@ -109,20 +120,36 @@ uu^{\mathsf T}
 \[
 A^{10}=\begin{pmatrix}1&0&1\\0&0&0\\1&0&1\end{pmatrix}.
 \]
-最後に、直交行列 $P$ について $P^{-1}AP=D$ が実対角なら
+\item[(4)] 直交行列 $P$ について $P^{-1}AP=D$ が実対角なら
 $A=PDP^{\mathsf T}$ である。転置すると
 \[
 A^{\mathsf T}=(PDP^{\mathsf T})^{\mathsf T}=PD^{\mathsf T}P^{\mathsf T}=PDP^{\mathsf T}=A
 \]
 となるので $A$ は対称である。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{微分積分｜積分記号下の微分}{unknown-2}
-$f\in C^1(D)$ とする。固定端点および可変端点の積分に対する Leibniz 則を示せ。また
-\[
-p(x)=\int_{x^2}^{x^3}\frac{\sin(xy)}y\,\d y\qquad(x>0)
-\]
-の導関数を求めよ。
+$a,b,c,d\in\R$ に対し $a<b$, $c<d$ を仮定する。$D$ は $\R^2$ の開集合で $[a,b]\times[c,d]$ を含むとする。$f(x,y)$ を $D$ 上の $C^1$ 級関数とする。
+\begin{enumerate}
+  \item[(1)] $[a,b]$ 上で
+  \[
+  \frac{\d}{\d x}\int_c^d f(x,y)\,\d y=\int_c^d\frac{\partial f}{\partial x}(x,y)\,\d y
+  \]
+  が成り立つことを示せ。ただし $G(x)=\int_c^d\frac{\partial f}{\partial x}(x,y)\,\d y$ が $[a,b]$ 上で連続であることを仮定して良い。
+  \item[(2)] $\phi(x),\psi(x)$ は $[a,b]$ を含む開区間上の $C^1$ 級関数で，任意の $x\in[a,b]$ に対し $\phi(x),\psi(x)\in[c,d]$ が成り立つとする。このとき
+  \[
+  \frac{\d}{\d x}\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y
+  =f(x,\psi(x))\frac{\d\psi}{\d x}(x)-f(x,\phi(x))\frac{\d\phi}{\d x}(x)
+  +\int_{\phi(x)}^{\psi(x)}\frac{\partial f}{\partial x}(x,y)\,\d y
+  \]
+  が成り立つことを示せ。
+  \item[(3)] $x>0$ に対し
+  \[
+  p(x)=\int_{x^2}^{x^3}\frac{\sin(xy)}y\,\d y
+  \]
+  とおくとき，$\dfrac{\d p}{\d x}(x)$ を求めよ。
+\end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
@@ -136,7 +163,8 @@ $Q(x,\psi(x))-Q(x,\phi(x))$ を二変数の連鎖律で微分する。
 これにより、上端の移動、下端の移動、被積分関数自身の変化という三つの項が現れる。
 \end{memo*}
 \begin{proof}[解答]
-固定端点の積分を
+\begin{enumerate}
+\item[(1)] 固定端点の積分を
 \[
 F(x)=\int_c^d f(x,y)\,\d y
 \]
@@ -152,7 +180,7 @@ F'(x)
 =\int_c^d f_x(x,y)\,\d y.
 \]
 
-可変端点について
+\item[(2)] 可変端点について
 \[
 Q(x,v)=\int_c^v f(x,y)\,\d y
 \]
@@ -168,7 +196,7 @@ $\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y
 =f(x,\psi(x))\psi'(x)-f(x,\phi(x))\phi'(x)
 +\int_{\phi(x)}^{\psi(x)} f_x(x,y)\,\d y.
 \]
-この公式を使うため
+\item[(3)] この公式を使うため
 \[
 f(x,y)=\frac{\sin(xy)}y,\qquad
 f_x(x,y)=\cos(xy),\qquad
@@ -188,10 +216,20 @@ p'(x)
 \[
 p'(x)=\frac{4\sin(x^4)-3\sin(x^3)}x.
 \]
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{距離空間｜コンパクト集合の近傍}{unknown-3}
-コンパクト集合 $K$ までの距離 $\rho(x)=\inf_{z\in K}d(x,z)$ について，$|\rho(x)-\rho(y)|\le d(x,y)$，各 $x$ で最短点 $a\in K$ が存在することを示せ。また $K\subset L$ で $L$ が開なら，ある $r>0$ で $\{\rho<r\}\subset L$ を示せ。
+$(X,d)$ を距離空間とし，$K$ を $X$ のコンパクトな部分集合とする。関数 $\rho:X\to\R$ を
+\[
+\rho(x)=\inf\{d(x,z)\mid z\in K\}\qquad(x\in X)
+\]
+で定める。
+\begin{enumerate}
+  \item[(1)] すべての $x,y\in X$ に対して $|\rho(x)-\rho(y)|\le d(x,y)$ が成り立つことを示せ。
+  \item[(2)] 任意の $x\in X$ に対して，ある $a\in K$ が存在して $\rho(x)=d(x,a)$ を満たすことを示せ。
+  \item[(3)] $L$ は $K$ を含む $X$ の開集合とする。このとき $K_r=\{x\in X\mid\rho(x)<r\}\subset L$ となる実数 $r>0$ が存在することを示せ。
+\end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
@@ -207,7 +245,8 @@ $F$ が空でなければ、各 $z\in K$ と閉集合 $F$ の距離は正であ�
 $K$ から距離 $r$ 未満の点が $F$ に入ることはできない。
 \end{memo*}
 \begin{proof}[解答]
-任意の $z\in K$ に対し三角不等式から
+\begin{enumerate}
+\item[(1)] 任意の $z\in K$ に対し三角不等式から
 \[
 d(x,z)\le d(x,y)+d(y,z)
 \]
@@ -219,7 +258,7 @@ $x,y$ を交換した式と合わせて
 \]
 となる。
 
-$z_1,z_2\in X$ に対しても三角不等式から
+\item[(2)] $z_1,z_2\in X$ に対しても三角不等式から
 \[
 |d(x,z_1)-d(x,z_2)|\le d(z_1,z_2)
 \]
@@ -229,7 +268,7 @@ $K$ はコンパクトなので最小値を取る点 $a\in K$ が存在し
 d(x,a)=\min_{z\in K}d(x,z)=\rho(x).
 \]
 
-最後に $F=X\setminus L$ とおく。$F=\varnothing$ なら $L=X$ なので、任意の $r>0$ で
+\item[(3)] $F=X\setminus L$ とおく。$F=\varnothing$ なら $L=X$ なので、任意の $r>0$ で
 $\{x\mid\rho(x)<r\}\subset L$ が成り立つ。以下では $F\ne\varnothing$ とする。
 $L$ が開なのでその補集合 $F$ は閉であり、$K\subset L$ より $K\cap F=\varnothing$ である。
 $h(z)=d(z,F)$ は、上と同じ三角不等式の評価により1-Lipschitz、特に $K$ 上連続である。
@@ -244,12 +283,21 @@ $0<r<\delta$ とする。$\rho(x)<r$ なら、最短点の存在により
 $d(x,a)=\rho(x)<r$ となる $a\in K$ がある。もし $x\in F$ なら
 $d(a,F)\le d(a,x)<r<\delta$ となり矛盾する。従って $x\in L$ であり、
 $\{x\mid\rho(x)<r\}\subset L$ を得る。
+\end{enumerate}
 \end{proof}
 
 \section{専門科目と思われる問題}
 
 \begin{problem}{回転面｜トーラス}{unknown-4}
-$R>r>0$ とし，円 $(x-R)^2+z^2=r^2$ を $z$ 軸の周りに回転したトーラス $S$ の Gauss 曲率と平均曲率を求め，測地線を一つ挙げよ。
+$R>r>0$ とする。$\R^3$ において $xz$ 平面上の円
+\[
+\{(x,0,z)\in\R^3\mid(x-R)^2+z^2=r^2\}
+\]
+を $z$ 軸のまわりに回転して得られる曲面を $S$ とする。
+\begin{enumerate}
+  \item[(1)] 曲面 $S$ のガウス曲率 $K$ と平均曲率 $H$ を求めよ。
+  \item[(2)] 曲面 $S$ 上の測地線の例を一つあげ，それが測地線となることを説明せよ。
+\end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
@@ -259,6 +307,8 @@ $R>r>0$ とし，円 $(x-R)^2+z^2=r^2$ を $z$ 軸の周りに回転したトー
 その加速度が曲面の法線方向だけであることを確認する。
 \end{memo*}
 \begin{proof}[解答]
+\begin{enumerate}
+\item[(1)]
 \[
 X(u,v)=((R+r\cos v)\cos u,(R+r\cos v)\sin u,r\sin v)
 \]
@@ -294,15 +344,29 @@ k_2=\frac{N_2}G=-\frac1r.
 K=\frac{\cos v}{r(R+r\cos v)},\qquad
 H=-\frac{R+2r\cos v}{2r(R+r\cos v)}.
 \]
-$v=0$ と固定した外側の赤道を $\gamma(u)=X(u,0)$ とおくと
+\item[(2)] $v=0$ と固定した外側の赤道を $\gamma(u)=X(u,0)$ とおくと
 \[
 \gamma''(u)=-(R+r)(\cos u,\sin u,0)=-(R+r)N(u,0).
 \]
 加速度の接平面成分が0、すなわち測地的曲率が0なので、この円は測地線である。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{Euler 型微分方程式}{unknown-5}
-$x^2y''+pxy'+qy=0$ $(x\ge1)$，$y(1)=0,y'(1)=1$ を考える。$q=0,p\ne1$ の解，$x=e^t$ による変形，$p=2$ の解を求める。さらに $p=2$ で $x>1$ の零点が存在する $q$ の範囲と最小の零点を求めよ。
+$p,q\in\R$ とする。微分方程式に対する初期値問題
+\[
+x^2\frac{\d^2y}{\d x^2}+px\frac{\d y}{\d x}+qy=0\quad(x\ge1),
+\qquad
+y(1)=0,\quad \frac{\d y}{\d x}(1)=1
+\tag{1}
+\]
+を考える。
+\begin{enumerate}
+  \item[(1)] $p\ne1$ かつ $q=0$ とするとき，(1) の解 $y(x)$ を $p$ を用いて表せ。
+  \item[(2)] 変数変換 $x=e^t$ によって，(1) の第一式を変形して得られる方程式を求めよ。
+  \item[(3)] $p=2$ とするとき，(1) の解 $y(x)$ を $q$ を用いて表せ。
+  \item[(4)] (3) で得られた解 $y(x)$ について，$y(x)=0$ となる $x>1$ が存在するような $q$ の範囲を求め，そのような $x>1$ の最小値を $q$ を用いて表せ。
+\end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
@@ -312,7 +376,8 @@ $x>1$ は $t>0$ に対応し、零点が繰り返し現れるのは三角関数�
 $d<0$、すなわち $q>1/4$ の場合だけである。
 \end{memo*}
 \begin{proof}[解答]
-$q=0$ では $x^2y''+pxy'=0$ である。$z=y'$ とおくと
+\begin{enumerate}
+\item[(1)] $q=0$ では $x^2y''+pxy'=0$ である。$z=y'$ とおくと
 \[
 xz'+pz=0,\qquad \frac{z'}z=-\frac px.
 \]
@@ -321,7 +386,7 @@ xz'+pz=0,\qquad \frac{z'}z=-\frac px.
 y(x)=\int_1^x s^{-p}\,\d s=\frac{x^{1-p}-1}{1-p}\qquad(p\ne1).
 \]
 
-次に $x=e^t$、$Y(t)=y(e^t)$ とおく。連鎖律から
+\item[(2)] $x=e^t$、$Y(t)=y(e^t)$ とおく。連鎖律から
 \[
 Y'(t)=e^ty'(e^t)=xy'(x),
 \]
@@ -332,7 +397,7 @@ Y''(t)=xy'(x)+x^2y''(x),
 \[
 Y''+(p-1)Y'+qY=0,\qquad Y(0)=0, Y'(0)=1.
 \]
-$p=2$ では特性方程式が $\lambda^2+\lambda+q=0$ となる。
+\item[(3)] $p=2$ では特性方程式が $\lambda^2+\lambda+q=0$ となる。
 $d=1-4q$ とおく。
 
 $d>0$ のとき、特性根は $(-1\pm\sqrt d)/2$ なので
@@ -364,7 +429,7 @@ y=x^{-1/2}\begin{cases}
 \dfrac{2}{\sqrt{-d}}\sin(\frac{\sqrt{-d}}2\log x),&d<0.
 \end{cases}
 \]
-$d\ge0$ の場合、$x>1$ では $\log x>0$ であり、$\sinh u$ と $u$ は正なので零点を持たない。
+\item[(4)] $d\ge0$ の場合、$x>1$ では $\log x>0$ であり、$\sinh u$ と $u$ は正なので零点を持たない。
 $d<0$、すなわち $q>1/4$ の場合は
 \[
 \sin\left(\frac{\sqrt{4q-1}}2\log x\right)=0
@@ -375,15 +440,32 @@ $d<0$、すなわち $q>1/4$ の場合は
 \]
 従って $x>1$ の零点があるのは $q>1/4$ のときに限り、最小の零点は
 $\exp(2\pi/\sqrt{4q-1})$ である。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{解析｜弱い特異核}{unknown-6}
-$0<\alpha<1$，$\phi$ は $[0,\infty)$ 上有界可測とし $f(x)=\int_0^x\phi(t)dt$，
-$g(x)=\int_0^x f(s)(x-s)^{-\alpha}ds$ とする。$f$ の連続性，
+$\alpha$ を $0<\alpha<1$ を満たす実数とする。$[0,\infty)$ 上で有界なルベーグ可測関数 $\phi(t)$ に対し，$[0,\infty)$ 上の関数 $f(x)$ を
 \[
-g(x)=\frac1{1-\alpha}\int_0^x\phi(t)(x-t)^{1-\alpha}dt
+f(x)=\int_0^x\phi(t)\,\d t
 \]
-を示し，$g'(x)=\int_0^x\phi(t)(x-t)^{-\alpha}dt$ を示せ。
+で定める。
+\begin{enumerate}
+  \item[(1)] $f(x)$ は $[0,\infty)$ 上で連続であることを示せ。
+  \item[(2)] $(0,\infty)$ 上の関数 $g(x)$ を
+  \[
+  g(x)=\int_0^x\frac{f(s)}{(x-s)^\alpha}\,\d s
+  \]
+  で定める。任意の $x\in(0,\infty)$ に対して
+  \[
+  g(x)=\frac1{1-\alpha}\int_0^x\phi(t)(x-t)^{1-\alpha}\,\d t
+  \]
+  が成り立つことを示せ。
+  \item[(3)] $g(x)$ を (2) で定めた $(0,\infty)$ 上の関数とする。$\{h_n\}$ は正の実数列で，$n\to\infty$ のとき $h_n\to0$ とする。任意の $x\in(0,\infty)$ に対して
+  \[
+  \lim_{n\to\infty}\frac{g(x+h_n)-g(x)}{h_n}=\int_0^x\frac{\phi(t)}{(x-t)^\alpha}\,\d t
+  \]
+  が成り立つことを示せ。
+\end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
@@ -394,7 +476,9 @@ $0<\alpha<1$ による絶対可積分性を確認して Fubini の定理を使�
 微積分学の基本定理へ帰着する。
 \end{memo*}
 \begin{proof}[解答]
-$|f(y)-f(x)|\le\norm\phi_\infty|y-x|$ なので $f$ は連続。$f(s)=\int_0^s\phi(t)dt$ を代入し，Fubini で積分順序を交換すると
+\begin{enumerate}
+\item[(1)] $|f(y)-f(x)|\le\norm\phi_\infty|y-x|$ なので $f$ は連続である。
+\item[(2)]$f(s)=\int_0^s\phi(t)dt$ を代入し，Fubini で積分順序を交換すると
 \begin{align*}
 g(x)
 &=\int_0^x\int_0^s\phi(t)(x-s)^{-\alpha}\,\d t\d s\\
@@ -413,7 +497,7 @@ g(x)
 \]
 従って指定された表示式を得る。
 
-導関数の候補を
+\item[(3)] 導関数の候補を
 \[
 G(x)=\int_0^x\phi(t)(x-t)^{-\alpha}\,\d t
 \]
@@ -431,5 +515,6 @@ $L^1(\R)$ に属し、その平行移動は $L^1$ で連続、$\phi$ は有界�
 \[
 g'(x)=G(x)=\int_0^x\phi(t)(x-t)^{-\alpha}\,\d t
 \]
-を得る。
+を得る。特に問題の極限は $h_n>0$, $h_n\to0$ に対する差商の極限なので、この値に等しい。
+\end{enumerate}
 \end{proof}
