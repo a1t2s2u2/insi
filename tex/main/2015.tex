@@ -4,7 +4,7 @@
 \section{第1期・専門基礎科目（3題必修）}
 
 \begin{problem}{第1問｜基底と上三角化}{2015-b-1}
-有限次元実ベクトル空間 $V$ について，一次独立と基底を定義せよ。基底 $v_1,\ldots,v_n$ と同型写像 $f:V\to V$ に対し $f(v_1),\ldots,f(v_n)$ も基底であることを示せ。また $V=\R^n$，$W_i=\langle v_1,\ldots,v_i\rangle$ とし，$AW_i\subset W_i$ なら $P^{-1}AP$ を上三角にする正則行列 $P$ があることを示せ。
+$V$ を有限次元実ベクトル空間とする。$V$ の元の組が一次独立であること，および $V$ の基底であることを定義せよ。$v_1,\ldots,v_n$ を $V$ の基底，$f:V\to V$ を実ベクトル空間としての同型写像とするとき，$f(v_1),\ldots,f(v_n)$ も $V$ の基底であることを示せ。さらに $V=\R^n$，$W_i=\langle v_1,\ldots,v_i\rangle$ $(1\le i\le n)$ とし，$n$ 次正方行列 $A$ が全ての $i$ で $AW_i\subset W_i$ を満たすなら，$P^{-1}AP$ が上三角行列となる $n$ 次実正則行列 $P$ が存在することを示せ。
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
@@ -18,26 +18,25 @@ $Av_i\in\langle v_1,\ldots,v_i\rangle$ を係数表示すると、その係数�
 $P^{-1}AP$ の第 $i$ 列になり、第 $i$ 成分より下が全て0になる。
 \end{memo*}
 \begin{proof}[解答]
-組 $v_1,\ldots,v_n$ が\textbf{一次独立}であるとは
+$v_1,\ldots,v_n\in V$ が\textbf{一次独立}であるとは、任意の $a_1,\ldots,a_n\in\R$ について
 \[
 \sum_{i=1}^n a_iv_i=0\quad\Longrightarrow\quad
 a_1=\cdots=a_n=0
 \]
-が成り立つことをいう。また、$v_1,\ldots,v_n$ が $V$ の\textbf{基底}であるとは、
-一次独立であり、かつ $V$ を生成する、すなわち任意の $v\in V$ が
-$v=\sum_i a_iv_i$ と書けることをいう。このとき表し方は一意である。実際、
-$\sum_i a_iv_i=\sum_i b_iv_i$ なら $\sum_i(a_i-b_i)v_i=0$ となり、
-一次独立性から全ての $i$ で $a_i=b_i$ となる。
+が成り立つことをいう。また、$v_1,\ldots,v_n\in V$ が $V$ の\textbf{基底}であるとは、
+一次独立であり、かつ $V$ を生成する、すなわち任意の $v\in V$ に対して
+ある $a_1,\ldots,a_n\in\R$ が存在して $v=\sum_{i=1}^n a_iv_i$ と書けることをいう。
 
 次に $f(v_1),\ldots,f(v_n)$ が基底であることを示す。
-まず一次独立性を見る。$\sum_i a_if(v_i)=0$ とすると、$f$ の線形性から
+まず一次独立性を見る。$a_1,\ldots,a_n\in\R$ が $\sum_i a_if(v_i)=0$ を満たすとすると、$f$ の線形性から
 \[
 f\left(\sum_i a_iv_i\right)=\sum_i a_if(v_i)=0=f(0)
 \]
 である。同型写像 $f$ は単射なので $\sum_i a_iv_i=0$ となり、
 $v_1,\ldots,v_n$ の一次独立性から全ての $a_i$ は0である。
 次に生成することを見る。任意の $w\in V$ に対し、$f$ の全射性から
-$w=f(v)$ となる $v\in V$ が存在する。$v=\sum_i b_iv_i$ と書けば、再び線形性により
+$w=f(v)$ となる $v\in V$ が存在する。$v_1,\ldots,v_n$ は $V$ の基底だから、
+ある $b_1,\ldots,b_n\in\R$ により $v=\sum_i b_iv_i$ と書ける。再び線形性により
 \[
 w=f(v)=\sum_i b_if(v_i)
 \]
@@ -49,7 +48,7 @@ P=(v_1\ \cdots\ v_n)
 \]
 を取る。$P$ の列は $\R^n$ の基底なので、$P$ の階数は $n$ であり $P$ は正則である。
 仮定 $AW_i\subset W_i$ と $v_i\in W_i$ から $Av_i\in W_i=\langle v_1,\ldots,v_i\rangle$ なので、
-ある係数 $c_{1i},\ldots,c_{ii}$ を用いて
+ある実数 $c_{1i},\ldots,c_{ii}\in\R$ を用いて
 \[
 Av_i=\sum_{j=1}^i c_{ji}v_j
 \]

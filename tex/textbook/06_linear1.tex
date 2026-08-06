@@ -34,17 +34,21 @@ $u+v$ がどちらに入っても、差を取ることで矛盾が出る。
 \section{一次独立・基底・次元}
 
 \begin{definition}{一次結合・生成・一次独立・基底}{tb-basis}
-$v_1,\ldots,v_k$ の一次結合全体を $\langle v_1,\ldots,v_k\rangle$ と書く。
+$K$ を体、$V$ を $K$ 上のベクトル空間とし、$v_1,\ldots,v_k\in V$ とする。
+$a_1v_1+\cdots+a_kv_k$（$a_i\in K$）の形の元を $v_1,\ldots,v_k$ の\textbf{一次結合}といい、
+その全体を $\langle v_1,\ldots,v_k\rangle$ と書く。
+任意の $a_1,\ldots,a_k\in K$ について
 \[
 \sum_{i=1}^k a_iv_i=0\ \Longrightarrow\ a_1=\cdots=a_k=0
 \]
-が成り立つとき $v_1,\ldots,v_k$ は\textbf{一次独立}であるという。
+が成り立つとき $v_1,\ldots,v_k$ は\textbf{一次独立}であるという。ここで $0$ は $V$ の零ベクトルである。
 一次独立かつ $V$ を生成する組を\textbf{基底}といい、その本数を $\dim V$ と書く。
+本書では特に断らない限り $K=\R$ とする。
 \end{definition}
 
 \begin{proposition}{基底による表示の一意性}{tb-basis-uniqueness}
-$v_1,\ldots,v_n$ が基底なら、各 $v\in V$ は
-$v=\sum_ia_iv_i$ と\textbf{一意に}表される。
+$v_1,\ldots,v_n$ が $V$ の基底なら、各 $v\in V$ は
+$v=\sum_ia_iv_i$（$a_i\in K$）と\textbf{一意に}表される。
 \end{proposition}
 
 \begin{proof}
