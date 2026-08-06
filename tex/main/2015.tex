@@ -78,39 +78,40 @@ $f(v_1),\ldots,f(v_n)$ は $V$ を生成する。
 \[
 Av_i\in W_i=\langle v_1,\ldots,v_i\rangle
 \]
-である。従って、ある実数 $t_{1i},\ldots,t_{ii}\in\R$ が存在して
-\[
-Av_i=t_{1i}v_1+t_{2i}v_2+\cdots+t_{ii}v_i
-\]
-と書ける。
+である。
 
 ここで、各 $v_i$ を列に並べた行列を
 \[
 P=(v_1\ \ v_2\ \cdots\ v_n)
 \]
 とする。$v_1,\ldots,v_n$ は $\R^n$ の基底なので $P$ は正則である。
-また、上で得た係数を使って
+列ベクトル $x\in\R^n$ に対して $Px$ は、$x$ の成分を係数とする
+$v_1,\ldots,v_n$ の一次結合である。従って $Av_i\in\langle v_1,\ldots,v_i\rangle$ は、
 \[
-T=\begin{pmatrix}
-t_{11}&t_{12}&t_{13}&\cdots&t_{1n}\\
-0&t_{22}&t_{23}&\cdots&t_{2n}\\
-0&0&t_{33}&\cdots&t_{3n}\\
-\vdots&\vdots&&\ddots&\vdots\\
-0&0&\cdots&0&t_{nn}
+Av_i=Pt_i,\qquad
+t_i\in\R^n\ \text{は第 $i$ 成分より下が全て $0$}
+\]
+となる列ベクトル $t_i$ が存在することと同じである。
+
+この $t_1,\ldots,t_n$ を列に並べて
+\[
+T=(t_1\ \ t_2\ \cdots\ t_n)
+=\begin{pmatrix}
+*&*&\cdots&*\\
+0&*&\cdots&*\\
+\vdots&\ddots&\ddots&\vdots\\
+0&\cdots&0&*
 \end{pmatrix}
 \]
-とおく。これは上三角行列である。
-
-行列 $AP$ の第 $i$ 列は $Av_i$ である。一方、$T$ の第 $i$ 列は
-$(t_{1i},\ldots,t_{ii},0,\ldots,0)^{\mathsf T}$ なので、$PT$ の第 $i$ 列も
+とおく。各列で第 $i$ 成分より下が $0$ なので、$T$ は上三角行列である。
+行列の積を列ごとに書くと
 \[
-t_{1i}v_1+\cdots+t_{ii}v_i=Av_i
+AP=(Av_1\ \cdots\ Av_n)
+=(Pt_1\ \cdots\ Pt_n)
+=P(t_1\ \cdots\ t_n)
+=PT
 \]
-である。従って
-\[
-AP=PT
-\]
-が成り立つ。$P$ は正則なので、左から $P^{-1}$ を掛けると
+である。$P$ は正則なので、左から $P^{-1}$ を掛けると
 \[
 P^{-1}AP=T
 \]
@@ -119,8 +120,20 @@ P^{-1}AP=T
 \end{proof}
 
 \begin{problem}{第2問｜広義積分}{2015-b-2}
-$f_a(x)=x^a\log x$ $(x>0)$ とする。不定積分を求めよ。また
-$I(a,R)=\iint_{x^2+y^2<R^2}f_a(1+x^2+y^2)\,\d x\d y$ とするとき $I(0,1)$ と，$\lim_{R\to\infty}I(a,R)$ が収束する $a$ の範囲を求めよ。
+$a$ を実数とする。区間 $(0,\infty)$ 上の関数 $f_a(x)$ を
+\[
+f_a(x)=x^a\log x
+\]
+によって定める。
+\begin{enumerate}
+  \item[(1)] 関数 $f_a(x)$ の不定積分を求めよ。
+  \item[(2)] 正数 $R>0$ に対して
+  \[
+  I(a,R)=\iint_{B(R)}f_a(1+x^2+y^2)\,\d x\d y
+  \]
+  とおく。ただし $B(R)$ は $xy$ 平面上の原点を中心とする半径 $R$ の円の内部とする。このとき $I(0,1)$ の値を求めよ。
+  \item[(3)] (2) で定めた $I(a,R)$ に対して $\displaystyle\lim_{R\to\infty}I(a,R)$ が収束するような $a$ の範囲を求めよ。
+\end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
@@ -134,81 +147,58 @@ $\int x^a\,\d x=x^{a+1}/(a+1)$ には $a\ne-1$ が必要なため、$a=-1$ だ�
 最後は原始関数を上端へ代入し、有限な極限を持つ条件を判定する。
 \end{memo*}
 \begin{proof}[解答]
-$a\ne-1$ なら部分積分で $u=\log x$, $\d v=x^a\,\d x$ とおくと
-\[
-\d u=\frac{\d x}{x},\qquad v=\frac{x^{a+1}}{a+1}
-\]
-なので
+\begin{enumerate}
+\item[(1)] $a\ne-1$ のとき、$\log x$ を微分する側にとって部分積分すると
 \begin{align*}
 \int x^a\log x\,\d x
-&=\frac{x^{a+1}\log x}{a+1}
--\frac1{a+1}\int x^a\,\d x\\
+&=\frac{x^{a+1}\log x}{a+1}-\frac1{a+1}\int x^a\,\d x\\
 &=x^{a+1}\left(\frac{\log x}{a+1}-\frac1{(a+1)^2}\right)+C.
 \end{align*}
-$a=-1$ では $u=\log x$ と置換し、$\d u=\d x/x$ より
+$a=-1$ のときは $u=\log x$ と置換して
 \[
 \int\frac{\log x}{x}\,\d x=\int u\,\d u=\frac{(\log x)^2}{2}+C.
 \]
 
-二重積分では
+\item[(2)] 極座標 $x=r\cos\theta$, $y=r\sin\theta$ では $\d x\d y=r\,\d r\d\theta$ であり、
+$B(R)$ は $0\le r<R$, $0\le\theta<2\pi$ に対応する。被積分関数は $r$ だけで決まるので
+角度の積分は $2\pi$ を出し、
 \[
-x=r\cos\theta,\qquad y=r\sin\theta
+I(a,R)=\int_0^{2\pi}\!\!\int_0^R(1+r^2)^a\log(1+r^2)\,r\,\d r\d\theta
+=2\pi\int_0^R(1+r^2)^a\log(1+r^2)\,r\,\d r.
 \]
-とおく。このとき
-\[
-\frac{\partial(x,y)}{\partial(r,\theta)}
-=\begin{vmatrix}
-\cos\theta&-r\sin\theta\\
-\sin\theta&r\cos\theta
-\end{vmatrix}
-=r(\cos^2\theta+\sin^2\theta)=r.
-\]
-円板 $x^2+y^2<R^2$ は $0\le r<R$, $0\le\theta<2\pi$ に対応するから
-\begin{align*}
-I(a,R)
-&=\int_0^{2\pi}\int_0^R(1+r^2)^a\log(1+r^2)r\,\d r\d\theta\\
-&=2\pi\int_0^R(1+r^2)^a\log(1+r^2)r\,\d r.
-\end{align*}
 $u=1+r^2$ とおけば $\d u=2r\,\d r$ なので
 \[
 I(a,R)=\pi\int_1^{1+R^2}u^a\log u\,\d u.
+\tag{$*$}
 \]
-$a=0$, $R=1$ のときは、上端が $1+R^2=2$ であり、原始関数の式へ $a=0$ を代入すると
-\[
-\int\log u\,\d u=u\left(\frac{\log u}{1}-\frac1{1}\right)+C=u\log u-u+C
-\]
-だから
+$a=0$ では (1) の不定積分が $\int\log u\,\d u=u\log u-u$ となるから、$R=1$ として
 \[
 I(0,1)=\pi\left[u\log u-u\right]_1^2
-=\pi\{(2\log2-2)-(1\cdot0-1)\}
+=\pi\{(2\log2-2)-(-1)\}
 =\pi(2\log2-1).
 \]
 
-$R\to\infty$ では上端 $1+R^2$ も $\infty$ へ向かうので、収束性は広義積分
-$\int_1^\infty u^a\log u\,\d u$ の収束性で判定できる。
-$a\ne-1$ のときの原始関数を
-\[
-\Phi(u)=u^{a+1}\left(\frac{\log u}{a+1}-\frac1{(a+1)^2}\right)
-\]
-と書く。$a<-1$ なら $a+1<0$ なので、$u\to\infty$ のとき $u^{a+1}\to0$ であり、また
-\[
-u^{a+1}\log u=\frac{\log u}{u^{-(a+1)}}\longrightarrow0
-\]
-である（分母の指数 $-(a+1)$ は正で、$\log u$ より速く増える）。従って $\Phi(u)\to0$ となり
-\[
-\int_1^\infty u^a\log u\,\d u
-=0-\Phi(1)
-=\frac1{(a+1)^2}
-\]
-と収束する。すなわち $\lim_{R\to\infty}I(a,R)=\pi/(a+1)^2$ である。
+\item[(3)] ($*$) の上端 $1+R^2$ は $R\to\infty$ で $\infty$ へ向かうので、
+極限の収束は広義積分 $\int_1^\infty u^a\log u\,\d u$ の収束と同じである。
 
-$a=-1$ なら原始関数は $(\log u)^2/2$ であり、$u\to\infty$ で $\infty$ へ発散する。
-$a>-1$ なら、$u\ge e$ で $\log u\ge1$ だから
+$a<-1$ のとき。(1) の原始関数を
+$\Phi(u)=u^{a+1}\left(\frac{\log u}{a+1}-\frac1{(a+1)^2}\right)$ とおく。
+$a+1<0$ だから $u^{a+1}\to0$ であり、また
+$u^{a+1}\log u=\log u/u^{-(a+1)}\to0$ である
+（分母の指数 $-(a+1)$ は正で、$\log u$ より速く増える）。よって $\Phi(u)\to0$ となり収束する。
+
+$a=-1$ のとき。原始関数は $(\log u)^2/2$ であり、$u\to\infty$ で発散する。
+
+$a>-1$ のとき。$u\ge e$ では $\log u\ge1$ だから $u^a\log u\ge u^a$ であり、
+$a+1>0$ より $\int_e^\infty u^a\,\d u$ は発散する。よって発散する。
+
+以上より、収束するのは $a<-1$ のとき、かつそのときに限る。
+このとき値は $-\Phi(1)=1/(a+1)^2$ なので
 \[
-\int_e^\infty u^a\log u\,\d u\ge\int_e^\infty u^a\,\d u
+\lim_{R\to\infty}I(a,R)=\frac{\pi}{(a+1)^2}
 \]
-であり、$a+1>0$ より右辺は発散する。従って左辺も発散する。
-以上より、極限が収束するのは $a<-1$ の場合に限る。
+である。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第3問｜二重周期関数}{2015-b-3}
