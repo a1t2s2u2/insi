@@ -73,32 +73,48 @@ $f(v_1),\ldots,f(v_n)$ は $V$ を生成する。
 
 以上より $f(v_1),\ldots,f(v_n)$ は $V$ の基底である。
 
-\item[(3)] 基底ベクトルを列に並べた
+\item[(3)] $W_i=\langle v_1,\ldots,v_i\rangle$ とする。条件 $AW_i\subset W_i$ より、
+特に $v_i\in W_i$ なので
 \[
-P=(v_1\ \cdots\ v_n)
+Av_i\in W_i=\langle v_1,\ldots,v_i\rangle
 \]
-を取る。$P$ の列は $\R^n$ の基底なので、$P$ の階数は $n$ であり $P$ は正則である。
-仮定 $AW_i\subset W_i$ と $v_i\in W_i$ から $Av_i\in W_i=\langle v_1,\ldots,v_i\rangle$ なので、
-ある実数 $c_{1i},\ldots,c_{ii}\in\R$ を用いて
+である。従って、ある実数 $t_{1i},\ldots,t_{ii}\in\R$ が存在して
 \[
-Av_i=\sum_{j=1}^i c_{ji}v_j
+Av_i=t_{1i}v_1+t_{2i}v_2+\cdots+t_{ii}v_i
 \]
-と書ける。$j>i$ に対しては $c_{ji}=0$ と定めれば、この式は
-$Av_i=\sum_{j=1}^n c_{ji}v_j$ と書き直せる。
-ここで $C=(c_{ji})$ とおく。行列の積では、$AP$ の第 $i$ 列は $A$ と $P$ の第 $i$ 列の積
-$Av_i$ であり、$PC$ の第 $i$ 列は $P$ と $C$ の第 $i$ 列の積
+と書ける。
+
+ここで、各 $v_i$ を列に並べた行列を
 \[
-P\begin{pmatrix}c_{1i}\\\vdots\\c_{ni}\end{pmatrix}
-=\sum_{j=1}^n c_{ji}v_j
+P=(v_1\ \ v_2\ \cdots\ v_n)
 \]
-である。上の式よりこの二つは全ての $i$ で一致するから
+とする。$v_1,\ldots,v_n$ は $\R^n$ の基底なので $P$ は正則である。
+また、上で得た係数を使って
 \[
-AP=PC.
+T=\begin{pmatrix}
+t_{11}&t_{12}&t_{13}&\cdots&t_{1n}\\
+0&t_{22}&t_{23}&\cdots&t_{2n}\\
+0&0&t_{33}&\cdots&t_{3n}\\
+\vdots&\vdots&&\ddots&\vdots\\
+0&0&\cdots&0&t_{nn}
+\end{pmatrix}
 \]
-左から $P^{-1}$ を掛けると $P^{-1}AP=C$ である。$C$ の第 $i$ 列は
-$(c_{1i},\ldots,c_{ii},0,\ldots,0)^{\mathsf T}$ であり、
-第 $i$ 成分より下は全て0だから、$C$ は上三角行列である。
-よって $T=C$ とおけば、$n$ 次正則行列 $P$ と $n$ 次上三角行列 $T$ が $P^{-1}AP=T$ を満たす。
+とおく。これは上三角行列である。
+
+行列 $AP$ の第 $i$ 列は $Av_i$ である。一方、$T$ の第 $i$ 列は
+$(t_{1i},\ldots,t_{ii},0,\ldots,0)^{\mathsf T}$ なので、$PT$ の第 $i$ 列も
+\[
+t_{1i}v_1+\cdots+t_{ii}v_i=Av_i
+\]
+である。従って
+\[
+AP=PT
+\]
+が成り立つ。$P$ は正則なので、左から $P^{-1}$ を掛けると
+\[
+P^{-1}AP=T
+\]
+となる。よって $n$ 次正則行列 $P$ と $n$ 次上三角行列 $T$ が求める性質を満たす。
 \end{enumerate}
 \end{proof}
 
