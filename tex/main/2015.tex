@@ -144,7 +144,8 @@ $\int x^a\,\d x=x^{a+1}/(a+1)$ には $a\ne-1$ が必要なため、$a=-1$ だ�
 そこで極座標を使うと面積要素は $\d x\d y=r\,\d r\d\theta$ となり、
 角度積分は係数 $2\pi$ になる。$u=1+r^2$ と置けば
 不定積分と同じ $\int u^a\log u\,\d u$ へ戻る。
-最後は原始関数を上端へ代入し、有限な極限を持つ条件を判定する。
+最後は $t=\log u$ と置換する。$\log$ が $t$ に化けて $\int_0^\infty te^{(a+1)t}\,\d t$ になるので、
+指数が減衰するかどうか、すなわち $a+1$ の符号だけを見ればよい。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
@@ -181,19 +182,28 @@ I(0,1)=\pi\left[u\log u-u\right]_1^2
 \item[(3)] ($*$) の上端 $1+R^2$ は $R\to\infty$ で $\infty$ へ向かうので、
 極限の収束は広義積分 $\int_1^\infty u^a\log u\,\d u$ の収束と同じである。
 
-$a<-1$ のとき。(1) の原始関数を
-$\Phi(u)=u^{a+1}\left(\frac{\log u}{a+1}-\frac1{(a+1)^2}\right)$ とおく。
-$a+1<0$ だから $u^{a+1}\to0$ であり、また
-$u^{a+1}\log u=\log u/u^{-(a+1)}\to0$ である
-（分母の指数 $-(a+1)$ は正で、$\log u$ より速く増える）。よって $\Phi(u)\to0$ となり収束する。
+$t=\log u$ と置換する。$u=e^t$, $\d u=e^t\,\d t$ であり、
+$u=1$ が $t=0$、$u\to\infty$ が $t\to\infty$ に対応するので
+\[
+u^a\log u\,\d u=e^{at}\cdot t\cdot e^t\,\d t=te^{(a+1)t}\,\d t,
+\qquad
+\int_1^\infty u^a\log u\,\d u=\int_0^\infty te^{(a+1)t}\,\d t.
+\]
+$\log$ が $t$ に化けたので、あとは指数 $e^{(a+1)t}$ が減衰するかどうかだけを見ればよい。
 
-$a=-1$ のとき。原始関数は $(\log u)^2/2$ であり、$u\to\infty$ で発散する。
+$a+1\ge0$ のとき。$t\ge0$ では $e^{(a+1)t}\ge1$ だから $te^{(a+1)t}\ge t$ であり、
+$\int_0^\infty t\,\d t$ は発散する。よって発散する。
 
-$a>-1$ のとき。$u\ge e$ では $\log u\ge1$ だから $u^a\log u\ge u^a$ であり、
-$a+1>0$ より $\int_e^\infty u^a\,\d u$ は発散する。よって発散する。
+$a+1<0$ のとき。$c=-(a+1)>0$ とおくと、部分積分により
+\[
+\int_0^\infty te^{-ct}\,\d t
+=\left[-\frac tce^{-ct}\right]_0^\infty+\frac1c\int_0^\infty e^{-ct}\,\d t
+=\frac1{c^2}
+\]
+となり収束する。
 
 以上より、収束するのは $a<-1$ のとき、かつそのときに限る。
-このとき値は $-\Phi(1)=1/(a+1)^2$ なので
+このとき $c^2=(a+1)^2$ だから
 \[
 \lim_{R\to\infty}I(a,R)=\frac{\pi}{(a+1)^2}
 \]
