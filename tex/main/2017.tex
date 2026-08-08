@@ -132,77 +132,71 @@ $I_n=\int_0^\infty n f(x)e^{-nx}\,\d x$ とおく。
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
-有界とは、ある定数 $M$ が存在して全ての $x\ge0$ で $|f(x)|\le M$ となることである。
-重み $ne^{-nx}$ は非負で、$[0,\infty)$ 上の積分が1になる。
-さらに固定した $\delta>0$ より右側の積分は $e^{-n\delta}$ なので、$n\to\infty$ で0になる。
+$f$ の有界性から定数 $M$ を一つ取っておき、以後の評価は全てこの $M$ に帰着させる。
+重み $ne^{-nx}$ は非負で $[0,\infty)$ 上の積分が1、$\delta>0$ より右側の積分は $e^{-n\delta}$ なので、
+$n\to\infty$ では右側だけが消える。これが (1) (2) の内容である。
 
-$I_n-f(0)$ を一つの積分として書き、$[0,\delta]$ と $[\delta,\infty)$ に分ける。
-前半では0における連続性により $f(x)-f(0)$ が小さく、後半では $f$ の有界性と
-指数関数の減衰により積分全体が小さくなる。この二つを別々に $\varepsilon/2$ 未満へ抑える。
+(3) では重みの積分が1であることを使って $f(0)$ を積分の中へ入れ、$I_n-f(0)$ を一つの積分にまとめる。
+$[0,\delta]$ では0における連続性、$[\delta,\infty)$ では有界性で抑えると
+$|I_n-f(0)|\le\varepsilon+2Me^{-n\delta}$ となる。
+$\delta$ は $\varepsilon$ だけで決まり $n$ に依らないので、$n\to\infty$ として $\limsup$ を取れば
+$\varepsilon$ だけが残り、$\varepsilon$ の任意性で終わる。
+$\varepsilon/2$ ずつに割り振って $N$ を取る必要はない。
 \end{memo*}
 \begin{proof}[解答]
-$f$ が有界であるとは、ある定数 $M\ge0$ が存在して、全ての $x\ge0$ で
-$|f(x)|\le M$ となることである。以下で繰り返し使うため、重み $ne^{-nx}$ の積分を先に計算しておく。
-$a\ge0$ に対して
+$f$ は有界なので、ある $M>0$ が存在して
 \[
-\int_a^\infty ne^{-nx}\,\d x
-=\lim_{R\to\infty}\left[-e^{-nx}\right]_{x=a}^{x=R}
-=\lim_{R\to\infty}\left(e^{-na}-e^{-nR}\right)
-=e^{-na}.
+|f(x)|\le M\qquad(x\ge0)
+\tag{$*$}
 \]
-特に $a=0$ とすれば
-\[
-\int_0^\infty ne^{-nx}\,\d x=1
-\]
-であり、この重みは全体で1になる。
+が成り立つ。
 \begin{enumerate}
-  \item[(1)] 全ての $x\ge0$ で
+  \item[(1)] 式 ($*$) より
   \[
-  |nf(x)e^{-nx}|=n|f(x)|e^{-nx}\le Mne^{-nx}
+  |I_n|\le\int_0^\infty n|f(x)|e^{-nx}\,\d x
+  \le\int_0^\infty nMe^{-nx}\,\d x
   \]
-  であるから、上で計算した積分を使うと
+  である。$(-e^{-nx})'=ne^{-nx}$ だから
   \[
-  \int_0^\infty|nf(x)e^{-nx}|\,\d x
-  \le M\int_0^\infty ne^{-nx}\,\d x=M<\infty.
+  \int_0^\infty ne^{-nx}\,\d x=\left[-e^{-nx}\right]_0^\infty=1
   \]
-  よって積分は絶対収束し、$I_n$ は有限の値を取る。
+  であり、よって $|I_n|\le M<\infty$、すなわち $I_n$ は有限である。
 
-  \item[(2)] 同じ評価を区間 $[\delta,\infty)$ で行うと
+  \item[(2)] 任意の $\delta>0$ に対し、同じ評価と同じ原始関数から
   \[
   \left|\int_\delta^\infty nf(x)e^{-nx}\,\d x\right|
-  \le M\int_\delta^\infty ne^{-nx}\,\d x
-  =Me^{-n\delta}.
+  \le M\int_\delta^\infty ne^{-nx}\,\d x=Me^{-n\delta}
   \]
-  $\delta>0$ は $n$ によらず固定されているので、$n\to\infty$ のとき
-  $e^{-n\delta}\to0$ である。従って左辺も0へ収束する。
+  である。$\delta$ は $n$ に依らないので $\lim_{n\to\infty}e^{-n\delta}=0$ であり、
+  従って $\int_\delta^\infty nf(x)e^{-nx}\,\d x\to0$ である。
 
-  \item[(3)] 重みの積分が1であることから
-  $f(0)=\int_0^\infty nf(0)e^{-nx}\,\d x$ なので、差を一つの積分にまとめて
+  \item[(3)] (1) で得た $\int_0^\infty ne^{-nx}\,\d x=1$ を使うと
   \[
-  I_n-f(0)=\int_0^\infty n\{f(x)-f(0)\}e^{-nx}\,\d x
+  I_n-f(0)
+  =\int_0^\infty nf(x)e^{-nx}\,\d x-f(0)\int_0^\infty ne^{-nx}\,\d x
+  =\int_0^\infty n\{f(x)-f(0)\}e^{-nx}\,\d x
   \]
-  と書ける。任意の $\varepsilon>0$ を取る。$f$ は0で連続だから、ある $\delta>0$ が存在して
+  と書ける。$f$ は0で連続なので、任意の $\varepsilon>0$ に対しある $\delta>0$ が存在して
   \[
-  0\le x\le\delta\quad\Longrightarrow\quad
-  |f(x)-f(0)|<\frac\varepsilon2
+  0\le x\le\delta\quad\Longrightarrow\quad|f(x)-f(0)|<\varepsilon
   \]
-  となる。一方、全ての $x\ge0$ で
-  $|f(x)-f(0)|\le|f(x)|+|f(0)|\le2M$ である。
-  積分区間を $[0,\delta]$ と $[\delta,\infty)$ に分け、前半には連続性から得た評価、
-  後半には有界性から得た評価を使うと
+  となる。また式 ($*$) より、全ての $x\ge0$ で $|f(x)-f(0)|\le2M$ である。
+  積分を $[0,\delta]$ と $[\delta,\infty)$ に分け、前半に連続性、後半に有界性を使うと
   \begin{align*}
   |I_n-f(0)|
   &\le\int_0^\delta n|f(x)-f(0)|e^{-nx}\,\d x
     +\int_\delta^\infty n|f(x)-f(0)|e^{-nx}\,\d x\\
-  &\le\frac\varepsilon2\int_0^\delta ne^{-nx}\,\d x
+  &\le\varepsilon\int_0^\delta ne^{-nx}\,\d x
     +2M\int_\delta^\infty ne^{-nx}\,\d x\\
-  &\le\frac\varepsilon2+2Me^{-n\delta}.
+  &\le\varepsilon+2Me^{-n\delta}
   \end{align*}
-  最後の行では、被積分関数が非負であることから
-  $\int_0^\delta ne^{-nx}\,\d x\le\int_0^\infty ne^{-nx}\,\d x=1$ を使った。
-  ここで $\delta$ は $n$ によらず定まっているので、
-  $2Me^{-n\delta}<\varepsilon/2$ となる $N$ を取れる。$n\ge N$ なら
-  $|I_n-f(0)|<\varepsilon$ である。$\varepsilon>0$ は任意だったから $I_n\to f(0)$ である。
+  を得る。最後の行では $\int_0^\delta ne^{-nx}\,\d x\le1$ と (2) の計算を使った。
+  $\delta$ は $n$ に依らないので、$n\to\infty$ として
+  \[
+  \limsup_{n\to\infty}|I_n-f(0)|\le\varepsilon
+  \]
+  を得る。$\varepsilon>0$ は任意だったから $\limsup_{n\to\infty}|I_n-f(0)|=0$、
+  すなわち $I_n\to f(0)$ である。
 \end{enumerate}
 \end{proof}
 
@@ -211,71 +205,45 @@ $\Q$ に通常の距離を入れ，$A=\{x\in\Q\mid1\le x\le2\}$ とする。$A$ 
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
-ここでの全体空間は $\R$ ではなく $\Q$ なので、閉・コンパクト・連結は全て $\Q$ の中で判定する。
-$A$ は $\R$ の閉集合 $[1,2]$ と $\Q$ の共通部分なので、相対位相の定義から $\Q$ で閉である。
-つまり「閉である」ことと「コンパクトである」ことは、ここでは連動しない。
+全体空間は $\R$ ではなく $\Q$ なので、閉・コンパクト・連結は全て $\Q$ の中で判定する。
+$\R$ なら Heine--Borel の定理で $[1,2]$ はコンパクトだが、$\Q$ では $A$ に無理数の
+「穴」が空いており、閉であってもコンパクト性は従わない。穴を一つ $\sqrt2$ と選べば、
+コンパクト性も連結性も同じ点で崩せる。
 
-$\R$ なら Heine--Borel の定理で $[1,2]$ はコンパクトだが、$\Q$ では $A$ の内部に
-無理数の「穴」が空いている。そこで $1<c<2$ となる無理数 $c$ を一つ取り、
-$c$ からの距離が $1/n$ より大きい点全体という開集合の増大列で $A$ を覆う。
-有限個を選べばその和は一つの $W_N$ に等しく、$c$ のすぐ右にある有理数を覆い残す。
-
-連結でないことを示すには、同じ $c$ で $A$ を交わらない二つの非空な相対開集合へ分ける。
-$c$ 自身は $\Q$ に存在しないため、左側と右側の間に点を残さず分割できる。
+連結とは「空でない開集合 $U,V$ で $X=U\cup V$，$U\cap V=\varnothing$ と分けられないこと」
+だったから、そのような $U,V$ を一組作れば連結でないと言える。
 \end{memo*}
 \begin{proof}[解答]
-閉集合ではあるが、コンパクトでも連結でもない。全体空間は $\R$ ではなく $\Q$ なので、
 以下の判定は全て距離空間 $\Q$ の中で行う。
-以下では $c=\sqrt2$ とおく。$1<c<2$ であり、$c$ は無理数だから $c\notin\Q$ である。
 
-まず $A$ が $\Q$ の閉集合であることを示す。補集合を取ると
+閉集合かを見る。補集合を考えると
 \[
-\Q\setminus A
-=\{x\in\Q\mid x<1\}\cup\{x\in\Q\mid x>2\}
+\Q\setminus A=\{x\in\Q\mid x<1\ \text{または}\ 2<x\}
+=\bigl((-\infty,1)\cup(2,\infty)\bigr)\cap\Q
 \]
-である。$\{x\in\R\mid x<1\}$ と $\{x\in\R\mid x>2\}$ は $\R$ の開集合であり、
-$\Q$ の位相は $\R$ からの相対位相だから、これらと $\Q$ の共通部分は $\Q$ の開集合である。
-開集合の合併は開集合なので $\Q\setminus A$ は $\Q$ で開であり、$A$ は $\Q$ の閉集合である。
+であり、$(-\infty,1)$ と $(2,\infty)$ は開だから $\Q\setminus A$ は $\Q$ で開である。
+よって $A$ は閉である。
 
-次に $A$ がコンパクトでないことを示す。$n\ge1$ に対して
+コンパクト性を見る。$1<\sqrt2<2$ であり $\Q$ は $\R$ に稠密だから、$A$ の中に
 \[
-W_n=\left\{x\in\Q\ \middle|\ |x-c|>\frac1n\right\}
+x_n\in\Q,\qquad x_n\to\sqrt2
 \]
-とおく。$W_n$ は $\R$ の開集合 $\{x\in\R\mid|x-c|>1/n\}$ と $\Q$ の共通部分だから
-$\Q$ の開集合である。また $1/n$ は $n$ について減少するので
-\[
-W_1\subset W_2\subset\cdots
-\]
-と増大する。$A$ の点はすべて有理数で $c\notin\Q$ だから $|x-c|>0$ であり、
-$1/n<|x-c|$ となる $n$ を取れば $x\in W_n$ となる。従って $\{W_n\}_{n\ge1}$ は $A$ の開被覆である。
+となる数列を取れる。どの部分列も $\R$ では $\sqrt2$ に収束するが $\sqrt2\notin A$ なので、
+この数列は $A$ 内で収束する部分列をもたない。
+距離空間ではコンパクトなら任意の数列が収束部分列をもつので、$A$ はコンパクトではない。
 
-ここで有限個 $W_{n_1},\ldots,W_{n_k}$ を選び、$N=\max\{n_1,\ldots,n_k\}$ とおくと、
-増大列であることから
+連結性を見る。
 \[
-W_{n_1}\cup\cdots\cup W_{n_k}=W_N
+U=A\cap(-\infty,\sqrt2),\qquad V=A\cap(\sqrt2,\infty)
 \]
-である。$c<2$ なので $\min\{c+1/N,\,2\}>c$ であり、有理数の稠密性から
+とおくと、$U,V$ は $A$ において開である。$\sqrt2\notin\Q$ だから
 \[
-c<x<\min\left\{c+\frac1N,\,2\right\}
+A=U\cup V,\qquad U\cap V=\varnothing
 \]
-を満たす有理数 $x$ が取れる。この $x$ は $1<c<x<2$ より $x\in A$ であるが、
-$0<x-c<1/N$ すなわち $|x-c|<1/N$ なので $x\notin W_N$ である。
-よってどの有限部分族も $A$ を覆えず、$A$ はコンパクトでない。
+であり、$1\in U$ と $3/2\in V$（$(3/2)^2=9/4>2$ による）よりともに空でない。
+従って $A$ は2つの開集合に分離できるので、$A$ は連結ではない。
 
-最後に連結性を見る。
-\[
-U=A\cap\{x\in\Q\mid x<c\},\qquad
-V=A\cap\{x\in\Q\mid x>c\}
-\]
-とおく。$\{x\in\Q\mid x<c\}$ と $\{x\in\Q\mid x>c\}$ は $\Q$ の開集合なので、
-$U,V$ は $A$ の相対位相で開である。
-$1\in U$ であり、有理数の稠密性から $c<x<2$ を満たす有理数 $x$ が取れて $x\in V$ だから、
-$U,V$ はともに空でない。さらに $c\notin\Q$ なので、$A$ の各点は $x<c$ と $x>c$ の
-ちょうど一方だけを満たす。従って
-\[
-A=U\sqcup V
-\]
-となる。よって $U,V$ は $A$ の非自明な開分離であり、$A$ は連結でない。
+以上より、$A$ は閉集合であるが、コンパクトでも連結でもない。
 \end{proof}
 
 \section{専門科目（8題から2題選択）}
