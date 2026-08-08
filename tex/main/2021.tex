@@ -118,15 +118,20 @@ $J_2(-1)\oplus(-1)$ となる。
 \end{proof}
 
 \begin{problem}{第2問｜二変数関数}{2021-1-2}
+$\R^2$ 上の関数 $f(x,y)$ を次のように定義する。
 \[
 f(x,y)=\begin{cases}\dfrac{\sin(x^2y)}{x^2+y^2},&(x,y)\ne(0,0),\\0,&(x,y)=(0,0).
 \end{cases}
 \]
 \begin{enumerate}
-  \item[(1)] 極座標で $|f(x,y)|\le r$ および $|f(x,y)|\le r^{-2}$ を示せ。
-  \item[(2)] 原点で連続であることを示せ。
-  \item[(3)] $p>1$，$B(R)=\{x^2+y^2\le R^2\}$ とし $I_p(R)=\iint_{B(R)}|f|^p\,\d x\d y$ とおく。$\lim_{R\to\infty}I_p(R)$ の存在を示せ。
-  \item[(4)] $\partial f/\partial y(x,0)$ を求め，$f$ が $C^1$ 級か判定せよ。
+  \item[(1)] $x=r\cos\theta$，$y=r\sin\theta$ $(r>0,\ 0\le\theta<2\pi)$ に対して，$|f(x,y)|\le r$ および $|f(x,y)|\le\dfrac1{r^2}$ が成り立つことを示せ。
+  \item[(2)] $f(x,y)$ は点 $(0,0)$ において連続であることを示せ。
+  \item[(3)] $R>0$，$p>1$ に対して
+  \[
+  I_p(R)=\iint_{B(R)}|f(x,y)|^p\,\d x\d y
+  \]
+  とおく。ただし $B(R)=\{(x,y)\in\R^2\mid\sqrt{x^2+y^2}\le R\}$ である。このとき $\lim_{R\to\infty}I_p(R)$ が存在することを示せ。
+  \item[(4)] $\dfrac{\partial f}{\partial y}(x,0)$ を求めよ。また，$f(x,y)$ は $C^1$ 級の関数かどうか，理由をつけて答えよ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
@@ -271,8 +276,9 @@ $\d x\d y=r\,\d r\d\theta$ を掛けた一変数積分が収束するか確認�
 \section{第1期・専門科目（4題から2題選択）}
 
 \begin{problem}{第1問｜環とイデアル}{2021-s-1}
-$\Phi:\mathbb C[X,Y,Z]\to\mathbb C[t]$ を
-$\Phi(f)=f(t^2,t^3,t^4)$ で定め，$I=\ker\Phi$，$R=\mathbb C[X,Y,Z]/I$ とする。
+環の準同型 $\Phi:\mathbb C[X,Y,Z]\to\mathbb C[t]$ を，$f(X,Y,Z)\in\mathbb C[X,Y,Z]$ に対し
+$\Phi(f(X,Y,Z))=f(t^2,t^3,t^4)$ で定める。$I=\ker\Phi$，$R=\mathbb C[X,Y,Z]/I$ と定める。
+多項式 $f\in\mathbb C[X,Y,Z]$ が定める剰余類 $f+I$ を $\bar f$ で表す。
 \begin{enumerate}
   \item[(1)] $I$ は素イデアルかどうか，理由も含め答えよ。
   \item[(2)] $I$ の生成元を求めよ。それらの元が $I$ を生成することも示せ。
@@ -357,11 +363,15 @@ $\mathfrak m/\mathfrak m^2$ のベクトル空間次元で判定する。
 \end{proof}
 
 \begin{problem}{第2問｜曲率・捩率}{2021-s-2}
-$p(t)=(\cos t,\sin t,\cosh t)$ と円柱面 $S=\{x^2+y^2=1\}$ を考える。
+曲線 $p:\R\to\R^3$ は
+\[
+p(t)=(\cos t,\ \sin t,\ \cosh t)\qquad(t\in\R)
+\]
+で定義されるとする。
 \begin{enumerate}
-  \item[(1)] $p$ の曲率と捩率を求めよ。
-  \item[(2)] $S$ の主方向と $p'(t)$ の角度が $\pi/4$ となる $t$ を全て求めよ。
-  \item[(3)] $p$ の $S$ における測地的曲率ベクトルを求めよ。
+  \item[(1)] 曲線 $p$ の曲率および捩率を求めよ。
+  \item[(2)] 円柱面 $S=\{(x,y,z)\in\R^3\mid x^2+y^2=1\}$ の主方向と $\dfrac{\d p}{\d t}(t)$ の角度が $\dfrac\pi4$ であるような $t$ を全て求めよ。
+  \item[(3)] 曲線 $p$ の曲面 $S$ における測地的曲率ベクトルを求めよ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
@@ -448,7 +458,11 @@ $\d s/\d t=\norm{p'}=\cosh t$ より $\d/\d s=\operatorname{sech}t\,\d/\d t$。
 \end{proof}
 
 \begin{problem}{第3問｜収束べき級数}{2021-s-3}
-$\varphi(z)=\sum_{n=0}^\infty a_nz^n$ は収束べき級数で $a_0\ne0$ とする。
+複素数を係数とする収束べき級数
+\[
+\varphi(z)=\sum_{n=0}^\infty a_nz^n
+\]
+を考える。$a_0\ne0$ とする。
 \begin{enumerate}
   \item[(1)] $1/\varphi(z)$ が $z=0$ で収束べき級数に展開できることを示せ。
   \item[(2)] $1/\varphi(z)$ の $z=0$ におけるべき級数展開の収束半径が $\varphi(z)$ の収束半径より真に小さくなることはあるか。あるとするならその理由を述べ，ないとするならそれを証明せよ。
@@ -520,9 +534,11 @@ $0,1/3,0,1/15$。留数定理から積分値は順に
 \end{proof}
 
 \begin{problem}{第4問｜測度収束}{2021-s-4}
-$E\subset\R^d$ は可測で $|E|<\infty$，$f_n$ は $E$ 上可測とする。$A_{n,\varepsilon}=\{x\in E\mid|f_n(x)|\ge\varepsilon\}$ とおく。
+$E\subset\R^d$ はルベーグ可測集合で $|E|<\infty$ とする。ここで，$|E|$ は $E$ のルベーグ測度を表す。
+$\{f_n(x)\}$ $(n=1,2,\ldots)$ は $E$ 上ルベーグ可測関数列とする。
+正数 $\varepsilon$ に対して $A_{n,\varepsilon}=\{x\in E\mid|f_n(x)|\ge\varepsilon\}$ $(n=1,2,\ldots)$ とおくとき，以下の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] $g\in L^1(E)$，$F=\{|g|\ge1\}$ なら $|F|\le\int_E|g|$ を示せ。
+  \item[(1)] $E$ 上ルベーグ積分可能な関数 $g$ に対して $F=\{x\in E\mid|g(x)|\ge1\}$ とおくとき，$|F|\le\int_E|g(x)|\,\d x$ を示せ。
   \item[(2)] $\int_E|f_n|\to0$ なら全ての $\varepsilon>0$ で $|A_{n,\varepsilon}|\to0$ を示せ。
   \item[(3)] $f_n\to0$ がほとんど至る所なら $\displaystyle\int_E\frac{|f_n|}{1+|f_n|}\to0$ を示せ。
   \item[(4)] 全ての $\varepsilon>0$ で $|A_{n,\varepsilon}|\to0$ なら，ほとんど至る所で0に収束する部分列があることを示せ。
@@ -585,12 +601,21 @@ $A_{n_k,1/k}$ に有限回しか属さない。従ってそのような $x$ で�
 \section{第2期・専門基礎科目（3題必修）}
 
 \begin{problem}{第1問｜等角ベクトルと対称行列}{2021-2-1}
-$x_1,\ldots,x_n\in\R^3$ が $|(x_i,x_j)|=r$ $(i\ne j)$，$|(x_i,x_i)|=1$ を満たす。ただし $r\ne1$。
+次の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] 3次実対称行列全体の次元を求めよ。
-  \item[(2)] $\sum_i a_i(x_i,x_j)^2=0$ が全ての $j$ で成り立つなら，全ての $a_i$ が0であることを示せ。
-  \item[(3)] 行列 $x_ix_i^{\mathsf T}$ が一次独立であることを示せ。
-  \item[(4)] $n\le6$ を示せ。
+  \item[(1)] 3次実対称行列全体のなす線形空間の次元を求めよ。
+  \item[(2)] $x,y\in\R^3$ に対し，$(x,y)$ を $x$ と $y$ の標準内積とする。$n$ を正の整数とする。
+  $x_1,\ldots,x_n\in\R^3$ が条件
+  \[
+  |(x_i,x_j)|=\begin{cases}r&i\ne j\text{ のとき}\\1&i=j\text{ のとき}\end{cases}
+  \]
+  を満たすとする。ただし，$r$ は $r\ne1$ となる定数とする。このとき，実数 $a_i$ $(i=1,2,\ldots,n)$ が
+  \[
+  \sum_{i=1}^na_i(x_i,x_j)^2=0,\qquad j=1,2,\ldots,n
+  \]
+  を満たすならば，$a_1=a_2=\cdots=a_n=0$ が成り立つことを示せ。
+  \item[(3)] (2) の $x_i$ に対し，行列 $x_ix_i^{\mathsf T}$ $(i=1,2,\ldots,n)$ は一次独立であることを示せ。ただし，$x_i^{\mathsf T}$ は $x_i$ を転置して得られる行ベクトルである。
+  \item[(4)] (2) の $n$ に対し，$n\le6$ となることを示せ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
@@ -662,16 +687,30 @@ x_ix_i^{\mathsf T}x_jx_j^{\mathsf T}
 \end{proof}
 
 \begin{problem}{第2問｜Gamma 関数と Beta 関数}{2021-2-2}
-$p,q>0$ とし
+$p>0$，$q>0$ とする。ガンマ関数 $\Gamma(p)$ とベータ関数 $B(p,q)$ は次のように定義される。
 \[
 \Gamma(p)=\int_0^\infty x^{p-1}e^{-x}\,\d x,
-\quad B(p,q)=\int_0^1x^{p-1}(1-x)^{q-1}\,\d x.
+\qquad B(p,q)=\int_0^1x^{p-1}(1-x)^{q-1}\,\d x
 \]
-$\Gamma(p)\Gamma(q)=B(p,q)\Gamma(p+q)$ を，二重積分に (1) $x=st,y=s(1-t)$，(2) $x=(r\cos\theta)^2,y=(r\sin\theta)^2$ を用いる二通りで示せ。
+ガンマ関数とベータ関数の間には関係式
+\[
+B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}
+\]
+が成り立つことを，
+\[
+\Gamma(p)\Gamma(q)=\iint_Dx^{p-1}y^{q-1}e^{-x-y}\,\d x\d y,
+\qquad D=\{(x,y)\mid x>0,\ y>0\}
+\tag{$*$}
+\]
+を利用して，以下の2通りの方法で示せ。
+\begin{enumerate}
+  \item[(1)] ($*$) において $x=st$，$y=s(1-t)$ と変数変換することにより，$\Gamma(p)\Gamma(q)=B(p,q)\Gamma(p+q)$ となることを示せ。
+  \item[(2)] ($*$) において $x=(r\cos\theta)^2$，$y=(r\sin\theta)^2$ と変数変換することにより，$\Gamma(p)\Gamma(q)=B(p,q)\Gamma(p+q)$ となることを示せ。
+\end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
-まず二つの一変数積分の積を、第1象限 $x>0,y>0$ 上の二重積分として書く。
+出発点の ($*$) は、二つの一変数積分の積を第1象限 $D$ 上の二重積分として書いたものである。
 被積分関数が非負なので、Tonelli の定理により積分順序を変えても値は変わらない。
 変数変換では、面積が何倍になるかを表す Jacobian の絶対値も必ず掛ける。
 
@@ -681,11 +720,13 @@ $s$ だけの積分と $t$ だけの積分へ分離できる。
 最後に $u=r^2$ と $t=\cos^2\theta$ を代入して、定義された Gamma・Beta 積分へ戻す。
 \end{memo*}
 \begin{proof}[解答]
-積の中の積分変数を区別して $x,y$ と書く。被積分関数は非負なので、Tonelli の定理から
+被積分関数は非負なので Tonelli の定理により積分順序を変えてよく、
+与えられた ($*$) は
 \[
 \Gamma(p)\Gamma(q)
-=\int_0^\infty\int_0^\infty x^{p-1}y^{q-1}e^{-(x+y)}\,\d x\d y.
+=\int_0^\infty\int_0^\infty x^{p-1}y^{q-1}e^{-(x+y)}\,\d x\d y
 \]
+と累次積分で書ける。以下、これを二通りに変数変換する。
 
 (1) $x=st$, $y=s(1-t)$ とおくと、$s=x+y>0$, $t=x/(x+y)\in(0,1)$ であり、
 \[
@@ -777,16 +818,21 @@ $\Gamma(p)\Gamma(q)=\Gamma(p+q)B(p,q)$ を得る。
 \end{proof}
 
 \begin{problem}{第3問｜距離空間の連続写像}{2021-2-3}
-距離空間 $(X,d_X)$ から $(Y,d_Y)$ への写像 $f$ について答えよ。
+距離空間 $(X,d_X)$ から距離空間 $(Y,d_Y)$ への写像 $f:X\to Y$ について次の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] $f$ が点 $x\in X$ で連続であることを開球を用いて定義せよ。
-  \item[(2)] $f$ が連続なら，任意の閉集合 $F\subset Y$ に対し $f^{-1}(F)$ が閉であることを示せ。
-  \item[(3)] 任意の $A\subset X$ に対し $f(\overline A)\subset\overline{f(A)}$ を示せ。
+  \item[(1)] $\delta>0$，$\varepsilon>0$，$x\in X$，$y\in Y$ に対して
+  \[
+  N_X(x;\delta)=\{u\in X\mid d_X(u,x)<\delta\},\qquad
+  N_Y(y;\varepsilon)=\{v\in Y\mid d_Y(v,y)<\varepsilon\}
+  \]
+  とおく。これらの記号を用いて「写像 $f$ が点 $x\in X$ で連続である」ということの定義を述べよ。
+  \item[(2)] $f$ が $X$ のすべての点で連続であれば，$Y$ の任意の閉集合 $F$ について $f^{-1}(F)$ が $X$ の閉集合であることを証明せよ。
+  \item[(3)] $f$ が $X$ のすべての点で連続であれば，$X$ の任意の部分集合 $A$ に対して $f(\overline A)\subset\overline{f(A)}$ であることを証明せよ。ここで $\overline A$ は集合 $A$ の閉包を表すものとする。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
-(1) の開球 $B_X(x,\delta)$ は、$x$ からの距離が $\delta$ 未満の点全体である。
+問題文の $N_X(x;\delta)$ は、$x$ からの距離が $\delta$ 未満の点全体、すなわち開球である。
 連続とは、出力側で許す誤差 $\varepsilon$ を先に指定したとき、
 入力側の十分小さい誤差 $\delta$ を選べることをいう。量化記号はこの順序で書く。
 (2) は $x\notin f^{-1}(F)$ を一つ取り、その周りに逆像の補集合へ含まれる開球を作る。
@@ -795,11 +841,10 @@ $\Gamma(p)\Gamma(q)=\Gamma(p+q)B(p,q)$ を得る。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] $B_X(x,\delta)=\{y\in X\mid d_X(x,y)<\delta\}$ とする。
-$f$ が $x$ で連続であるとは
+\item[(1)] $f$ が点 $x$ で連続であるとは
 \[
 \forall\varepsilon>0\ \exists\delta>0\quad
-f(B_X(x,\delta))\subset B_Y(f(x),\varepsilon)
+f(N_X(x;\delta))\subset N_Y(f(x);\varepsilon)
 \]
 が成り立つこと、すなわち
 \[
@@ -812,13 +857,13 @@ d_Y(f(x),f(y))<\varepsilon
 $x\in f^{-1}(Y\setminus F)$ を取ると $f(x)\in Y\setminus F$ である。
 補集合は開なので、ある $\varepsilon>0$ に対して
 \[
-B_Y(f(x),\varepsilon)\subset Y\setminus F
+N_Y(f(x);\varepsilon)\subset Y\setminus F
 \]
 となる。$x$ における連続性から、ある $\delta>0$ が存在して
 \[
-f(B_X(x,\delta))\subset B_Y(f(x),\varepsilon)
+f(N_X(x;\delta))\subset N_Y(f(x);\varepsilon)
 \]
-となる。従って $B_X(x,\delta)\subset f^{-1}(Y\setminus F)$ である。
+となる。従って $N_X(x;\delta)\subset f^{-1}(Y\setminus F)$ である。
 各点 $x$ の周りにこのような開球が取れるので $f^{-1}(Y\setminus F)$ は開であり、
 \[
 f^{-1}(Y\setminus F)=X\setminus f^{-1}(F)
@@ -828,12 +873,12 @@ f^{-1}(Y\setminus F)=X\setminus f^{-1}(F)
 \item[(3)] $x\in\overline A$ を取り、$f(x)\in\overline{f(A)}$ を示す。
 任意の $\varepsilon>0$ に対して、$x$ における連続性より、ある $\delta>0$ が存在して
 \[
-f(B_X(x,\delta))\subset B_Y(f(x),\varepsilon)
+f(N_X(x;\delta))\subset N_Y(f(x);\varepsilon)
 \]
-となる。$x\in\overline A$ だから $B_X(x,\delta)\cap A\ne\varnothing$ である。
+となる。$x\in\overline A$ だから $N_X(x;\delta)\cap A\ne\varnothing$ である。
 この共通部分から $a$ を一つ取ると
 \[
-f(a)\in B_Y(f(x),\varepsilon)\cap f(A)
+f(a)\in N_Y(f(x);\varepsilon)\cap f(A)
 \]
 となる。従って $f(x)$ の任意の開球は $f(A)$ と交わるので
 $f(x)\in\overline{f(A)}$ である。以上より
