@@ -4,19 +4,21 @@
 \section{第1期・専門科目（4題から2題選択）}
 
 \begin{problem}{第1問｜群論}{2026-1-1}
-$S_6$ の元 $\sigma=(1\ 2)(3\ 4)(5\ 6)$ と，その中心化群
+6次対称群 $S_6$ の元 $(1\ 2)(3\ 4)(5\ 6)$ を $\sigma$ とおく。$\sigma$ の中心化群
 \[
-Z_{S_6}(\sigma)=\{\tau\in S_6\mid \tau\sigma\tau^{-1}=\sigma\}
+Z_{S_6}(\sigma)=\{\tau\in S_6\mid\tau\sigma\tau^{-1}=\sigma\}
 \]
-を考える。積は $\sigma\tau(i)=\sigma(\tau(i))$ で定める。
+を考える。ただし，$\sigma,\tau\in S_6$ の積 $\sigma\tau$ は，$\sigma\tau(i)=\sigma(\tau(i))$ $(1\le i\le6)$ で定める。以下の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] $\rho\in S_6$ と巡回置換 $(k_1\ k_2\ \cdots\ k_r)$ に対し
-  $\rho(k_1\ k_2\ \cdots\ k_r)\rho^{-1}=(\rho(k_1)\ \rho(k_2)\ \cdots\ \rho(k_r))$
-  を示せ。
+  \item[(1)] $\rho\in S_6$ と巡回置換 $(k_1\ k_2\ \cdots\ k_r)\in S_6$ に対し，
+  \[
+  \rho(k_1\ k_2\ \cdots\ k_r)\rho^{-1}=(\rho(k_1)\ \rho(k_2)\ \cdots\ \rho(k_r))
+  \]
+  が成り立つことを示せ。
   \item[(2)] $S_6$ における $\sigma$ の共役類の元の個数を求めよ。
   \item[(3)] $Z_{S_6}(\sigma)$ の位数を求めよ。
-  \item[(4)] $Z_{S_6}(\sigma)$ の Sylow $3$ 部分群を一つ求めよ。
-  \item[(5)] $H=\langle(1\ 2),(3\ 4),(5\ 6)\rangle$ が $Z_{S_6}(\sigma)$ の正規部分群であることを示せ。
+  \item[(4)] $Z_{S_6}(\sigma)$ のシロー3部分群を1つ求めよ。
+  \item[(5)] $\{(1\ 2),(3\ 4),(5\ 6)\}$ で生成された $S_6$ の部分群は $Z_{S_6}(\sigma)$ の正規部分群であることを証明せよ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
@@ -134,9 +136,9 @@ Z_{S_6}(\sigma)=\{\tau\in S_6\mid \tau\sigma\tau^{-1}=\sigma\}
 \end{proof}
 
 \begin{problem}{第2問｜基本群と被覆空間}{2026-1-2}
-$S^1\subset\R^2$ を単位円，$x_0=(1,0)$ とする。
+$\R^2$ の中の単位円周を $S^1$ とおく。$x_0=(1,0)\in S^1$ をとる。以下の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] $\pi_1(S^1\times S^1,(x_0,x_0))$ を求めよ。ただし $\pi_1(S^1,x_0)\cong\Z$ は用いてよい。
+  \item[(1)] トーラス $S^1\times S^1$ の基本群 $\pi_1(S^1\times S^1,(x_0,x_0))$ を求めよ。ただし $\pi_1(S^1,x_0)\cong\Z$ であることは証明なしに使って良い。
   \item[(2)] $S^1\times S^1$ の普遍被覆空間が $\R^2$ と同型であることを示せ。
   \item[(3)] $S^1\times S^1$ の被覆空間で，基本群が $\Z$ と同型なものを構成せよ。
 \end{enumerate}
@@ -208,12 +210,14 @@ $S^1\subset\R^2$ を単位円，$x_0=(1,0)$ とする。
 \end{proof}
 
 \begin{problem}{第3問｜複素積分}{2026-1-3}
+複素関数 $f(z)$ を
 \[
-f(z)=\frac{\sin z}{e^z-1-z},\qquad C=\{z\mid |z|=1\}
+f(z)=\frac{\sin z}{e^z-1-z}
 \]
-とし，$C$ は反時計回りとする。
+で定める。$C$ を単位円 $|z|=1$ とする。ただし，$C$ の向きは0を反時計回りに回る向きとする。
+以下の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] $g(z)=e^z-1-z$ の Maclaurin 展開と，零点 $z=0$ の位数を求めよ。
+  \item[(1)] 関数 $g(z)=e^z-1-z$ のマクローリン展開を求めよ。$g(z)$ の零点 $z=0$ の位数を求めよ。
   \item[(2)] $|z|=1$ のとき
   \[
   \left|e^z-1-z-\frac{z^2}{2}\right|\le e-\frac52
@@ -290,11 +294,15 @@ f(z)=\frac{\sin z}{e^z-1-z},\qquad C=\{z\mid |z|=1\}
 \end{proof}
 
 \begin{problem}{第4問｜ルベーグ積分}{2026-1-4}
-$G:\R\to\R$ は有界連続関数，$M=\sup_{x\in\R}|G(x)|$ とする。$f_n,f:\R^d\to\R$ はルベーグ可測で，$f_n\to f$ がほとんど至る所で成り立つ。
+$G(x)$ は $\R$ 上有界な実数値連続関数とする。$M=\sup_{x\in\R}|G(x)|$ とおく。
+$f_n(x)$ $(n=1,2,\ldots)$ および $f(x)$ は $\R^d$ 上定義されたルベーグ可測な実数値関数とする。
+関数列 $\{f_n(x)\}$ はほとんどすべての $x\in\R^d$ で $f(x)$ に収束するとする。
+$G(x)$ と $f(x)$, $f_n(x)$ との合成関数をそれぞれ $(G\circ f)(x)=G(f(x))$, $(G\circ f_n)(x)=G(f_n(x))$ とおく。
+$\R^d$ のルベーグ可測集合 $E$ のルベーグ測度を $|E|$ と表す。以下の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] 任意の開集合 $I\subset\R$ に対し $(G\circ f)^{-1}(I)$ がルベーグ可測であることを示せ。
-  \item[(2)] $G\circ f_n\to G\circ f$ がほとんど至る所で成り立つことを示せ。
-  \item[(3)] 可測集合 $E\subset\R^d$ が $|E|<\infty$ を満たすとき
+  \item[(1)] $I$ を $\R$ の開集合とする。$I$ の $G\circ f$ による逆像 $(G\circ f)^{-1}(I)$ は $\R^d$ のルベーグ可測集合であることを示せ。
+  \item[(2)] 関数列 $\{(G\circ f_n)(x)\}$ はほとんどすべての $x\in\R^d$ で $(G\circ f)(x)$ に収束することを示せ。
+  \item[(3)] $E$ は $\R^d$ のルベーグ可測集合であり $|E|<\infty$ とするとき，
   \[
   \lim_{n\to\infty}\int_E(G\circ f_n)(x)\,\d x
   =\int_E(G\circ f)(x)\,\d x
@@ -362,13 +370,14 @@ $M\chi_E$ を優関数として優収束定理を適用する。
 \[
 A=\begin{pmatrix}
 2&-i&1&i\\ i&2&i&-1\\ 1&-i&2&i\\ -i&-1&-i&2
-\end{pmatrix}.
+\end{pmatrix}
 \]
+とする。ここで，$i$ は虚数単位とする。このとき，以下の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] $|A|$ を求めよ。
-  \item[(2)] 固有値と各固有空間を求めよ。
+  \item[(1)] $A$ の行列式を求めよ。
+  \item[(2)] $A$ の固有値および各固有値に関する固有空間を求めよ。
   \item[(3)] $A$ をユニタリ行列で対角化せよ。
-  \item[(4)] エルミート行列の固有値がすべて実数であることを示せ。
+  \item[(4)] $n$ 次正方行列 $X$ が ${}^{\mathsf T}\overline X=X$ をみたすとき，$X$ をエルミート行列という。エルミート行列の固有値はすべて実数であることを示せ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
@@ -741,13 +750,15 @@ i&0&0&1
 \end{proof}
 
 \begin{problem}{第2問｜重積分}{2026-2-2}
+$\R^2$ の部分集合 $D$ を
 \[
-D=\{(x,y)\in\R^2\mid1\le x^2+y^2\le4,\ 0\le x\le1,\ y\ge0\}.
+D=\{(x,y)\in\R^2\mid1\le x^2+y^2\le4,\ 0\le x\le1,\ y\ge0\}
 \]
+で定義する。以下の問いに答えよ。
 \begin{enumerate}
   \item[(1)] $D$ を図示せよ。
-  \item[(2)] $-\pi/2<\theta<\pi/2$ で $\displaystyle\log\left(\tan\theta+\frac1{\cos\theta}\right)$ の導関数を求めよ。
-  \item[(3)] $\displaystyle\iint_D\frac{x}{\sqrt{x^2+y^2}}\,\d x\d y$ を求めよ。
+  \item[(2)] $\theta\in\left(-\dfrac\pi2,\dfrac\pi2\right)$ に対して，関数 $\log\left(\tan\theta+\dfrac1{\cos\theta}\right)$ の導関数を $\cos\theta$ で表せ。
+  \item[(3)] 重積分 $\displaystyle\iint_D\frac{x}{\sqrt{x^2+y^2}}\,\d x\d y$ の値を求めよ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
@@ -857,12 +868,15 @@ $\d x\d y=r\,\d r\d\theta$ へ変わる。
 \end{proof}
 
 \begin{problem}{第3問｜集合までの距離}{2026-2-3}
-距離空間 $(X,d)$ と空でない部分集合 $A\subset X$ に対し
-$d(x,A)=\inf\{d(x,a)\mid a\in A\}$ とおく。
+$(X,d)$ を距離空間とし，$A$ を $X$ の空でない部分集合とする。また $x\in X$ に対して，
+\[
+d(x,A)=\inf\{d(x,a)\mid a\in A\}
+\]
+とおく。このとき，以下の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] $|d(x,A)-d(y,A)|\le d(x,y)$ を示せ。
-  \item[(2)] $f(x)=d(x,A)$ が連続であることを示せ。
-  \item[(3)] $x$ が $A$ の触点であることと $d(x,A)=0$ が同値であることを示せ。
+  \item[(1)] 任意の $x,y\in X$ に対して，$|d(x,A)-d(y,A)|\le d(x,y)$ となることを示せ。
+  \item[(2)] $X$ 上の関数 $f:X\to\R$ を $f(x)=d(x,A)$ と定めると，$f$ は連続関数となることを示せ。
+  \item[(3)] $x\in X$ が $A$ の触点であることと，$d(x,A)=0$ となることは同値であることを示せ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}

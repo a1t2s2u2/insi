@@ -4,47 +4,52 @@
 \section{専門基礎科目（3題必修）}
 
 \begin{problem}{第1問｜不変部分空間}{2017-b-1}
-$f:\R^3\to\R^3$ を
+実ベクトル空間 $\R^3$ 上の線形写像 $f:\R^3\to\R^3$ を
 \[
-f(x)=\begin{pmatrix}1&0&0\\1&3&-3\\-2&2&-4\end{pmatrix}x
+f(x):=\begin{pmatrix}1&0&0\\1&3&-3\\-2&2&-4\end{pmatrix}x
+\qquad(x\in\R^3)
 \]
-で定める。$f(W)\subset W$ となる1次元および2次元の部分空間 $W$ を全て求めよ。
+で定める。次の問いに答えよ。
+\begin{enumerate}
+  \item[(1)] $f(W)\subset W$ かつ $\dim W=1$ となる部分空間 $W\subset\R^3$ をすべて求めよ。
+  \item[(2)] $f(W)\subset W$ かつ $\dim W=2$ となる部分空間 $W\subset\R^3$ をすべて求めよ。
+\end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
-$f(W)\subset W$ は、$W$ のベクトルへ行列 $A$ を掛けても結果が $W$ の外へ出ない、という意味である。
-まず $|\lambda I-A|=0$ から三つの固有値を求め、各連立方程式
-$(A-\lambda I)x=0$ を解いて固有方向を得る。
-1次元不変部分空間では、生成ベクトル $w$ に対して $Aw$ が $w$ の定数倍になるため、
-$w$ は固有ベクトルでなければならない。
+$f(W)\subset W$ となる部分空間 $W$ を $f$ の\textbf{不変部分空間}という。
+$f$ は行列 $A$ を掛ける写像なので、これは $W$ のベクトルに $A$ を掛けても
+$W$ の外へ出ない、という条件である。
 
-2次元の場合に「固有方向二つの組」以外がないことは、固有値ごとの成分を取り出す
-多項式 $\Pi_j(A)$ を具体的に作って示す。$W$ は $A$ で不変なら $A$ の多項式でも不変なので、
-$w\in W$ の各固有方向成分も $W$ に入る。
+固有値が三つとも相異なるので、固有ベクトル $v_1,v_2,v_3$ は $\R^3$ の基底になる。
+不変部分空間はこの三方向から $\dim W$ 個を選んで生成したものに限られるので、
+(1) は3つ、(2) も3つ出る。固有値と固有ベクトルの計算は両方で共通なので先にまとめておく。
+
+「組み合わせに限る」ことは、$w\in W$ に $(A-\lambda_iI)(A-\lambda_jI)$ を掛けると
+残り一つの方向 $v_k$ だけが生き残ることから従う。
+$W$ は $A$ で不変だから、掛けた結果も $W$ に入る。
 \end{memo*}
 \begin{proof}[解答]
-行列を $A$ と書く。数 $\lambda$ が固有値であるとは、$(\lambda I-A)x=0$ が
-$x\ne0$ の解を持つこと、すなわち $|\lambda I-A|=0$ となることである。まず
+行列を $A$ と書く。(1) (2) に共通する準備として、まず固有値を求める。
 \[
-\lambda I-A
-=\begin{pmatrix}
-\lambda-1&0&0\\
--1&\lambda-3&3\\
-2&-2&\lambda+4
+A-\lambda I=\begin{pmatrix}
+1-\lambda&0&0\\
+1&3-\lambda&-3\\
+-2&2&-4-\lambda
 \end{pmatrix}
 \]
-である。第1行は $(1,1)$ 成分以外が0なので、第1行に沿って余因子展開すると
+であり、第1行は $(1,1)$ 成分以外が0なので、第1行に沿って余因子展開すると
 \begin{align*}
-|\lambda I-A|
-&=(\lambda-1)\begin{vmatrix}\lambda-3&3\\-2&\lambda+4\end{vmatrix}\\
-&=(\lambda-1)\{(\lambda-3)(\lambda+4)+6\}\\
-&=(\lambda-1)(\lambda^2+\lambda-6)\\
-&=(\lambda-1)(\lambda-2)(\lambda+3).
+|A-\lambda I|
+&=(1-\lambda)\begin{vmatrix}3-\lambda&-3\\2&-4-\lambda\end{vmatrix}\\
+&=(1-\lambda)\{(3-\lambda)(-4-\lambda)+6\}\\
+&=(1-\lambda)(\lambda^2+\lambda-6)\\
+&=(1-\lambda)(\lambda+3)(\lambda-2).
 \end{align*}
-従って固有値は $1,2,-3$ の三つで、互いに相異なる。
+従って固有値は $\lambda=1,2,-3$ の三つで、互いに相異なる。
 
-各固有空間を、連立方程式 $(A-\lambda I)x=0$ を解いて求める。
-$\lambda=1$ では
+各 $\lambda$ について $(A-\lambda I)v=0$ を解けば固有ベクトルが得られる。
+$\lambda=1$ なら
 \[
 A-I=\begin{pmatrix}0&0&0\\1&2&-3\\-2&2&-5\end{pmatrix}
 \]
@@ -52,241 +57,212 @@ A-I=\begin{pmatrix}0&0&0\\1&2&-3\\-2&2&-5\end{pmatrix}
 \[
 x+2y-3z=0,\qquad -2x+2y-5z=0
 \]
-の二本である。第1式を $x=3z-2y$ と解いて第2式へ代入すると
-\[
--2(3z-2y)+2y-5z=6y-11z=0
-\]
-となる。分数を避けるため $z=6t$ と取れば $y=11t$、$x=18t-22t=-4t$ である。
-$\lambda=2$ では
+の二本である。第1式から第2式を引くと $3x+2z=0$、すなわち $x=-\frac23z$ である。
+これを第1式へ戻して3倍すると $-2z+6y-9z=0$ となり $y=\frac{11}6z$ を得る。
+分数を避けて $z=6$ と取れば $v_1=(-4,11,6)^{\mathsf T}$ である。
+
+同様に $\lambda=2$ では
 \[
 A-2I=\begin{pmatrix}-1&0&0\\1&1&-3\\-2&2&-6\end{pmatrix}
 \]
-であり、第1行から $x=0$、第2行から $y=3z$ が従う。第3行はこの二つから
-自動的に満たされるので、新しい条件を与えない。
-$\lambda=-3$ では
+であり、第1行から $x=0$、これを第2行へ入れて $y=3z$ を得る。
+第3行 $-2x+2y-6z=0$ は同じ条件である。$z=1$ と取れば $v_2=(0,3,1)^{\mathsf T}$ である。
+
+また $\lambda=-3$ では
 \[
 A+3I=\begin{pmatrix}4&0&0\\1&6&-3\\-2&2&-1\end{pmatrix}
 \]
-であり、第1行から $x=0$、第2行から $z=2y$ が従う。第3行 $-2x+2y-z=0$ は
-同じ条件である。以上より、各固有空間は1次元で、固有ベクトルを
-\[
-v_1=(-4,11,6)^{\mathsf T},\quad v_2=(0,3,1)^{\mathsf T},\quad
-v_3=(0,1,2)^{\mathsf T}
-\]
-と取れる。相異なる固有値に属する固有ベクトルは一次独立なので、
-$v_1,v_2,v_3$ は $\R^3$ の基底である。
+であり、第1行から $x=0$、これを第2行へ入れて $z=2y$ を得る。
+第3行 $-2x+2y-z=0$ も同じ条件である。$y=1$ と取れば $v_3=(0,1,2)^{\mathsf T}$ である。
 
-1次元部分空間 $W=\langle w\rangle$ が不変なら $Aw\in\langle w\rangle$ だから、
-$Aw=\lambda w$ となり、$w$ は固有ベクトルである。各固有空間は1次元なので、
-1次元不変部分空間は
-$\langle v_1\rangle,\langle v_2\rangle,\langle v_3\rangle$ に限る。
+以上より
+\[
+\lambda_1=1:\ v_1=\begin{pmatrix}-4\\11\\6\end{pmatrix},\qquad
+\lambda_2=2:\ v_2=\begin{pmatrix}0\\3\\1\end{pmatrix},\qquad
+\lambda_3=-3:\ v_3=\begin{pmatrix}0\\1\\2\end{pmatrix}
+\]
+である。固有値が相異なるので $v_1,v_2,v_3$ は一次独立であり、$\R^3$ の基底をなす。
 
-2次元不変部分空間 $W$ を考える。$v_1,v_2,v_3$ は基底なので、任意の $w\in\R^3$ は
+次に、不変部分空間がこの三方向の組み合わせに限ることを見る。
+$W$ を不変部分空間、$w=c_1v_1+c_2v_2+c_3v_3\in W$ とし、$c_k\ne0$ とする。
+$\{i,j,k\}=\{1,2,3\}$ とすると $(A-\mu I)v_m=(\lambda_m-\mu)v_m$ より
 \[
-w=c_1v_1+c_2v_2+c_3v_3
+(A-\lambda_iI)(A-\lambda_jI)w
+=c_k(\lambda_k-\lambda_i)(\lambda_k-\lambda_j)v_k
 \]
-と一意に書ける。この分解の各項を取り出すため、固有値 $\lambda_1,\lambda_2,\lambda_3=1,2,-3$ に対して
-\[
-\Pi_1=\frac{(A-2I)(A+3I)}{(1-2)(1+3)},\qquad
-\Pi_2=\frac{(A-I)(A+3I)}{(2-1)(2+3)},\qquad
-\Pi_3=\frac{(A-I)(A-2I)}{(-3-1)(-3-2)}
-\]
-とおく。各 $\Pi_k$ は、分子で $\lambda_k$ 以外の固有値の因子を掛け、
-分母でその値を1に正規化した行列である。実際、$Av_j=\lambda_jv_j$ より
-$(A-\mu I)v_j=(\lambda_j-\mu)v_j$ なので
-\[
-\Pi_1v_j=\frac{(\lambda_j-2)(\lambda_j+3)}{(1-2)(1+3)}\,v_j
-\]
-となる。$j=1$ では係数は $((1-2)(1+3))/((1-2)(1+3))=1$、
-$j=2,3$ では分子に因子 $\lambda_j-2$ または $\lambda_j+3$ が0として現れるため係数は0である。従って
-\[
-\Pi_1v_1=v_1,\qquad \Pi_1v_2=\Pi_1v_3=0,
-\qquad\text{すなわち}\qquad
-\Pi_1w=c_1v_1.
-\]
-同じ計算により $\Pi_2w=c_2v_2$、$\Pi_3w=c_3v_3$ である。
+である（$v_i,v_j$ の項はそれぞれ因子 $\lambda_i-\lambda_i$, $\lambda_j-\lambda_j$ で消える）。
+$W$ は $A$ で不変で和と定数倍について閉じているから左辺は $W$ に属し、
+固有値が相異なるので係数は0でない。よって $v_k\in W$ である。
+従って $W$ は、$W$ の元の展開に現れる $v_k$ たちで生成され、その個数が $\dim W$ に等しい。
+逆に $A(av_i+bv_j)=\lambda_iav_i+\lambda_jbv_j$ より、$v_k$ たちで生成される部分空間は
+どれも不変である。
 
-$W$ が $A$ で不変なら、$w\in W$ に対し $Aw\in W$、これを繰り返して $A^2w\in W$ であり、
-部分空間は和と定数倍で閉じているので、$A$ の多項式で書けた $\Pi_k$ についても
-$\Pi_kw\in W$ となる。従って $w$ の各成分 $c_kv_k$ は $W$ に属する。
-すなわち $W$ は、$W$ の元に現れる固有方向 $v_k$ たちで生成される。
-$\dim W=2$ であり各 $\langle v_k\rangle$ は1次元だから、現れる固有方向はちょうど二つである。よって
+すなわち不変部分空間は $v_1,v_2,v_3$ のうち $\dim W$ 個を選んで生成したものに限り、
+逆にそれらはすべて不変である。
+
+(1) $\dim W=1$ のとき、選ぶ方向は1つなので
 \[
-\langle v_1,v_2\rangle,\qquad
-\langle v_1,v_3\rangle,\qquad
-\langle v_2,v_3\rangle
+\langle v_1\rangle,\qquad\langle v_2\rangle,\qquad\langle v_3\rangle
 \]
-のいずれかに限る。逆にこれら三つは固有ベクトルで生成されるので、
-$A(av_i+bv_j)=\lambda_iav_i+\lambda_jbv_j$ より $A$ で不変である。
-従って2次元不変部分空間はこの三つで全てである。
+の3つで全てである。
+
+(2) $\dim W=2$ のとき、選ぶ方向は2つなので
+\[
+\langle v_1,v_2\rangle,\qquad\langle v_1,v_3\rangle,\qquad\langle v_2,v_3\rangle
+\]
+の3つで全てである。
 \end{proof}
 
 \begin{problem}{第2問｜近似恒等核}{2017-b-2}
-$f$ は $[0,\infty)$ 上の有界連続関数とし
-$I_n=\int_0^\infty n f(x)e^{-nx}\,\d x$ とおく。
+$f(x)$ を区間 $[0,\infty)$ で定義された有界かつ連続な関数とするとき，次の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] $I_n$ が有限であることを示せ。
-  \item[(2)] 任意の $\delta>0$ に対し $\displaystyle\int_\delta^\infty nf(x)e^{-nx}\,\d x\to0$ を示せ。
-  \item[(3)] $I_n\to f(0)$ を示せ。
+  \item[(1)] 任意の自然数 $n$ に対して $\displaystyle\int_0^\infty nf(x)e^{-nx}\,\d x$ は有限値であることを示せ。この積分値を $I_n$ とおく。
+  \item[(2)] 任意に選んだ $\delta>0$ に対して
+  \[
+  \lim_{n\to\infty}\int_\delta^\infty nf(x)e^{-nx}\,\d x=0
+  \]
+  を示せ。
+  \item[(3)] $\displaystyle\lim_{n\to\infty}I_n=f(0)$ を示せ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
-有界とは、ある定数 $M$ が存在して全ての $x\ge0$ で $|f(x)|\le M$ となることである。
-重み $ne^{-nx}$ は非負で、$[0,\infty)$ 上の積分が1になる。
-さらに固定した $\delta>0$ より右側の積分は $e^{-n\delta}$ なので、$n\to\infty$ で0になる。
+$f$ の有界性から定数 $M$ を一つ取っておき、以後の評価は全てこの $M$ に帰着させる。
+重み $ne^{-nx}$ は非負で $[0,\infty)$ 上の積分が1、$\delta>0$ より右側の積分は $e^{-n\delta}$ なので、
+$n\to\infty$ では右側だけが消える。これが (1) (2) の内容である。
 
-$I_n-f(0)$ を一つの積分として書き、$[0,\delta]$ と $[\delta,\infty)$ に分ける。
-前半では0における連続性により $f(x)-f(0)$ が小さく、後半では $f$ の有界性と
-指数関数の減衰により積分全体が小さくなる。この二つを別々に $\varepsilon/2$ 未満へ抑える。
+(3) では重みの積分が1であることを使って $f(0)$ を積分の中へ入れ、$I_n-f(0)$ を一つの積分にまとめる。
+$[0,\delta]$ では0における連続性、$[\delta,\infty)$ では有界性で抑えると
+$|I_n-f(0)|\le\varepsilon+2Me^{-n\delta}$ となる。
+$\delta$ は $\varepsilon$ だけで決まり $n$ に依らないので、$n\to\infty$ として $\limsup$ を取れば
+$\varepsilon$ だけが残り、$\varepsilon$ の任意性で終わる。
+$\varepsilon/2$ ずつに割り振って $N$ を取る必要はない。
 \end{memo*}
 \begin{proof}[解答]
-$f$ が有界であるとは、ある定数 $M\ge0$ が存在して、全ての $x\ge0$ で
-$|f(x)|\le M$ となることである。以下で繰り返し使うため、重み $ne^{-nx}$ の積分を先に計算しておく。
-$a\ge0$ に対して
+$f$ は有界なので、ある $M>0$ が存在して
 \[
-\int_a^\infty ne^{-nx}\,\d x
-=\lim_{R\to\infty}\left[-e^{-nx}\right]_{x=a}^{x=R}
-=\lim_{R\to\infty}\left(e^{-na}-e^{-nR}\right)
-=e^{-na}.
+|f(x)|\le M\qquad(x\ge0)
+\tag{$*$}
 \]
-特に $a=0$ とすれば
-\[
-\int_0^\infty ne^{-nx}\,\d x=1
-\]
-であり、この重みは全体で1になる。
+が成り立つ。
 \begin{enumerate}
-  \item[(1)] 全ての $x\ge0$ で
+  \item[(1)] 式 ($*$) より
   \[
-  |nf(x)e^{-nx}|=n|f(x)|e^{-nx}\le Mne^{-nx}
+  |I_n|\le\int_0^\infty n|f(x)|e^{-nx}\,\d x
+  \le\int_0^\infty nMe^{-nx}\,\d x
   \]
-  であるから、上で計算した積分を使うと
+  である。$(-e^{-nx})'=ne^{-nx}$ だから
   \[
-  \int_0^\infty|nf(x)e^{-nx}|\,\d x
-  \le M\int_0^\infty ne^{-nx}\,\d x=M<\infty.
+  \int_0^\infty ne^{-nx}\,\d x=\left[-e^{-nx}\right]_0^\infty=1
   \]
-  よって積分は絶対収束し、$I_n$ は有限の値を取る。
+  であり、よって $|I_n|\le M<\infty$、すなわち $I_n$ は有限である。
 
-  \item[(2)] 同じ評価を区間 $[\delta,\infty)$ で行うと
+  \item[(2)] 任意の $\delta>0$ に対し、同じ評価と同じ原始関数から
   \[
   \left|\int_\delta^\infty nf(x)e^{-nx}\,\d x\right|
-  \le M\int_\delta^\infty ne^{-nx}\,\d x
-  =Me^{-n\delta}.
+  \le M\int_\delta^\infty ne^{-nx}\,\d x=Me^{-n\delta}
   \]
-  $\delta>0$ は $n$ によらず固定されているので、$n\to\infty$ のとき
-  $e^{-n\delta}\to0$ である。従って左辺も0へ収束する。
+  である。$\delta$ は $n$ に依らないので $\lim_{n\to\infty}e^{-n\delta}=0$ であり、
+  従って $\int_\delta^\infty nf(x)e^{-nx}\,\d x\to0$ である。
 
-  \item[(3)] 重みの積分が1であることから
-  $f(0)=\int_0^\infty nf(0)e^{-nx}\,\d x$ なので、差を一つの積分にまとめて
+  \item[(3)] (1) で得た $\int_0^\infty ne^{-nx}\,\d x=1$ を使うと
   \[
-  I_n-f(0)=\int_0^\infty n\{f(x)-f(0)\}e^{-nx}\,\d x
+  I_n-f(0)
+  =\int_0^\infty nf(x)e^{-nx}\,\d x-f(0)\int_0^\infty ne^{-nx}\,\d x
+  =\int_0^\infty n\{f(x)-f(0)\}e^{-nx}\,\d x
   \]
-  と書ける。任意の $\varepsilon>0$ を取る。$f$ は0で連続だから、ある $\delta>0$ が存在して
+  と書ける。$f$ は0で連続なので、任意の $\varepsilon>0$ に対しある $\delta>0$ が存在して
   \[
-  0\le x\le\delta\quad\Longrightarrow\quad
-  |f(x)-f(0)|<\frac\varepsilon2
+  0\le x\le\delta\quad\Longrightarrow\quad|f(x)-f(0)|<\varepsilon
   \]
-  となる。一方、全ての $x\ge0$ で
-  $|f(x)-f(0)|\le|f(x)|+|f(0)|\le2M$ である。
-  積分区間を $[0,\delta]$ と $[\delta,\infty)$ に分け、前半には連続性から得た評価、
-  後半には有界性から得た評価を使うと
+  となる。また式 ($*$) より、全ての $x\ge0$ で $|f(x)-f(0)|\le2M$ である。
+  積分を $[0,\delta]$ と $[\delta,\infty)$ に分け、前半に連続性、後半に有界性を使うと
   \begin{align*}
   |I_n-f(0)|
   &\le\int_0^\delta n|f(x)-f(0)|e^{-nx}\,\d x
     +\int_\delta^\infty n|f(x)-f(0)|e^{-nx}\,\d x\\
-  &\le\frac\varepsilon2\int_0^\delta ne^{-nx}\,\d x
+  &\le\varepsilon\int_0^\delta ne^{-nx}\,\d x
     +2M\int_\delta^\infty ne^{-nx}\,\d x\\
-  &\le\frac\varepsilon2+2Me^{-n\delta}.
+  &\le\varepsilon+2Me^{-n\delta}
   \end{align*}
-  最後の行では、被積分関数が非負であることから
-  $\int_0^\delta ne^{-nx}\,\d x\le\int_0^\infty ne^{-nx}\,\d x=1$ を使った。
-  ここで $\delta$ は $n$ によらず定まっているので、
-  $2Me^{-n\delta}<\varepsilon/2$ となる $N$ を取れる。$n\ge N$ なら
-  $|I_n-f(0)|<\varepsilon$ である。$\varepsilon>0$ は任意だったから $I_n\to f(0)$ である。
+  を得る。最後の行では $\int_0^\delta ne^{-nx}\,\d x\le1$ と (2) の計算を使った。
+  $\delta$ は $n$ に依らないので、$n\to\infty$ として
+  \[
+  \limsup_{n\to\infty}|I_n-f(0)|\le\varepsilon
+  \]
+  を得る。$\varepsilon>0$ は任意だったから $\limsup_{n\to\infty}|I_n-f(0)|=0$、
+  すなわち $I_n\to f(0)$ である。
 \end{enumerate}
 \end{proof}
 
 \begin{problem}{第3問｜有理数の部分空間}{2017-b-3}
-$\Q$ に通常の距離を入れ，$A=\{x\in\Q\mid1\le x\le2\}$ とする。$A$ は閉，コンパクト，連結か。
+$\Q$ を有理数全体の集合とする。$\Q$ の2点 $x,y$ に対して $d(x,y):=|x-y|$ と定義することにより，
+$\Q$ は $d$ を距離とする距離空間となる。$\Q$ の部分集合 $A=\{x\in\Q\mid1\le x\le2\}$ について
+次の各命題は正しいか？ 理由をつけて答えよ。
+\begin{enumerate}
+  \item[(1)] $A$ は $\Q$ の閉集合である。
+  \item[(2)] $A$ はコンパクト集合である。
+  \item[(3)] $A$ は連結集合である。
+\end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
-ここでの全体空間は $\R$ ではなく $\Q$ なので、閉・コンパクト・連結は全て $\Q$ の中で判定する。
-$A$ は $\R$ の閉集合 $[1,2]$ と $\Q$ の共通部分なので、相対位相の定義から $\Q$ で閉である。
-つまり「閉である」ことと「コンパクトである」ことは、ここでは連動しない。
+全体空間は $\R$ ではなく $\Q$ なので、閉・コンパクト・連結は全て $\Q$ の中で判定する。
+$\R$ なら Heine--Borel の定理で $[1,2]$ はコンパクトだが、$\Q$ では $A$ に無理数の
+「穴」が空いており、閉であってもコンパクト性は従わない。穴を一つ $\sqrt2$ と選べば、
+コンパクト性も連結性も同じ点で崩せる。
 
-$\R$ なら Heine--Borel の定理で $[1,2]$ はコンパクトだが、$\Q$ では $A$ の内部に
-無理数の「穴」が空いている。そこで $1<c<2$ となる無理数 $c$ を一つ取り、
-$c$ からの距離が $1/n$ より大きい点全体という開集合の増大列で $A$ を覆う。
-有限個を選べばその和は一つの $W_N$ に等しく、$c$ のすぐ右にある有理数を覆い残す。
-
-連結でないことを示すには、同じ $c$ で $A$ を交わらない二つの非空な相対開集合へ分ける。
-$c$ 自身は $\Q$ に存在しないため、左側と右側の間に点を残さず分割できる。
+連結とは「空でない開集合 $U,V$ で $X=U\cup V$，$U\cap V=\varnothing$ と分けられないこと」
+だったから、そのような $U,V$ を一組作れば連結でないと言える。
 \end{memo*}
 \begin{proof}[解答]
-閉集合ではあるが、コンパクトでも連結でもない。全体空間は $\R$ ではなく $\Q$ なので、
-以下の判定は全て距離空間 $\Q$ の中で行う。
-以下では $c=\sqrt2$ とおく。$1<c<2$ であり、$c$ は無理数だから $c\notin\Q$ である。
+全体空間は $\R$ ではなく $\Q$ なので、以下の判定は全て距離空間 $\Q$ の中で行う。
+\begin{enumerate}
+\item[(1)] 補集合を考えると
+\[
+\Q\setminus A=\{x\in\Q\mid x<1\ \text{または}\ 2<x\}
+=\bigl((-\infty,1)\cup(2,\infty)\bigr)\cap\Q
+\]
+であり、$(-\infty,1)$ と $(2,\infty)$ は開だから $\Q\setminus A$ は $\Q$ で開である。
+よって $A$ は $\Q$ の閉集合であり、命題 (1) は正しい。
 
-まず $A$ が $\Q$ の閉集合であることを示す。補集合を取ると
+\item[(2)] $1<\sqrt2<2$ であり $\Q$ は $\R$ に稠密だから、$A$ の中に
 \[
-\Q\setminus A
-=\{x\in\Q\mid x<1\}\cup\{x\in\Q\mid x>2\}
+x_n\in\Q,\qquad x_n\to\sqrt2
 \]
-である。$\{x\in\R\mid x<1\}$ と $\{x\in\R\mid x>2\}$ は $\R$ の開集合であり、
-$\Q$ の位相は $\R$ からの相対位相だから、これらと $\Q$ の共通部分は $\Q$ の開集合である。
-開集合の合併は開集合なので $\Q\setminus A$ は $\Q$ で開であり、$A$ は $\Q$ の閉集合である。
+となる数列を取れる。どの部分列も $\R$ では $\sqrt2$ に収束するが $\sqrt2\notin A$ なので、
+この数列は $A$ 内で収束する部分列をもたない。
+距離空間ではコンパクトなら任意の数列が収束部分列をもつので、$A$ はコンパクトではない。
+よって命題 (2) は正しくない。
 
-次に $A$ がコンパクトでないことを示す。$n\ge1$ に対して
+\item[(3)] 
 \[
-W_n=\left\{x\in\Q\ \middle|\ |x-c|>\frac1n\right\}
+U=A\cap(-\infty,\sqrt2),\qquad V=A\cap(\sqrt2,\infty)
 \]
-とおく。$W_n$ は $\R$ の開集合 $\{x\in\R\mid|x-c|>1/n\}$ と $\Q$ の共通部分だから
-$\Q$ の開集合である。また $1/n$ は $n$ について減少するので
+とおくと、$U,V$ は $A$ において開である。$\sqrt2\notin\Q$ だから
 \[
-W_1\subset W_2\subset\cdots
+A=U\cup V,\qquad U\cap V=\varnothing
 \]
-と増大する。$A$ の点はすべて有理数で $c\notin\Q$ だから $|x-c|>0$ であり、
-$1/n<|x-c|$ となる $n$ を取れば $x\in W_n$ となる。従って $\{W_n\}_{n\ge1}$ は $A$ の開被覆である。
+であり、$1\in U$ と $3/2\in V$（$(3/2)^2=9/4>2$ による）よりともに空でない。
+従って $A$ は2つの開集合に分離できるので、$A$ は連結ではない。
+よって命題 (3) は正しくない。
+\end{enumerate}
 
-ここで有限個 $W_{n_1},\ldots,W_{n_k}$ を選び、$N=\max\{n_1,\ldots,n_k\}$ とおくと、
-増大列であることから
-\[
-W_{n_1}\cup\cdots\cup W_{n_k}=W_N
-\]
-である。$c<2$ なので $\min\{c+1/N,\,2\}>c$ であり、有理数の稠密性から
-\[
-c<x<\min\left\{c+\frac1N,\,2\right\}
-\]
-を満たす有理数 $x$ が取れる。この $x$ は $1<c<x<2$ より $x\in A$ であるが、
-$0<x-c<1/N$ すなわち $|x-c|<1/N$ なので $x\notin W_N$ である。
-よってどの有限部分族も $A$ を覆えず、$A$ はコンパクトでない。
-
-最後に連結性を見る。
-\[
-U=A\cap\{x\in\Q\mid x<c\},\qquad
-V=A\cap\{x\in\Q\mid x>c\}
-\]
-とおく。$\{x\in\Q\mid x<c\}$ と $\{x\in\Q\mid x>c\}$ は $\Q$ の開集合なので、
-$U,V$ は $A$ の相対位相で開である。
-$1\in U$ であり、有理数の稠密性から $c<x<2$ を満たす有理数 $x$ が取れて $x\in V$ だから、
-$U,V$ はともに空でない。さらに $c\notin\Q$ なので、$A$ の各点は $x<c$ と $x>c$ の
-ちょうど一方だけを満たす。従って
-\[
-A=U\sqcup V
-\]
-となる。よって $U,V$ は $A$ の非自明な開分離であり、$A$ は連結でない。
+以上より、$A$ は $\Q$ の閉集合であるが、コンパクトでも連結でもない。
 \end{proof}
 
 \section{専門科目（8題から2題選択）}
 
 \begin{problem}{第1問｜群の交換子}{2017-s-1}
-$G$ を有限群，$K\subset H$ を部分群とし
-$X=\{x\in G\mid[x,h]\in K\ (\forall h\in H)\}$，$[x,y]=x^{-1}y^{-1}xy$ とおく。
+$G$ を有限群とする。$H,K$ は $G$ の部分群で $K\subset H$ であるとする。
+\[
+X=\{x\in G\mid[x,h]\in K\ (\forall h\in H)\}
+\]
+とおく。ここで，$x,y\in G$ に対して $[x,y]=x^{-1}y^{-1}xy$ とする。次の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] $x\in X$ なら $x^{-1}Kx=K$ を示せ。
-  \item[(2)] $X$ が $G$ の部分群であることを示せ。
-  \item[(3)] $K\triangleleft H$ かつ $H/K$ が可換であることと $H\subset X$ が同値であることを示せ。
+  \item[(1)] $x\in X$ に対して $x^{-1}Kx=K$ が成り立つことを示せ。
+  \item[(2)] $X$ は $G$ の部分群であることを示せ。
+  \item[(3)] $K\triangleleft H$ かつ $H/K$ が可換群であることは，$H\subset X$ となるための必要十分条件であることを示せ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
@@ -320,10 +296,12 @@ $K$ に入る。従って各 $h_1\in H$ は $X$ に属し、$H\subset X$ とな�
 \end{proof}
 
 \begin{problem}{第2問｜剰余環と局所化}{2017-s-2}
-$R$ を可換環，$a\in R$，$S=\{a^n\mid n\ge0\}$ とする。自然な写像 $\pi:R\to R/(a)$，$\tau:R\to S^{-1}R$ を考える。
+$R$ を可換環とし，$a$ を $R$ の元とする。$R$ の積閉集合 $S$ を $S=\{a^n\mid n\ge0\}$ で定める。
+ただし，$a^0$ は $R$ の乗法的単位元とする。$\pi:R\to R/(a)$ および $\tau:R\to S^{-1}R$ を
+自然な環準同型写像とする。次の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] $x\in\ker\pi\cap\ker\tau$ なら，ある $n$ で $x^n=0$ となることを示せ。
-  \item[(2)] $\tau$ が全射なら $\ker\pi+\ker\tau=R$ を示せ。
+  \item[(1)] $R$ の元 $x$ が $\ker\pi\cap\ker\tau$ に属するなら，$x^n=0$ となる自然数 $n$ が存在することを示せ。
+  \item[(2)] $\tau$ が全射なら $\ker\pi+\ker\tau=R$ となることを示せ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
@@ -375,7 +353,7 @@ $R$ を可換環，$a\in R$，$S=\{a^n\mid n\ge0\}$ とする。自然な写像 
 \begin{problem}{第3問｜被覆空間と Betti 数}{2017-s-3}
 \begin{enumerate}
   \item[(1)] $F:\R\to S^1$，$F(\theta)=(\cos\theta,\sin\theta)$ が普遍被覆であることを示し，被覆変換群を求めよ。
-  \item[(2)] 四面体の境界のうち，三つの面からなる複体を $K_1$，残り一面を $K_2$ とする。$K_1\cap K_2,K_1,K_2,K_1\cup K_2$ の Betti 数を求めよ。
+  \item[(2)] $\R^4$ の点 $a_1,a_2,a_3,a_4$ を $a_1=(1,0,0,0)$, $a_2=(0,1,0,0)$, $a_3=(0,0,1,0)$, $a_4=(0,0,0,1)$ で定める。3つの2単体 $|a_1a_3a_4|$, $|a_1a_2a_4|$, $|a_1a_2a_3|$ およびこれらの全ての辺単体からなる単体的複体を $K_1$ で表し，2単体 $|a_2a_3a_4|$ およびこの全ての辺単体からなる単体的複体を $K_2$ で表す。このとき $K_1\cap K_2$ が単体的複体であることを示せ。また，非負整数 $p$ に対し $K_1\cap K_2$, $K_1$ および $K_2$ の $p$ 次元 Betti 数を求め，さらに Mayer--Vietoris 完全系列を用いて単体的複体 $K=K_1\cup K_2$ の $p$ 次元 Betti 数を求めよ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
@@ -383,7 +361,9 @@ $R$ を可換環，$a\in R$，$S=\{a^n\mid n\ge0\}$ とする。自然な写像 
 被覆写像の確認では短い円弧の逆像が $2\pi$ ごとの区間へ分かれることを明示する。
 被覆変換は $F(T(\theta))=F(\theta)$ から差が $2\pi$ の整数倍と分かり、
 連結性によってその整数が一定になる。
-複体はそれぞれ $D^2,S^1,S^2$ のどれと同相かを見抜けば Betti 数を読める。
+複体は $a_1,\ldots,a_4$ を頂点とする4面体の境界を三面と一面に割ったもので、
+$K_1,K_2$ はそれぞれ $D^2$、共通部分は $S^1$、和は $S^2$ と同相である。
+$K=K_1\cup K_2$ の Betti 数だけは、指示どおり Mayer--Vietoris 完全系列から求める。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
@@ -414,33 +394,79 @@ T(\theta)-\theta\in2\pi\Z.
 左辺は $\theta$ の連続関数であり、$\R$ は連結だから、この整数値は一定である。
 従って $T=T_k$ となる。合成について $T_kT_\ell=T_{k+\ell}$ なので、被覆変換群は $\Z$ と同型である。
 
-\item[(2)] $K_2$ は三角形一枚なので $D^2$ と同相であり、$K_1$ も残りの三面を合わせた円板なので $D^2$ と同相である。
-両者の共通部分は $K_2$ の境界であるから
+\item[(2)] まず $K_1\cap K_2$ が単体的複体であることを見る。
+二つの複体の共通部分とは、両方に属する単体全体のことである。
+$K_1$ には $a_1,\ldots,a_4$ の全ての頂点と6本の辺が属し、
+$K_2$ には $a_2,a_3,a_4$ とその3本の辺、および2単体 $|a_2a_3a_4|$ が属する。
+$|a_2a_3a_4|$ は $K_1$ に属さないので
 \[
-K_1\simeq D^2,\qquad K_2\simeq D^2,
-\qquad K_1\cap K_2\simeq S^1,
-\qquad K_1\cup K_2\simeq S^2.
+K_1\cap K_2=\{|a_2|,|a_3|,|a_4|,|a_2a_3|,|a_3a_4|,|a_2a_4|\},
 \]
-$D^2,S^1,S^2$ のホモロジー群から、Betti 数は
+すなわち2単体 $|a_2a_3a_4|$ の境界複体である。
+一般に、単体の面はもとの単体が属する複体に属するから、
+共通部分も面を取る操作で閉じている。また二つの単体の共通部分は
+$K_1$ でも $K_2$ でも共通の面だから、$K_1\cap K_2$ でもそうである。
+従って $K_1\cap K_2$ は単体的複体である。
+
+多面体としては、$K_2$ は三角形一枚なので $D^2$ と同相であり、
+$K_1$ は4面体の残り三面を合わせたものでやはり $D^2$ と同相、
+$K_1\cap K_2$ は三角形の境界なので $S^1$ と同相である。従って
+\[
+b_p(K_1)=b_p(K_2)=
+\begin{cases}1&p=0\\0&p\ge1\end{cases},
+\qquad
+b_p(K_1\cap K_2)=
+\begin{cases}1&p=0,1\\0&p\ge2.\end{cases}
+\]
+
+$K=K_1\cup K_2$ の Betti 数は Mayer--Vietoris 完全系列
+\[
+\cdots\to H_p(K_1\cap K_2)\to H_p(K_1)\oplus H_p(K_2)
+\to H_p(K)\to H_{p-1}(K_1\cap K_2)\to\cdots
+\]
+から求める。以下 $H_p$ は整数係数のホモロジー群を表す。
+$p\ge2$ では $H_p(K_1)\oplus H_p(K_2)=0$ かつ $H_{p-1}(K_1\cap K_2)=0$ $(p\ge3)$ なので
+$H_p(K)=0$、すなわち $b_p(K)=0$ $(p\ge3)$ である。
+$p=2$ の部分は
+\[
+0=H_2(K_1)\oplus H_2(K_2)\to H_2(K)\to H_1(K_1\cap K_2)\to H_1(K_1)\oplus H_1(K_2)=0
+\]
+なので $H_2(K)\cong H_1(K_1\cap K_2)\cong\Z$、よって $b_2(K)=1$ である。
+$p=1$ の部分は
+\[
+0=H_1(K_1)\oplus H_1(K_2)\to H_1(K)\to
+H_0(K_1\cap K_2)\xrightarrow{\ \iota\ }H_0(K_1)\oplus H_0(K_2)
+\]
+であり、$K_1\cap K_2$ は連結だから $\iota$ は $\Z\to\Z\oplus\Z$, $1\mapsto(1,-1)$ で単射である。
+従って $H_1(K)=0$、すなわち $b_1(K)=0$ である。
+最後に $K$ は連結なので $b_0(K)=1$ である。以上をまとめると
 \[
 \begin{array}{c|ccc}
 &b_0&b_1&b_2\\\hline
 K_1\cap K_2&1&1&0\\
 K_1&1&0&0\\
 K_2&1&0&0\\
-K_1\cup K_2&1&0&1
+K=K_1\cup K_2&1&0&1
 \end{array}
 \]
-であり、高次の Betti 数はいずれも0である。
+であり、$p\ge3$ の Betti 数はいずれも0である。
+これは $K$ が $S^2$ と同相であることとも整合する。
 \end{enumerate}
 \end{proof}
 
 \begin{problem}{第4問｜管状曲面}{2017-s-4}
-$0<a<1$ とし
+$a$ は $0<a<1$ を満たす定数とし，写像 $p:\R^2\to\R^3$ を
 \[
-p(u,v)=(u,u^2/2,0)+\frac{a\cos v}{\sqrt{u^2+1}}(-u,1,0)+a\sin v(0,0,1).
+p(u,v):=\left(u,\ \frac12u^2,\ 0\right)
++a\frac{\cos v}{\sqrt{u^2+1}}(-u,\ 1,\ 0)
++a(\sin v)(0,\ 0,\ 1)
 \]
-これが曲面であることを示し，Gauss 曲率・平均曲率を求めよ。また $q(s)=p(u_0,s/a)$ が測地線であることを示せ。
+で定める。次の問いに答えよ。
+\begin{enumerate}
+  \item[(1)] $p$ は曲面であることを示せ。
+  \item[(2)] 曲面 $p$ の Gauss 曲率および平均曲率を求めよ。
+  \item[(3)] 固定された $u_0\in\R$ に対し $q(s)=p(u_0,s/a)$ で定義される曲線 $q$ は $p$ の測地線であることを示せ。
+\end{enumerate}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
@@ -450,7 +476,7 @@ Frenet 標構で $p_u,p_v$ を表せば、正則性と主方向が同時に分�
 $u=u_0$ の円では、単位速度曲線の加速度が曲面法線方向だけになることを示す。
 \end{memo*}
 \begin{proof}[解答]
-中心曲線を $c(u)=(u,u^2/2,0)$ とし、
+(1) 中心曲線を $c(u)=(u,u^2/2,0)$ とし、
 \[
 w=\norm{c'(u)}=\sqrt{1+u^2},\quad
 T=\frac{(1,u,0)}w,\quad
@@ -473,7 +499,7 @@ p_u=w(1-a\kappa\cos v)T,
 $0<a<1$ かつ $0<\kappa\le1$ だから $1-a\kappa\cos v\ge1-a>0$。
 従って $p_u,p_v$ はともに0でなく互いに直交し、$p_u\times p_v\ne0$ なので正則な曲面である。
 
-外向き単位法線を $\nu=\cos v\,N+\sin v\,B$ と取ると
+(2) 外向き単位法線を $\nu=\cos v\,N+\sin v\,B$ と取ると
 \[
 \nu_u=-\kappa w\cos v\,T,
 \qquad \nu_v=-\sin v\,N+\cos v\,B=\frac1a p_v.
@@ -492,7 +518,7 @@ k_1=\frac{\kappa\cos v}{1-a\kappa\cos v},\qquad k_2=-\frac1a.
 K=-\frac{\kappa\cos v}{a(1-a\kappa\cos v)},\qquad
 H=\frac12\left(\frac{\kappa\cos v}{1-a\kappa\cos v}-\frac1a\right).
 \]
-$q(s)=p(u_0,s/a)$ について連鎖律から
+(3) $q(s)=p(u_0,s/a)$ について連鎖律から
 \[
 q'(s)=\frac1a p_v(u_0,s/a),\qquad
 q''(s)=\frac1{a^2}p_{vv}(u_0,s/a).
@@ -506,11 +532,27 @@ q''(s)=-\frac1a\nu(u_0,s/a).
 \end{proof}
 
 \begin{problem}{第5問｜扇形上の正則関数}{2017-s-5}
-$S=\{z\in\mathbb C\mid0<|z|<r,\ \alpha<\arg z<\beta\}$，$\beta<\alpha+2\pi$ とする。
+正数 $r$ と $\alpha<\beta<\alpha+2\pi$ を満たす実数 $\alpha,\beta$ に対し，領域 $S$ を
+\[
+S=\{z\in\mathbb C\mid0<|z|<r,\ \alpha<\arg z<\beta\}
+\]
+で定める。次の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] $f(z)$ は $z\to0$ で極限を持つが $f'(z)$ は持たない例を挙げよ。
-  \item[(2)] $0<r'<r$，$\alpha<\alpha'<\beta'<\beta$ で切り取った閉じた小扇形の各点を中心に，$S$ に含まれる円板があることを示せ。
-  \item[(3)] $f$ が $S$ 上有界正則なら，境界から $\varepsilon$ だけ離した小扇形 $T_\varepsilon$ 上で $|f'(z)|\le M_\varepsilon/|z|$ となることを示せ。
+  \item[(1)] $S$ 上の正則関数 $f(z)$ で，$\displaystyle\lim_{\substack{z\to0\\z\in S}}f(z)$ は存在するが $\displaystyle\lim_{\substack{z\to0\\z\in S}}f'(z)$ は存在しないものの例を挙げよ。ただし $S$ 上定義された関数 $g(z)$ に対し，$z\in S$ を保ちながら $z\to0$ としたときの $g(z)$ の極限値を $\displaystyle\lim_{\substack{z\to0\\z\in S}}g(z)$ で表す。
+  \item[(2)] $r'<r$ を満たす正数 $r'$ と $\alpha<\alpha'<\beta'<\beta$ を満たす実数 $\alpha',\beta'$ に対し，
+  \[
+  T=\{z\in\mathbb C\mid0<|z|\le r',\ \alpha'\le\arg z\le\beta'\}
+  \]
+  という $S$ の部分集合を考える。$T$ の任意の点 $z$ に対して，$z$ を中心とする円で $S$ に含まれるものが存在することを示せ。
+  \item[(3)] $f(z)$ を $S$ 上正則かつ有界な関数とする。$r-\varepsilon>0$, $\alpha+\varepsilon<\beta-\varepsilon$ を満たす任意の正数 $\varepsilon$ に対して，ある正数 $M_\varepsilon$ が存在して，
+  \[
+  |f'(z)|\le\frac{M_\varepsilon}{|z|}
+  \]
+  がすべての $z\in T_\varepsilon$ に対して成立することを示せ。ただし $T_\varepsilon$ は
+  \[
+  T_\varepsilon=\{z\in\mathbb C\mid0<|z|\le r-\varepsilon,\ \alpha+\varepsilon\le\arg z\le\beta-\varepsilon\}
+  \]
+  で定まる $S$ の部分集合である。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
@@ -533,23 +575,29 @@ f'(z)=\frac12\exp\left(-\frac12\log z\right),\qquad
 \]
 従って $f'$ は有限な極限を持たない。
 
-\item[(2)] 切り取った小扇形の点 $z$ は $0<|z|<r$ かつ
-$\alpha<\arg z<\beta$ を満たすので $z\in S$ である。$S$ は開集合だから、
-開集合の定義により、各 $z$ に対してある $\rho_z>0$ が存在し
-$B(z,\rho_z)\subset S$ となる。
+\item[(2)] $z\in T$ とすると $0<|z|\le r'<r$ であり、
+$\alpha<\alpha'\le\arg z\le\beta'<\beta$ だから $z\in S$ である。
+$S$ は開集合なので、開集合の定義により各 $z$ に対してある $\rho_z>0$ が存在して
+$z$ を中心とする円 $B(z,\rho_z)$ が $S$ に含まれる。
 
-\item[(3)] $T_\varepsilon$ では角度が二つの境界半直線から少なくとも
-$\varepsilon$ 離れ、外周も $r'<r$ に切り取られているとする。
+\item[(3)] $\varepsilon'\le\varepsilon$ なら $T_\varepsilon\subset T_{\varepsilon'}$ なので、
+$\varepsilon$ を小さく取り替えて $\varepsilon\le\pi/2$ としてよい。
+$T_\varepsilon$ の点は二つの境界半直線から角度で少なくとも $\varepsilon$ 離れ、
+動径も $r-\varepsilon$ 以下である。そこで
 \[
-0<c_\varepsilon<\min\left\{1,\sin\varepsilon,\frac r{r'}-1\right\}
+0<c_\varepsilon<\min\left\{1,\ \sin\varepsilon,\ \frac{\varepsilon}{r-\varepsilon}\right\}
 \]
-を取れば、任意の $z\in T_\varepsilon$ に対し
+を取ると、任意の $z\in T_\varepsilon$ に対し
 \[
-B(z,c_\varepsilon|z|)\subset S.
+B(z,c_\varepsilon|z|)\subset S
 \]
-実際、半径が $|z|$ 未満なので円板は0を含まず、境界半直線までの距離
-$|z|\sin\varepsilon$ より小さく、さらに円板内の $w$ は
-$|w|<(1+c_\varepsilon)r'<r$ を満たす。
+が成り立つ。実際、半径 $c_\varepsilon|z|$ は $|z|$ 未満なので円板は0を含まない。
+また境界半直線までの距離は $|z|\sin\varepsilon$ 以上なので円板はそれらを越えず、
+円板内の $w$ は
+\[
+|w|<(1+c_\varepsilon)|z|\le(1+c_\varepsilon)(r-\varepsilon)<r
+\]
+を満たす。
 
 $|f|\le B$ とし、円 $|\zeta-z|=c_\varepsilon|z|$ 上で Cauchy の微分公式を使うと
 \[
@@ -568,9 +616,24 @@ $M_\varepsilon=B/c_\varepsilon$ とおけば求める評価を得る。
 \end{proof}
 
 \begin{problem}{第6問｜線形微分方程式}{2017-s-6}
+次の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] $y''+2y'+2y=0$，$y(0)=1,y'(0)=0$ を解き，零点を全て求めよ。
-  \item[(2)] $y''+2y=\cos(\omega x)$，$y(0)=0,y'(0)=1$ の解が $x>0$ で非有界となる $\omega$ と，その解を求めよ。
+  \item[(1)] 微分方程式の初期値問題
+  \[
+  \begin{cases}
+  \dfrac{\d^2y}{\d x^2}+2\dfrac{\d y}{\d x}+2y=0,\\[1mm]
+  y(0)=1,\quad\dfrac{\d y}{\d x}(0)=0
+  \end{cases}
+  \]
+  の解 $y(x)$ を求めよ。また，$y(x)=0$ を満たす $x$ をすべて求めよ。
+  \item[(2)] 微分方程式の初期値問題
+  \[
+  \begin{cases}
+  \dfrac{\d^2y}{\d x^2}+2y=\cos(\omega x),\\[1mm]
+  y(0)=0,\quad\dfrac{\d y}{\d x}(0)=1
+  \end{cases}
+  \]
+  の解 $y(x)$ が $\displaystyle\sup_{x>0}|y(x)|=\infty$ を満たすように定数 $\omega$ を定め，またそのときの解 $y(x)$ を求めよ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
@@ -625,10 +688,15 @@ y(x)=\frac{x+2}{2\sqrt2}\sin(\sqrt2x).
 \end{proof}
 
 \begin{problem}{第7問｜パラメータ積分}{2017-s-7}
-$f$ は $(0,\infty)$ 上可測で $\int_0^\infty x|f(x)|\,\d x<\infty$ を満たす。次を求めよ。
+$f$ は $(0,\infty)$ 上の Lebesgue 可測関数で，
 \[
-\lim_{a\downarrow0}\frac1a\int_0^\infty(\log(1+ax)-ax)f(x)\,\d x.
+\int_0^\infty x|f(x)|\,\d x<\infty
 \]
+を満たしているとする。このとき
+\[
+\lim_{a\to+0}\frac1a\int_0^\infty(\log(ax+1)-ax)f(x)\,\d x
+\]
+を求めよ。
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
@@ -656,10 +724,10 @@ $\log(1+u)=u+o(u)$ だから、各 $x>0$ について
 \end{proof}
 
 \begin{problem}{第8問｜確率収束}{2017-s-8}
-実確率変数列 $X_n$ と実確率変数 $X$ について答えよ。
+$\{X_n\}_{n=1}^\infty$ を実数値確率変数列，$X$ を実数値確率変数とする。次の問いに答えよ。
 \begin{enumerate}
-  \item[(1)] $\lim_{N\to\infty}P(|X|>N)=0$ を示せ。
-  \item[(2)] $X_n\to X$ が確率収束し，$f:\R\to\R$ が連続なら $f(X_n)\to f(X)$ も確率収束することを示せ。
+  \item[(1)] $\displaystyle\lim_{N\to\infty}P(|X|>N)=0$ が成り立つことを示せ。
+  \item[(2)] $\{X_n\}_{n=1}^\infty$ が $X$ に確率収束するとき，$\R$ 上の任意の連続関数 $f$ に対して，$\{f(X_n)\}_{n=1}^\infty$ は $f(X)$ に確率収束することを示せ。
 \end{enumerate}
 \end{problem}
 \begin{memo*}
