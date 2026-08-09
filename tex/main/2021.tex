@@ -382,7 +382,9 @@ p(t)=(\cos t,\ \sin t,\ \cosh t)\qquad(t\in\R)
 そこから円柱の法線方向成分を引けば測地的曲率ベクトルになる。
 \end{memo*}
 \begin{proof}[解答]
-まず
+以下 $p'=\d p/\d t$ などと略記する。
+
+(1) まず
 \[
 p'=(-\sin t,\cos t,\sinh t),\quad
 p''=(-\cos t,-\sin t,\cosh t),
@@ -406,7 +408,7 @@ p'\times p''=(\cos t\cosh t+\sin t\sinh t,
 \kappa(t)=\frac{\sqrt2}{\cosh^2t},\qquad
 \tau(t)=\frac{\sinh t}{\cosh^2t}.
 \]
-円柱の単位主方向を
+(2) 円柱面 $S$ の単位主方向を
 \[
 e_1=(-\sin t,\cos t,0),\qquad e_2=(0,0,1)
 \]
@@ -419,7 +421,7 @@ $e_2$ との角についても $|\sinh t|/\cosh t=1/\sqrt2$ となり、同じ�
 $\cosh t=\sqrt2$ を与える。従って
 $t=\pm\operatorname{arcosh}\sqrt2=\pm\log(1+\sqrt2)$。
 
-単位接ベクトルは
+(3) 単位接ベクトルは
 \[
 T=\frac{p'}{\norm{p'}}
 =(-\operatorname{sech}t\sin t,

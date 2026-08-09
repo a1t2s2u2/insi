@@ -241,14 +241,16 @@ f(x+y)=f(x)+f(y)
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] $C_5=\langle a\rangle$ とする。自己同型は生成元 $a$ の像によって一意に決まり、
-  自己同型は生成元を生成元へ写す。$C_5$ の生成元は
+  \item[(1)] 位数5の群 $\langle x\rangle$ は巡回群である。自己同型 $\varphi$ は生成元 $x$ の像
+  $\varphi(x)$ によって一意に決まり、また自己同型は生成元を生成元へ写す。
+  $\langle x\rangle$ の生成元は
   \[
-  a,a^2,a^3,a^4
+  x,x^2,x^3,x^4
   \]
-  の4個である。逆に $k=1,2,3,4$ に対して $a\mapsto a^k$ は自己同型を定めるので
+  の4個である。逆に $k=1,2,3,4$ に対して $x\mapsto x^k$ は自己同型を定めるので、
+  自己同型は生成元の像で尽くされ
   \[
-  |\operatorname{Aut}(C_5)|=4.
+  |\operatorname{Aut}(\langle x\rangle)|=4.
   \]
 
   \item[(2)] $S_5$ の5-cycle の個数は、最初の文字を1に固定して残りを並べることで
@@ -640,14 +642,14 @@ $ax+by$ も集合内に残ることを確認すればよい。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] $W_1,W_2$ は部分空間なので $0\in W_1\cap W_2$ である。また
+\item[(1)] (i) $W_1,W_2$ は部分空間なので $0\in W_1\cap W_2$ である。また
 $x,y\in W_1\cap W_2$ と $a,b\in\R$ を取ると、$x,y$ は $W_1,W_2$ の両方に属するから
 \[
 ax+by\in W_1,\qquad ax+by\in W_2.
 \]
 従って $ax+by\in W_1\cap W_2$ であり、$W_1\cap W_2$ は部分空間である。
 
-次に $W_1\cup W_2$ が部分空間であると仮定する。
+(ii) $W_1\cup W_2$ が部分空間であると仮定する。
 $W_1\not\subset W_2$ かつ $W_2\not\subset W_1$ なら、
 \[
 u\in W_1\setminus W_2,
