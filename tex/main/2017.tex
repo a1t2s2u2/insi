@@ -471,7 +471,7 @@ p(u,v):=\left(u,\ \frac12u^2,\ 0\right)
 \begin{memo*}
 \textbf{解答の見通し。}
 与式を中心曲線 $c$ の法平面内に半径 $a$ の円を動かした管状曲面として読む。
-Frenet 標構で $p_u,p_v$ を表せば、正則性と主方向が同時に分かる。
+Frenet 標構で $\partial p/\partial u$, $\partial p/\partial v$ を表せば、正則性と主方向が同時に分かる。
 単位法線の微分から二つの主曲率を求め、その積と平均を取る。
 $u=u_0$ の円では、単位速度曲線の加速度が曲面法線方向だけになることを示す。
 \end{memo*}
@@ -487,27 +487,29 @@ N=\frac{(-u,1,0)}w,\quad B=(0,0,1)
 \kappa=\frac{\norm{c'\times c''}}{\norm{c'}^3}
 =\frac1{(1+u^2)^{3/2}}
 \]
-であり、Frenet の公式から $N_u=-\kappa wT$ である。問題の写像は
+であり、Frenet の公式から $\dfrac{\d N}{\d u}=-\kappa wT$ である。問題の写像は
 \[
 p(u,v)=c(u)+a\cos v\,N(u)+a\sin v\,B
 \]
 と書けるので
 \[
-p_u=w(1-a\kappa\cos v)T,
-\qquad p_v=a(-\sin v\,N+\cos v\,B).
+\frac{\partial p}{\partial u}=w(1-a\kappa\cos v)T,
+\qquad \frac{\partial p}{\partial v}=a(-\sin v\,N+\cos v\,B).
 \]
 $0<a<1$ かつ $0<\kappa\le1$ だから $1-a\kappa\cos v\ge1-a>0$。
-従って $p_u,p_v$ はともに0でなく互いに直交し、$p_u\times p_v\ne0$ なので正則な曲面である。
+従って $\partial p/\partial u$, $\partial p/\partial v$ はともに0でなく互いに直交し、
+外積も0でないので正則な曲面である。
 
 (2) 外向き単位法線を $\nu=\cos v\,N+\sin v\,B$ と取ると
 \[
 \nu_u=-\kappa w\cos v\,T,
-\qquad \nu_v=-\sin v\,N+\cos v\,B=\frac1a p_v.
+\qquad \frac{\partial\nu}{\partial v}=-\sin v\,N+\cos v\,B=\frac1a\frac{\partial p}{\partial v}.
 \]
-形作用素 $S(X)=-\d\nu(X)$ を $p_u,p_v$ に作用させると
+形作用素 $S(X)=-\d\nu(X)$ を $\partial p/\partial u$, $\partial p/\partial v$ に作用させると
 \[
-S(p_u)=\frac{\kappa\cos v}{1-a\kappa\cos v}p_u,
-\qquad S(p_v)=-\frac1a p_v.
+S\!\left(\frac{\partial p}{\partial u}\right)
+=\frac{\kappa\cos v}{1-a\kappa\cos v}\frac{\partial p}{\partial u},
+\qquad S\!\left(\frac{\partial p}{\partial v}\right)=-\frac1a\frac{\partial p}{\partial v}.
 \]
 従って座標方向は主方向で、主曲率は
 \[
@@ -520,11 +522,11 @@ H=\frac12\left(\frac{\kappa\cos v}{1-a\kappa\cos v}-\frac1a\right).
 \]
 (3) $q(s)=p(u_0,s/a)$ について連鎖律から
 \[
-q'(s)=\frac1a p_v(u_0,s/a),\qquad
-q''(s)=\frac1{a^2}p_{vv}(u_0,s/a).
+q'(s)=\frac1a\frac{\partial p}{\partial v}(u_0,s/a),\qquad
+q''(s)=\frac1{a^2}\frac{\partial^2p}{\partial v^2}(u_0,s/a).
 \]
-$\norm{p_v}=a$ なので $q$ は単位速度であり、
-$p_{vv}=-a(\cos v\,N+\sin v\,B)=-a\nu$ だから
+$\left\|\partial p/\partial v\right\|=a$ なので $q$ は単位速度であり、
+$\dfrac{\partial^2p}{\partial v^2}=-a(\cos v\,N+\sin v\,B)=-a\nu$ だから
 \[
 q''(s)=-\frac1a\nu(u_0,s/a).
 \]

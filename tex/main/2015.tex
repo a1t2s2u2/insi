@@ -1052,7 +1052,7 @@ $f(x,y)$ を $\R^2$ における $C^\infty$ 級関数で $f(0,0)=0$ を満たす
 目標の $f=xg+yh$ では係数 $x,y$ を作る必要がある。
 そこで原点から $(x,y)$ へ向かう線分 $(tx,ty)$ を考え、
 $\varphi(t)=f(tx,ty)$ を連鎖律で微分する。すると
-$\varphi'(t)=xf_x(tx,ty)+yf_y(tx,ty)$ となり、必要な $x,y$ が現れる。
+$\varphi'(t)=x\frac{\partial f}{\partial x}(tx,ty)+y\frac{\partial f}{\partial y}(tx,ty)$ となり、必要な $x,y$ が現れる。
 $t=0$ から1まで積分すれば、微積分学の基本定理により $f(x,y)-f(0,0)$ が戻る。
 
 二つ目では $H$ を $y$ だけの関数にする必要がある。そのため
@@ -1062,7 +1062,7 @@ $y$ 方向だけに積分する。
 \begin{proof}[解答]
 (1) 一変数関数 $\varphi(t)=f(tx,ty)$ を考える。連鎖律より
 \[
-\varphi'(t)=x f_x(tx,ty)+y f_y(tx,ty)
+\varphi'(t)=x\frac{\partial f}{\partial x}(tx,ty)+y\frac{\partial f}{\partial y}(tx,ty)
 \]
 である。$f(0,0)=0$ と微積分学の基本定理を用いると
 \begin{align*}
@@ -1070,16 +1070,16 @@ f(x,y)
 &=f(x,y)-f(0,0)\\
 &=\varphi(1)-\varphi(0)\\
 &=\int_0^1\varphi'(t)\,\d t\\
-&=x\int_0^1f_x(tx,ty)\,\d t
- +y\int_0^1f_y(tx,ty)\,\d t.
+&=x\int_0^1\frac{\partial f}{\partial x}(tx,ty)\,\d t
+ +y\int_0^1\frac{\partial f}{\partial y}(tx,ty)\,\d t.
 \end{align*}
 従って
 \[
-g(x,y)=\int_0^1f_x(tx,ty)\,\d t,
+g(x,y)=\int_0^1\frac{\partial f}{\partial x}(tx,ty)\,\d t,
 \qquad
-h(x,y)=\int_0^1f_y(tx,ty)\,\d t
+h(x,y)=\int_0^1\frac{\partial f}{\partial y}(tx,ty)\,\d t
 \]
-とおけば $f=xg+yh$ となる。$f_x,f_y$ は滑らかであり、コンパクト区間 $0\le t\le1$ 上の
+とおけば $f=xg+yh$ となる。$\partial f/\partial x$, $\partial f/\partial y$ は滑らかであり、コンパクト区間 $0\le t\le1$ 上の
 パラメータ積分は任意の階数で積分記号下に微分できるので、$g,h$ も滑らかである。
 
 (2) 今度は
@@ -1090,20 +1090,20 @@ f(x,y)=\{f(x,y)-f(0,y)\}+f(0,y)
 \begin{align*}
 f(x,y)-f(0,y)
 &=\int_0^1\frac{\d}{\d s}f(sx,y)\,\d s\\
-&=x\int_0^1f_x(sx,y)\,\d s.
+&=x\int_0^1\frac{\partial f}{\partial x}(sx,y)\,\d s.
 \end{align*}
 また $f(0,0)=0$ だから、$t\mapsto f(0,ty)$ に同じ計算を行うと
 \begin{align*}
 f(0,y)
 &=f(0,y)-f(0,0)\\
 &=\int_0^1\frac{\d}{\d t}f(0,ty)\,\d t\\
-&=y\int_0^1f_y(0,ty)\,\d t.
+&=y\int_0^1\frac{\partial f}{\partial y}(0,ty)\,\d t.
 \end{align*}
 そこで
 \[
-G(x,y)=\int_0^1f_x(sx,y)\,\d s,
+G(x,y)=\int_0^1\frac{\partial f}{\partial x}(sx,y)\,\d s,
 \qquad
-H(y)=\int_0^1f_y(0,ty)\,\d t
+H(y)=\int_0^1\frac{\partial f}{\partial y}(0,ty)\,\d t
 \]
 とおけば、$G,H$ は滑らかであり
 \[

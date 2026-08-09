@@ -712,14 +712,19 @@ B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}
 \end{problem}
 \begin{memo*}
 \textbf{解答の見通し。}
-出発点の ($*$) は、二つの一変数積分の積を第1象限 $D$ 上の二重積分として書いたものである。
+出発点の ($*$) は、二つの一変数積分の積を $D$ 上の二重積分として書いたものである。
 被積分関数が非負なので、Tonelli の定理により積分順序を変えても値は変わらない。
-変数変換では、面積が何倍になるかを表す Jacobian の絶対値も必ず掛ける。
+変数変換では、面積が何倍になるかを表す Jacobian の絶対値を掛ける。
 
-一つ目では $s=x+y$ が二点の合計、$t=x/(x+y)$ が合計に占める $x$ の割合であり、
-$s$ だけの積分と $t$ だけの積分へ分離できる。
-二つ目では $x,y$ を平方付き極座標で表し、動径 $r$ と角度 $\theta$ の積分へ分ける。
-最後に $u=r^2$ と $t=\cos^2\theta$ を代入して、定義された Gamma・Beta 積分へ戻す。
+どちらの変換でも、狙いは被積分関数を「一方の変数だけの因子」と
+「もう一方の変数だけの因子」の積にすることである。
+そうなれば二重積分は二つの一変数積分の積に分かれ、
+片方が $\Gamma(p+q)$、もう片方が $B(p,q)$ になる。
+
+一つ目では $s=x+y$ が二数の和、$t=x/(x+y)$ が和に占める $x$ の割合であり、
+変換後はそのまま分離する。
+二つ目では動径 $r$ と角度 $\theta$ に分かれるが、
+$\Gamma$ と $B$ の定義の形に戻すため $u=r^2$ と $t=\cos^2\theta$ を代入する。
 \end{memo*}
 \begin{proof}[解答]
 被積分関数は非負なので Tonelli の定理により積分順序を変えてよく、
@@ -728,85 +733,101 @@ $s$ だけの積分と $t$ だけの積分へ分離できる。
 \Gamma(p)\Gamma(q)
 =\int_0^\infty\int_0^\infty x^{p-1}y^{q-1}e^{-(x+y)}\,\d x\d y
 \]
-と累次積分で書ける。以下、これを二通りに変数変換する。
+と累次積分で書ける。以下これを二通りに変数変換する。
+重積分の変数変換では Jacobian の絶対値を掛けることに注意する。
 
-(1) $x=st$, $y=s(1-t)$ とおくと、$s=x+y>0$, $t=x/(x+y)\in(0,1)$ であり、
+(1) $x=st$, $y=s(1-t)$ とおく。このとき
+\[
+s=x+y>0,\qquad t=\frac xs=\frac x{x+y}
+\]
+であり、$x>0$, $y>0$ から $0<t<1$ となる。Jacobian は
 \[
 \frac{\partial(x,y)}{\partial(s,t)}
-=\begin{vmatrix}t&s\\1-t&-s\end{vmatrix}=-s,
-\qquad
-\left|\frac{\partial(x,y)}{\partial(s,t)}\right|=s.
+=\begin{vmatrix}
+\dfrac{\partial x}{\partial s}&\dfrac{\partial x}{\partial t}\\[3mm]
+\dfrac{\partial y}{\partial s}&\dfrac{\partial y}{\partial t}
+\end{vmatrix}
+=\begin{vmatrix}t&s\\1-t&-s\end{vmatrix}
+=t(-s)-s(1-t)=-s
+\]
+だから
+\[
+\d x\d y=\left|\frac{\partial(x,y)}{\partial(s,t)}\right|\d s\d t=s\,\d s\d t.
 \]
 従って
 \begin{align*}
 \Gamma(p)\Gamma(q)
+&=\int_0^\infty\int_0^1(st)^{p-1}\{s(1-t)\}^{q-1}e^{-s}\,s\,\d t\d s\\
 &=\int_0^\infty\int_0^1
-(st)^{p-1}\{s(1-t)\}^{q-1}e^{-s}s\,\d t\d s\\
+\underbrace{s^{p+q-1}e^{-s}}_{s\ \text{のみ}}\cdot
+\underbrace{t^{p-1}(1-t)^{q-1}}_{t\ \text{のみ}}\,\d t\d s.
+\end{align*}
+被積分関数が $s$ だけの因子と $t$ だけの因子の積になったので、
+\[
+\iint f(s)g(t)\,\d t\d s
+=\left(\int f(s)\,\d s\right)\left(\int g(t)\,\d t\right)
+\]
+により積分が分離できて
+\begin{align*}
+\Gamma(p)\Gamma(q)
 &=\left(\int_0^\infty s^{p+q-1}e^{-s}\,\d s\right)
 \left(\int_0^1t^{p-1}(1-t)^{q-1}\,\d t\right)\\
 &=\Gamma(p+q)B(p,q).
 \end{align*}
+以上より $B(p,q)=\dfrac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}$ である。
 
-(2) $x=(r\cos\theta)^2$, $y=(r\sin\theta)^2$ とおく。
-$x,y>0$ から $r>0$ かつ $0<\theta<\pi/2$ であり、逆に
+(2) $x=(r\cos\theta)^2$, $y=(r\sin\theta)^2$ とおく。このとき
 \[
-r=\sqrt{x+y},\qquad \theta=\arctan\sqrt{\frac yx}
+r^2=x+y>0
 \]
-と一意に定まるので、この対応は $(0,\infty)\times(0,\pi/2)$ と第1象限の間の全単射である。
-また、後で使うため
+なので $r>0$ であり、$x>0$, $y>0$ は $0<\theta<\pi/2$ と同じことである。
+各偏微分は
 \[
-x+y=r^2(\cos^2\theta+\sin^2\theta)=r^2
-\]
-に注意しておく。各偏微分は
-\[
-x_r=2r\cos^2\theta,\quad x_\theta=-2r^2\sin\theta\cos\theta,
+\frac{\partial x}{\partial r}=2r\cos^2\theta,\qquad
+\frac{\partial x}{\partial\theta}=-2r^2\sin\theta\cos\theta,
 \]
 \[
-y_r=2r\sin^2\theta,\quad y_\theta=2r^2\sin\theta\cos\theta
+\frac{\partial y}{\partial r}=2r\sin^2\theta,\qquad
+\frac{\partial y}{\partial\theta}=2r^2\sin\theta\cos\theta
 \]
-だから、Jacobian は
+なので、Jacobian は
 \begin{align*}
-\left|\frac{\partial(x,y)}{\partial(r,\theta)}\right|
-&=\left|x_ry_\theta-x_\theta y_r\right|\\
-&=\left|4r^3\sin\theta\cos^3\theta
- +4r^3\sin^3\theta\cos\theta\right|\\
+\frac{\partial(x,y)}{\partial(r,\theta)}
+&=\begin{vmatrix}
+\dfrac{\partial x}{\partial r}&\dfrac{\partial x}{\partial\theta}\\[3mm]
+\dfrac{\partial y}{\partial r}&\dfrac{\partial y}{\partial\theta}
+\end{vmatrix}
+=\begin{vmatrix}
+2r\cos^2\theta&-2r^2\sin\theta\cos\theta\\
+2r\sin^2\theta&2r^2\sin\theta\cos\theta
+\end{vmatrix}\\[1mm]
+&=4r^3\sin\theta\cos^3\theta+4r^3\sin^3\theta\cos\theta\\
+&=4r^3\sin\theta\cos\theta(\cos^2\theta+\sin^2\theta)\\
 &=4r^3\sin\theta\cos\theta
-(\cos^2\theta+\sin^2\theta)\\
-&=4r^3\sin\theta\cos\theta.
 \end{align*}
-最後で絶対値が外れるのは $0<\theta<\pi/2$ で $\sin\theta,\cos\theta>0$ だからである。
-被積分関数を新しい変数で書き直すと
-\begin{align*}
-x^{p-1}y^{q-1}e^{-(x+y)}
-&=(r^2\cos^2\theta)^{p-1}(r^2\sin^2\theta)^{q-1}e^{-r^2}\\
-&=r^{2p-2}\cos^{2p-2}\theta\cdot
-  r^{2q-2}\sin^{2q-2}\theta\cdot e^{-r^2}
-\end{align*}
-なので、Jacobian を掛けると
-\begin{align*}
-&x^{p-1}y^{q-1}e^{-(x+y)}
- \left|\frac{\partial(x,y)}{\partial(r,\theta)}\right|\\
-&\qquad=4r^{(2p-2)+(2q-2)+3}
- \cos^{(2p-2)+1}\theta\,\sin^{(2q-2)+1}\theta\,e^{-r^2}\\
-&\qquad=4r^{2p+2q-1}
- \cos^{2p-1}\theta\,\sin^{2q-1}\theta\,e^{-r^2}
-\end{align*}
-となる。この式は $r$ だけの因子と $\theta$ だけの因子の積なので、積分は分離して
+となる。$0<\theta<\pi/2$ では $\sin\theta,\cos\theta>0$ なのでこれは正であり、
+\[
+\d x\d y=4r^3\sin\theta\cos\theta\,\d r\d\theta.
+\]
+$x+y=r^2$ にも注意して代入すると
 \begin{align*}
 \Gamma(p)\Gamma(q)
-&=4\int_0^\infty r^{2p+2q-1}e^{-r^2}\,\d r
-\int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\,\d\theta.
+&=\int_0^\infty\int_0^{\pi/2}
+(r\cos\theta)^{2(p-1)}(r\sin\theta)^{2(q-1)}e^{-r^2}
+\cdot4r^3\sin\theta\cos\theta\,\d\theta\d r\\
+&=4\left(\int_0^\infty r^{2p+2q-1}e^{-r^2}\,\d r\right)
+\left(\int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\,\d\theta\right)
 \end{align*}
-第1積分では $u=r^2$, $\d u=2r\,\d r$ とおく。
-$r^{2p+2q-1}\,\d r=r^{2p+2q-2}\cdot r\,\d r=u^{p+q-1}\cdot\frac{\d u}2$ だから
+となり、ここでも $r$ だけの因子と $\theta$ だけの因子に分かれた。
+第1の積分では $u=r^2$, $\d u=2r\,\d r$ とおくと
+$r^{2p+2q-1}\,\d r=r^{2p+2q-2}\cdot r\,\d r=u^{p+q-1}\dfrac{\d u}2$ だから
 \[
 \int_0^\infty r^{2p+2q-1}e^{-r^2}\,\d r
 =\frac12\int_0^\infty u^{p+q-1}e^{-u}\,\d u
 =\frac12\Gamma(p+q).
 \]
-第2積分では $t=\cos^2\theta$, $\d t=-2\sin\theta\cos\theta\,\d\theta$ とおく。
-このとき $\sin^2\theta=1-t$ であり、
-$\theta=0,\pi/2$ がそれぞれ $t=1,0$ に対応するので
+第2の積分では $t=\cos^2\theta$, $\d t=-2\sin\theta\cos\theta\,\d\theta$ とおく。
+$\sin^2\theta=1-t$ であり、$\theta=0,\pi/2$ がそれぞれ $t=1,0$ に対応するので
 \begin{align*}
 \int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\,\d\theta
 &=\int_0^{\pi/2}\cos^{2p-2}\theta\sin^{2q-2}\theta
@@ -815,8 +836,11 @@ $\theta=0,\pi/2$ がそれぞれ $t=1,0$ に対応するので
 &=\frac12\int_0^1t^{p-1}(1-t)^{q-1}\,\d t
 =\frac12B(p,q).
 \end{align*}
-係数も含めて $4\cdot(1/2)\cdot(1/2)=1$ なので、再び
-$\Gamma(p)\Gamma(q)=\Gamma(p+q)B(p,q)$ を得る。
+係数は $4\cdot\dfrac12\cdot\dfrac12=1$ なので
+\[
+\Gamma(p)\Gamma(q)=\Gamma(p+q)B(p,q),
+\]
+よって $B(p,q)=\dfrac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}$ である。
 \end{proof}
 
 \begin{problem}{第3問｜距離空間の連続写像}{2021-2-3}

@@ -155,8 +155,8 @@ $a,b,c,d\in\R$ に対し $a<b$, $c<d$ を仮定する。$D$ は $\R^2$ の開集
 \textbf{解答の見通し。}
 固定端点とは積分区間 $[c,d]$ が $x$ によらない場合である。
 差商 $\{F(x+h)-F(x)\}/h$ を書き、$f$ の差だけを積分した形へ直す。
-一変数の微積分学の基本定理を $x$ 方向へ使うと、その差商は $f_x$ の平均になる。
-$f_x$ の連続性により平均が一様に $f_x(x,y)$ へ近づくため、極限と積分を交換できる。
+一変数の微積分学の基本定理を $x$ 方向へ使うと、その差商は $\partial f/\partial x$ の平均になる。
+$\partial f/\partial x$ の連続性により平均が一様に $\dfrac{\partial f}{\partial x}(x,y)$ へ近づくため、極限と積分を交換できる。
 
 可変端点では $Q(x,v)=\int_c^v f(x,y)\,\d y$ と置き、
 $Q(x,\psi(x))-Q(x,\phi(x))$ を二変数の連鎖律で微分する。
@@ -171,13 +171,13 @@ F(x)=\int_c^d f(x,y)\,\d y
 とおく。微積分学の基本定理により
 \[
 \frac{f(x+h,y)-f(x,y)}h
-=\int_0^1 f_x(x+\theta h,y)\,\d\theta.
+=\int_0^1\frac{\partial f}{\partial x}(x+\theta h,y)\,\d\theta.
 \]
-$f_x$ の連続性により右辺は $h\to0$ で $f_x(x,y)$ へ一様に収束するから、
+$\partial f/\partial x$ の連続性により右辺は $h\to0$ で $\dfrac{\partial f}{\partial x}(x,y)$ へ一様に収束するから、
 \[
 F'(x)
 =\lim_{h\to0}\int_c^d\frac{f(x+h,y)-f(x,y)}h\,\d y
-=\int_c^d f_x(x,y)\,\d y.
+=\int_c^d\frac{\partial f}{\partial x}(x,y)\,\d y.
 \]
 
 \item[(2)] 可変端点について
@@ -186,20 +186,20 @@ Q(x,v)=\int_c^v f(x,y)\,\d y
 \]
 とおくと、固定端点の結果と微積分学の基本定理から
 \[
-Q_x(x,v)=\int_c^v f_x(x,y)\,\d y,\qquad
-Q_v(x,v)=f(x,v).
+\frac{\partial Q}{\partial x}(x,v)=\int_c^v\frac{\partial f}{\partial x}(x,y)\,\d y,\qquad
+\frac{\partial Q}{\partial v}(x,v)=f(x,v).
 \]
 $\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y
 =Q(x,\psi(x))-Q(x,\phi(x))$ に連鎖律を使えば
 \[
 \frac{\d}{\d x}\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y
 =f(x,\psi(x))\psi'(x)-f(x,\phi(x))\phi'(x)
-+\int_{\phi(x)}^{\psi(x)} f_x(x,y)\,\d y.
++\int_{\phi(x)}^{\psi(x)}\frac{\partial f}{\partial x}(x,y)\,\d y.
 \]
 \item[(3)] この公式を使うため
 \[
 f(x,y)=\frac{\sin(xy)}y,\qquad
-f_x(x,y)=\cos(xy),\qquad
+\frac{\partial f}{\partial x}(x,y)=\cos(xy),\qquad
 \phi(x)=x^2,\quad\psi(x)=x^3
 \]
 とおくと
