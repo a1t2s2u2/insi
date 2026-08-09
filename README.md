@@ -44,6 +44,13 @@ PDF のしおりからは37題を個別に辿れます。
 
 問題・解答の全文は Web サイト側（`make site`）で読めます。
 
+教科書と補足資料はサイトに載せていないので、読むときは個別にビルドします。
+
+```sh
+cd tex && latexmk kumadai-textbook.tex   # 専門基礎科目のための教科書
+cd tex && latexmk kumadai-reference.tex  # 解答で使う用語・定義・定理の補足資料
+```
+
 ## 原稿と生成物
 
 - `tex/main/2026.tex` など: 年度別の問題・解答原稿

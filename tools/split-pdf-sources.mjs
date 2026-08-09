@@ -77,24 +77,15 @@ function workbookSource(source, sections, file, { chapterTitle, withSolution } =
 }
 
 rmSync(generatedDir, { recursive: true, force: true });
-for (const kind of ["basic", "specialized", "workbook", "answers"]) {
+for (const kind of ["workbook", "answers"]) {
   mkdirSync(path.join(generatedDir, kind), { recursive: true });
 }
 
-const counts = { basic: 0, specialized: 0, workbook: 0, answers: 0 };
+const counts = { workbook: 0, answers: 0 };
 for (const year of years) {
   const file = `${year}.tex`;
   const source = readFileSync(path.join(mainDir, file), "utf8");
-  const { header, sections } = sectionParts(source, file);
-
-  for (const kind of ["basic", "specialized"]) {
-    const selected = sections.filter((section) => category(section.title, file) === kind);
-    const content = `${header}${selected.map((section) => section.body).join("")}`;
-    const problemCount = [...content.matchAll(/^\\begin\{problem\}/gm)].length;
-    if (problemCount === 0) throw new Error(`${file}: ${kind} の問題がありません`);
-    counts[kind] += problemCount;
-    writeFileSync(path.join(generatedDir, kind, file), content);
-  }
+  const { sections } = sectionParts(source, file);
 
   const basicSections = sections.filter((section) => category(section.title, file) === "basic");
   for (const [kind, withSolution] of [["workbook", false], ["answers", true]]) {
@@ -118,14 +109,12 @@ for (const year of years) {
   }
 }
 
-if (counts.basic !== 31 || counts.specialized !== 31 || counts.workbook !== 37 || counts.answers !== 37) {
+if (counts.workbook !== 37 || counts.answers !== 37) {
   throw new Error(
-    `問題数が想定外です: basic=${counts.basic}, specialized=${counts.specialized},` +
-      ` workbook=${counts.workbook}, answers=${counts.answers}`,
+    `問題数が想定外です: workbook=${counts.workbook}, answers=${counts.answers}`,
   );
 }
 
 console.log(
-  `PDF用原稿を生成: 専門基礎 ${counts.basic}題 / 専門 ${counts.specialized}題` +
-    ` / 演習用 ${counts.workbook}題 / 解答編 ${counts.answers}題`,
+  `PDF用原稿を生成: 演習用 ${counts.workbook}題 / 解答編 ${counts.answers}題`,
 );
