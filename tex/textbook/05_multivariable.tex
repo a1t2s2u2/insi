@@ -3,27 +3,24 @@
 
 \section{連続性、偏微分、\texorpdfstring{$C^1$ 級}{C1 級}}
 
-\begin{definition}{連続と偏微分}{tb-multivariable-basics}
-$f:\R^2\to\R$ が $(a,b)$ で連続であるとは
-\[
-(x,y)\to(a,b)\Longrightarrow f(x,y)\to f(a,b)
-\]
-をいう。偏導関数は一方の変数を固定した差商
-\[
-f_x(a,b)=\lim_{h\to0}\frac{f(a+h,b)-f(a,b)}h,\qquad
-f_y(a,b)=\lim_{h\to0}\frac{f(a,b+h)-f(a,b)}h
-\]
-である。全ての1階偏導関数が存在し連続なら $C^1$ 級、
-全ての階数の偏導関数が連続なら $C^\infty$ 級という。
-\end{definition}
+$C^1$ 級は1階偏導関数が存在して連続、$C^\infty$ 級は全階の偏導関数が連続、という意味である。
+$C^1$ 級なら連続だが、偏導関数が存在するだけでは連続とは限らない。
 
-$C^1$ 級なら連続であるが、偏導関数が存在するだけでは連続とは限らない。
-$C^1$ 級でないことを示すには、ある偏導関数が不連続であることを一つ示せばよい。
-
-原点での連続性は極座標 $x=r\cos\theta$, $y=r\sin\theta$ を使い、
-$\abs{f(x,y)-f(0,0)}\le C r^\alpha$（$\alpha>0$）へ落とすと速い。
-2021年度第1期では $\abs{\sin u}\le\min\{\abs u,1\}$ を原点付近と無限遠で使い分ける。
-場合分け関数の原点での偏微分は、必ず差商の定義から計算する。
+原点で場合分けされた関数は、次の順に処理する。
+\begin{enumerate}
+  \item 連続性：$x=r\cos\theta$, $y=r\sin\theta$ とし、
+        $\abs{f(x,y)-f(0,0)}\le Cr^\alpha$（$\alpha>0$）へ落とす。
+  \item 原点での偏微分：周囲の式を形式微分せず、軸上の差商
+        \[
+        f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}h,
+        \quad
+        f_y(0,0)=\lim_{h\to0}\frac{f(0,h)-f(0,0)}h
+        \]
+        を計算する。
+  \item $C^1$ 級でないこと：周囲で偏導関数を計算し、原点へ近づける経路を一つ選んで
+        不連続を示す。
+\end{enumerate}
+評価では $\abs{\sin u}\le\min\{\abs u,1\}$ を、原点付近と無限遠で使い分ける。
 
 \begin{theorem}{曲線に沿う連鎖律}{tb-multivariable-chain-rule}
 $f$ が $C^1$ 級で $x(t),y(t)$ が微分可能なら
@@ -63,6 +60,8 @@ f(x,y)=\bigl(f(x,y)-f(0,y)\bigr)+f(0,y)
 
 \section{積分記号下の微分}
 
+積分区間が動くか、中身だけが動くかを最初に分ける。
+
 \begin{theorem}{Leibniz 則}{tb-leibniz-rule}
 $f,f_x$ が必要な長方形上で連続なら
 \[
@@ -97,6 +96,9 @@ $\abs{f_t(t,x)}\le g(x)$ となる可積分関数 $g$ があれば
 広義積分では、交換を正当化する優関数 $g$ を答案に書く。
 \end{theorem}
 
+答案では「形式微分したら簡単になった」で終えない。
+$t$ の近傍を固定し、そこで共通に使える可積分な $g(x)$ を一つ書く。
+
 \begin{example}{$(x^t-1)/\log x$}{tb-log-quotient-parameter}
 $0<x<1$, $t\ge0$ では
 \[
@@ -112,6 +114,9 @@ $0<x<1$, $t\ge0$ では
 \end{example}
 
 \section{重積分と変数変換}
+
+被積分関数より先に領域を見る。直交座標のまま上下端が一行で書けるなら累次積分、
+円・和・比が境界に現れるなら変数変換を選ぶ。
 
 \begin{theorem}{Fubini--Tonelli}{tb-fubini-tonelli}
 $f\ge0$ なら Tonelli の定理により累次積分の順序を交換できる。

@@ -1,6 +1,9 @@
 \chapter{線形代数I：空間・写像・行列}
 \label{ch:tb-linear-one}
 
+抽象的な記号が出ても、有限次元の問題は基底を選べば行列と連立方程式になる。
+答案では「何を未知係数としたか」「どの行列を簡約化したか」「得たベクトルが何の基底か」を残す。
+
 \section{部分空間、基底、次元}
 
 \begin{definition}{部分空間}{tb-subspace}
@@ -37,7 +40,9 @@ $v_1,\ldots,v_m$ の一次結合全体を
 \end{definition}
 
 基底であることは「一次独立」と「生成」の二項目を示す。
-行列の列ベクトルなら、pivot 列が像の基底、自由変数の本数が核の次元を与える。
+行列の列ベクトルなら、pivot に対応する元の行列の列が像の基底、
+自由変数の本数が核の次元を与える。
+本数が既に空間の次元と一致するときは、一次独立か生成の片方だけ示せば他方も従う。
 
 \begin{definition}{和と直和}{tb-direct-sum}
 \[
@@ -126,14 +131,6 @@ n=\dim(\ker f+\ker g)
 
 \section{行基本変形と連立方程式}
 
-行基本変形は
-\begin{enumerate}
-  \item 二行を交換する、
-  \item 一行を0でない定数倍する、
-  \item 一行に別の行の定数倍を加える
-\end{enumerate}
-の三つであり、連立方程式の解集合を変えない。
-
 拡大係数行列を階段形にし、
 \[
 \operatorname{rank}A=\operatorname{rank}(A\mid b)
@@ -145,6 +142,9 @@ n=\dim(\ker f+\ker g)
 \]
 正則行列の逆行列は Gauss--Jordan 法
 $(A\mid I)\longrightarrow(I\mid A^{-1})$ で同時に求められる。
+
+答案では「簡約化した」とだけ書かず、最終的な階段形を一つ示す。
+核なら自由変数を置いた一般解まで、非斉次系なら特殊解と自由度まで書く。
 
 $A$ が正則なら、行列方程式は掛ける側に注意して
 \[
@@ -181,16 +181,9 @@ U_i=A_i-\sum_{k<i}l_{ik}U_k
 
 \section{行列式と正則性}
 
-\begin{proposition}{行列式の計算規則}{tb-determinant-properties}
-\[
-\det(AB)=\det A\det B,\quad
-\det A^{\mathsf T}=\det A,\quad
-\det(cA)=c^n\det A.
-\]
-行交換で符号が反転し、一行の $c$ 倍で行列式も $c$ 倍、
-一行に他の行の倍を加えても行列式は変わらない。
-三角行列の行列式は対角成分の積である。
-\end{proposition}
+行列式を余因子展開する前に、積・三角行列・行基本変形を使えないか見る。
+$A=BC$ なら $\det A=\det B\det C$、三角行列なら対角成分の積で終わる。
+行基本変形を使う場合は、行交換の符号と行の定数倍だけを追跡する。
 
 \begin{theorem}{正則性の同値条件}{tb-invertibility}
 $n$ 次正方行列 $A$ について次は同値である。
@@ -211,6 +204,9 @@ $x^{\mathsf T}A^{\mathsf T}Ax=\norm{Ax}^2\ge0$ なので
 $A^{\mathsf T}A=-I_n$ は不可能である。
 
 \section{行列多項式から逆行列を作る}
+
+行列が満たす式を与えられたら、成分計算や Gauss--Jordan 法より先に
+$A$ または求めたい $cI-A$ を一方の因子としてくくれる形へ変形する。
 
 \begin{proposition}{逆行列を式から読む}{tb-polynomial-inverse}
 $A^2+A-2I=O$ なら
