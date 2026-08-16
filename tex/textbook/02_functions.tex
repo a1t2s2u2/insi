@@ -1,85 +1,39 @@
-\chapter{計算に必要な特殊関数}
+\chapter{計算で止まりやすい公式・置換}
 \label{ch:tb-functions}
 
-$\sin,\cos,\tan$、指数・対数の基本公式は既知とし、
-workbook で記号または置換を知らないと止まる箇所だけを扱う。
+$\sin,\cos,\tan$、指数・対数の基本公式は扱わない。
+ここでは記号を読めない、または原始関数を思い出せないと止まる箇所だけを扱う。
 
 \section{\texorpdfstring{$\sec,\csc,\cot$}{sec, csc, cot}}
 
-\begin{definition}{逆数三角関数}{tb-reciprocal-trig}
 \[
 \sec x=\frac1{\cos x},\qquad
 \csc x=\frac1{\sin x},\qquad
 \cot x=\frac{\cos x}{\sin x}=\frac1{\tan x}.
 \]
-$\sec x$ は $\cos x\ne0$、$\csc x,\cot x$ は $\sin x\ne0$ で定義される。
-\end{definition}
+恒等式と微分公式は逆数から導く。収録問題で覚えて使うのは
+\[
+\boxed{\int\sec x\,\d x=\log\abs{\sec x+\tan x}+C}
+\]
+である。極座標で $x=1$ が $r=\sec\theta$ になる問題では、この原始関数まで一続きで使う。
 
-\[
-1+\tan^2x=\sec^2x,
-\qquad
-1+\cot^2x=\csc^2x.
-\]
-微分は
-\[
-(\tan x)'=\sec^2x,\qquad
-(\sec x)'=\sec x\tan x,
-\]
-\[
-(\cot x)'=-\csc^2x,\qquad
-(\csc x)'=-\csc x\cot x,
-\]
-原始関数は
-\[
-\int\sec x\,\d x=\log\abs{\sec x+\tan x}+C,
-\qquad
-\int\csc x\,\d x=\log\abs{\csc x-\cot x}+C
-\]
-である。特に
-\[
-\frac{\d}{\d x}\log(\tan x+\sec x)=\sec x
-\]
-は、2026年度第2期の極座標積分でそのまま使う。
+\section{逆三角関数は積分の形で覚える}
 
-\section{逆三角関数}
-
-\begin{definition}{標準的な逆三角関数}{tb-inverse-trig}
+定義域・値域の表は、逆関数を作る単調区間から判断できるため載せない。
+導関数は逆関数の微分から出せる。積分では定数倍まで含めた次の二形だけを認識する。
 \[
-\begin{array}{c|c|c}
- &\text{定義域}&\text{値域（主値）}\\ \hline
-\arcsin x&[-1,1]&[-\pi/2,\pi/2]\\
-\arccos x&[-1,1]&[0,\pi]\\
-\arctan x&\R&(-\pi/2,\pi/2)
-\end{array}
-\]
-\end{definition}
-
-$\sin(\arcsin x)=x$ は常に成り立つが、
-$\arcsin(\sin x)=x$ には $x\in[-\pi/2,\pi/2]$ が必要である。
-主値から符号を決めれば
-\[
-\cos(\arcsin x)=\sqrt{1-x^2},
+\boxed{
+\int\frac{\d x}{\sqrt{a^2-x^2}}=\arcsin\frac xa+C,
 \qquad
-\sin(\arccos x)=\sqrt{1-x^2}.
+\int\frac{\d x}{a^2+x^2}=\frac1a\arctan\frac xa+C
+}\qquad(a>0)
 \]
-また
-\[
-(\arcsin x)'=\frac1{\sqrt{1-x^2}},
-\qquad
-(\arccos x)'=-\frac1{\sqrt{1-x^2}},
-\qquad
-(\arctan x)'=\frac1{1+x^2}.
-\]
-従って $1/\sqrt{1-x^2}$ と $1/(1+x^2)$ の原始関数は、それぞれ
-$\arcsin x$ と $\arctan x$ である。
+$\arccos$ は $\pi/2-\arcsin$ へ直せるので別に覚えない。
 
 \section{根号の有理化置換}
 
-2015年度応用数理の積分では
-\[
-t=x+\sqrt{x^2+1}
-\]
-と置く。共役との積が1なので
+問題に $\sqrt{x^2+1}$ と $x$ が同時に現れたら
+$t=x+\sqrt{x^2+1}$ と置く。共役を掛ければ
 \[
 t^{-1}=\sqrt{x^2+1}-x,
 \qquad
@@ -89,11 +43,11 @@ x=\frac{t-t^{-1}}2,
 \qquad
 \d x=\frac{1+t^{-2}}2\,\d t.
 \]
-従って
+まで機械的に出る。必要な式だけ選ぶと
 \[
 \frac{\d x}{\sqrt{x^2+1}}=\frac{\d t}{t},
 \qquad
 \sqrt{x^2+1}\,\d x
 =\frac14(t+2t^{-1}+t^{-3})\,\d t.
 \]
-$x=0,1$ はそれぞれ $t=1,1+\sqrt2$ に移る。
+となる。定積分では最後に端点も $x=0,1\mapsto t=1,1+\sqrt2$ と移す。

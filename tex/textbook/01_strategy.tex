@@ -1,0 +1,92 @@
+\chapter{問題文から解法を選ぶ}
+\label{ch:tb-strategy}
+
+この章は暗記用ではなく、workbook を解くときの索引である。
+公式だけを覚えても、使う場面を選べなければ答案にならない。
+問題を見たら、まず次の型のどれかへ分類する。
+
+\section{微積分：領域・特異点・交換を見る}
+
+計算を始める前に、定義域、端点、特異点、積分領域を書く。
+その後は問題文の形から次の初手を選ぶ。
+\[
+\begin{array}{c|l}
+\text{見えた形}&\text{初手}\\ \hline
+x+y,\ x-y&u=x+y,\ v=x-y\\
+x^2+y^2,\ \text{円・扇形}&x=r\cos\theta,\ y=r\sin\theta\\
+x,y>0,\ x+y&x=st,\ y=s(1-t)\\
+\sqrt{x^2+1}&t=x+\sqrt{x^2+1}\\
+\displaystyle\int f(t,x)\,\d x&\partial_t f\text{ を計算し、優関数を探す}\\
+\text{原点で場合分け}&x=r\cos\theta,\ y=r\sin\theta\text{ で }r\text{ の冪に抑える}\\
+\text{無限区間・分母が0}&\text{広義積分として端点ごとに比較する}
+\end{array}
+\]
+
+重積分の答案は
+\[
+\boxed{\text{新領域}}
+\longrightarrow
+\boxed{\text{逆変換}}
+\longrightarrow
+\boxed{|J|}
+\longrightarrow
+\boxed{\text{累次積分}}
+\]
+の順に書く。積分記号下の微分では、微分した式だけでなく
+「近傍の全てのパラメータで $|\partial_t f|\le g$、$g$ は可積分」と書いて交換を正当化する。
+
+\section{線形代数：最後は必ず連立方程式へ戻す}
+
+\[
+\begin{array}{c|l}
+\text{問われたもの}&\text{答案の骨格}\\ \hline
+\ker A,\ \operatorname{Im}A,\ \text{基底}&\text{簡約化}\to\text{自由変数}\to\text{基底}\\
+\text{固有値・対角化}&\det(A-\lambda I)=0\to\text{各 }A-\lambda I\text{ を簡約化}\\
+\text{直交対角化}&\text{固有空間}\to\text{空間内で正規直交化}\to P^*AP\\
+\text{Jordan 形}&\text{固有値が重なる場合を分け、}\dim\ker(A-\lambda I)^k\text{ を調べる}\\
+\text{不変平面}&A^{\mathsf T}\text{ の固有ベクトル }u\to\ker u^{\mathsf T}\\
+p(A)=O&\text{因数分解し、固有値・射影・逆行列を式から読む}\\
+A=LU&Ly=b\text{ を前進代入}\to Ux=y\text{ を後退代入}
+\end{array}
+\]
+
+計算問題では、結果だけでなく簡約後の行列を一つ書く。
+例えば固有空間なら
+\[
+A-\lambda I\sim R
+\quad\Longrightarrow\quad
+E_\lambda=\ker(A-\lambda I)=\langle v_1,\ldots,v_r\rangle
+\]
+までが一続きの答案である。証明問題では、結論に対応する零空間・像・次元へ翻訳してから定理を使う。
+
+\section{位相：性質に対応する定義から始める}
+
+位相の答案は計算よりも、最初にどの定義を開くかで決まる。
+\[
+\begin{array}{c|l}
+\text{示す性質}&\text{最初に取るもの}\\ \hline
+x\in\overline A&A\text{ の点列 }a_n\to x\text{、または任意の球}\\
+F\text{ が閉}&X\setminus F\text{ が開、または極限を含むこと}\\
+K\text{ がコンパクト}&\text{開被覆、または距離空間なら点列}\\
+f(K)\text{ がコンパクト}&f(K)\text{ の開被覆を逆像で }K\text{ へ戻す}\\
+X\text{ が非連結}&X\text{ を二つの非空な相対開集合に分ける}\\
+f\text{ が連続}&\varepsilon\text{--}\delta、\text{点列、開集合の逆像のいずれか}\\
+\text{主張が偽}&x^2、\text{定数写像、離散位相と密着位相を試す}
+\end{array}
+\]
+
+「連続像」が保つのはコンパクト性と連結性、
+「連続写像の逆像」が保つのは開集合と閉集合である。
+像と逆像を取り違えなければ、収録問題の多くは数行で終わる。
+
+\section{答案を短くする基準}
+
+残すのは、使った定理の条件、非自明な変形、結論を導く一行である。
+一方、行列積や通常の微分を全成分展開する必要はない。
+目安は
+\[
+\boxed{\text{方針が読める}}
++\boxed{\text{採点者が検算できる}}
++\boxed{\text{結論と条件が明記される}}
+\]
+の三点である。本書の各節は、この粒度で使う公式と答案の型だけを残す。

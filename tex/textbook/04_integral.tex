@@ -1,57 +1,49 @@
 \chapter{一変数の積分}
 \label{ch:tb-integral}
 
-\section{出題で使う積分操作}
+\section{一変数積分の初手}
 
-変数上端には微積分学の基本定理
+置換積分と部分積分の一般公式は既知とする。問題では、形を見て次の操作へ入る。
+変数が積分区間の上端にあれば
 \[
 \frac{\d}{\d x}\int_a^x f(t)\,\d t=f(x)
 \]
-を使う。置換積分と部分積分は
-\[
-\int_{\phi(\alpha)}^{\phi(\beta)}f(x)\,\d x
-=\int_\alpha^\beta f(\phi(t))\phi'(t)\,\d t,
-\]
-\[
-\int_a^bu(x)v'(x)\,\d x
-=\bigl[u(x)v(x)\bigr]_a^b-\int_a^bu'(x)v(x)\,\d x
-\]
-である。定積分の置換では端点も変える。
-
-2015年度第1期で必要な部分積分は、$a\ne-1$ のとき
+を使う。$x^a\log x$ があれば $\log x$ を微分する側にして部分積分し、$a\ne-1$ なら
 \[
 \int x^a\log x\,\d x
 =x^{a+1}\left(\frac{\log x}{a+1}-\frac1{(a+1)^2}\right)+C.
 \]
-$a=-1$ だけは $u=\log x$ と置いて
+$a=-1$ は式へ代入せず、$u=\log x$ と置いて
 \[
 \int\frac{\log x}{x}\,\d x=\frac{(\log x)^2}{2}+C
 \]
-となる。$\sqrt{x^2+1}$ の置換は第\ref{ch:tb-functions}章に置いた。
+とする。$\sqrt{x^2+1}$ があれば第\ref{ch:tb-functions}章の有理化置換を試す。
+定積分の置換では、新変数へ直した直後に端点も変える。
 
 \section{広義積分と比較}
 
-非有界区間または特異点を含む積分は、端を切った積分の極限で定義する。
-例えば
+非有界区間または特異点が見えたら、まず端を切る。
+例えば答案の最初を
 \[
 \int_a^\infty f(x)\,\d x
 =\lim_{R\to\infty}\int_a^Rf(x)\,\d x.
 \]
-特異点が内部にあれば左右を別々に判定する。
+とする。特異点が内部にあれば左右を別々に判定し、一方でも発散すれば全体は発散である。
 
 \[
 \int_1^\infty x^a\,\d x<\infty\Longleftrightarrow a<-1,
 \qquad
 \int_0^1x^a\,\d x<\infty\Longleftrightarrow a>-1.
 \]
-$0\le f\le g$ かつ $\int g<\infty$ なら $\int f<\infty$ であり、
-$\int\abs f<\infty$ なら $\int f$ は収束する。
+$0\le f\le g$ かつ $\int g<\infty$ なら $\int f<\infty$。
+比較するときは「どの端点で」「何の冪に」比較したかを書く。
+$\int\abs f<\infty$ まで示せれば絶対収束、従って収束である。
 
-問題の $\int_1^\infty x^a\log x\,\d x$ は $t=\log x$ により
+$\int_1^\infty x^a\log x\,\d x$ を見たら $t=\log x$ として
 \[
 \int_0^\infty te^{(a+1)t}\,\d t
 \]
-へ変わるため、$a<-1$ のとき、かつそのときに限り収束する。
+へ変える。指数減衰が必要なので、収束条件は $a+1<0$、すなわち $a<-1$ である。
 
 \section{局所化する指数核}
 
@@ -61,6 +53,9 @@ $f:[0,\infty)\to\R$ が有界かつ $0$ で連続なら
 \lim_{n\to\infty}\int_0^\infty n f(x)e^{-nx}\,\d x=f(0).
 \]
 \end{theorem}
+
+この形を見たら $ne^{-nx}$ の全質量が1で、$x=0$ 付近へ集中すると読む。
+答案は $f(x)-f(0)$ を作り、$[0,\delta]$ と $[\delta,\infty)$ に分ける。
 
 \begin{proof}
 $\int_0^\infty ne^{-nx}\,\d x=1$ なので、差は
