@@ -38,6 +38,23 @@ $\dim E_\lambda$ を幾何的重複度 $m_g(\lambda)$ といい
 全ての固有値で両者が等しいことと対角化可能であることは同値である。
 相異なる固有値の固有ベクトルは一次独立なので、固有値が $n$ 個あれば自動的に対角化できる。
 
+\begin{proposition}{行列が満たす多項式の使い方}{tb-matrix-polynomial}
+$p(A)=O$ なら、$A$ の固有値 $\lambda$ は全て $p(\lambda)=0$ を満たす。
+さらに
+\[
+p(t)=\prod_{i=1}^r(t-\lambda_i)\qquad(\lambda_i\ne\lambda_j\ (i\ne j))
+\]
+と相異なる一次式に分解できれば、$A$ は対角化可能である。このとき固有値 $\lambda_i$ の成分は
+\[
+P_i x=\prod_{j\ne i}\frac{A-\lambda_jI}{\lambda_i-\lambda_j}\,x
+\]
+で取り出せ、$x=\sum_iP_ix$、$P_ix\in E_{\lambda_i}$ となる。
+\end{proposition}
+
+$Av=\lambda v$ なら $p(A)v=p(\lambda)v$ なので前半が従う。
+後半は Lagrange 補間の恒等式 $\sum_iP_i=I$ と
+$(A-\lambda_iI)P_i=O$ を用いればよい。
+
 対角化できれば
 \[
 A^k=PD^kP^{-1},\qquad
