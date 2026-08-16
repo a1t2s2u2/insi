@@ -62,152 +62,44 @@ $C$ の第1行から順に一つずつ確定する。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] 左辺を成分で書くと
+  \item[(1)] 前進代入により
   \[
-  B\begin{pmatrix}y_1\\y_2\\y_3\\y_4\end{pmatrix}
-  =\begin{pmatrix}
-  y_1\\
-  \frac12y_1+y_2\\
-  \frac34y_2+y_3\\
-  \frac{16}{19}y_3+y_4
-  \end{pmatrix}
-  \]
-  なので、方程式は
-  \[
-  \begin{cases}
-  y_1=1, &\text{第1式},\\
-  \frac12y_1+y_2=1, &\text{第2式},\\
-  \frac34y_2+y_3=1, &\text{第3式},\\
-  \frac{16}{19}y_3+y_4=1 &\text{第4式}
-  \end{cases}
-  \]
-  と同値である。第1式から $y_1=1$ である。これを第2式へ代入すると
-  \[
-  y_2=1-\frac12=\frac12.
-  \]
-  これを第3式へ代入すると
-  \[
-  y_3=1-\frac34\cdot\frac12=1-\frac38=\frac58.
-  \]
-  これを第4式へ代入すると
-  \[
-  y_4=1-\frac{16}{19}\cdot\frac58=1-\frac{10}{19}=\frac9{19}.
-  \]
-  以上より
-  \[
-  y_1=1,\qquad y_2=\frac12,\qquad y_3=\frac58,\qquad y_4=\frac9{19}.
+  y_1=1,\quad
+  y_2=1-\frac12=\frac12,\quad
+  y_3=1-\frac34\cdot\frac12=\frac58,\quad
+  y_4=1-\frac{16}{19}\cdot\frac58=\frac9{19}.
   \]
 
-  \item[(2)] $C$ の第 $i$ 行を $c_i$、$A$ の第 $i$ 行を $a_i$ と書く。
-  積 $BC$ の第 $i$ 行は、$B$ の第 $i$ 行の成分を重みとして $C$ の各行を足したものだから、
-  $B$ の形より
+  \item[(2)] $C,A$ の第 $j$ 行をそれぞれ $c_j,a_j$ とすると
   \[
-  a_1=c_1,\quad
-  a_2=\frac12c_1+c_2,\quad
-  a_3=\frac34c_2+c_3,\quad
-  a_4=\frac{16}{19}c_3+c_4
+  c_1=a_1,\quad c_2=a_2-\frac12c_1,\quad
+  c_3=a_3-\frac34c_2,\quad c_4=a_4-\frac{16}{19}c_3.
   \]
-  である。これを $c_i$ について解くと、上から順に
-  \begin{align*}
-  c_1&=a_1=\begin{pmatrix}2&2&0&0\end{pmatrix},\\
-  c_2&=a_2-\frac12c_1
-  =\begin{pmatrix}1&5&3&0\end{pmatrix}-\begin{pmatrix}1&1&0&0\end{pmatrix}
-  =\begin{pmatrix}0&4&3&0\end{pmatrix},\\
-  c_3&=a_3-\frac34c_2
-  =\begin{pmatrix}0&3&7&6\end{pmatrix}-\begin{pmatrix}0&3&\frac94&0\end{pmatrix}
-  =\begin{pmatrix}0&0&\frac{19}4&6\end{pmatrix},\\
-  c_4&=a_4-\frac{16}{19}c_3
-  =\begin{pmatrix}0&0&4&5\end{pmatrix}-\begin{pmatrix}0&0&4&\frac{96}{19}\end{pmatrix}
-  =\begin{pmatrix}0&0&0&-\frac1{19}\end{pmatrix}
-  \end{align*}
-  となる。最後の行では $\frac{16}{19}\cdot\frac{19}4=4$ と
-  $5-\frac{96}{19}=\frac{95-96}{19}=-\frac1{19}$ を使った。よって
+  従って
   \[
   C=\begin{pmatrix}
   2&2&0&0\\
   0&4&3&0\\
-  0&0&\frac{19}4&6\\
-  0&0&0&-\frac1{19}
-  \end{pmatrix}
+  0&0&19/4&6\\
+  0&0&0&-1/19
+  \end{pmatrix}.
   \]
-  である。これは上三角行列である。
-
-  次に $Cz=y$ を解く。成分で書くと
+  $Cz=y$ を後退代入で解くと
   \[
-  \begin{cases}
-  2z_1+2z_2=1, &\text{第1式},\\
-  4z_2+3z_3=\frac12, &\text{第2式},\\
-  \frac{19}4z_3+6z_4=\frac58, &\text{第3式},\\
-  -\frac1{19}z_4=\frac9{19} &\text{第4式}
-  \end{cases}
-  \]
-  である。今度は下から順に確定する。第4式から
-  \[
-  z_4=-9.
-  \]
-  これを第3式へ代入すると
-  \[
-  \frac{19}4z_3=\frac58+54=\frac{5+432}8=\frac{437}8,
-  \qquad
-  z_3=\frac{437}8\cdot\frac4{19}=\frac{437}{38}=\frac{23}2.
-  \]
-  最後の等号では $437=19\cdot23$ を使った。これを第2式へ代入すると
-  \[
-  4z_2=\frac12-3\cdot\frac{23}2=\frac{1-69}2=-34,
-  \qquad
-  z_2=-\frac{17}2.
-  \]
-  これを第1式へ代入すると
-  \[
-  2z_1=1-2\cdot\left(-\frac{17}2\right)=1+17=18,
-  \qquad
-  z_1=9.
-  \]
-  以上より
-  \[
-  z_1=9,\qquad z_2=-\frac{17}2,\qquad z_3=\frac{23}2,\qquad z_4=-9.
+  z_4=-9,\qquad z_3=\frac{23}{2},\qquad
+  z_2=-\frac{17}{2},\qquad z_1=9.
   \]
 
-  \item[(3)] 三角行列の行列式は対角成分の積である。$B$ の対角成分は全て1だから
+  \item[(3)]
   \[
-  \abs B=1.
-  \]
-  (2) で求めた $C$ は上三角行列だから
-  \[
-  \abs C=2\cdot4\cdot\frac{19}4\cdot\left(-\frac1{19}\right)
-  =8\cdot\frac{19}4\cdot\left(-\frac1{19}\right)
-  =38\cdot\left(-\frac1{19}\right)
-  =-2.
-  \]
-  行列式は積を保つので $\abs{BC}=\abs B\,\abs C$ であり、$A=BC$ とあわせて
-  \[
-  \abs A=\abs B\,\abs C=1\cdot(-2)=-2.
+  \det A=\det B\det C
+  =1\cdot2\cdot4\cdot\frac{19}{4}\cdot\left(-\frac1{19}\right)=-2.
   \]
 
-  \item[(4)] $b=(1,1,1,1)^{\mathsf T}$、$x=(x_1,x_2,x_3,x_4)^{\mathsf T}$ とおく。
-  $A=BC$ だから、方程式 $Ax=b$ は
+  \item[(4)] $Ax=B(Cx)=(1,1,1,1)^{\mathsf T}$ である。(1) より $Cx=y$、(2) より $x=z$ だから
   \[
-  B(Cx)=b
+  (x_1,x_2,x_3,x_4)=\left(9,-\frac{17}{2},\frac{23}{2},-9\right).
   \]
-  と書ける。そこで $w=Cx$ とおくと、$w$ は $Bw=b$ を満たす。
-  この方程式は (1) で解いたものと同じであり、(1) の計算では
-  各未知数が上から順に一意に決まったから、解は $w=y$ に限る。よって
-  \[
-  Cx=y
-  \]
-  である。これは (2) の後半で解いた方程式と同じであり、(2) の計算でも
-  各未知数が下から順に一意に決まったから、$x=z$ である。従って
-  \[
-  x_1=9,\qquad x_2=-\frac{17}2,\qquad x_3=\frac{23}2,\qquad x_4=-9.
-  \]
-  実際、この $x$ に対して
-  \begin{align*}
-  2x_1+2x_2&=18-17=1,\\
-  x_1+5x_2+3x_3&=9-\frac{85}2+\frac{69}2=9-8=1,\\
-  3x_2+7x_3+6x_4&=-\frac{51}2+\frac{161}2-54=55-54=1,\\
-  4x_3+5x_4&=46-45=1
-  \end{align*}
-  となり、確かに $Ax=b$ が成り立っている。
 \end{enumerate}
 \end{proof}
 
@@ -248,145 +140,48 @@ $I$ が有界であることを使って $x$ を含まない上界へ置き換�
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] $R>0$ に対し
+  \item[(1)] $I=\int_0^\infty e^{-x^2}\,\d x$ とおく。非負関数なので累次積分と極座標変換により
   \[
-  I_R=\int_0^Re^{-x^2}\,\d x
+  I^2=\int_0^\infty\!\!\int_0^\infty e^{-(x^2+y^2)}\,\d x\d y
+  =\int_0^{\pi/2}\!\!\int_0^\infty e^{-r^2}r\,\d r\d\theta
+  =\frac{\pi}{4}.
   \]
-  とおく。求めたいのは $\lim_{R\to\infty}I_R$ である。
-
-  被積分関数は連続なので、正方形 $S_R=[0,R]\times[0,R]$ 上の重積分は
-  累次積分に等しく、変数が分離できるから
+  $I>0$ より
   \[
-  \iint_{S_R}e^{-(x^2+y^2)}\,\d x\d y
-  =\left(\int_0^Re^{-x^2}\,\d x\right)\left(\int_0^Re^{-y^2}\,\d y\right)
-  =I_R^2.
-  \]
-  次に、四分円
-  \[
-  D_a=\{(x,y)\mid x\ge0,\ y\ge0,\ x^2+y^2\le a^2\}
-  \]
-  を考える。$S_R$ に含まれる点は $x^2+y^2\le2R^2$ を満たすから
-  \[
-  D_R\subset S_R\subset D_{\sqrt2R}
-  \]
-  であり、被積分関数 $e^{-(x^2+y^2)}$ は正だから、領域が広いほど積分は大きい。よって
-  \[
-  \iint_{D_R}e^{-(x^2+y^2)}\,\d x\d y
-  \le I_R^2\le
-  \iint_{D_{\sqrt2R}}e^{-(x^2+y^2)}\,\d x\d y.
-  \]
-  四分円上の積分は極座標 $x=r\cos\theta$、$y=r\sin\theta$ で計算できる。
-  この変換のヤコビアンは $r$ であり、$D_a$ は $0\le r\le a$、$0\le\theta\le\frac\pi2$ に対応するから
-  \begin{align*}
-  \iint_{D_a}e^{-(x^2+y^2)}\,\d x\d y
-  &=\int_0^{\pi/2}\!\!\int_0^ae^{-r^2}r\,\d r\,\d\theta\\
-  &=\frac\pi2\left[-\frac12e^{-r^2}\right]_0^a
-  =\frac\pi4\left(1-e^{-a^2}\right).
-  \end{align*}
-  これを上の不等式へ入れると
-  \[
-  \frac\pi4\left(1-e^{-R^2}\right)\le I_R^2\le\frac\pi4\left(1-e^{-2R^2}\right).
-  \]
-  $R\to\infty$ のとき両端はともに $\frac\pi4$ に収束するから
-  $\lim_{R\to\infty}I_R^2=\frac\pi4$ である。$I_R\ge0$ なので
-  \[
-  \int_0^\infty e^{-x^2}\,\d x=\lim_{R\to\infty}I_R=\frac{\sqrt\pi}2.
+  I=\frac{\sqrt{\pi}}{2}.
   \]
 
-  \item[(2)] 部分和を
+  \item[(2)] $I\subset[-M,M]$ となる $M>0$ を取る。指数関数の整級数より各 $x\in I$ で
   \[
-  S_N(x)=\sum_{n=0}^N\frac{(-1)^nx^{2n}}{n!}
+  e^{-x^2}=\sum_{n=0}^\infty\frac{(-1)^nx^{2n}}{n!}.
   \]
-  とおく。$S_N$ が $I$ 上 $e^{-x^2}$ に一様収束するとは、誤差の上限が $x$ によらず0に近づくこと、すなわち
+  また
   \[
-  \lim_{N\to\infty}\ \sup_{x\in I}\abs{e^{-x^2}-S_N(x)}=0
+  \left|\frac{(-1)^nx^{2n}}{n!}\right|
+  \le\frac{M^{2n}}{n!},\qquad
+  \sum_{n=0}^\infty\frac{M^{2n}}{n!}=e^{M^2}<\infty.
   \]
-  が成り立つことである。これを示す。
+  よって Weierstrass の $M$ 判定法により、収束は $I$ 上一様である。
 
-  指数関数 $e^t$ は何回でも微分でき、その導関数は全て $e^t$ である。
-  よって Taylor の定理より、任意の $t\in\R$ と $N$ に対し、$0<\theta<1$ を満たす
-  $\theta$（$t$ と $N$ に依存してよい）が存在して
+  \item[(3)] (2) により $0$ と $x$ を含む有界閉区間上で項別積分できるので
   \[
-  e^t=\sum_{n=0}^N\frac{t^n}{n!}+\frac{e^{\theta t}}{(N+1)!}t^{N+1}
-  \]
-  が成り立つ。ここで $t=-x^2$ とおく。$t^n=(-1)^nx^{2n}$ なので
-  \[
-  e^{-x^2}=\sum_{n=0}^N\frac{(-1)^nx^{2n}}{n!}
-  +\frac{(-1)^{N+1}e^{-\theta x^2}}{(N+1)!}x^{2(N+1)},
-  \]
-  すなわち
-  \[
-  e^{-x^2}-S_N(x)=\frac{(-1)^{N+1}e^{-\theta x^2}}{(N+1)!}x^{2(N+1)}
-  \]
-  である。
-
-  $I$ は有界だから、ある $M>0$ が存在して、全ての $x\in I$ で $\abs x\le M$ となる。
-  また $\theta>0$ と $x^2\ge0$ より $-\theta x^2\le0$ なので $e^{-\theta x^2}\le1$ である。よって
-  \[
-  \abs{e^{-x^2}-S_N(x)}
-  =\frac{e^{-\theta x^2}}{(N+1)!}\abs x^{2(N+1)}
-  \le\frac{\abs x^{2(N+1)}}{(N+1)!}
-  \le\frac{\left(M^2\right)^{N+1}}{(N+1)!}
-  \]
-  となる。最右辺は $x$ を含まないから
-  \[
-  \sup_{x\in I}\abs{e^{-x^2}-S_N(x)}\le\frac{\left(M^2\right)^{N+1}}{(N+1)!}
-  \]
-  である。仮定の極限を $a=M^2$ に対して使うと、右辺は $N\to\infty$ で0に収束する。
-  従って
-  \[
-  \lim_{N\to\infty}\ \sup_{x\in I}\abs{e^{-x^2}-S_N(x)}=0
-  \]
-  であり、整級数は $I$ 上 $e^{-x^2}$ に一様収束する。
-
-  \item[(3)] $x\in\R$ を一つ固定し、0 と $x$ を端点とする閉区間を $I$ とおく
-  （$x\ge0$ なら $I=[0,x]$、$x<0$ なら $I=[x,0]$）。
-  $I$ は有界閉区間だから、(2) より $S_N$ は $I$ 上 $e^{-t^2}$ へ一様収束する。
-  有界閉区間上で連続関数の列が一様収束するとき、極限と積分は交換できる。
-  $S_N$ は多項式だから連続であり、
-  \begin{align*}
-  f(x)=\int_0^xe^{-t^2}\,\d t
-  &=\lim_{N\to\infty}\int_0^xS_N(t)\,\d t\\
-  &=\lim_{N\to\infty}\sum_{n=0}^N\frac{(-1)^n}{n!}\int_0^xt^{2n}\,\d t\\
-  &=\lim_{N\to\infty}\sum_{n=0}^N\frac{(-1)^n}{n!(2n+1)}x^{2n+1}
-  =\sum_{n=0}^\infty\frac{(-1)^n}{n!(2n+1)}x^{2n+1}.
-  \end{align*}
-  右辺は全ての $x\in\R$ で収束する整級数である。
-  関数を原点の近くで表す整級数は一意で、その係数は Taylor 係数に一致するから、
-  これが求める Taylor 展開である。すなわち
-  \[
-  f(x)=\sum_{n=0}^\infty\frac{(-1)^n}{n!(2n+1)}x^{2n+1}
-  =x-\frac{x^3}3+\frac{x^5}{10}-\frac{x^7}{42}+\cdots.
+  f(x)=\sum_{n=0}^\infty
+  \frac{(-1)^n}{n!(2n+1)}x^{2n+1}
+  =x-\frac{x^3}{3}+\frac{x^5}{10}-\frac{x^7}{42}+\cdots.
   \]
 
-  \item[(4)] (2) の誤差評価を $I=[0,1]$、$M=1$ に対して使う。$t\in[0,1]$ では
+  \item[(4)] (3) の $x=1$ は絶対値が単調減少する交代級数である。第5項までの和を $S_4$ とすると
   \[
-  \abs{e^{-t^2}-S_N(t)}\le\frac{t^{2(N+1)}}{(N+1)!}
+  S_4=1-\frac13+\frac1{10}-\frac1{42}+\frac1{216}
+  =\frac{5651}{7560}=0.747486\cdots,
   \]
-  だから、$[0,1]$ 上で積分すると
   \[
-  \left|f(1)-\sum_{n=0}^N\frac{(-1)^n}{n!(2n+1)}\right|
-  =\left|\int_0^1\left(e^{-t^2}-S_N(t)\right)\d t\right|
-  \le\int_0^1\frac{t^{2(N+1)}}{(N+1)!}\,\d t
-  =\frac1{(N+1)!\,(2N+3)}.
+  S_4-\frac1{5!\cdot11}\le f(1)\le S_4.
   \]
-  ここで $N=4$ とする。有限和は
+  左端は $0.746728\cdots$ だから、小数第3位以下を切り捨てると
   \[
-  \sum_{n=0}^4\frac{(-1)^n}{n!(2n+1)}
-  =1-\frac13+\frac1{10}-\frac1{42}+\frac1{216}
-  =\frac{7560-2520+756-180+35}{7560}
-  =\frac{5651}{7560}
+  f(1)=0.74.
   \]
-  であり、誤差の上界は
-  \[
-  \frac1{5!\cdot11}=\frac1{1320}
-  \]
-  である。$\frac{5651}{7560}=0.74748\cdots$、$\frac1{1320}=0.00076\cdots$ なので
-  \[
-  0.7467<f(1)<0.7483
-  \]
-  が成り立つ。特に $0.74\le f(1)<0.75$ だから、小数第3位以下を切り捨てた値は一意に定まる。
-  よって求める値は $0.74$ である。
 \end{enumerate}
 \end{proof}
 
@@ -419,105 +214,28 @@ $\Q$ を左右に切る点として無理数を選ぶのが要点である。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] 点列 $\{a_n\}$ が点 $\alpha$ に収束するとは、$\alpha$ の任意の近傍 $U$ に対し、
-  ある番号 $N_\alpha$ が存在して、$n>N_\alpha$ ならば $a_n\in U$ となることである。
+  \item[(1)] $a_n\to\alpha,\beta$ かつ $\alpha\ne\beta$ と仮定する。Hausdorff 性より
+  $\alpha\in U$, $\beta\in V$, $U\cap V=\varnothing$ となる開集合を取れる。
+  十分大きい $n$ では $a_n\in U$ かつ $a_n\in V$ となり矛盾する。従って $\alpha=\beta$ である。
 
-  $\alpha$ と $\beta$ をいずれも $\{a_n\}$ の極限とし、$\alpha\ne\beta$ と仮定する。
-  $S$ はハウスドルフ空間だから、$\alpha$ の近傍 $U$ と $\beta$ の近傍 $V$ で
+  \item[(2)]
   \[
-  U\cap V=\varnothing
+  U=\Q\cap(-\infty,\sqrt2),\qquad
+  V=\Q\cap(\sqrt2,\infty)
   \]
-  となるものが取れる。$\alpha$ が極限であることを近傍 $U$ に対して使うと、
-  ある番号 $N_\alpha$ が存在して
-  \[
-  n>N_\alpha\implies a_n\in U
-  \]
-  となる。同様に $\beta$ が極限であることを近傍 $V$ に対して使うと、
-  ある番号 $N_\beta$ が存在して
-  \[
-  n>N_\beta\implies a_n\in V
-  \]
-  となる。そこで $N=\max\{N_\alpha,N_\beta\}$ とおき、$n>N$ を満たす番号 $n$ を一つ取ると、
-  $n>N_\alpha$ かつ $n>N_\beta$ だから
-  \[
-  a_n\in U\cap V
-  \]
-  である。これは $U\cap V=\varnothing$ に反する。
-  従って $\alpha\ne\beta$ という仮定が誤りであり、$\alpha=\beta$ である。
-  よって極限は唯一つである。
+  は空でない互いに素な $\Q$ の開集合である。$\sqrt2\notin\Q$ より
+  $U\cup V=\Q$ なので、$\Q$ は連結でない。
 
-  \item[(2)] $\Q$ に $\R$ からの相対位相を入れるとは、$\R$ の開集合 $O$ を用いて
-  $\Q\cap O$ と書ける集合をちょうど $\Q$ の開集合とすることである。
-  また、空間 $X$ が連結であるとは、空でない二つの開集合 $U_1,U_2$ で
+  \item[(3)] $f\equiv0$ なら明らかである。$f(p)\ne0$ とし、
+  $\varepsilon=|f(p)|/2$ を取る。ある $R>|p|$ に対して
   \[
-  U_1\cap U_2=\varnothing,\qquad U_1\cup U_2=X
+  |x|>R\implies |f(x)|<\varepsilon
   \]
-  を満たすものが存在しないことをいう。従って、このような $U_1,U_2$ を一組作れば
-  $\Q$ が連結でないことが示せる。
-
-  $\sqrt2$ は無理数だから $\sqrt2\notin\Q$ である。そこで
-  \[
-  O_1=\{x\in\R\mid x<\sqrt2\},\qquad
-  O_2=\{x\in\R\mid x>\sqrt2\}
-  \]
-  とおく。どちらも $\R$ の開集合である。これらを使って
-  \[
-  U_1=\Q\cap O_1,\qquad U_2=\Q\cap O_2
-  \]
-  とおくと、相対位相の定義から $U_1,U_2$ はどちらも $\Q$ の開集合である。
-  この $U_1,U_2$ が条件を満たすことを確かめる。
-  まず $1<\sqrt2<2$ であり $1,2\in\Q$ だから、$1\in U_1$ かつ $2\in U_2$ であり、
-  どちらも空でない。
-  次に $O_1\cap O_2=\varnothing$ だから $U_1\cap U_2=\varnothing$ である。
-  最後に、$q\in\Q$ を任意に取ると $q\ne\sqrt2$ だから、$q<\sqrt2$ または $q>\sqrt2$ の
-  いずれか一方が成り立つ。よって $q\in U_1$ または $q\in U_2$ であり、$U_1\cup U_2=\Q$ である。
-
-  以上より、$\Q$ は空でなく互いに交わらない二つの開集合の和に分解できた。
-  よって $\Q$ は連結でない。
-
-  \item[(3)] まず $f$ が恒等的に0の場合、全ての $x$ で $f(x)=0$ だから、
-  $f$ は最大値0と最小値0を持つ。以下、$f$ は恒等的に0ではないとし、
-  $f(p)\ne0$ となる点 $p\in\R$ を一つ取る。
-
-  $\varepsilon=\frac{\abs{f(p)}}2>0$ に対して仮定を使うと、ある正数 $R>0$ が存在して
-  \[
-  \abs x>R\implies\abs{f(x)}<\varepsilon=\frac{\abs{f(p)}}2
-  \]
-  が成り立つ。ここで $\abs p\le R$ である。実際、もし $\abs p>R$ ならば
-  この条件を $x=p$ に使って $\abs{f(p)}<\frac{\abs{f(p)}}2$ となり、
-  $\abs{f(p)}>0$ に反するからである。
-
-  区間 $[-R,R]$ は有界閉区間だからコンパクトであり、$f$ は連続である。
-  よって最大値・最小値の定理より、$f$ は $[-R,R]$ 上で最大値 $M$ と最小値 $m$ を取る。
-  $p\in[-R,R]$ だから
-  \[
-  m\le f(p)\le M
-  \]
-  である。$f(p)\ne0$ なので、$f(p)>0$ か $f(p)<0$ のいずれかである。
-
-  $f(p)>0$ の場合を考える。このとき $\abs{f(p)}=f(p)$ だから
-  \[
-  M\ge f(p)=2\varepsilon>\varepsilon
-  \]
-  である。$x\in\R$ を任意に取る。$\abs x\le R$ ならば、$M$ が $[-R,R]$ 上の最大値だから
-  $f(x)\le M$ である。$\abs x>R$ ならば、$R$ の取り方より
-  \[
-  f(x)\le\abs{f(x)}<\varepsilon<M
-  \]
-  である。いずれの場合も $f(x)\le M$ であり、しかも $M$ は $[-R,R]$ のある点で
-  実際に取られている。従って $M$ は $\R$ 全体での $f$ の最大値である。
-
-  $f(p)<0$ の場合も同様である。このとき $\abs{f(p)}=-f(p)$ だから
-  \[
-  m\le f(p)=-2\varepsilon<-\varepsilon
-  \]
-  である。$\abs x\le R$ ならば $f(x)\ge m$ であり、$\abs x>R$ ならば $R$ の取り方より
-  \[
-  f(x)\ge-\abs{f(x)}>-\varepsilon>m
-  \]
-  である。よって全ての $x\in\R$ で $f(x)\ge m$ となり、$m$ は $\R$ 全体での $f$ の最小値である。
-
-  以上より、いずれの場合も $f$ は最大値または最小値を持つ。
+  となる。$[-R,R]$ 上の最大値を $M$、最小値を $m$ とする。
+  $f(p)>0$ なら $M\ge f(p)>\varepsilon$ であり、区間外では
+  $f(x)<\varepsilon<M$ だから $M$ は全体の最大値である。
+  $f(p)<0$ なら $m\le f(p)<-\varepsilon$ であり、区間外では
+  $f(x)>-\varepsilon>m$ だから $m$ は全体の最小値である。
 \end{enumerate}
 \end{proof}
 
@@ -925,348 +643,65 @@ $1-\lambda$ が共通因子として現れる。この因子をくくり出し�
 $P^*AP$ が対角行列になる。これが問題文の「ユニタリ行列による対角化」である。
 \end{memo*}
 \begin{proof}[解答]
-固有値を求めるため、まず特性多項式
+まず
 \[
-p_A(\lambda)=|A-\lambda I_4|
-\]
-を計算する。まず
-\[
-\lambda I_4=\begin{pmatrix}
-\lambda&0&0&0\\
-0&\lambda&0&0\\
-0&0&\lambda&0\\
-0&0&0&\lambda
-\end{pmatrix}
-\]
-なので、$A-\lambda I_4$ では対角成分からだけ $\lambda$ を引き、
-対角成分以外は元のままになる。従って
-\[
-A-\lambda I_4
-=\begin{pmatrix}
-2-\lambda&-i&1&i\\
-i&2-\lambda&i&-1\\
-1&-i&2-\lambda&i\\
--i&-1&-i&2-\lambda
-\end{pmatrix}.
-\]
-行列式では、ある行に別の行の定数倍を加えても値は変わらない。
-\[
-R_2\longleftarrow R_2-iR_1,\qquad
-R_3\longleftarrow R_3-R_1,\qquad
-R_4\longleftarrow R_4+iR_1
-\]
-を行うと、行列式は
-\begin{align*}
-p_A(\lambda)
-&=\begin{vmatrix}
-2-\lambda&-i&1&i\\
-i&2-\lambda&i&-1\\
-1&-i&2-\lambda&i\\
--i&-1&-i&2-\lambda
-\end{vmatrix}\\
-&=\begin{vmatrix}
-2-\lambda&-i&1&i\\
--i(1-\lambda)&1-\lambda&0&0\\
--(1-\lambda)&0&1-\lambda&0\\
-i(1-\lambda)&0&0&1-\lambda
-\end{vmatrix}\\
-&=(1-\lambda)^3\begin{vmatrix}
+\det(A-\lambda I_4)
+=(1-\lambda)^3
+\begin{vmatrix}
 2-\lambda&-i&1&i\\
 -i&1&0&0\\
 -1&0&1&0\\
 i&0&0&1
-\end{vmatrix}.
-\end{align*}
-最後の等号では、第2、第3、第4行から $1-\lambda$ を一つずつくくり出した。
-続いて
-\[
-R_1\longleftarrow R_1+iR_2-R_3-iR_4
+\end{vmatrix}
+=(1-\lambda)^3(5-\lambda).
 \]
-を行うと
-\begin{align*}
-p_A(\lambda)
-&=(1-\lambda)^3\begin{vmatrix}
-5-\lambda&0&0&0\\
--i&1&0&0\\
--1&0&1&0\\
-i&0&0&1
-\end{vmatrix}\\
-&=(1-\lambda)^3(5-\lambda).
-\end{align*}
+ここでは順に
+\[
+R_2\leftarrow R_2-iR_1,\quad
+R_3\leftarrow R_3-R_1,\quad
+R_4\leftarrow R_4+iR_1,\quad
+R_1\leftarrow R_1+iR_2-R_3-iR_4
+\]
+を用いた。
 \begin{enumerate}
-  \item[(1)] 特性多項式の定義
-  $p_A(\lambda)=|A-\lambda I_4|$ に $\lambda=0$ を代入すると
-  \[
-  p_A(0)=|A-0I_4|
-  \]
-  となる。$0I_4$ は全ての成分が0の行列なので
-  \[
-  A-0I_4=A,
-  \qquad
-  p_A(0)=|A|
-  \]
-  である。従って
-  \[
-  |A|=p_A(0)=1^3\cdot5=5.
-  \]
+  \item[(1)] $\det A=\det(A-0I_4)=5$。
 
-  \item[(2)] 固有値は $p_A(\lambda)=0$ を満たす数なので
+  \item[(2)] 固有値は $1,5$ である。行基本変形により
   \[
-  \lambda=1,\qquad \lambda=5
+  E_1=\ker(A-I_4)
+  =\left\{x\in\mathbb C^4\mid x_1-ix_2+x_3+ix_4=0\right\}
   \]
-  である。
-
-  固有値 $\lambda$ に対する固有空間とは、方程式
-  $(A-\lambda I_4)x=0$ の解を全て集めた集合である。
-  記号 $\ker M$ は「$Mx=0$ となる全ての $x$」を表すので、
-  この固有空間を $W_\lambda=\ker(A-\lambda I_4)$ と書く。
-
-  まず $\lambda=1$ の固有空間を求める。
   \[
-  A-I_4
-  =\begin{pmatrix}
-  1&-i&1&i\\
-  i&1&i&-1\\
-  1&-i&1&i\\
-  -i&-1&-i&1
-  \end{pmatrix}.
-  \]
-  ここで
-  \[
-  R_2\longleftarrow R_2-iR_1,\qquad
-  R_3\longleftarrow R_3-R_1,\qquad
-  R_4\longleftarrow R_4+iR_1
-  \]
-  と行基本変形すると
-  \[
-  A-I_4\ \longrightarrow\
-  \begin{pmatrix}
-  1&-i&1&i\\
-  0&0&0&0\\
-  0&0&0&0\\
-  0&0&0&0
-  \end{pmatrix}.
-  \]
-  従って $(A-I_4)x=0$ は一つの方程式
-  \[
-  x_1-ix_2+x_3+ix_4=0
-  \]
-  と同値である。よって
-  \[
-  W_1=\ker(A-I_4)
-  =\left\{
-  \begin{pmatrix}x_1\\x_2\\x_3\\x_4\end{pmatrix}\in\mathbb C^4
-  \mathrel{}\middle|\mathrel{}
-  x_1-ix_2+x_3+ix_4=0
+  =\operatorname{span}\left\{
+  \begin{pmatrix}1\\-i\\0\\0\end{pmatrix},
+  \begin{pmatrix}0\\0\\1\\i\end{pmatrix},
+  \begin{pmatrix}-i\\1\\i\\1\end{pmatrix}
   \right\},
-  \qquad \dim W_1=3.
-  \]
-  最後の次元が3であるのは、$x_2,x_3,x_4$ の三つを自由に選べば
-  \[
-  x_1=ix_2-x_3-ix_4
-  \]
-  と一意に決まり、自由に選べる複素数が三つあるためである。
-
-  次に $\lambda=5$ の固有空間を求める。
-  $x=(x_1,x_2,x_3,x_4)^{\mathsf T}$ とおくと、
-  $(A-5I_4)x=0$ は
-  \[
-  \begin{cases}
-  -3x_1-ix_2+x_3+ix_4=0, &\text{第1式},\\
-  ix_1-3x_2+ix_3-x_4=0, &\text{第2式},\\
-  x_1-ix_2-3x_3+ix_4=0, &\text{第3式},\\
-  -ix_1-x_2-ix_3-3x_4=0. &\text{第4式}
-  \end{cases}
-  \]
-  第1式から第3式を引くと
-  \[
-  -4x_1+4x_3=0,
-  \]
-  したがって $x_3=x_1$ である。これを第1式と第2式へ代入すると
-  \[
-  -2x_1-ix_2+ix_4=0,
   \qquad
-  2ix_1-3x_2-x_4=0.
-  \]
-  左の式から
-  \[
-  x_4=x_2-2ix_1
-  \]
-  を得る。これを右の式へ代入すると
-  \[
-  2ix_1-3x_2-(x_2-2ix_1)=0
-  \quad\Longleftrightarrow\quad
-  4ix_1-4x_2=0,
-  \]
-  よって
-  \[
-  x_2=ix_1,
-  \qquad
-  x_4=-ix_1.
+  E_5=\operatorname{span}\left\{\begin{pmatrix}i\\-1\\i\\1\end{pmatrix}\right\}.
   \]
 
-  $x_1=t$ と書けば、解は
+  \item[(3)] 上の固有ベクトルを正規化して列に並べると
   \[
-  x=t\begin{pmatrix}1\\i\\1\\-i\end{pmatrix}
-  \quad(t\in\mathbb C)
-  \]
-  である。ここまでの計算で第1式から第3式は満たされている。
-  第4式についても
-  \[
-  -it-it-it-3(-it)=0
-  \]
-  となるので、この形のベクトルは元の4式を全て満たす。
-  従ってこれが解の全体である。$t=i$ と選んだベクトルを
-  \[
-  v=\begin{pmatrix}i\\-1\\i\\1\end{pmatrix}
-  \]
-
-  と書けば
-  \[
-  W_5=\ker(A-5I_4)=\langle v\rangle.
-  \]
-
-  ここで $\langle v\rangle$ は
-  $\{tv\mid t\in\mathbb C\}$、すなわち $v$ の全ての複素数倍を表す。
-
-  \item[(3)] 複素数 $a+bi$ の共役を
-  $\overline{a+bi}=a-bi$ とする。列ベクトル
-  $z=(z_1,z_2,z_3,z_4)^{\mathsf T}$ に対して
-  \[
-  z^*=(\overline{z_1},\overline{z_2},\overline{z_3},\overline{z_4})
-  \]
-  と書く。二つの複素ベクトル $z,w$ に対して
-  \[
-  z^*w=0
-  \]
-  なら「$z$ と $w$ は直交する」という。また $z^*z=1$ なら $z$ の長さは1である。
-  行列 $P$ が
-  \[
-  P^*P=I_4
-  \]
-  を満たすとき $P$ をユニタリ行列という。これは $P$ の各列の長さが1で、
-  異なる列同士が直交することを意味する。実際、$P$ の列を
-  $p_1,\ldots,p_4$ とすると、$P^*P$ の第 $(j,k)$ 成分は $p_j^*p_k$ なので、
-  対角成分が1、その他が0になる条件がそのまま現れる。
-
-  「$A$ をユニタリ行列で対角化する」とは、この条件を満たす $P$ を作り、
-  $P^*AP$ を対角行列にすることである。そのために、長さ1で互いに直交する
-  固有ベクトルを4本作り、それらを $P$ の列に並べる。
-
-  まず $W_1$ の方程式
-  \[
-  x_1-ix_2+x_3+ix_4=0
-  \]
-  を満たすベクトルとして
-  \[
-  w_1=(1,-i,0,0)^{\mathsf T},\qquad
-  w_2=(0,0,1,i)^{\mathsf T}
-  \]
-  を選ぶ。実際、$w_1$ を方程式の左辺へ代入すると
-  \[
-  1-i(-i)+0+i\cdot0=1+i^2=0,
-  \]
-  $w_2$ を代入すると
-  \[
-  0-i\cdot0+1+i(i)=1+i^2=0
-  \]
-  となるので、どちらも $W_1$ に属する。また
-  \[
-  w_1^*w_2=(1,i,0,0)
-  \begin{pmatrix}0\\0\\1\\i\end{pmatrix}=0
-  \]
-  なので互いに直交する。
-
-  三本目は、$W_1$ に属し、さらに $w_1,w_2$ の両方に直交するように決める。
-  $x=(x_1,x_2,x_3,x_4)^{\mathsf T}$ とおくと、必要な式は
-  \[
-  \begin{cases}
-  w_1^*x=x_1+ix_2=0,\\
-  w_2^*x=x_3-ix_4=0,\\
-  x_1-ix_2+x_3+ix_4=0.
-  \end{cases}
-  \]
-
-  第1、第2式から $x_1=-ix_2$, $x_3=ix_4$ である。これを第3式へ代入すると
-  \[
-  -ix_2-ix_2+ix_4+ix_4=0,
-  \]
-  すなわち $x_4=x_2$ となる。$x_2=1$ と選べば
-  \[
-  w_3=(-i,1,i,1)^{\mathsf T}
-  \]
-  を得る。
-
-  各ベクトルの長さは
-  \[
-  \|w_1\|=\sqrt{1+|-i|^2}=\sqrt2,\qquad
-  \|w_2\|=\sqrt{1+|i|^2}=\sqrt2,
-  \]
-  \[
-  \|w_3\|=\sqrt{|-i|^2+1+|i|^2+1}=2,
-  \qquad
-  \|v\|=\sqrt{|i|^2+|-1|^2+|i|^2+1}=2
-  \]
-  である。各ベクトルをその長さで割ると
-  \[
-  u_1=\frac1{\sqrt2}(1,-i,0,0)^{\mathsf T},\qquad
-  u_2=\frac1{\sqrt2}(0,0,1,i)^{\mathsf T},
-  \]
-  \[
-  u_3=\frac12(-i,1,i,1)^{\mathsf T},\qquad
-  u_4=\frac12(i,-1,i,1)^{\mathsf T}
-  \]
-  となる。$u_1,u_2,u_3$ は、いずれも長さ1で、異なる二本の内積が0である。
-  この性質をまとめて「正規直交」という。また、この三本は固有値1の固有ベクトルであり、
-  $u_4=v/2$ は固有値5の単位固有ベクトルである。異なる固有空間同士の直交性も
-  \[
-  u_1^*u_4=\frac{i-i}{2\sqrt2}=0,\qquad
-  u_2^*u_4=\frac{i-i}{2\sqrt2}=0,
-  \]
-  \[
-  u_3^*u_4=\frac{-1-1+1+1}{4}=0
-  \]
-  と成分から確認できる。
-
-  従って
-  \[
-  P=(u_1\ u_2\ u_3\ u_4)
-  =\begin{pmatrix}
+  P=\begin{pmatrix}
   1/\sqrt2&0&-i/2&i/2\\
   -i/\sqrt2&0&1/2&-1/2\\
   0&1/\sqrt2&i/2&i/2\\
   0&i/\sqrt2&1/2&1/2
-  \end{pmatrix}
+  \end{pmatrix}.
   \]
-  は $P^*P=I_4$ を満たすユニタリ行列である。
-  $P$ の各列は固有ベクトルなので、行列積を列ごとに書くと
-  \begin{align*}
-  AP
-  &=(Au_1\ Au_2\ Au_3\ Au_4)\\
-  &=(u_1\ u_2\ u_3\ 5u_4)\\
-  &=P\diag(1,1,1,5).
-  \end{align*}
-  ここで $\diag(1,1,1,5)$ は、対角成分が順に $1,1,1,5$ で、
-  それ以外の成分が0である行列を表す。
-  $P^*P=I_4$ だから $P^*$ は $P$ の逆行列 $P^{-1}$ である。
-  $AP=P\diag(1,1,1,5)$ の左から $P^*$ を掛けると
+  各列は正規直交しているから $P$ はユニタリ行列であり、
   \[
-  P^*AP=\diag(1,1,1,5)
+  P^*AP=\diag(1,1,1,5).
   \]
-  を得る。
-  \item[(4)] $X=X^*$ とし、$Xw=\lambda w$, $w\ne0$ とする。
-  $X=X^*$ は、$X$ が自分の共役転置と等しいというエルミート条件である。
-  固有値 $\lambda$ を一つの数として取り出すため、等式の左から $w^*$ を掛けると
+
+  \item[(4)] $Xw=\lambda w$、$w\ne0$ とする。$X=X^*$ より
   \[
-  w^*Xw=\lambda w^*w.
+  \overline{w^*Xw}=w^*X^*w=w^*Xw.
   \]
-  $X=X^*$ より
+  従って $w^*Xw\in\R$ であり、
   \[
-  \overline{w^*Xw}=w^*X^*w=w^*Xw
-  \]
-  なので $w^*Xw$ は実数である。また $w^*w>0$ は実数だから
-  \[
-  \lambda=\frac{w^*Xw}{w^*w}\in\mathbb R.
+  \lambda=\frac{w^*Xw}{w^*w}\in\R.
   \]
 \end{enumerate}
 \end{proof}
@@ -1297,95 +732,34 @@ $\d x\d y=r\,\d r\d\theta$ へ変わる。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] 条件を一つずつ図形へ直す。
-  $1\le x^2+y^2$ は原点中心・半径1の円の周と外側、
-  $x^2+y^2\le4$ は原点中心・半径2の円の周と内側を表す。
-  $0\le x\le1$ は二直線 $x=0$ と $x=1$ に挟まれた帯、$y\ge0$ は上半平面である。
-  従って $D$ は、二つの同心円に挟まれた輪帯のうち、第1象限にあって
-  さらに直線 $x=1$ より左側にある部分である。
+  \item[(1)] $D$ は第1象限の輪帯 $1\le x^2+y^2\le4$ を、直線 $x=1$ で切った左側である。
+  境界は半径1の四分円弧、半径2の $\pi/3\le\theta\le\pi/2$ の円弧、
+  $y$ 軸上の $1\le y\le2$、および $x=1$ 上の $0\le y\le\sqrt3$ からなる。
 
-  境界は四つの部分からなる。半径1の円弧
-  $x^2+y^2=1$ $(0\le x\le1,\ y\ge0)$、半径2の円弧
-  $x^2+y^2=4$ $(0\le x\le1,\ y\ge0)$、$y$ 軸上の線分
-  $x=0$ $(1\le y\le2)$、および直線上の線分
-  $x=1$ $(0\le y\le\sqrt3)$ である。
-  最後の線分の上端は、$x=1$ を $x^2+y^2=4$ へ代入した $y=\sqrt3$ であり、
-  下端は $x=1$, $y=0$、すなわち半径1の円と直線 $x=1$ の交点 $(1,0)$ である。
-  \item[(2)] $h(\theta)=\tan\theta+\sec\theta$ とおく。
-  $-\pi/2<\theta<\pi/2$ では
-  $h=(1+\sin\theta)/\cos\theta>0$ なので対数を微分できる。
-  \[
-  h'(\theta)=\sec^2\theta+\sec\theta\tan\theta
-  =\sec\theta(\sec\theta+\tan\theta).
-  \]
-  従って連鎖律により
+  \item[(2)]
   \[
   \frac{\d}{\d\theta}\log(\tan\theta+\sec\theta)
-  =\frac{h'(\theta)}{h(\theta)}
-  =\frac{\sec\theta(\sec\theta+\tan\theta)}
-         {\sec\theta+\tan\theta}
+  =\frac{\sec^2\theta+\sec\theta\tan\theta}
+         {\tan\theta+\sec\theta}
   =\sec\theta=\frac1{\cos\theta}.
   \]
-  \item[(3)]
-  \[
-  x=r\cos\theta,\qquad y=r\sin\theta
-  \]
-  とおく。ここで $r=\sqrt{x^2+y^2}$ は原点からの距離、$\theta$ は正の $x$ 軸からの角度である。
-  $x\ge0$, $y\ge0$ から $0\le\theta\le\pi/2$ であり、
-  $1\le x^2+y^2\le4$ は $1\le r\le2$ となる。また $x\le1$ は
-  \[
-  r\cos\theta\le1
-  \quad\Longleftrightarrow\quad
-  r\le\sec\theta
-  \]
-  である。従って $r$ の上端は $\min\{2,\sec\theta\}$ である。
-  $2=\sec\theta$ を解くと $\cos\theta=1/2$、すなわち
-  $\theta=\pi/3$ だから
+
+  \item[(3)] 極座標では
   \[
   \begin{cases}
-  1\le r\le\sec\theta,&0\le\theta\le\pi/3,\\
-  1\le r\le2,&\pi/3\le\theta\le\pi/2.
+  0\le\theta\le\pi/3,\quad 1\le r\le\sec\theta,\\
+  \pi/3\le\theta\le\pi/2,\quad 1\le r\le2.
   \end{cases}
   \]
-  Jacobian は
-  \[
-  \frac{\partial(x,y)}{\partial(r,\theta)}
-  =\begin{vmatrix}
-  \partial x/\partial r&\partial x/\partial\theta\\
-  \partial y/\partial r&\partial y/\partial\theta
-  \end{vmatrix}
-  =\begin{vmatrix}
-  \cos\theta&-r\sin\theta\\
-  \sin\theta&r\cos\theta
-  \end{vmatrix}=r.
-  \]
-  さらに $x/\sqrt{x^2+y^2}=\cos\theta$ なので、積分を
-  \[
-  I_1=\int_0^{\pi/3}\int_1^{\sec\theta}r\cos\theta\,\d r\d\theta,
-  \qquad
-  I_2=\int_{\pi/3}^{\pi/2}\int_1^2r\cos\theta\,\d r\d\theta
-  \]
-  と分ける。まず
+  従って
   \begin{align*}
-  I_1
-  &=\frac12\int_0^{\pi/3}(\sec^2\theta-1)\cos\theta\,\d\theta\\
-  &=\frac12\int_0^{\pi/3}(\sec\theta-\cos\theta)\,\d\theta\\
-  &=\frac12\left[\log(\sec\theta+\tan\theta)-\sin\theta\right]_0^{\pi/3}\\
-  &=\frac12\log(2+\sqrt3)-\frac{\sqrt3}{4}.
+  \iint_D\frac{x}{\sqrt{x^2+y^2}}\,\d x\d y
+  &=\int_0^{\pi/3}\int_1^{\sec\theta}r\cos\theta\,\d r\d\theta
+    +\int_{\pi/3}^{\pi/2}\int_1^2r\cos\theta\,\d r\d\theta\\
+  &=\frac12\left[\log(\sec\theta+\tan\theta)-\sin\theta\right]_0^{\pi/3}
+    +\frac32[\sin\theta]_{\pi/3}^{\pi/2}\\
+  &=\frac32-\sqrt3+\frac12\log(2+\sqrt3).
   \end{align*}
-  また
-  \begin{align*}
-  I_2
-  &=\int_{\pi/3}^{\pi/2}
-    \left[\frac{r^2}{2}\cos\theta\right]_{r=1}^{r=2}\d\theta\\
-  &=\frac32\int_{\pi/3}^{\pi/2}\cos\theta\,\d\theta\\
-  &=\frac32\left[\sin\theta\right]_{\pi/3}^{\pi/2}
-  =\frac32\left(1-\frac{\sqrt3}{2}\right).
-  \end{align*}
-  よって
-  \[
-  I_1+I_2=\frac32-\sqrt3+\frac12\log(2+\sqrt3).
-  \]
 \end{enumerate}
 \end{proof}
 
@@ -1414,55 +788,25 @@ $\{d(x,a)\mid a\in A\}$ の下限である。下限は実際の最小値とし�
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] 任意の $a\in A$ に対し、三角不等式から
+  \item[(1)] 任意の $a\in A$ に対し
   \[
-  d(x,a)\le d(x,y)+d(y,a)
+  d(x,A)\le d(x,a)\le d(x,y)+d(y,a).
   \]
-  である。また $d(x,A)$ は $\{d(x,a)\mid a\in A\}$ の下限だから
+  $a$ について下限を取れば
+  $d(x,A)-d(y,A)\le d(x,y)$。$x,y$ を交換した不等式と合わせて
   \[
-  d(x,A)\le d(x,a)\le d(x,y)+d(y,a)
+  |d(x,A)-d(y,A)|\le d(x,y).
   \]
-  が全ての $a\in A$ について成り立つ。右端について $a\in A$ の下限を取ると
-  \[
-  d(x,A)\le d(x,y)+\inf_{a\in A}d(y,a)
-  =d(x,y)+d(y,A),
-  \]
-  従って $d(x,A)-d(y,A)\le d(x,y)$ である。
-  $x,y$ を交換すれば
-  \[
-  d(y,A)-d(x,A)\le d(y,x)=d(x,y)
-  \]
-  も得られる。二つの不等式を合わせて
-  \[
-  |d(x,A)-d(y,A)|\le d(x,y)
-  \]
-  となる。
 
-  \item[(2)] $f(x)=d(x,A)$ とおく。(1) より $|f(x)-f(y)|\le d(x,y)$ だから、$f$ は $1$-Lipschitz である。
-  実際、任意の $\varepsilon>0$ に対して $\delta=\varepsilon$ と取れば
-  \[
-  d(x,y)<\delta
-  \quad\Longrightarrow\quad
-  |f(x)-f(y)|\le d(x,y)<\varepsilon.
-  \]
-  従って $f$ は各 $x\in X$ で連続である。
+  \item[(2)] (1) より $f$ は $1$-Lipschitz、従って連続である。
 
-  \item[(3)] $x$ が $A$ の触点であるとは、任意の $\varepsilon>0$ に対して
-  $B(x,\varepsilon)\cap A\ne\varnothing$ となること、すなわち $x\in\overline A$ となることである。
+  \item[(3)] $x$ が $A$ の触点なら、任意の $\varepsilon>0$ に対して
+  $a\in A$ で $d(x,a)<\varepsilon$ となるものがある。従って
+  $0\le d(x,A)<\varepsilon$、ゆえに $d(x,A)=0$ である。
 
-  $x$ が $A$ の触点なら、任意の $\varepsilon>0$ に対して
-  $a\in B(x,\varepsilon)\cap A$ を取れるので
-  \[
-  0\le d(x,A)\le d(x,a)<\varepsilon.
-  \]
-  これは全ての $\varepsilon>0$ について成り立つから $d(x,A)=0$ である。
-
-  逆に $d(x,A)=0$ とする。もしある $\varepsilon>0$ に対して
+  逆に $d(x,A)=0$ とする。ある $\varepsilon>0$ で
   $B(x,\varepsilon)\cap A=\varnothing$ なら、全ての $a\in A$ に対して
-  $d(x,a)\ge\varepsilon$ となり
-  \[
-  d(x,A)=\inf_{a\in A}d(x,a)\ge\varepsilon>0
-  \]
-  となって矛盾する。従って任意の開球 $B(x,\varepsilon)$ は $A$ と交わり、$x$ は $A$ の触点である。
+  $d(x,a)\ge\varepsilon$ となり $d(x,A)\ge\varepsilon$、矛盾。
+  よって $x$ は $A$ の触点である。
 \end{enumerate}
 \end{proof}

@@ -30,87 +30,39 @@ $W$ の外へ出ない、という条件である。
 $W$ は $A$ で不変だから、掛けた結果も $W$ に入る。
 \end{memo*}
 \begin{proof}[解答]
-行列を $A$ と書く。(1) (2) に共通する準備として、まず固有値を求める。
+係数行列を $A$ とする。
 \[
-A-\lambda I=\begin{pmatrix}
-1-\lambda&0&0\\
-1&3-\lambda&-3\\
--2&2&-4-\lambda
-\end{pmatrix}
+\det(A-\lambda I)
+=(1-\lambda)(\lambda+3)(\lambda-2).
 \]
-であり、第1行は $(1,1)$ 成分以外が0なので、第1行に沿って余因子展開すると
-\begin{align*}
-|A-\lambda I|
-&=(1-\lambda)\begin{vmatrix}3-\lambda&-3\\2&-4-\lambda\end{vmatrix}\\
-&=(1-\lambda)\{(3-\lambda)(-4-\lambda)+6\}\\
-&=(1-\lambda)(\lambda^2+\lambda-6)\\
-&=(1-\lambda)(\lambda+3)(\lambda-2).
-\end{align*}
-従って固有値は $\lambda=1,2,-3$ の三つで、互いに相異なる。
+対応する固有ベクトルとして
+\[
+v_1=\begin{pmatrix}-4\\11\\6\end{pmatrix}\ (\lambda=1),\qquad
+v_2=\begin{pmatrix}0\\3\\1\end{pmatrix}\ (\lambda=2),\qquad
+v_3=\begin{pmatrix}0\\1\\2\end{pmatrix}\ (\lambda=-3)
+\]
+を取れる。固有値が相異なるので $v_1,v_2,v_3$ は基底をなす。
 
-各 $\lambda$ について $(A-\lambda I)v=0$ を解けば固有ベクトルが得られる。
-$\lambda=1$ なら
+$A$-不変部分空間 $W$ は、これらの固有ベクトルの一部で生成される。
+実際、$w=\sum c_kv_k\in W$ に対し
 \[
-A-I=\begin{pmatrix}0&0&0\\1&2&-3\\-2&2&-5\end{pmatrix}
+\prod_{j\ne k}\frac{A-\lambda_jI}{\lambda_k-\lambda_j}\,w=c_kv_k\in W
 \]
-なので、方程式は
-\[
-x+2y-3z=0,\qquad -2x+2y-5z=0
-\]
-の二本である。第1式から第2式を引くと $3x+2z=0$、すなわち $x=-\frac23z$ である。
-これを第1式へ戻して3倍すると $-2z+6y-9z=0$ となり $y=\frac{11}6z$ を得る。
-分数を避けて $z=6$ と取れば $v_1=(-4,11,6)^{\mathsf T}$ である。
+となる。逆に、それらの任意の組の生成する空間は明らかに $A$-不変である。
+従って
+\begin{enumerate}
+  \item[(1)]
+  \[
+  W=\langle v_1\rangle,\qquad\langle v_2\rangle,\qquad\langle v_3\rangle.
+  \]
 
-同様に $\lambda=2$ では
-\[
-A-2I=\begin{pmatrix}-1&0&0\\1&1&-3\\-2&2&-6\end{pmatrix}
-\]
-であり、第1行から $x=0$、これを第2行へ入れて $y=3z$ を得る。
-第3行 $-2x+2y-6z=0$ は同じ条件である。$z=1$ と取れば $v_2=(0,3,1)^{\mathsf T}$ である。
-
-また $\lambda=-3$ では
-\[
-A+3I=\begin{pmatrix}4&0&0\\1&6&-3\\-2&2&-1\end{pmatrix}
-\]
-であり、第1行から $x=0$、これを第2行へ入れて $z=2y$ を得る。
-第3行 $-2x+2y-z=0$ も同じ条件である。$y=1$ と取れば $v_3=(0,1,2)^{\mathsf T}$ である。
-
-以上より
-\[
-\lambda_1=1:\ v_1=\begin{pmatrix}-4\\11\\6\end{pmatrix},\qquad
-\lambda_2=2:\ v_2=\begin{pmatrix}0\\3\\1\end{pmatrix},\qquad
-\lambda_3=-3:\ v_3=\begin{pmatrix}0\\1\\2\end{pmatrix}
-\]
-である。固有値が相異なるので $v_1,v_2,v_3$ は一次独立であり、$\R^3$ の基底をなす。
-
-次に、不変部分空間がこの三方向の組み合わせに限ることを見る。
-$W$ を不変部分空間、$w=c_1v_1+c_2v_2+c_3v_3\in W$ とし、$c_k\ne0$ とする。
-$\{i,j,k\}=\{1,2,3\}$ とすると $(A-\mu I)v_m=(\lambda_m-\mu)v_m$ より
-\[
-(A-\lambda_iI)(A-\lambda_jI)w
-=c_k(\lambda_k-\lambda_i)(\lambda_k-\lambda_j)v_k
-\]
-である（$v_i,v_j$ の項はそれぞれ因子 $\lambda_i-\lambda_i$, $\lambda_j-\lambda_j$ で消える）。
-$W$ は $A$ で不変で和と定数倍について閉じているから左辺は $W$ に属し、
-固有値が相異なるので係数は0でない。よって $v_k\in W$ である。
-従って $W$ は、$W$ の元の展開に現れる $v_k$ たちで生成され、その個数が $\dim W$ に等しい。
-逆に $A(av_i+bv_j)=\lambda_iav_i+\lambda_jbv_j$ より、$v_k$ たちで生成される部分空間は
-どれも不変である。
-
-すなわち不変部分空間は $v_1,v_2,v_3$ のうち $\dim W$ 個を選んで生成したものに限り、
-逆にそれらはすべて不変である。
-
-(1) $\dim W=1$ のとき、選ぶ方向は1つなので
-\[
-\langle v_1\rangle,\qquad\langle v_2\rangle,\qquad\langle v_3\rangle
-\]
-の3つで全てである。
-
-(2) $\dim W=2$ のとき、選ぶ方向は2つなので
-\[
-\langle v_1,v_2\rangle,\qquad\langle v_1,v_3\rangle,\qquad\langle v_2,v_3\rangle
-\]
-の3つで全てである。
+  \item[(2)]
+  \[
+  W=\langle v_1,v_2\rangle,\qquad
+  \langle v_1,v_3\rangle,\qquad
+  \langle v_2,v_3\rangle.
+  \]
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第2問｜近似恒等核}{2017-b-2}
@@ -139,59 +91,33 @@ $\varepsilon$ だけが残り、$\varepsilon$ の任意性で終わる。
 $\varepsilon/2$ ずつに割り振って $N$ を取る必要はない。
 \end{memo*}
 \begin{proof}[解答]
-$f$ は有界なので、ある $M>0$ が存在して
-\[
-|f(x)|\le M\qquad(x\ge0)
-\tag{$*$}
-\]
-が成り立つ。
+$|f(x)|\le M$ $(x\ge0)$ となる $M>0$ を取る。
 \begin{enumerate}
-  \item[(1)] 式 ($*$) より
+  \item[(1)]
   \[
-  |I_n|\le\int_0^\infty n|f(x)|e^{-nx}\,\d x
-  \le\int_0^\infty nMe^{-nx}\,\d x
+  |I_n|\le M\int_0^\infty ne^{-nx}\,\d x=M<\infty.
   \]
-  である。$(-e^{-nx})'=ne^{-nx}$ だから
-  \[
-  \int_0^\infty ne^{-nx}\,\d x=\left[-e^{-nx}\right]_0^\infty=1
-  \]
-  であり、よって $|I_n|\le M<\infty$、すなわち $I_n$ は有限である。
 
-  \item[(2)] 任意の $\delta>0$ に対し、同じ評価と同じ原始関数から
+  \item[(2)] 任意の $\delta>0$ に対して
   \[
   \left|\int_\delta^\infty nf(x)e^{-nx}\,\d x\right|
-  \le M\int_\delta^\infty ne^{-nx}\,\d x=Me^{-n\delta}
+  \le M\int_\delta^\infty ne^{-nx}\,\d x
+  =Me^{-n\delta}\longrightarrow0.
   \]
-  である。$\delta$ は $n$ に依らないので $\lim_{n\to\infty}e^{-n\delta}=0$ であり、
-  従って $\int_\delta^\infty nf(x)e^{-nx}\,\d x\to0$ である。
 
-  \item[(3)] (1) で得た $\int_0^\infty ne^{-nx}\,\d x=1$ を使うと
+  \item[(3)] $\int_0^\infty ne^{-nx}\,\d x=1$ より
   \[
-  I_n-f(0)
-  =\int_0^\infty nf(x)e^{-nx}\,\d x-f(0)\int_0^\infty ne^{-nx}\,\d x
-  =\int_0^\infty n\{f(x)-f(0)\}e^{-nx}\,\d x
+  I_n-f(0)=\int_0^\infty n\{f(x)-f(0)\}e^{-nx}\,\d x.
   \]
-  と書ける。$f$ は0で連続なので、任意の $\varepsilon>0$ に対しある $\delta>0$ が存在して
+  任意の $\varepsilon>0$ に対し、連続性から
+  $0\le x\le\delta$ なら $|f(x)-f(0)|<\varepsilon$ となる $\delta>0$ を取ると
   \[
-  0\le x\le\delta\quad\Longrightarrow\quad|f(x)-f(0)|<\varepsilon
-  \]
-  となる。また式 ($*$) より、全ての $x\ge0$ で $|f(x)-f(0)|\le2M$ である。
-  積分を $[0,\delta]$ と $[\delta,\infty)$ に分け、前半に連続性、後半に有界性を使うと
-  \begin{align*}
   |I_n-f(0)|
-  &\le\int_0^\delta n|f(x)-f(0)|e^{-nx}\,\d x
-    +\int_\delta^\infty n|f(x)-f(0)|e^{-nx}\,\d x\\
-  &\le\varepsilon\int_0^\delta ne^{-nx}\,\d x
-    +2M\int_\delta^\infty ne^{-nx}\,\d x\\
-  &\le\varepsilon+2Me^{-n\delta}
-  \end{align*}
-  を得る。最後の行では $\int_0^\delta ne^{-nx}\,\d x\le1$ と (2) の計算を使った。
-  $\delta$ は $n$ に依らないので、$n\to\infty$ として
-  \[
-  \limsup_{n\to\infty}|I_n-f(0)|\le\varepsilon
+  \le\varepsilon\int_0^\delta ne^{-nx}\,\d x
+  +2M\int_\delta^\infty ne^{-nx}\,\d x
+  \le\varepsilon+2Me^{-n\delta}.
   \]
-  を得る。$\varepsilon>0$ は任意だったから $\limsup_{n\to\infty}|I_n-f(0)|=0$、
-  すなわち $I_n\to f(0)$ である。
+  $n\to\infty$ とし、$\varepsilon>0$ の任意性を用いれば $I_n\to f(0)$。
 \end{enumerate}
 \end{proof}
 
@@ -216,39 +142,25 @@ $\R$ なら Heine--Borel の定理で $[1,2]$ はコンパクトだが、$\Q$ �
 だったから、そのような $U,V$ を一組作れば連結でないと言える。
 \end{memo*}
 \begin{proof}[解答]
-全体空間は $\R$ ではなく $\Q$ なので、以下の判定は全て距離空間 $\Q$ の中で行う。
 \begin{enumerate}
-\item[(1)] 補集合を考えると
-\[
-\Q\setminus A=\{x\in\Q\mid x<1\ \text{または}\ 2<x\}
-=\bigl((-\infty,1)\cup(2,\infty)\bigr)\cap\Q
-\]
-であり、$(-\infty,1)$ と $(2,\infty)$ は開だから $\Q\setminus A$ は $\Q$ で開である。
-よって $A$ は $\Q$ の閉集合であり、命題 (1) は正しい。
+  \item[(1)] 正しい。
+  \[
+  \Q\setminus A=\Q\cap\{(-\infty,1)\cup(2,\infty)\}
+  \]
+  は $\Q$ で開だから、$A$ は閉である。
 
-\item[(2)] $1<\sqrt2<2$ であり $\Q$ は $\R$ に稠密だから、$A$ の中に
-\[
-x_n\in\Q,\qquad x_n\to\sqrt2
-\]
-となる数列を取れる。どの部分列も $\R$ では $\sqrt2$ に収束するが $\sqrt2\notin A$ なので、
-この数列は $A$ 内で収束する部分列をもたない。
-距離空間ではコンパクトなら任意の数列が収束部分列をもつので、$A$ はコンパクトではない。
-よって命題 (2) は正しくない。
+  \item[(2)] 正しくない。$x_n\in A$, $x_n\to\sqrt2$ となる有理数列を取る。
+  その任意の部分列も $\R$ では $\sqrt2\notin\Q$ に収束するので、
+  $A$ 内で収束する部分列をもたない。従って $A$ はコンパクトでない。
 
-\item[(3)] 
-\[
-U=A\cap(-\infty,\sqrt2),\qquad V=A\cap(\sqrt2,\infty)
-\]
-とおくと、$U,V$ は $A$ において開である。$\sqrt2\notin\Q$ だから
-\[
-A=U\cup V,\qquad U\cap V=\varnothing
-\]
-であり、$1\in U$ と $3/2\in V$（$(3/2)^2=9/4>2$ による）よりともに空でない。
-従って $A$ は2つの開集合に分離できるので、$A$ は連結ではない。
-よって命題 (3) は正しくない。
+  \item[(3)] 正しくない。
+  \[
+  U=A\cap(-\infty,\sqrt2),\qquad
+  V=A\cap(\sqrt2,\infty)
+  \]
+  は空でない互いに素な $A$ の開集合で、$\sqrt2\notin\Q$ より
+  $U\cup V=A$。従って $A$ は連結でない。
 \end{enumerate}
-
-以上より、$A$ は $\Q$ の閉集合であるが、コンパクトでも連結でもない。
 \end{proof}
 
 \section{専門科目（8題から2題選択）}

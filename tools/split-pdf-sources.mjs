@@ -35,8 +35,18 @@ function category(title, file) {
 // 演習用と解答編の原稿。どちらも見出しを本文に出さないので、章・節・問題名は
 // \\wbchapter / \\wbsection / \\wbproblem へ畳む（定義は workbook-layout.tex）。
 // 問題文の終わりには \\wbend を置き、その下を演習用では解答欄、解答編では解答に使う。
-// 解答編だけ、問題に続く memo*（解答の見通し）と proof（解答）をそのまま残す。
+// 解答編だけ、問題に続く proof（解答）を残す。
+// memo*（解答の見通し）は教科書・Web 用の補助なので、簡潔さを優先する解答PDFでは落とす。
 const problemHead = /\\begin\{problem\}\{([^{}]*)\}\{[^{}]*\}\n/g;
+
+function answerSource(solution, file, title) {
+  const answer = solution.replace(
+    /^\\begin\{memo\*\}[\s\S]*?\\end\{memo\*\}\s*/,
+    "",
+  );
+  if (!answer) throw new Error(`${file}: 解答がありません: ${title}`);
+  return answer;
+}
 
 function problemChunks(body) {
   const heads = [...body.matchAll(problemHead)];
@@ -67,7 +77,7 @@ function workbookSource(source, sections, file, { chapterTitle, withSolution } =
       lines.push(`\\wbproblem{${problem.title}}`, problem.statement, "\\wbend");
       if (withSolution) {
         if (!problem.solution) throw new Error(`${file}: 解答がありません: ${problem.title}`);
-        lines.push(problem.solution);
+        lines.push(answerSource(problem.solution, file, problem.title));
       }
       lines.push("");
       count += 1;

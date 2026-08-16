@@ -38,94 +38,37 @@ $A=-\sqrt[10]{2}\,uu^{\mathsf T}$ となり、10乗を計算できる。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] 直交行列は $P^{\mathsf T}P=I$ を満たす。この行列積の $(j,k)$ 成分は
-「第 $j$ 列と第 $k$ 列の内積」なので、同じ列の内積は1、
-異なる列の内積は0になる。つまり各列の長さは1で、異なる二列は直交する。
-この性質を「列が正規直交している」という。まず第1列と第2列の内積から
-\[
-\frac1{\sqrt6}+qr-\frac1{\sqrt6}=qr=0.
-\]
-第2列のノルムの2乗は $1/2+r^2+1/2=1+r^2$ であり、これが1に等しいので $r=0$。
-第1列のノルムの2乗は $1/3+q^2+1/3$ なので、これが1に等しいことから
-$q^2=1/3$、すなわち $q=\varepsilon/\sqrt3$（$\varepsilon=\pm1$）である。
-第3列を $(p,s,-1/\sqrt6)^{\mathsf T}$ と書く。$r=0$ なので、第2列との直交条件は
-\[
-\frac p{\sqrt2}+r s-\frac1{\sqrt2}\cdot\frac1{\sqrt6}
-=\frac p{\sqrt2}-\frac1{\sqrt{12}}=0
-\]
-となる。両辺に $\sqrt2$ を掛けると
-$p=\sqrt2/\sqrt{12}=\sqrt{2/12}=1/\sqrt6$ である。第1列との直交条件は
-\[
-\frac p{\sqrt3}+qs+\left(-\frac1{\sqrt3}\right)\left(-\frac1{\sqrt6}\right)
-=\frac p{\sqrt3}+qs+\frac1{\sqrt{18}}=0.
-\]
-$p=1/\sqrt6$ より第1項も $1/\sqrt{18}$ なので
-\[
-qs=-\frac2{\sqrt{18}}=-\frac2{3\sqrt2}=-\frac{\sqrt2}3
-\]
-であり、$q=\varepsilon/\sqrt3$ を代入して
-\[
-s=-\frac{\sqrt2}3\cdot\frac{\sqrt3}{\varepsilon}
-=-\varepsilon\frac{\sqrt6}3
-=-\varepsilon\sqrt{\frac23}
-\]
-を得る（$\varepsilon^{-1}=\varepsilon$ を使った）。従って全ての組は
-\[
-p=\frac1{\sqrt6},\quad q=\frac{\varepsilon}{\sqrt3},\quad r=0,
-\quad s=-\varepsilon\sqrt{\frac23}.
-\]
-実際、このとき第3列のノルムの2乗も
-$1/6+2/3+1/6=1$ となり、条件をすべて満たしている。
-\item[(2)] $P^{\mathsf T}=P^{-1}$ なので、指数法則を使うと
-\begin{align*}
-(P^{\mathsf T})^{10}P^{19}(P^{\mathsf T})^{10}
-&=P^{-10}P^{19}P^{-10}\\
-&=P^{-1}=P^{\mathsf T}.
-\end{align*}
+  \item[(1)] 列ベクトルの正規直交条件から
+  \[
+  r=0,\qquad q=\frac{\varepsilon}{\sqrt3},\qquad
+  p=\frac1{\sqrt6},\qquad
+  s=-\varepsilon\sqrt{\frac23}
+  \qquad(\varepsilon=\pm1).
+  \]
+  これらはいずれも第3列の長さも1にするので、全ての組である。
 
-\item[(3)] 固有多項式は $x^2(x+\sqrt[10]{2})$ だから、固有値は0（重複度2）と
-$-\sqrt[10]{2}$（重複度1）である。与えられた固有ベクトルを長さ $\sqrt2$ で割り
-\[
-u=\frac1{\sqrt2}(1,0,1)^{\mathsf T}
-\]
-とする。$A$ は直交行列で対角化されるという仮定から、固有ベクトルだけでできた、
-長さ1で互いに直交する基底を選べる。そこで $u$ に直交する0固有空間から
-長さ1で互いに直交する二本を $u_2,u_3$ と選ぶ。
-$Q=(u\ u_2\ u_3)$ の各列は長さ1で互いに直交するため
-$Q^{\mathsf T}Q=I$、すなわち $Q$ は直交行列であり
-\begin{align*}
-A
-&=Q\diag(-\sqrt[10]{2},0,0)Q^{\mathsf T}\\
-&=-\sqrt[10]{2}\,uu^{\mathsf T}
-  +0\,u_2u_2^{\mathsf T}+0\,u_3u_3^{\mathsf T}\\
-&=-\sqrt[10]{2}\,uu^{\mathsf T}.
-\end{align*}
-ここで $u$ は長さ1なので $u^{\mathsf T}u=1$ であり
-\[
-(uu^{\mathsf T})^2=u(u^{\mathsf T}u)u^{\mathsf T}=uu^{\mathsf T}
-\]
-である。これを繰り返せば全ての $k\ge1$ で $(uu^{\mathsf T})^k=uu^{\mathsf T}$ となる。従って
-\[
-A^{10}=(-\sqrt[10]{2})^{10}(uu^{\mathsf T})^{10}
-=2\,uu^{\mathsf T}.
-\]
-ここで
-\[
-uu^{\mathsf T}
-=\frac12\begin{pmatrix}1\\0\\1\end{pmatrix}
-\begin{pmatrix}1&0&1\end{pmatrix}
-=\frac12\begin{pmatrix}1&0&1\\0&0&0\\1&0&1\end{pmatrix}
-\]
-だから
-\[
-A^{10}=\begin{pmatrix}1&0&1\\0&0&0\\1&0&1\end{pmatrix}.
-\]
-\item[(4)] 直交行列 $P$ について $P^{-1}AP=D$ が実対角なら
-$A=PDP^{\mathsf T}$ である。転置すると
-\[
-A^{\mathsf T}=(PDP^{\mathsf T})^{\mathsf T}=PD^{\mathsf T}P^{\mathsf T}=PDP^{\mathsf T}=A
-\]
-となるので $A$ は対称である。
+  \item[(2)] $P^{\mathsf T}=P^{-1}$ より
+  \[
+  (P^{10})^{\mathsf T}P^{19}(P^{\mathsf T})^{10}
+  =P^{-10}P^{19}P^{-10}=P^{-1}=P^{\mathsf T}.
+  \]
+
+  \item[(3)] 固有値は $0,0,-\sqrt[10]{2}$ である。
+  \[
+  u=\frac1{\sqrt2}(1,0,1)^{\mathsf T}
+  \]
+  とすると、直交対角化より $A=-\sqrt[10]{2}\,uu^{\mathsf T}$。
+  $u^{\mathsf T}u=1$ だから $(uu^{\mathsf T})^k=uu^{\mathsf T}$ であり、
+  \[
+  A^{10}=2uu^{\mathsf T}
+  =\begin{pmatrix}1&0&1\\0&0&0\\1&0&1\end{pmatrix}.
+  \]
+
+  \item[(4)] 直交行列 $Q$ と実対角行列 $D$ により
+  $Q^{-1}AQ=D$ と書けるなら $A=QDQ^{\mathsf T}$。従って
+  \[
+  A^{\mathsf T}=QD^{\mathsf T}Q^{\mathsf T}=QDQ^{\mathsf T}=A.
+  \]
 \end{enumerate}
 \end{proof}
 
@@ -164,58 +107,35 @@ $Q(x,\psi(x))-Q(x,\phi(x))$ を二変数の連鎖律で微分する。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] 固定端点の積分を
-\[
-F(x)=\int_c^d f(x,y)\,\d y
-\]
-とおく。微積分学の基本定理により
-\[
-\frac{f(x+h,y)-f(x,y)}h
-=\int_0^1\frac{\partial f}{\partial x}(x+\theta h,y)\,\d\theta.
-\]
-$\partial f/\partial x$ の連続性により右辺は $h\to0$ で $\dfrac{\partial f}{\partial x}(x,y)$ へ一様に収束するから、
-\[
-F'(x)
-=\lim_{h\to0}\int_c^d\frac{f(x+h,y)-f(x,y)}h\,\d y
-=\int_c^d\frac{\partial f}{\partial x}(x,y)\,\d y.
-\]
+  \item[(1)] $F(x)=\int_c^d f(x,y)\,\d y$ とおく。差商は
+  \[
+  \frac{F(x+h)-F(x)}h
+  =\int_c^d\int_0^1 f_x(x+th,y)\,\d t\d y.
+  \]
+  $f_x$ の連続性により $h\to0$ で被積分関数は一様に $f_x(x,y)$ へ収束するから
+  \[
+  F'(x)=\int_c^d f_x(x,y)\,\d y.
+  \]
 
-\item[(2)] 可変端点について
-\[
-Q(x,v)=\int_c^v f(x,y)\,\d y
-\]
-とおくと、固定端点の結果と微積分学の基本定理から
-\[
-\frac{\partial Q}{\partial x}(x,v)=\int_c^v\frac{\partial f}{\partial x}(x,y)\,\d y,\qquad
-\frac{\partial Q}{\partial v}(x,v)=f(x,v).
-\]
-$\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y
-=Q(x,\psi(x))-Q(x,\phi(x))$ に連鎖律を使えば
-\[
-\frac{\d}{\d x}\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y
-=f(x,\psi(x))\psi'(x)-f(x,\phi(x))\phi'(x)
-+\int_{\phi(x)}^{\psi(x)}\frac{\partial f}{\partial x}(x,y)\,\d y.
-\]
-\item[(3)] この公式を使うため
-\[
-f(x,y)=\frac{\sin(xy)}y,\qquad
-\frac{\partial f}{\partial x}(x,y)=\cos(xy),\qquad
-\phi(x)=x^2,\quad\psi(x)=x^3
-\]
-とおくと
-\begin{align*}
-p'(x)
-&=f(x,x^3)\,3x^2-f(x,x^2)\,2x
-  +\int_{x^2}^{x^3}\cos(xy)\,\d y\\
-&=\frac{3\sin(x^4)-2\sin(x^3)}x
-  +\left[\frac{\sin(xy)}x\right]_{y=x^2}^{x^3}\\
-&=\frac{3\sin(x^4)-2\sin(x^3)}x
-  +\frac{\sin(x^4)-\sin(x^3)}x.
-\end{align*}
-従って
-\[
-p'(x)=\frac{4\sin(x^4)-3\sin(x^3)}x.
-\]
+  \item[(2)] $Q(x,v)=\int_c^v f(x,y)\,\d y$ とおくと
+  \[
+  Q_x(x,v)=\int_c^v f_x(x,y)\,\d y,\qquad Q_v(x,v)=f(x,v).
+  \]
+  $\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y
+  =Q(x,\psi(x))-Q(x,\phi(x))$ に連鎖律を用いれば
+  \[
+  \frac{\d}{\d x}\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y
+  =f(x,\psi(x))\psi'(x)-f(x,\phi(x))\phi'(x)
+  +\int_{\phi(x)}^{\psi(x)}f_x(x,y)\,\d y.
+  \]
+
+  \item[(3)] $f(x,y)=\sin(xy)/y$, $\phi(x)=x^2$, $\psi(x)=x^3$ として (2) を使うと
+  \begin{align*}
+  p'(x)
+  &=\frac{3\sin(x^4)-2\sin(x^3)}x
+    +\int_{x^2}^{x^3}\cos(xy)\,\d y\\
+  &=\frac{4\sin(x^4)-3\sin(x^3)}x.
+  \end{align*}
 \end{enumerate}
 \end{proof}
 
@@ -246,43 +166,35 @@ $K$ から距離 $r$ 未満の点が $F$ に入ることはできない。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] 任意の $z\in K$ に対し三角不等式から
-\[
-d(x,z)\le d(x,y)+d(y,z)
-\]
-である。$z\in K$ について右辺の下限を取ると
-$\rho(x)\le d(x,y)+\rho(y)$、すなわち $\rho(x)-\rho(y)\le d(x,y)$ を得る。
-$x,y$ を交換した式と合わせて
-\[
-|\rho(x)-\rho(y)|\le d(x,y)
-\]
-となる。
+  \item[(1)] 任意の $z\in K$ に対し
+  \[
+  \rho(x)\le d(x,z)\le d(x,y)+d(y,z).
+  \]
+  $z$ について下限を取り、$x,y$ を交換した式と合わせれば
+  \[
+  |\rho(x)-\rho(y)|\le d(x,y).
+  \]
 
-\item[(2)] $z_1,z_2\in X$ に対しても三角不等式から
-\[
-|d(x,z_1)-d(x,z_2)|\le d(z_1,z_2)
-\]
-である。従って $z\mapsto d(x,z)$ は1-Lipschitz、特に $K$ 上連続である。
-$K$ はコンパクトなので最小値を取る点 $a\in K$ が存在し
-\[
-d(x,a)=\min_{z\in K}d(x,z)=\rho(x).
-\]
+  \item[(2)] $z\mapsto d(x,z)$ は $K$ 上連続である。$K$ はコンパクトだから
+  最小値を取る $a\in K$ があり、
+  \[
+  \rho(x)=\min_{z\in K}d(x,z)=d(x,a).
+  \]
 
-\item[(3)] $F=X\setminus L$ とおく。$F=\varnothing$ なら $L=X$ なので、任意の $r>0$ で
-$\{x\mid\rho(x)<r\}\subset L$ が成り立つ。以下では $F\ne\varnothing$ とする。
-$L$ が開なのでその補集合 $F$ は閉であり、$K\subset L$ より $K\cap F=\varnothing$ である。
-$h(z)=d(z,F)$ は、上と同じ三角不等式の評価により1-Lipschitz、特に $K$ 上連続である。
-また各 $z\in K$ については $h(z)>0$ である。実際 $h(z)=0$ なら、
-$d(z,f_n)<1/n$ を満たす $f_n\in F$ が取れて $f_n\to z$ となり、
-$F$ が閉であることから $z\in F$、これは $K\cap F=\varnothing$ に反する。
-従って連続関数 $h$ は空でないコンパクト集合 $K$ 上で最小値を取り、その値は正である。
-\[
-\delta:=\min_{z\in K}d(z,F)>0.
-\]
-$0<r<\delta$ とする。$\rho(x)<r$ なら、最短点の存在により
-$d(x,a)=\rho(x)<r$ となる $a\in K$ がある。もし $x\in F$ なら
-$d(a,F)\le d(a,x)<r<\delta$ となり矛盾する。従って $x\in L$ であり、
-$\{x\mid\rho(x)<r\}\subset L$ を得る。
+  \item[(3)] 各 $z\in K$ に対し、$L$ が開なので
+  $B(z,2\varepsilon_z)\subset L$ となる $\varepsilon_z>0$ を取る。
+  コンパクト性より
+  \[
+  K\subset B(z_1,\varepsilon_{z_1})\cup\cdots\cup
+  B(z_m,\varepsilon_{z_m}).
+  \]
+  $r=\min_i\varepsilon_{z_i}>0$ とする。$\rho(x)<r$ なら (2) より
+  $d(x,a)<r$ となる $a\in K$ がある。ある $i$ で
+  $d(a,z_i)<\varepsilon_{z_i}$ だから
+  \[
+  d(x,z_i)<r+\varepsilon_{z_i}\le2\varepsilon_{z_i}.
+  \]
+  従って $x\in L$、すなわち $K_r\subset L$。
 \end{enumerate}
 \end{proof}
 

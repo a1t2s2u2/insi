@@ -29,93 +29,33 @@ $P^{-1}AP$ の第 $i$ 列になり、第 $i$ 成分より下が全て0になる�
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] (i) $w_1,\ldots,w_m\in V$ が\textbf{一次独立}であるとは、
-任意の $a_1,\ldots,a_m\in\R$ について
-\[
-\sum_{i=1}^m a_iw_i=0\quad\Longrightarrow\quad
-a_1=\cdots=a_m=0
-\]
-が成り立つことをいう。
+  \item[(1)] (i) $w_1,\ldots,w_m$ が一次独立であるとは
+  \[
+  \sum_{i=1}^m a_iw_i=0\quad\Longrightarrow\quad a_1=\cdots=a_m=0
+  \]
+  が任意の $a_i\in\R$ に対して成り立つことをいう。
 
-(ii) $v_1,\ldots,v_n\in V$ が $V$ の\textbf{基底}であるとは、$v_1,\ldots,v_n$ が一次独立であり、
-かつ $V$ を生成する、すなわち任意の $v\in V$ に対して
-ある $a_1,\ldots,a_n\in\R$ が存在して $v=\sum_{i=1}^n a_iv_i$ と書けることをいう。
-$v_1,\ldots,v_k\in V$ の一次結合全体を $\langle v_1,\ldots,v_k\rangle$ と書けば、
-生成することは $\langle v_1,\ldots,v_n\rangle=V$ と書ける。
+  (ii) $v_1,\ldots,v_n$ が $V$ の基底であるとは、一次独立であり、かつ
+  \[
+  V=\langle v_1,\ldots,v_n\rangle
+  \]
+  となることをいう。
 
-\item[(2)] まず一次独立性を見る。$a_1,\ldots,a_n\in\R$ が
-\[
-a_1f(v_1)+\cdots+a_nf(v_n)=0
-\]
-を満たすとする。$f$ は線形写像なので左辺は $f(a_1v_1+\cdots+a_nv_n)$ に等しい。
-また線形写像は $f(0)=0$ を満たすから
-\[
-f(a_1v_1+\cdots+a_nv_n)=f(0)
-\]
-である。$f$ は同型写像だから単射であり、従って
-\[
-a_1v_1+\cdots+a_nv_n=0
-\]
-となる。$v_1,\ldots,v_n$ は $V$ の基底なので一次独立であり、$a_1=\cdots=a_n=0$ を得る。
-よって $f(v_1),\ldots,f(v_n)$ は一次独立である。
+  \item[(2)] $\sum_i a_if(v_i)=0$ なら、線形性と単射性から
+  $f(\sum_i a_iv_i)=f(0)$、従って $\sum_i a_iv_i=0$ なので全ての $a_i$ は0。
+  また任意の $v\in V$ に対し、全射性から $v=f(w)$ となる $w\in V$ があり、
+  $w=\sum_i a_iv_i$ と書けば $v=\sum_i a_if(v_i)$。従って $\{f(v_i)\}$ は基底である。
 
-次に $V=\langle f(v_1),\ldots,f(v_n)\rangle$ を示す。任意の $v\in V$ を取る。
-$f$ は同型写像だから全射であり、$v=f(w)$ となる $w\in V$ が存在する。
-$w\in V$ で $v_1,\ldots,v_n$ は $V$ の基底だから、ある $a_1,\ldots,a_n\in\R$ を用いて
-$w=a_1v_1+\cdots+a_nv_n$ と書ける。すると $f$ の線形性から
-\[
-v=f(a_1v_1+\cdots+a_nv_n)
-=a_1f(v_1)+\cdots+a_nf(v_n)
-\in\langle f(v_1),\ldots,f(v_n)\rangle
-\]
-である。$v\in V$ は任意だったので $V=\langle f(v_1),\ldots,f(v_n)\rangle$ であり、
-$f(v_1),\ldots,f(v_n)$ は $V$ を生成する。
-
-以上より $f(v_1),\ldots,f(v_n)$ は $V$ の基底である。
-
-\item[(3)] $W_i=\langle v_1,\ldots,v_i\rangle$ とする。条件 $AW_i\subset W_i$ より、
-特に $v_i\in W_i$ なので
-\[
-Av_i\in W_i=\langle v_1,\ldots,v_i\rangle
-\]
-である。
-
-ここで、各 $v_i$ を列に並べた行列を
-\[
-P=(v_1\ \ v_2\ \cdots\ v_n)
-\]
-とする。$v_1,\ldots,v_n$ は $\R^n$ の基底なので $P$ は正則である。
-列ベクトル $x\in\R^n$ に対して $Px$ は、$x$ の成分を係数とする
-$v_1,\ldots,v_n$ の一次結合である。従って $Av_i\in\langle v_1,\ldots,v_i\rangle$ は、
-\[
-Av_i=Pt_i,\qquad
-t_i\in\R^n\ \text{は第 $i$ 成分より下が全て $0$}
-\]
-となる列ベクトル $t_i$ が存在することと同じである。
-
-この $t_1,\ldots,t_n$ を列に並べて
-\[
-T=(t_1\ \ t_2\ \cdots\ t_n)
-=\begin{pmatrix}
-*&*&\cdots&*\\
-0&*&\cdots&*\\
-\vdots&\ddots&\ddots&\vdots\\
-0&\cdots&0&*
-\end{pmatrix}
-\]
-とおく。各列で第 $i$ 成分より下が $0$ なので、$T$ は上三角行列である。
-行列の積を列ごとに書くと
-\[
-AP=(Av_1\ \cdots\ Av_n)
-=(Pt_1\ \cdots\ Pt_n)
-=P(t_1\ \cdots\ t_n)
-=PT
-\]
-である。$P$ は正則なので、左から $P^{-1}$ を掛けると
-\[
-P^{-1}AP=T
-\]
-となる。よって $n$ 次正則行列 $P$ と $n$ 次上三角行列 $T$ が求める性質を満たす。
+  \item[(3)] $P=(v_1\ \cdots\ v_n)$ とおく。$\{v_i\}$ は基底なので $P$ は正則である。
+  $Av_i\in W_i$ より
+  \[
+  Av_i=\sum_{j=1}^i t_{ji}v_j.
+  \]
+  $T=(t_{ji})$ とおけば $T$ は上三角であり、
+  \[
+  AP=(Av_1\ \cdots\ Av_n)=PT.
+  \]
+  従って $P^{-1}AP=T$。
 \end{enumerate}
 \end{proof}
 
@@ -149,65 +89,36 @@ $\int x^a\,\d x=x^{a+1}/(a+1)$ には $a\ne-1$ が必要なため、$a=-1$ だ�
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] $a\ne-1$ のとき、$\log x$ を微分する側にとって部分積分すると
-\begin{align*}
-\int x^a\log x\,\d x
-&=\frac{x^{a+1}\log x}{a+1}-\frac1{a+1}\int x^a\,\d x\\
-&=x^{a+1}\left(\frac{\log x}{a+1}-\frac1{(a+1)^2}\right)+C.
-\end{align*}
-$a=-1$ のときは $u=\log x$ と置換して
-\[
-\int\frac{\log x}{x}\,\d x=\int u\,\d u=\frac{(\log x)^2}{2}+C.
-\]
+  \item[(1)]
+  \[
+  \int x^a\log x\,\d x=
+  \begin{cases}
+  \displaystyle
+  x^{a+1}\left(\frac{\log x}{a+1}-\frac1{(a+1)^2}\right)+C &(a\ne-1),\\[2mm]
+  \displaystyle\frac12(\log x)^2+C &(a=-1).
+  \end{cases}
+  \]
 
-\item[(2)] 極座標 $x=r\cos\theta$, $y=r\sin\theta$ では $\d x\d y=r\,\d r\d\theta$ であり、
-$B(R)$ は $0\le r<R$, $0\le\theta<2\pi$ に対応する。被積分関数は $r$ だけで決まるので
-角度の積分は $2\pi$ を出し、
-\[
-I(a,R)=\int_0^{2\pi}\!\!\int_0^R(1+r^2)^a\log(1+r^2)\,r\,\d r\d\theta
-=2\pi\int_0^R(1+r^2)^a\log(1+r^2)\,r\,\d r.
-\]
-$u=1+r^2$ とおけば $\d u=2r\,\d r$ なので
-\[
-I(a,R)=\pi\int_1^{1+R^2}u^a\log u\,\d u.
-\tag{$*$}
-\]
-$a=0$ では (1) の不定積分が $\int\log u\,\d u=u\log u-u$ となるから、$R=1$ として
-\[
-I(0,1)=\pi\left[u\log u-u\right]_1^2
-=\pi\{(2\log2-2)-(-1)\}
-=\pi(2\log2-1).
-\]
+  \item[(2)] 極座標と $u=1+r^2$ により
+  \[
+  I(a,R)=2\pi\int_0^R(1+r^2)^a\log(1+r^2)r\,\d r
+  =\pi\int_1^{1+R^2}u^a\log u\,\d u.
+  \]
+  従って
+  \[
+  I(0,1)=\pi[u\log u-u]_1^2=\pi(2\log2-1).
+  \]
 
-\item[(3)] ($*$) の上端 $1+R^2$ は $R\to\infty$ で $\infty$ へ向かうので、
-極限の収束は広義積分 $\int_1^\infty u^a\log u\,\d u$ の収束と同じである。
-
-$t=\log u$ と置換する。$u=e^t$, $\d u=e^t\,\d t$ であり、
-$u=1$ が $t=0$、$u\to\infty$ が $t\to\infty$ に対応するので
-\[
-u^a\log u\,\d u=e^{at}\cdot t\cdot e^t\,\d t=te^{(a+1)t}\,\d t,
-\qquad
-\int_1^\infty u^a\log u\,\d u=\int_0^\infty te^{(a+1)t}\,\d t.
-\]
-$\log$ が $t$ に化けたので、あとは指数 $e^{(a+1)t}$ が減衰するかどうかだけを見ればよい。
-
-$a+1\ge0$ のとき。$t\ge0$ では $e^{(a+1)t}\ge1$ だから $te^{(a+1)t}\ge t$ であり、
-$\int_0^\infty t\,\d t$ は発散する。よって発散する。
-
-$a+1<0$ のとき。$c=-(a+1)>0$ とおくと、部分積分により
-\[
-\int_0^\infty te^{-ct}\,\d t
-=\left[-\frac tce^{-ct}\right]_0^\infty+\frac1c\int_0^\infty e^{-ct}\,\d t
-=\frac1{c^2}
-\]
-となり収束する。
-
-以上より、収束するのは $a<-1$ のとき、かつそのときに限る。
-このとき $c^2=(a+1)^2$ だから
-\[
-\lim_{R\to\infty}I(a,R)=\frac{\pi}{(a+1)^2}
-\]
-である。
+  \item[(3)] $t=\log u$ とおくと
+  \[
+  \int_1^\infty u^a\log u\,\d u
+  =\int_0^\infty te^{(a+1)t}\,\d t.
+  \]
+  これは $a+1<0$ のとき、かつそのときに限り収束する。従って
+  \[
+  a<-1.
+  \]
+  なお、このとき極限値は $\pi/(a+1)^2$ である。
 \end{enumerate}
 \end{proof}
 
@@ -232,48 +143,23 @@ $[0,1]^2$ は閉かつ有界なのでコンパクトであり、連続関数は�
 従って中間値の定理により、その間の全ての値を通る。
 \end{memo*}
 \begin{proof}[解答]
-(1) まず、仮定の周期性が整数だけ平行移動しても保たれることを見る。
-$f(x+1,y)=f(x,y)$ を $x$ を $x+1,x+2,\ldots$ と取り替えて繰り返せば、
-帰納法により全ての $m\ge0$ で $f(x+m,y)=f(x,y)$ である。
-また $f(x,y)=f((x-1)+1,y)=f(x-1,y)$ なので、同じ議論が負の向きにも使える。
-$y$ 方向も同様だから、全ての整数 $m,n$ について
-\[
-f(x+m,y+n)=f(x,y)
-\]
-が成り立つ。
+\begin{enumerate}
+  \item[(1)] $m=\lfloor x\rfloor$, $n=\lfloor y\rfloor$ とすると、周期性より
+  \[
+  f(x,y)=f(x-m,y-n),\qquad (x-m,y-n)\in[0,1)^2.
+  \]
+  従って $f(\R^2)\subset f([0,1]^2)$。逆の包含は明らかなので等号が成り立つ。
 
-$\lfloor x\rfloor$ を $x$ 以下の最大の整数とし、$m=\lfloor x\rfloor$, $n=\lfloor y\rfloor$ とおくと
-$0\le x-m<1$, $0\le y-n<1$ なので
-\[
-(x-m,y-n)\in[0,1)^2\subset[0,1]^2
-\]
-であり、上の等式から $f(x,y)=f(x-m,y-n)$ である。
-従って $\R^2$ 上に現れる値は全て $[0,1]^2$ 上でも現れ、
-$f(\R^2)\subset f([0,1]^2)$ となる。一方、$[0,1]^2\subset\R^2$ だから
-$f([0,1]^2)\subset f(\R^2)$ も成り立ち、両者は等しい。
+  \item[(2)] $[0,1]^2$ はコンパクトだから、$f$ はそこで最大値と最小値を取る。
+  (1) より、それらは $\R^2$ 全体での最大値・最小値でもある。
 
-(2) $[0,1]^2$ は $\R^2$ の有界閉集合なので、Heine--Borel の定理によりコンパクトである。
-$f$ は連続だから、最大値・最小値の定理により
-\[
-f(p)=a=\min_{[0,1]^2}f,\qquad
-f(q)=b=\max_{[0,1]^2}f
-\]
-となる点 $p,q\in[0,1]^2$ が存在する。前段の $f(\R^2)=f([0,1]^2)$ により、
-この $a,b$ は $\R^2$ 全体での最小値・最大値でもある。
-
-(3) $p$ と $q$ を結ぶ線分を
-\[
-\sigma(t)=(1-t)p+tq\qquad(0\le t\le1)
-\]
-とおく。$[0,1]^2$ は凸集合なので $\sigma(t)\in[0,1]^2$ であり、$\sigma$ は $t$ の一次式だから連続である。
-従って $f\circ\sigma:[0,1]\to\R$ も連続で
-\[
-(f\circ\sigma)(0)=f(p)=a,\qquad
-(f\circ\sigma)(1)=f(q)=b
-\]
-である。また $a,b$ は $f$ の最小値・最大値だから、$f\circ\sigma$ の値は常に $[a,b]$ に入る。
-任意の $y\in[a,b]$ に対して、中間値の定理から $(f\circ\sigma)(t)=y$ となる
-$t\in[0,1]$ が存在する。よって $f\circ\sigma:[0,1]\to[a,b]$ は全射である。
+  \item[(3)] $f(p)=a$, $f(q)=b$ となる $p,q\in[0,1]^2$ を取り
+  \[
+  \sigma(t)=(1-t)p+tq\qquad(0\le t\le1)
+  \]
+  とおく。$f\circ\sigma$ は連続で端点の値が $a,b$ だから、
+  中間値の定理より $[a,b]$ への全射である。
+\end{enumerate}
 \end{proof}
 
 \section{専門科目（8題から2題選択）}
@@ -872,164 +758,61 @@ $U\oplus W$ は $U+W$ に加えて $U\cap W=\{0\}$ を満たす直和を意味�
 同じ有限次元の空間同士では単射と全射が同値なので、全単射が従う。
 \end{memo*}
 \begin{proof}[解答]
-(1)(i) 列ベクトルを調べる。$A$ の第1、2列を
-\[
-a_1=(1,-1,2,1)^{\mathsf T},\qquad
-a_2=(2,0,3,1)^{\mathsf T}
-\]
-とおくと、第3列は $a_1+a_2$、第4列は $-2a_1+a_2$ である。
-$a_1,a_2$ は一次独立なので
-\[
-\operatorname{Im}A=\langle(1,-1,2,1),(2,0,3,1)\rangle,
-\]
-となる。次に $B$ の第1、3列を
-\[
-b_1=(1,1,2,3)^{\mathsf T},\qquad
-b_2=(3,2,3,7)^{\mathsf T}
-\]
-とおくと、第2列は $2b_1$、第4列は $3b_1-b_2$ だから
-\[
-\operatorname{Im}B=\langle(1,1,2,3),(3,2,3,7)\rangle,
-\]
-である。共通部分の元を
-$\alpha a_1+\beta a_2=\gamma b_1+\delta b_2$ と表す。4成分を比較すると
-\[
-\begin{cases}
-\alpha+2\beta=\gamma+3\delta,\\
--\alpha=\gamma+2\delta,\\
-2\alpha+3\beta=2\gamma+3\delta,\\
-\alpha+\beta=3\gamma+7\delta.
-\end{cases}
-\]
-第2式から $\gamma=-\alpha-2\delta$。これを第1、3、4式へ代入すると
-\[
-\delta=2\alpha+2\beta,\qquad
-4\alpha+3\beta+\delta=0,
-\qquad4\alpha+\beta-\delta=0.
-\]
-さらに $\delta=2\alpha+2\beta$ を後ろ2式へ代入して
-\[
-6\alpha+5\beta=0,\qquad 2\alpha-\beta=0
-\]
-を得る。第2式から $\beta=2\alpha$、これを第1式へ入れると
-$16\alpha=0$ なので $\alpha=\beta=0$。従って
-$\delta=0$, $\gamma=0$ であり
-\[
-\operatorname{Im}A\cap\operatorname{Im}B=\{0\}.
-\]
-(ii) 列の関係式から、任意の $x=(x_1,x_2,x_3,x_4)^{\mathsf T}$ に対し
-\[
-Ax=(x_1+x_3-2x_4)a_1+(x_2+x_3+x_4)a_2.
-\]
-$a_1,a_2$ は一次独立だから $Ax=0$ は
-\[
-x_1+x_3-2x_4=0,\qquad x_2+x_3+x_4=0
-\]
-と同値である。$B$ についても列の一次関係を代入すると
-\[
-Bx=(x_1+2x_2+3x_4)b_1+(x_3-x_4)b_2
-\]
-だから、$Bx=0$ は
-\[
-x_1+2x_2+3x_4=0,\qquad x_3-x_4=0
-\]
-と同値である。従って
-\[
-\ker A=\langle(-1,-1,1,0),(2,-1,0,1)\rangle,
-\]
-\[
-\ker B=\langle(-2,1,0,0),(-3,0,1,1)\rangle.
-\]
-ここで
-\[
-p=(-1,-1,1,0),\quad q=(2,-1,0,1),\quad
-r=(-2,1,0,0),\quad s=(-3,0,1,1)
-\]
-とおくと
-\[
-s=p+q+2r
-\]
-である。従って $\ker A+\ker B=\langle p,q,r\rangle$ である。
-さらに $ap+bq+cr=0$ とすると、第3、第4成分から
-\[
-a=0,\qquad b=0
-\]
-となり、第1成分から $-2c=0$、すなわち $c=0$ となる。
-よって $p,q,r$ は一次独立であり
-\[
-\dim(\ker A+\ker B)=3
-\]
-である。
+\begin{enumerate}
+  \item[(1)] (i) $A,B$ の列を調べると
+  \[
+  \operatorname{Im}f_A
+  =\left\langle
+  \begin{pmatrix}1\\-1\\2\\1\end{pmatrix},
+  \begin{pmatrix}2\\0\\3\\1\end{pmatrix}
+  \right\rangle,\qquad
+  \operatorname{Im}f_B
+  =\left\langle
+  \begin{pmatrix}1\\1\\2\\3\end{pmatrix},
+  \begin{pmatrix}3\\2\\3\\7\end{pmatrix}
+  \right\rangle.
+  \]
+  これらを順に $a_1,a_2,b_1,b_2$ と書くと
+  \[
+  \det(a_1\ a_2\ {-b_1}\ {-b_2})=16\ne0.
+  \]
+  従って4本は一次独立であり、
+  \[
+  \operatorname{Im}f_A\cap\operatorname{Im}f_B=\{0\}.
+  \]
 
-(2)(i) 仮定
-\[
-\R^n=\operatorname{Im}f\oplus\operatorname{Im}g
-\]
-から
-\[
-\operatorname{Im}f\cap\operatorname{Im}g=\{0\}
-\]
-である。$x\in\ker(f+g)$ なら
-\[
-f(x)+g(x)=0,
-\qquad f(x)=-g(x).
-\]
-ここで $f(x)\in\operatorname{Im}f$ であり、同時に
-$f(x)=-g(x)\in\operatorname{Im}g$ だから
-\[
-f(x)\in\operatorname{Im}f\cap\operatorname{Im}g=\{0\}.
-\]
-従って $f(x)=g(x)=0$ となり、$x\in\ker f\cap\ker g$ である。
-逆に $x\in\ker f\cap\ker g$ なら
-$(f+g)(x)=f(x)+g(x)=0$ だから
-\[
-\ker(f+g)=\ker f\cap\ker g
-\]
-を得る。
+  (ii) 同じ列の関係から
+  \[
+  \ker f_A=\langle(-1,-1,1,0),(2,-1,0,1)\rangle,
+  \]
+  \[
+  \ker f_B=\langle(-2,1,0,0),(-3,0,1,1)\rangle.
+  \]
+  $p=(-1,-1,1,0)$, $q=(2,-1,0,1)$, $r=(-2,1,0,0)$ とすると、
+  第4のベクトルは $p+q+2r$ であり、$p,q,r$ は一次独立である。従って
+  \[
+  \dim(\ker f_A+\ker f_B)=3.
+  \]
 
-(ii) さらに $\R^n=\ker f+\ker g$ と仮定する。
-準備として、有限次元の線形写像 $h:\R^n\to\R^n$ を取る。
-$\ker h$ の基底を $e_1,\ldots,e_k$ とし、これにベクトルを加えて
-$e_1,\ldots,e_n$ を $\R^n$ の基底にすると、
-\[
-h(e_{k+1}),\ldots,h(e_n)
-\]
-が $\operatorname{Im}h$ の基底になる。従って
-\[
-\dim\operatorname{Im}h=n-\dim\ker h.
-\]
-この等式を階数・退化次数の定理という。
+  \item[(2)] (i) $x\in\ker(f+g)$ なら
+  $f(x)=-g(x)\in\operatorname{Im}f\cap\operatorname{Im}g=\{0\}$。
+  従って $x\in\ker f\cap\ker g$。逆の包含は明らかだから
+  \[
+  \ker(f+g)=\ker f\cap\ker g.
+  \]
 
-像が直和で $\R^n$ 全体になるという仮定と、この等式から
-\begin{align*}
-n
-&=\dim\operatorname{Im}f+\dim\operatorname{Im}g\\
-&=(n-\dim\ker f)+(n-\dim\ker g),
-\end{align*}
-従って
-\[
-\dim\ker f+\dim\ker g=n.
-\]
-一方、核の和が $\R^n$ 全体であることと部分空間の和の次元公式から
-\begin{align*}
-n
-&=\dim(\ker f+\ker g)\\
-&=\dim\ker f+\dim\ker g-\dim(\ker f\cap\ker g)\\
-&=n-\dim(\ker f\cap\ker g).
-\end{align*}
-よって $\ker f\cap\ker g=\{0\}$ である。先に示した核の等式より
-\[
-\ker(f+g)=\{0\},
-\]
-従って $f+g$ は単射である。$f+g$ は同じ有限次元空間
-$\R^n$ から $\R^n$ への線形写像である。
-$\ker(f+g)=\{0\}$ を上の次元の等式へ代入すると
-\[
-\dim\operatorname{Im}(f+g)=n-0=n.
-\]
-$\R^n$ の中の $n$ 次元部分空間は $\R^n$ 自身なので
-$\operatorname{Im}(f+g)=\R^n$、すなわち $f+g$ は全射である。
-以上から $f+g$ は全単射である。
+  (ii) 階数・退化次数の定理と像の直和から
+  \[
+  n=\dim\operatorname{Im}f+\dim\operatorname{Im}g
+  =2n-\dim\ker f-\dim\ker g.
+  \]
+  一方、$\R^n=\ker f+\ker g$ だから
+  \[
+  n=\dim\ker f+\dim\ker g-\dim(\ker f\cap\ker g).
+  \]
+  よって $\ker f\cap\ker g=\{0\}$。(i) より $f+g$ は単射であり、
+  同じ有限次元空間の間の線形写像なので全単射である。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第2問｜滑らかな関数の分解}{2015-2-2}
@@ -1060,56 +843,33 @@ $f(x,y)-f(0,y)$ を $x$ 方向だけに積分し、残る $f(0,y)-f(0,0)$ を
 $y$ 方向だけに積分する。
 \end{memo*}
 \begin{proof}[解答]
-(1) 一変数関数 $\varphi(t)=f(tx,ty)$ を考える。連鎖律より
-\[
-\varphi'(t)=x\frac{\partial f}{\partial x}(tx,ty)+y\frac{\partial f}{\partial y}(tx,ty)
-\]
-である。$f(0,0)=0$ と微積分学の基本定理を用いると
-\begin{align*}
-f(x,y)
-&=f(x,y)-f(0,0)\\
-&=\varphi(1)-\varphi(0)\\
-&=\int_0^1\varphi'(t)\,\d t\\
-&=x\int_0^1\frac{\partial f}{\partial x}(tx,ty)\,\d t
- +y\int_0^1\frac{\partial f}{\partial y}(tx,ty)\,\d t.
-\end{align*}
-従って
-\[
-g(x,y)=\int_0^1\frac{\partial f}{\partial x}(tx,ty)\,\d t,
-\qquad
-h(x,y)=\int_0^1\frac{\partial f}{\partial y}(tx,ty)\,\d t
-\]
-とおけば $f=xg+yh$ となる。$\partial f/\partial x$, $\partial f/\partial y$ は滑らかであり、コンパクト区間 $0\le t\le1$ 上の
-パラメータ積分は任意の階数で積分記号下に微分できるので、$g,h$ も滑らかである。
+\begin{enumerate}
+  \item[(1)] 連鎖律と $f(0,0)=0$ より
+  \begin{align*}
+  f(x,y)
+  &=\int_0^1\frac{\d}{\d t}f(tx,ty)\,\d t\\
+  &=x\int_0^1f_x(tx,ty)\,\d t
+   +y\int_0^1f_y(tx,ty)\,\d t.
+  \end{align*}
+  従って
+  \[
+  g(x,y)=\int_0^1f_x(tx,ty)\,\d t,\qquad
+  h(x,y)=\int_0^1f_y(tx,ty)\,\d t
+  \]
+  とすればよい。積分記号下で任意回微分できるので $g,h\in C^\infty$。
 
-(2) 今度は
-\[
-f(x,y)=\{f(x,y)-f(0,y)\}+f(0,y)
-\]
-と二つに分ける。固定した $y$ に対して $s\mapsto f(sx,y)$ に基本定理を使うと
-\begin{align*}
-f(x,y)-f(0,y)
-&=\int_0^1\frac{\d}{\d s}f(sx,y)\,\d s\\
-&=x\int_0^1\frac{\partial f}{\partial x}(sx,y)\,\d s.
-\end{align*}
-また $f(0,0)=0$ だから、$t\mapsto f(0,ty)$ に同じ計算を行うと
-\begin{align*}
-f(0,y)
-&=f(0,y)-f(0,0)\\
-&=\int_0^1\frac{\d}{\d t}f(0,ty)\,\d t\\
-&=y\int_0^1\frac{\partial f}{\partial y}(0,ty)\,\d t.
-\end{align*}
-そこで
-\[
-G(x,y)=\int_0^1\frac{\partial f}{\partial x}(sx,y)\,\d s,
-\qquad
-H(y)=\int_0^1\frac{\partial f}{\partial y}(0,ty)\,\d t
-\]
-とおけば、$G,H$ は滑らかであり
-\[
-f(x,y)=xG(x,y)+yH(y)
-\]
-を得る。
+  \item[(2)]
+  \[
+  f(x,y)-f(0,y)=x\int_0^1f_x(tx,y)\,\d t,\qquad
+  f(0,y)=y\int_0^1f_y(0,ty)\,\d t.
+  \]
+  よって
+  \[
+  G(x,y)=\int_0^1f_x(tx,y)\,\d t,\qquad
+  H(y)=\int_0^1f_y(0,ty)\,\d t
+  \]
+  とおけば $f=xG+yH$ であり、$G,H$ はともに $C^\infty$ 級である。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第3問｜コンパクト性と連結性}{2015-2-3}
@@ -1130,39 +890,27 @@ $Y=\R^2\setminus\Q^2$ では、各点は少なくとも一方の座標が無理�
 その無理数座標を固定した縦線または横線は $Y$ の外へ出ないので、折れ線で共通点へ結べる。
 \end{memo*}
 \begin{proof}[解答]
-(1) Hausdorff 空間 $T$ では一点集合 $\{p\}$ が閉である。実際、$q\ne p$ を取ると
-Hausdorff 性から交わらない開近傍 $U\ni p$, $V\ni q$ が存在し、
-$V\subset T\setminus\{p\}$ となるので $T\setminus\{p\}$ は開である。
-$f$ は連続なので、閉集合の逆像 $f^{-1}(\{p\})$ は $S$ の閉部分集合である。
-コンパクト空間の閉部分集合はコンパクトだから、$f^{-1}(\{p\})$ はコンパクトである。
+\begin{enumerate}
+  \item[(1)] Hausdorff 空間では $\{p\}$ は閉である。従って連続性より
+  $f^{-1}(\{p\})$ はコンパクト空間 $S$ の閉部分集合であり、コンパクトである。
 
-(2) まず $X=\Q^2$ について、$0<c<2$ を満たす無理数 $c$ を一つ取る（例えば $c=\sqrt2$）。
-\[
-U=X\cap\{(x,y)\in\R^2\mid x<c\},\qquad
-V=X\cap\{(x,y)\in\R^2\mid x>c\}
-\]
-とおくと、二つの半平面は $\R^2$ の開集合なので $U,V$ は $X$ の相対位相で開である。
-$(0,0)\in U$、$(2,0)\in V$ だからともに空でなく、
-$x<c$ と $x>c$ は同時に成り立たないので $U\cap V=\varnothing$ である。
-さらに $c$ は無理数だから $X$ の点の第1座標が $c$ に等しくなることはなく、
-\[
-X=U\sqcup V
-\]
-となる。従って $X$ は非連結である。
+  \item[(2)] $X=\Q^2$ は非連結である。例えば
+  \[
+  U=X\cap\{x<\sqrt2\},\qquad V=X\cap\{x>\sqrt2\}
+  \]
+  は非自明な開分離を与える。
 
-$Y=\R^2\setminus\Q^2$ は道連結であり、道連結な空間は連結なので、$Y$ は連結である。
-道連結であることを示す。無理数 $\alpha,\beta$ を固定する。
-$p=(p_1,p_2)\in Y$ について、$p_1$ が無理数なら
-\[
-p\longrightarrow(p_1,\beta)\longrightarrow(\alpha,\beta)
-\]
-という縦・横の線分を取り、$p_1$ が有理数なら $p_2$ は無理数なので
-\[
-p\longrightarrow(\alpha,p_2)\longrightarrow(\alpha,\beta)
-\]
-という横・縦の線分を取る。各線分上では少なくとも一方の座標が固定された無理数なので
-$\Q^2$ と交わらない。任意の二点をそれぞれ $(\alpha,\beta)$ へ結んで一方を逆向きにつなげれば、
-$Y$ 内の折れ線で結べる。
+  一方 $Y=\R^2\setminus\Q^2$ は道連結である。無理数 $\alpha,\beta$ を固定する。
+  $(x,y)\in Y$ について、$x$ が無理数なら
+  \[
+  (x,y)\longrightarrow(x,\beta)\longrightarrow(\alpha,\beta),
+  \]
+  $x$ が有理数なら $y$ は無理数なので
+  \[
+  (x,y)\longrightarrow(\alpha,y)\longrightarrow(\alpha,\beta)
+  \]
+  という折れ線が全て $Y$ 内にある。従って $Y$ は連結である。
+\end{enumerate}
 \end{proof}
 
 \section{応用数理コース・専門基礎科目（4題必修）}
@@ -1201,97 +949,44 @@ $A^{-1}$、$AY=C$ から $Y$ を孤立させるには左から $A^{-1}$ を掛�
 最後の正則性では、逆行列の候補を多項式恒等式から直接作り、左右から掛けて単位行列になることを確認する。
 \end{memo*}
 \begin{proof}[解答]
-(1) 第2式から第1式の4倍を引き、第3式から第1式の7倍を引くと
-\[
--3y-6z=-6,\qquad -6y-12z=a-7.
-\]
-前者は $y+2z=2$ であり、後者がその2倍になるためには $a-7=-12$、
-すなわち $a=-5$ が必要である。このとき $z=t$ とおけば
-\[
-y=2-2t,\qquad x=1-2y-3z=t-3,
-\]
-従って全解は $(x,y,z)=(t-3,2-2t,t)$ である。
+\begin{enumerate}
+  \item[(1)] 第2式から第1式の4倍、第3式から第1式の7倍を引くと
+  \[
+  -3y-6z=-6,\qquad -6y-12z=a-7.
+  \]
+  従って解をもつのは $a=-5$ のときであり、全解は
+  \[
+  (x,y,z)=(t-3,\,2-2t,\,t)\qquad(t\in\R).
+  \]
 
-(2) まず $A$ の正則性を確認する。第1行で展開すると
-\begin{align*}
-|A|
-&=1\begin{vmatrix}3&1\\1&2\end{vmatrix}
--2\begin{vmatrix}2&1\\3&2\end{vmatrix}
-+3\begin{vmatrix}2&3\\3&1\end{vmatrix}\\
-&=(6-1)-2(4-3)+3(2-9)\\
-&=5-2-21=-18\ne0.
-\end{align*}
-従って $A$ は正則である。$A$ の余因子行列を $C_A=(C_{ij})$ とすると、各成分は
-\[
-C_A=
-\begin{pmatrix}
-\begin{vmatrix}3&1\\1&2\end{vmatrix}&
--\begin{vmatrix}2&1\\3&2\end{vmatrix}&
-\begin{vmatrix}2&3\\3&1\end{vmatrix}\\[3mm]
--\begin{vmatrix}2&3\\1&2\end{vmatrix}&
-\begin{vmatrix}1&3\\3&2\end{vmatrix}&
--\begin{vmatrix}1&2\\3&1\end{vmatrix}\\[3mm]
-\begin{vmatrix}2&3\\3&1\end{vmatrix}&
--\begin{vmatrix}1&3\\2&1\end{vmatrix}&
-\begin{vmatrix}1&2\\2&3\end{vmatrix}
-\end{pmatrix}
-=
-\begin{pmatrix}5&-1&-7\\-1&-7&5\\-7&5&-1\end{pmatrix}.
-\]
-$\operatorname{adj}A$ は余因子行列の転置である。いまの $C_A$ は対称なので転置しても変わらず
-\[
-\operatorname{adj}A=
- C_A^{\mathsf T}
-=\begin{pmatrix}5&-1&-7\\-1&-7&5\\-7&5&-1\end{pmatrix},
-\]
-よって
-\[
-A^{-1}=\frac1{|A|}\operatorname{adj}A
-=\frac1{18}
-\begin{pmatrix}-5&1&7\\1&7&-5\\7&-5&1\end{pmatrix}.
-\]
-$XA=B$ は右から $A^{-1}$ を掛けて $X=BA^{-1}$、
-$AY=C$ は左から $A^{-1}$ を掛けて $Y=A^{-1}C$ である。それぞれの積は
-\[
-BA^{-1}=\frac1{18}
-\begin{pmatrix}1&2&3\\8&5&5\\3&1&2\end{pmatrix}
-\begin{pmatrix}-5&1&7\\1&7&-5\\7&-5&1\end{pmatrix}
-=\frac1{18}
-\begin{pmatrix}18&0&0\\0&18&36\\0&0&18\end{pmatrix}
-=\begin{pmatrix}1&0&0\\0&1&2\\0&0&1\end{pmatrix},
-\]
-\[
-A^{-1}C=\frac1{18}
-\begin{pmatrix}-5&1&7\\1&7&-5\\7&-5&1\end{pmatrix}
-\begin{pmatrix}2&1&3\\3&2&1\\1&3&2\end{pmatrix}
-=\frac1{18}
-\begin{pmatrix}0&18&0\\18&0&0\\0&0&18\end{pmatrix}
-=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix}.
-\]
-よって
-\[
-X=\begin{pmatrix}1&0&0\\0&1&2\\0&0&1\end{pmatrix},\qquad
-Y=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix}.
-\]
-(3)(i) ここでの $A$ は (2) のものとは無関係な、一般の $n$ 次正方行列である。
-$A^2+A-2I=O$ とすると $A^2+A=2I$ であり、左辺を因数分解して
-\[
-A(A+I)=(A+I)A=2I,
-\qquad\text{すなわち}\qquad
-A\cdot\frac{A+I}2=\frac{A+I}2\cdot A=I
-\]
-となる。従って $A$ は正則で $A^{-1}=(A+I)/2$ である。
+  \item[(2)]
+  \[
+  A^{-1}=\frac1{18}
+  \begin{pmatrix}-5&1&7\\1&7&-5\\7&-5&1\end{pmatrix}
+  \]
+  だから
+  \[
+  X=BA^{-1}=\begin{pmatrix}1&0&0\\0&1&2\\0&0&1\end{pmatrix},
+  \qquad
+  Y=A^{-1}C=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix}.
+  \]
 
-(ii) $A^m=O$ となる冪零行列 $A$ を考える。$A$ が正則だと仮定すると、
-正則行列の積は正則なので $A^m$ も正則だが、$A^m=O$ は正則でないので矛盾する。
-従って冪零行列は正則でない。一方、有限等比和を掛けると
-\[
-(I-A)(I+A+\cdots+A^{m-1})=I-A^m=I,
-\]
-\[
-(I+A)(I-A+A^2-\cdots+(-A)^{m-1})=I-(-A)^m=I.
-\]
-従って $I-A$, $I+A$ はともに正則で、括弧内の行列がそれぞれの逆行列である。
+  \item[(3)] (i) $A^2+A=2I$ より
+  \[
+  A\frac{A+I}{2}=\frac{A+I}{2}A=I.
+  \]
+  従って $A^{-1}=(A+I)/2$。
+
+  (ii) $A^m=O$ とする。$A$ が正則なら $A^m$ も正則となるので矛盾。
+  また
+  \[
+  (I-A)(I+A+\cdots+A^{m-1})=I-A^m=I,
+  \]
+  \[
+  (I+A)(I-A+\cdots+(-1)^{m-1}A^{m-1})=I-(-A)^m=I.
+  \]
+  従って $I-A$, $I+A$ は正則である。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第2問｜対角化・漸化式・直交行列}{2015-a-2}
@@ -1330,168 +1025,69 @@ $P^{-1}AP=D$、さらに $A^n=PD^nP^{-1}$ とできる。
 $\norm{x+y}^2$ の展開を使い、「行列条件・長さ・内積」を順につなぐ。
 \end{memo*}
 \begin{proof}[解答]
-(1)(i) 固有値を求めるため特性多項式を計算すると
-\begin{align*}
-|\lambda I-A|
-&=\begin{vmatrix}\lambda+2&-1&-2\\-1&\lambda&0\\0&-1&\lambda\end{vmatrix}\\
-&=(\lambda+2)\lambda^2-\lambda-2\\
-&=(\lambda-1)(\lambda+1)(\lambda+2).
-\end{align*}
-従って固有値は $1,-1,-2$ である。
-$x=(x_1,x_2,x_3)^{\mathsf T}$ に対して $Ax=\lambda x$ を成分で書くと
-\[
-\begin{cases}
--2x_1+x_2+2x_3=\lambda x_1,\\
-x_1=\lambda x_2,\\
-x_2=\lambda x_3.
-\end{cases}
-\]
-今回の固有値はいずれも0でない。第2、第3式から
-\[
-x_2=\lambda x_3,
-\qquad x_1=\lambda x_2=\lambda^2x_3
-\]
-となる。$x_3=t$ とおけば
-\[
-x=t(\lambda^2,\lambda,1)^{\mathsf T}.
-\]
-$\lambda=1,-1,-2$ を順に代入して
-\[
-E_1=\langle(1,1,1)^{\mathsf T}\rangle,\quad
-E_{-1}=\langle(1,-1,1)^{\mathsf T}\rangle,\quad
-E_{-2}=\langle(4,-2,1)^{\mathsf T}\rangle.
-\]
-(ii) 三つの固有値が相異なるので、これらの固有ベクトルは一次独立である。
-従って $A$ は対角化可能であり、固有ベクトルを列に並べて
-\[
-P=\begin{pmatrix}1&1&4\\1&-1&-2\\1&1&1\end{pmatrix}
-\]
-とおける。実際
-\[
-|P|
-=1\begin{vmatrix}-1&-2\\1&1\end{vmatrix}
--1\begin{vmatrix}1&-2\\1&1\end{vmatrix}
-+4\begin{vmatrix}1&-1\\1&1\end{vmatrix}
-=1-3+8=6\ne0
-\]
-なので $P$ は正則である。余因子を用いると
-\[
-P^{-1}=\frac1{6}
-\begin{pmatrix}1&3&2\\-3&-3&6\\2&0&-2\end{pmatrix}
-=\begin{pmatrix}1/6&1/2&1/3\\-1/2&-1/2&1\\1/3&0&-1/3\end{pmatrix}.
-\]
-$P$ の各列は順に固有値 $1,-1,-2$ の固有ベクトルだから
-\[
-AP=P\diag(1,-1,-2).
-\]
-左から $P^{-1}$ を掛けて
-\[
-P^{-1}AP=\diag(1,-1,-2)
-\]
-を得る。
+\begin{enumerate}
+  \item[(1)] (i)
+  \[
+  \det(\lambda I-A)=(\lambda-1)(\lambda+1)(\lambda+2),
+  \]
+  \[
+  E_1=\langle(1,1,1)^{\mathsf T}\rangle,\quad
+  E_{-1}=\langle(1,-1,1)^{\mathsf T}\rangle,\quad
+  E_{-2}=\langle(4,-2,1)^{\mathsf T}\rangle.
+  \]
 
-(iii) 従って
-\[
-A^n=P\diag(1,(-1)^n,(-2)^n)P^{-1}.
-\]
-右辺の第1行を求めるため、まず
-\[
-(1,1,4)\diag(1,(-1)^n,(-2)^n)
-=\bigl(1,(-1)^n,4(-2)^n\bigr)
-\]
-と計算する。これを $P^{-1}$ に掛けると、$A^n$ の第1行は
-\[
-\left(\frac16-\frac{(-1)^n}2+\frac43(-2)^n,
-\frac{1-(-1)^n}2,
-\frac13+(-1)^n-\frac43(-2)^n\right).
-\]
+  (ii) 固有値が相異なるので対角化可能である。
+  \[
+  P=\begin{pmatrix}1&1&4\\1&-1&-2\\1&1&1\end{pmatrix},\qquad
+  P^{-1}=\frac16\begin{pmatrix}1&3&2\\-3&-3&6\\2&0&-2\end{pmatrix},
+  \]
+  \[
+  P^{-1}AP=\diag(1,-1,-2).
+  \]
 
-(iv) 漸化式の特性方程式も
-\[
-r^3+2r^2-r-2=(r-1)(r+1)(r+2)=0
-\]
-なので一般解は $x_n=\alpha+\beta(-1)^n+\gamma(-2)^n$ と書ける。
-$n=1,2,3$ を代入すると
-\[
-x_1=\alpha-\beta-2\gamma,
-\qquad
-x_2=\alpha+\beta+4\gamma,
-\qquad
-x_3=\alpha-\beta-8\gamma.
-\]
+  (iii) $A^n=P\diag(1,(-1)^n,(-2)^n)P^{-1}$ より、第1行は
+  \[
+  \left(
+  \frac16-\frac{(-1)^n}{2}+\frac43(-2)^n,\quad
+  \frac{1-(-1)^n}{2},\quad
+  \frac13+(-1)^n-\frac43(-2)^n
+  \right).
+  \]
 
-初期値 $(x_1,x_2,x_3)=(1,0,0)$ のときは
-\[
-\begin{cases}
-\alpha-\beta-2\gamma=1,\\
-\alpha+\beta+4\gamma=0,\\
-\alpha-\beta-8\gamma=0.
-\end{cases}
-\]
-第3式から第1式を引くと $-6\gamma=-1$ だから $\gamma=1/6$ である。
-第2式から第1式を引くと
-$2\beta+6\gamma=-1$ だから $\beta=-1$ となり、第1式から $\alpha=1/3$ を得る。
+  (iv) 特性方程式は $(r-1)(r+1)(r+2)=0$ だから
+  \[
+  x_n=\alpha+\beta(-1)^n+\gamma(-2)^n.
+  \]
+  各初期条件を代入すると
+  \[
+  (x_1,x_2,x_3)=(1,0,0):
+  \quad x_n=\frac13-(-1)^n+\frac16(-2)^n,
+  \]
+  \[
+  (x_1,x_2,x_3)=(0,-1,1):
+  \quad x_n=-\frac13-\frac16(-2)^n.
+  \]
 
-初期値 $(x_1,x_2,x_3)=(0,-1,1)$ のときは
-\[
-\begin{cases}
-\alpha-\beta-2\gamma=0,\\
-\alpha+\beta+4\gamma=-1,\\
-\alpha-\beta-8\gamma=1.
-\end{cases}
-\]
-第3式から第1式を引くと $-6\gamma=1$ だから $\gamma=-1/6$ である。
-第2式から第1式を引くと
-$2\beta+6\gamma=-1$ だから $\beta=0$ となり、第1式から $\alpha=-1/3$ を得る。
-よって一般項はそれぞれ
-\[
-x_n=\frac13-(-1)^n+\frac16(-2)^n,\qquad
-x_n=-\frac13-\frac16(-2)^n.
-\]
+  \item[(2)] (i) $A^{\mathsf T}A=I$ なら
+  \[
+  \|Ax\|^2=x^{\mathsf T}A^{\mathsf T}Ax=\|x\|^2.
+  \]
 
-(2) 以下の $A$ は (1) の行列とは無関係な $n$ 次正方行列である。
+  (ii) 長さを保つなら、実内積の極化恒等式より
+  \[
+  \langle Ax,Ay\rangle
+  =\frac{\|A(x+y)\|^2-\|Ax\|^2-\|Ay\|^2}{2}
+  =\langle x,y\rangle.
+  \]
 
-(i) $(\text{ア})$、すなわち $A^{\mathsf T}A=I$ を仮定すると、任意の $x\in\R^n$ に対して
-\[
-\norm{Ax}^2
-=(Ax)^{\mathsf T}(Ax)
-=x^{\mathsf T}A^{\mathsf T}Ax
-=x^{\mathsf T}x
-=\norm{x}^2.
-\]
-両辺は非負なので平方根を取り $\norm{Ax}=\norm{x}$ となる。よって
-$(\text{ア})\Rightarrow(\text{イ})$ である。
-
-(ii) (イ) を仮定する。$A$ の線形性と (イ) を $x+y,x,y$ に適用すると
-\begin{align*}
-\norm{x+y}^2
-&=\norm{A(x+y)}^2\\
-&=\norm{Ax+Ay}^2\\
-&=\norm{Ax}^2+2\inner{Ax}{Ay}+\norm{Ay}^2\\
-&=\norm{x}^2+2\inner{Ax}{Ay}+\norm{y}^2.
-\end{align*}
-一方
-\[
-\norm{x+y}^2
-=\norm{x}^2+2\inner{x}{y}+\norm{y}^2
-\]
-だから、共通する項を消去して
-\[
-\inner{Ax}{Ay}=\inner{x}{y}
-\]
-を得る。よって $(\text{イ})\Rightarrow(\text{ウ})$ である。
-
-(iii) (ウ) を仮定し、$e_1,\ldots,e_n$ を $\R^n$ の標準基底とする。
-$A^{\mathsf T}A$ の $(i,j)$ 成分は
-\[
-e_i^{\mathsf T}A^{\mathsf T}Ae_j
-=(Ae_i)^{\mathsf T}(Ae_j)
-=\inner{Ae_i}{Ae_j}
-=\inner{e_i}{e_j}
-=\delta_{ij}.
-\]
-従って $A^{\mathsf T}A=I$ であり、$A$ は直交行列である。
-よって $(\text{ウ})\Rightarrow(\text{ア})$ も成り立ち、三条件は同値である。
+  (iii) 内積を保つなら、標準基底 $e_i,e_j$ に対して
+  \[
+  (A^{\mathsf T}A)_{ij}
+  =\langle Ae_i,Ae_j\rangle
+  =\langle e_i,e_j\rangle=\delta_{ij}.
+  \]
+  従って $A^{\mathsf T}A=I$、すなわち $A$ は直交行列である。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第3問｜初等微積分}{2015-a-3}
@@ -1523,79 +1119,44 @@ $x^{\sin x}=\exp(\sin x\log x)$ と書いて指数関数と積の微分へ直す
 $t$ と $t^{-1}$ を加減して $x$ と平方根を表し、$\d x$ と積分端点も全て $t$ へ変換する。
 \end{memo*}
 \begin{proof}[解答]
-(1)(i) $\tan x\ne0$ となる区間で、合成関数の微分公式
-$(\log|u|)'=u'/u$ を $u=\tan x$ に使うと
-\[
-\frac{\d}{\d x}\log|\tan x|
-=\frac{(\tan x)'}{\tan x}
-=\frac{\sec^2x}{\tan x}
-=\frac{1/\cos^2x}{\sin x/\cos x}
-=\frac1{\sin x\cos x}.
-\]
-(ii) $x^{\sin x}$ は $x>0$ で実数値として定まり、$x^{\sin x}=\exp(\sin x\log x)$ と書ける。
-指数関数の微分と積の微分公式を順に使うと
-\begin{align*}
-\frac{\d}{\d x}x^{\sin x}
-&=\exp(\sin x\log x)\cdot\frac{\d}{\d x}(\sin x\log x)\\
-&=x^{\sin x}\left(\cos x\log x+\frac{\sin x}{x}\right).
-\end{align*}
+\begin{enumerate}
+  \item[(1)] (i)
+  \[
+  \frac{\d}{\d x}\log|\tan x|
+  =\frac{\sec^2x}{\tan x}
+  =\frac1{\sin x\cos x}.
+  \]
+  (ii) $x^{\sin x}=e^{\sin x\log x}$ より
+  \[
+  \frac{\d}{\d x}x^{\sin x}
+  =x^{\sin x}\left(\cos x\log x+\frac{\sin x}{x}\right).
+  \]
 
-(2)(i) $t=x+\sqrt{x^2+1}$ に対して
-\[
-(\sqrt{x^2+1}+x)(\sqrt{x^2+1}-x)=(x^2+1)-x^2=1
-\]
-なので $t^{-1}=\sqrt{x^2+1}-x$ である。この二式を辺々加減すると
-\[
-t-t^{-1}=2x,\qquad t+t^{-1}=2\sqrt{x^2+1},
-\]
-すなわち
-\[
-x=\frac{t-t^{-1}}2,\qquad
-\sqrt{x^2+1}=\frac{t+t^{-1}}2,\qquad
-\d x=\frac{1+t^{-2}}2\,\d t.
-\]
-最後の式は $x=(t-t^{-1})/2$ を $t$ で微分したものである。
-また $x=0$ は $t=0+1=1$、$x=1$ は $t=1+\sqrt2$ に対応する。
+  \item[(2)] (i)
+  \[
+  t^{-1}=\sqrt{x^2+1}-x,\qquad
+  x=\frac{t-t^{-1}}2.
+  \]
 
-(ii)(a) $t+t^{-1}=t(1+t^{-2})$ に注意すると被積分要素が
-\[
-\frac{\d x}{\sqrt{x^2+1}}
-=\frac{2}{t+t^{-1}}\cdot\frac{1+t^{-2}}2\,\d t
-=\frac{1+t^{-2}}{t(1+t^{-2})}\,\d t
-=\frac{\d t}{t}
-\]
-と簡単になる。従って
-\[
-\int_0^1\frac{\d x}{\sqrt{x^2+1}}
-=\int_1^{1+\sqrt2}\frac{\d t}{t}
-=\left[\log t\right]_1^{1+\sqrt2}
-=\log(1+\sqrt2).
-\]
-(b) 
-\[
-(t+t^{-1})(1+t^{-2})=t+t^{-1}+t^{-1}+t^{-3}=t+2t^{-1}+t^{-3}
-\]
-だから
-\begin{align*}
-\int_0^1\sqrt{x^2+1}\,\d x
-&=\int_1^{1+\sqrt2}\frac{t+t^{-1}}2\cdot\frac{1+t^{-2}}2\,\d t\\
-&=\frac14\int_1^{1+\sqrt2}(t+2t^{-1}+t^{-3})\,\d t\\
-&=\frac14\left[\frac{t^2}{2}+2\log t-\frac1{2t^2}\right]_1^{1+\sqrt2}\\
-&=\left[\frac{t^2}{8}+\frac12\log t-\frac1{8t^2}\right]_1^{1+\sqrt2}.
-\end{align*}
-ここで $t=1+\sqrt2$ では $t^2=3+2\sqrt2$ であり、
-$(3+2\sqrt2)(3-2\sqrt2)=9-8=1$ より $t^{-2}=3-2\sqrt2$ だから
-\[
-\frac{t^2}{8}-\frac1{8t^2}
-=\frac{(3+2\sqrt2)-(3-2\sqrt2)}{8}
-=\frac{4\sqrt2}{8}=\frac{\sqrt2}{2}.
-\]
-$t=1$ では $1/8+0-1/8=0$ である。従って
-\[
-\int_0^1\sqrt{x^2+1}\,\d x
-=\frac{\sqrt2}{2}+\frac12\log(1+\sqrt2)
-=\frac{\sqrt2+\log(1+\sqrt2)}2.
-\]
+  (ii) さらに
+  \[
+  \sqrt{x^2+1}=\frac{t+t^{-1}}2,\qquad
+  \d x=\frac{1+t^{-2}}2\,\d t,
+  \]
+  で、$x=0,1$ は $t=1,1+\sqrt2$ に対応する。従って
+  \[
+  \text{(a)}\quad
+  \int_0^1\frac{\d x}{\sqrt{x^2+1}}
+  =\int_1^{1+\sqrt2}\frac{\d t}{t}
+  =\log(1+\sqrt2),
+  \]
+  \[
+  \text{(b)}\quad
+  \int_0^1\sqrt{x^2+1}\,\d x
+  =\frac14\int_1^{1+\sqrt2}(t+2t^{-1}+t^{-3})\,\d t
+  =\frac{\sqrt2+\log(1+\sqrt2)}2.
+  \]
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第4問｜最大最小と三重積分}{2015-a-4}
@@ -1621,50 +1182,23 @@ $u,v\ge0$ で、制約は直線 $u+v=1$ になる。
 変数変換を式にすると積分値 $J$ が $J=-J$ を満たし、$J=0$ となる。
 \end{memo*}
 \begin{proof}[解答]
-(1) 制約 $\sqrt x+\sqrt y=1$ では平方根が現れるので、$u=\sqrt x$, $v=\sqrt y$ とおく。
-このとき $x=u^2$, $y=v^2$ で、$u,v\ge0$ かつ $u+v=1$ である。
-$q=uv$ とおくと、相加相乗平均より
-\[
-q=uv\le\left(\frac{u+v}2\right)^2=\frac14
-\]
-であり、$u,v\ge0$ から $q\ge0$ でもある。逆に $0\le q\le1/4$ なら
-$u,v$ は2次方程式 $s^2-s+q=0$ の二根として実際に取れる（判別式は $1-4q\ge0$）。
-従って $q$ の動く範囲はちょうど $[0,1/4]$ である。目的関数は
-\begin{align*}
-x^2+xy+y^2
-&=u^4+u^2v^2+v^4\\
-&=(u^2+v^2)^2-u^2v^2\\
-&=\{(u+v)^2-2uv\}^2-(uv)^2\\
-&=(1-2q)^2-q^2\\
-&=1-4q+3q^2=:F(q)
-\end{align*}
-と $q$ だけの式になる。$F'(q)=-4+6q$ は $0\le q\le1/4$ では
-$6q\le3/2<4$ より常に負なので、$F$ はこの区間で単調減少する。
-従って最大値は $q=0$ で取る $F(0)=1$ であり、$q=uv=0$ は
-$(u,v)=(1,0),(0,1)$、すなわち $(x,y)=(1,0),(0,1)$ に対応する。
-最小値は $q=1/4$ で取る
-\[
-F\left(\frac14\right)=1-1+\frac3{16}=\frac3{16}
-\]
-であり、$q=1/4$ は $u=v=1/2$、すなわち $x=y=1/4$ に対応する。
+\begin{enumerate}
+  \item[(1)] $u=\sqrt x$, $v=\sqrt y$, $q=uv$ とおくと
+  $u,v\ge0$, $u+v=1$, $0\le q\le1/4$ であり、
+  \[
+  x^2+xy+y^2=u^4+u^2v^2+v^4=1-4q+3q^2.
+  \]
+  これは $0\le q\le1/4$ で単調減少する。従って
+  \[
+  \max=1\quad ((x,y)=(1,0),(0,1)),
+  \]
+  \[
+  \min=\frac3{16}\quad ((x,y)=(1/4,1/4)).
+  \]
 
-(2) 原点に関する点対称移動
-\[
-T(x,y,z)=(-x,-y,-z)
-\]
-を変数変換として使う。$T$ は線形写像で、その行列は $-I_3$ だから
-\[
-\frac{\partial(-x,-y,-z)}{\partial(x,y,z)}=|-I_3|=(-1)^3=-1,
-\qquad
-\left|\frac{\partial(-x,-y,-z)}{\partial(x,y,z)}\right|=1
-\]
-であり、体積要素は変わらない。また $V$ は原点中心の球なので
-$(x,y,z)\in V$ と $T(x,y,z)\in V$ は同値であり、$T$ は $V$ を $V$ へ写す。
-積分値を $J$ とおくと、変数変換により
-\begin{align*}
-J&=\iiint_V(x+y+z)\,\d x\d y\d z\\
-&=\iiint_V\{(-x)+(-y)+(-z)\}\,\d x\d y\d z\\
-&=-J
-\end{align*}
-となる。従って $2J=0$、すなわち $J=0$ である。
+  \item[(2)] $V$ は原点対称で、$x+y+z$ は奇関数だから
+  \[
+  \iiint_V(x+y+z)\,\d x\d y\d z=0.
+  \]
+\end{enumerate}
 \end{proof}

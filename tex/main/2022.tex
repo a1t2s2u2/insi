@@ -24,60 +24,31 @@ $|A|^2=(-1)^n$ へ変え、左右の符号を比べる。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] $A^2=-E_n$ なら
+  \item[(1)] 行列式を取ると
   \[
-  A(-A)=(-A)A=E_n
+  (\det A)^2=\det(-E_n)=(-1)^n.
   \]
-  だから、$-A$ が $A$ の逆行列であり、$A$ は正則である。両辺の行列式を取ると
+  左辺は正だから $n$ は偶数である。また
   \[
-  |A|^2=|A^2|=|-E_n|=(-1)^n.
+  A=\begin{pmatrix}0&-1\\1&0\end{pmatrix}
   \]
-  $A$ は正則だから $|A|\ne0$、従って $|A|^2>0$ である。
-  よって $(-1)^n=1$ でなければならない。
-  よって $n$ は偶数である。$n=2$ では
-  \[
-  J=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\qquad
-  J^2=
-  \begin{pmatrix}0&-1\\1&0\end{pmatrix}
-  \begin{pmatrix}0&-1\\1&0\end{pmatrix}
-  =\begin{pmatrix}-1&0\\0&-1\end{pmatrix}=-E_2
-  \]
-  が一例である。
+  とすれば $A^2=-E_2$ である。
 
-  \item[(2)] $A^{\mathsf T}A=-E_n$ を満たす実行列 $A$ が存在すると仮定する。
-  $0\ne x\in\R^n$ を一つ取る。等式の左から $x^{\mathsf T}$、右から $x$ を掛けると
+  \item[(2)] $0\ne x\in\R^n$ に対して
   \[
-  x^{\mathsf T}A^{\mathsf T}Ax
-  =(Ax)^{\mathsf T}(Ax)=\norm{Ax}^2\ge0
+  x^{\mathsf T}A^{\mathsf T}Ax=\|Ax\|^2\ge0,\qquad
+  x^{\mathsf T}(-E_n)x=-\|x\|^2<0.
   \]
-  である一方、
-  \[
-  x^{\mathsf T}(-E_n)x=-x^{\mathsf T}x=-\norm{x}^2<0
-  \]
-  となる。これは矛盾であるから、そのような実行列は存在しない。
+  従って $A^{\mathsf T}A=-E_n$ は不可能である。
 
-  \item[(3)] $A^{\mathsf T}=-A$ とする。任意の $v\in\R^n$ に対して
-  $v^{\mathsf T}Av$ は $1\times1$ 行列、すなわち実数なので、転置しても値は変わらない。従って
+  \item[(3)] $Av=\lambda v$ $(0\ne v\in\R^n,\ \lambda\in\R)$ なら
   \[
-  v^{\mathsf T}Av
+  \lambda\|v\|^2=v^{\mathsf T}Av
   =(v^{\mathsf T}Av)^{\mathsf T}
-  =v^{\mathsf T}A^{\mathsf T}v
-  =-v^{\mathsf T}Av,
+  =v^{\mathsf T}A^{\mathsf T}v=-v^{\mathsf T}Av,
   \]
-  よって $v^{\mathsf T}Av=0$ である。
-
-  もし実正則行列 $P$ により $P^{-1}AP=D$ が実対角行列になるなら、
-  $P$ の各列は $A$ の実固有ベクトルであり、$D$ の各対角成分は対応する実固有値である。
-  実固有値 $\lambda$ と対応する実固有ベクトル $0\ne v$ に対して
-  \[
-  0=v^{\mathsf T}Av=v^{\mathsf T}(\lambda v)
-  =\lambda\norm v^2
-  \]
-  だから $\lambda=0$ である。従って $D=O$ となり
-  \[
-  A=PDP^{-1}=O
-  \]
-  となるが、これは $A\ne O$ に矛盾する。よってそのような $P$ は存在しない。
+  よって $\lambda=0$ である。実数上で対角化できれば対角行列は零行列となり、
+  $A=O$ となるので仮定に反する。
 \end{enumerate}
 \end{proof}
 
@@ -103,49 +74,28 @@ f(x+y)=f(x)+f(y)
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] 与えられた式へ $x=y=0$ を代入すると
+  \item[(1)]
   \[
-  f(0)=f(0+0)=f(0)+f(0)=2f(0)
+  f(0)=f(0)+f(0)\quad\Longrightarrow\quad f(0)=0,
   \]
-  である。両辺から $f(0)$ を引けば $f(0)=0$ を得る。
-  次に $y=-x$ を代入すると
   \[
-  0=f(0)=f(x+(-x))=f(x)+f(-x)
+  0=f(x-x)=f(x)+f(-x)\quad\Longrightarrow\quad f(-x)=-f(x).
   \]
-  なので $f(-x)=-f(x)$ である。
 
-  \item[(2)] まず $n\in\N$ に対する $f(nx)=nf(x)$ を、$n$ についての帰納法で示す。
-  $n=1$ では両辺とも $f(x)$ である。$n$ で成り立つと仮定すると
+  \item[(2)] 加法性と (1) より $f(mx)=mf(x)$ $(m\in\Z)$。また
   \[
-  f((n+1)x)=f(nx+x)=f(nx)+f(x)=nf(x)+f(x)=(n+1)f(x)
+  f(x)=f\left(n\frac{x}{n}\right)=nf\left(\frac{x}{n}\right)
   \]
-  なので $n+1$ でも成り立つ。従って全ての $n\in\N$ で成り立つ。
-  負の整数 $-n$ については、(1) の $f(-u)=-f(u)$ を $u=nx$ に使って
+  だから、$r=m/n$ $(m\in\Z,\ n\in\N)$ に対して
   \[
-  f((-n)x)=f(-(nx))=-f(nx)=-nf(x)
+  f(rx)=f\left(m\frac{x}{n}\right)=\frac{m}{n}f(x)=rf(x).
   \]
-  となる。$n=0$ の場合は (1) の $f(0)=0$ である。よって全ての整数 $m$ で
-  $f(mx)=mf(x)$ が成り立つ。
 
-  次に、$n\ge1$ に対して $x=n\cdot(x/n)$ と書き、いま示した式を $x/n$ へ使うと
-  \[
-  f(x)=f\left(n\cdot\frac xn\right)=nf\left(\frac xn\right),
-  \qquad\text{すなわち}\qquad
-  f\left(\frac xn\right)=\frac{f(x)}n.
-  \]
-  従って $r=m/n$（$m\in\Z$, $n\in\N$）に対し
-  \[
-  f(rx)=f\left(m\cdot\frac{x}{n}\right)
-  =m f\left(\frac xn\right)
-  =\frac mn f(x)=rf(x).
-  \]
   \item[(3)] $c=f(1)$ とおくと (2) より $f(r)=cr$ $(r\in\Q)$。
-  任意の $x\in\R$ に対し $r_n\in\Q$, $r_n\to x$ を取る。
-  連続性から
+  $r_n\in\Q$, $r_n\to x$ を取れば、連続性から
   \[
-  f(x)=f\left(\lim_{n\to\infty}r_n\right)
-  =\lim_{n\to\infty}f(r_n)
-  =\lim_{n\to\infty}cr_n=cx.
+  f(x)=\lim_{n\to\infty}f(r_n)
+  =c\lim_{n\to\infty}r_n=cx.
   \]
 \end{enumerate}
 \end{proof}
@@ -168,51 +118,21 @@ f(x+y)=f(x)+f(y)
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] $X=Y=\R$ とし、定数写像
-  \[
-  f:\R\to\R,\qquad f(x)=0
-  \]
-  を考える。任意の開集合 $O\subset\R$ に対して
-  \[
-  f^{-1}(O)=
-  \begin{cases}
-  \R &(0\in O),\\
-  \varnothing &(0\notin O)
-  \end{cases}
-  \]
-  だから $f$ は連続である。しかし $U=\R$ は $X$ の開集合である一方、
-  $f(U)=\{0\}$ は $Y=\R$ の開集合ではない。
+  \item[(1)] 定数写像 $f:\R\to\R$, $f(x)=0$ は連続である。
+  開集合 $U=\R$ に対して $f(U)=\{0\}$ は開でない。
 
-  \item[(2)] (1) と同じ定数写像を使う。$K=\{0\}\subset\R$ は有限集合なのでコンパクトであるが
-  \[
-  f^{-1}(K)=f^{-1}(\{0\})=\R
-  \]
-  はコンパクトでない。実際、開被覆 $\{(-n,n)\}_{n\ge1}$ は有限部分被覆を持たない。
+  \item[(2)] 同じ写像で $K=\{0\}$ はコンパクトだが
+  $f^{-1}(K)=\R$ はコンパクトでない。
 
-  \item[(3)] $X=\R\sqcup\{p\}$ とする。$X$ の部分集合を、
-  $\R$ の開集合 $O$ と $E=\varnothing$ または $E=\{p\}$ を用いて
-  $O\sqcup E$ と書けるときに開と定める。これがここでいう直和位相であり、特に $\{p\}$ は開である。
-  $Y=\R$ とし、写像 $f:X\to Y$ を
+  \item[(3)] $X=\R\sqcup\{p\}$ に直和位相を入れ、$Y=\R$ とする。
   \[
-  f(x)=x\quad(x\in\R),\qquad f(p)=0
+  f(x)=x\ (x\in\R),\qquad f(p)=0
   \]
-  と定める。$f|_{\R}$ が恒等写像なので $f$ は全射である。
-  $Y$ の開集合 $O$ に対して
+  とおけば $f$ は連続かつ全射である。$V=\R\setminus\{0\}$ は $Y$ で稠密だが
   \[
-  f^{-1}(O)=
-  \begin{cases}
-  O\sqcup\{p\} &(0\in O),\\
-  O &(0\notin O)
-  \end{cases}
+  f^{-1}(V)=\R\setminus\{0\}
   \]
-  であり、どちらも直和位相で開だから $f$ は連続である。
-
-  $V=\R\setminus\{0\}$ とすると $\overline V=\R$ なので $V$ は $Y$ で稠密である。しかし
-  \[
-  f^{-1}(V)=\R\setminus\{0\}\subset X
-  \]
-  は $X$ の非空開集合 $\{p\}$ と交わらない。従って
-  $\overline{f^{-1}(V)}\ne X$ であり、$f^{-1}(V)$ は $X$ で稠密でない。
+  は $X$ の非空開集合 $\{p\}$ と交わらないので稠密でない。
 \end{enumerate}
 \end{proof}
 
@@ -642,77 +562,38 @@ $ax+by$ も集合内に残ることを確認すればよい。
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] (i) $W_1,W_2$ は部分空間なので $0\in W_1\cap W_2$ である。また
-$x,y\in W_1\cap W_2$ と $a,b\in\R$ を取ると、$x,y$ は $W_1,W_2$ の両方に属するから
-\[
-ax+by\in W_1,\qquad ax+by\in W_2.
-\]
-従って $ax+by\in W_1\cap W_2$ であり、$W_1\cap W_2$ は部分空間である。
+  \item[(1)] (i) $0\in W_1\cap W_2$ であり、$x,y\in W_1\cap W_2$、
+  $a,b\in\R$ なら $ax+by\in W_1\cap W_2$。従って部分空間である。
 
-(ii) $W_1\cup W_2$ が部分空間であると仮定する。
-$W_1\not\subset W_2$ かつ $W_2\not\subset W_1$ なら、
-\[
-u\in W_1\setminus W_2,
-\qquad v\in W_2\setminus W_1
-\]
-を取れる。合併が部分空間なら $u+v\in W_1\cup W_2$ である。
-もし $u+v\in W_1$ なら $v=(u+v)-u\in W_1$ となって矛盾し、
-もし $u+v\in W_2$ なら $u=(u+v)-v\in W_2$ となって矛盾する。
-従って、必ず $W_1\subset W_2$ または $W_2\subset W_1$ である。
+  (ii) どちらの包含も成り立たないとすると
+  $u\in W_1\setminus W_2$, $v\in W_2\setminus W_1$ を取れる。
+  $u+v\in W_1$ なら $v\in W_1$、$u+v\in W_2$ なら $u\in W_2$ となる。
+  従って $u+v\notin W_1\cup W_2$ であり、合併が部分空間であることに反する。
 
-\item[(2)] $x,y\in\ker f$ と $a,b\in\R$ に対し
-\[
-f(ax+by)=af(x)+bf(y)=0
-\]
-なので $ax+by\in\ker f$ である。また $f(0)=0$ だから $0\in\ker f$ であり、$\ker f$ は部分空間である。
-また
-\[
-f(x)=f(y)\Longleftrightarrow f(x-y)=0
-\Longleftrightarrow x-y\in\ker f.
-\]
-従って、$\ker f=\{0\}$ なら $f(x)=f(y)$ から $x=y$ が従い、$f$ は単射である。
-逆に $f$ が単射なら、$x\in\ker f$ に対して $f(x)=0=f(0)$ だから $x=0$ であり、
-$\ker f=\{0\}$ となる。
+  \item[(2)] $x,y\in\ker f$, $a,b\in\R$ なら
+  \[
+  f(ax+by)=af(x)+bf(y)=0
+  \]
+  であり、$0_U\in\ker f$ だから $\ker f$ は部分空間である。また
+  \[
+  f(x)=f(y)\iff f(x-y)=0\iff x-y\in\ker f.
+  \]
+  よって $f$ が単射であることと $\ker f=\{0_U\}$ は同値である。
 
-\item[(3)] まず $W$ が $V$ の部分空間であることを示す。零行列は $O^{\mathsf T}=O=-O$ を満たすので
-$O\in W$ であり、$W$ は空でない。また $A,B\in W$ と $a,b\in\R$ に対し、
-転置が線形であることと $A^{\mathsf T}=-A$, $B^{\mathsf T}=-B$ から
-\[
-(aA+bB)^{\mathsf T}
-=aA^{\mathsf T}+bB^{\mathsf T}
-=-aA-bB
-=-(aA+bB)
-\]
-となるので $aA+bB\in W$ である。従って $W$ は $V$ の部分空間である。
-
-次に基底と次元を求める。$A=(a_{ij})\in W$ とすると、条件 $A^{\mathsf T}=-A$ は
-\[
-a_{ji}=-a_{ij}\qquad(1\le i,j\le3)
-\]
-を意味する。$i=j$ とすれば $a_{ii}=-a_{ii}$、すなわち $2a_{ii}=0$ より $a_{ii}=0$ である。
-また $i<j$ の成分を $a_{12}=a$, $a_{13}=b$, $a_{23}=c$ とおけば、
-残りの成分は $a_{21}=-a$, $a_{31}=-b$, $a_{32}=-c$ と決まる。従って $A$ は
-\[
-A=\begin{pmatrix}
-0&a&b\\
--a&0&c\\
--b&-c&0
-\end{pmatrix}
-=aF_{12}+bF_{13}+cF_{23},
-\qquad
-F_{ij}=E_{ij}-E_{ji}
-\]
-と書ける。ここで $E_{ij}$ は $(i,j)$ 成分だけが1で、他の成分が0の行列である。
-逆に $F_{12},F_{13},F_{23}$ はいずれも $F_{ij}^{\mathsf T}=-F_{ij}$ を満たすので $W$ に属し、
-その一次結合も $W$ に属する。よって $F_{12},F_{13},F_{23}$ は $W$ を生成する。
-
-一次独立性を見る。$aF_{12}+bF_{13}+cF_{23}=O$ とすると、上の行列表示の
-$(1,2),(1,3),(2,3)$ 成分を読めばそれぞれ $a=0$, $b=0$, $c=0$ である。
-従って $F_{12},F_{13},F_{23}$ は一次独立であり、$W$ の基底である。よって
-\[
-E_{12}-E_{21},\quad E_{13}-E_{31},\quad E_{23}-E_{32}
-\]
-が基底で，$\dim W=3$。
+  \item[(3)] $O\in W$ であり、$A,B\in W$, $a,b\in\R$ なら
+  \[
+  (aA+bB)^{\mathsf T}=-aA-bB,
+  \]
+  従って $W$ は部分空間である。任意の $A\in W$ は一意に
+  \[
+  A=\begin{pmatrix}0&a&b\\-a&0&c\\-b&-c&0\end{pmatrix}
+  =a(E_{12}-E_{21})+b(E_{13}-E_{31})+c(E_{23}-E_{32})
+  \]
+  と書ける。従って
+  \[
+  E_{12}-E_{21},\quad E_{13}-E_{31},\quad E_{23}-E_{32}
+  \]
+  が基底であり、$\dim W=3$。
 \end{enumerate}
 \end{proof}
 
@@ -749,74 +630,32 @@ $F$ では積分区間と被積分関数の両方が $s$ とともに変わる�
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] $F(s)=\int_a^s u(s,t)\,\d t$ とおく。$F$ の連続性を確認する。
-$s,s+h\in[a,b]$ とし、まず $h>0$ の場合には
-\begin{align*}
-F(s+h)-F(s)
-&=\int_a^s\{u(s+h,t)-u(s,t)\}\,\d t
-  +\int_s^{s+h}u(s+h,t)\,\d t.
-\end{align*}
-$u$ はコンパクト集合 $[a,b]^2$ 上連続なので一様連続かつ有界であり、
-$|u|\le M$ となる $M\ge0$ と、任意の $\varepsilon>0$ に対して
-\[
-|s-s'|<\eta\quad\Longrightarrow\quad
-|u(s,t)-u(s',t)|<\varepsilon\qquad(t\in[a,b])
-\]
-を満たす $\eta>0$ が取れる。従って $0<h<\eta$ なら
-\[
-|F(s+h)-F(s)|
-\le\int_a^s|u(s+h,t)-u(s,t)|\,\d t
- +\int_s^{s+h}|u(s+h,t)|\,\d t
-\le\varepsilon(b-a)+Mh.
-\]
-右辺は $\varepsilon\to0$, $h\to0$ で0へ近づくので、第1項も第2項も0へ収束する。
-$h<0$ でも積分区間の向きを入れ替えれば同じ評価ができるので、$F$ は連続である。
+  \item[(1)] $F(s)=\int_a^s u(s,t)\,\d t$ とおく。
+  $u$ の一様連続性と有界性から、$h\to0$ のとき
+  \[
+  F(s+h)-F(s)
+  =\int_a^s\{u(s+h,t)-u(s,t)\}\,\d t
+   +\int_s^{s+h}u(s+h,t)\,\d t\longrightarrow0.
+  \]
+  従って $F$ は連続であり、微積分学の基本定理から
+  \[
+  f'(x)=F(x)=\int_a^x u(x,t)\,\d t.
+  \]
 
-$f(x)=\int_a^xF(s)\,\d s$ だから、微積分学の基本定理より
-\[
-f'(x)=F(x)=\int_a^x u(x,t)\,\d t.
-\]
-\item[(2)] 積分領域の条件 $0\le s\le t\le x$ は、外側で $t$ を $0$ から $x$ まで動かし、
-各 $t$ を固定した内側で $s$ を $0$ から $t$ まで動かすことを表す。
-被積分関数は $s(1-2st)=s-2s^2t$ だから
-\begin{align*}
-g(x)
-&=\int_0^x\int_0^t (s-2s^2t)\,\d s\d t\\
-&=\int_0^x\left[\frac{s^2}{2}-\frac{2ts^3}{3}\right]_{s=0}^{s=t}\d t\\
-&=\int_0^x\left(\frac{t^2}{2}-\frac{2t^4}{3}\right)\d t\\
-&=\left[\frac{t^3}{6}-\frac{2t^5}{15}\right]_{t=0}^{t=x}
-=\frac{x^3}{6}-\frac{2x^5}{15}.
-\end{align*}
-従って
-\[
-g'(x)=\frac{x^2}{2}-\frac{2x^4}{3}
-=x^2\left(\frac12-\frac{2x^2}{3}\right).
-\]
-$x>0$ では $x^2>0$ なので、$g'(x)$ の符号は括弧の中だけで決まる。
-\[
-\frac12-\frac{2x^2}{3}=0
-\quad\Longleftrightarrow\quad
-x^2=\frac34
-\quad\Longleftrightarrow\quad
-x=\frac{\sqrt3}{2}\quad(x>0)
-\]
-であり、括弧の中は $x$ について単調減少だから、
-$0<x<\sqrt3/2$ では $g'(x)>0$、$x>\sqrt3/2$ では $g'(x)<0$ である。
-従って $g$ は $x=\sqrt3/2$ で最大になる。この点では
-\[
-x^2=\frac34,\qquad
-x^3=\frac34\cdot\frac{\sqrt3}{2}=\frac{3\sqrt3}{8},\qquad
-x^5=\left(\frac34\right)^2\frac{\sqrt3}{2}=\frac{9\sqrt3}{32}
-\]
-なので
-\[
-g\left(\frac{\sqrt3}{2}\right)
-=\frac16\cdot\frac{3\sqrt3}{8}-\frac{2}{15}\cdot\frac{9\sqrt3}{32}
-=\frac{\sqrt3}{16}-\frac{3\sqrt3}{80}
-=\frac{5\sqrt3-3\sqrt3}{80}
-=\frac{\sqrt3}{40}.
-\]
-よって $x>0$ における最大値は $\sqrt3/40$ である。
+  \item[(2)] $D_x=\{(s,t)\mid0\le s\le t\le x\}$ より
+  \begin{align*}
+  g(x)
+  &=\int_0^x\int_0^t(s-2s^2t)\,\d s\d t\\
+  &=\int_0^x\left(\frac{t^2}{2}-\frac{2t^4}{3}\right)\d t
+  =\frac{x^3}{6}-\frac{2x^5}{15}.
+  \end{align*}
+  \[
+  g'(x)=x^2\left(\frac12-\frac{2x^2}{3}\right)
+  \]
+  だから、$g$ は $x=\sqrt3/2$ で最大となる。その値は
+  \[
+  g\left(\frac{\sqrt3}{2}\right)=\frac{\sqrt3}{40}.
+  \]
 \end{enumerate}
 \end{proof}
 
@@ -839,58 +678,31 @@ g\left(\frac{\sqrt3}{2}\right)
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] 閉包 $\overline{A\cup B}$ は $A\cup B$ を含む最小の閉集合である。
-$\overline A\cup\overline B$ は閉集合であり $A\cup B$ を含むので
-\[
-\overline{A\cup B}\subset\overline A\cup\overline B.
-\]
-逆に $A\subset A\cup B$ と $B\subset A\cup B$ に閉包の単調性を用いると
-\[
-\overline A\subset\overline{A\cup B},\qquad
-\overline B\subset\overline{A\cup B}.
-\]
-従って $\overline A\cup\overline B\subset\overline{A\cup B}$ であり、両方の包含から
-\[
-\overline{A\cup B}=\overline A\cup\overline B
-\]
-を得る。
+  \item[(1)] $\overline A\cup\overline B$ は $A\cup B$ を含む閉集合だから
+  \[
+  \overline{A\cup B}\subset\overline A\cup\overline B.
+  \]
+  一方、$A,B\subset A\cup B$ より
+  $\overline A,\overline B\subset\overline{A\cup B}$。従って等号が成り立つ。
 
-\item[(2)] $K\subset X$ をコンパクト部分集合とし、$x\in X\setminus K$ を取る。
-$X$ は Hausdorff 空間なので、各 $y\in K$ に対して互いに交わらない開近傍
-$U_y\ni x$ と $V_y\ni y$ を取れる。$\{V_y\}_{y\in K}$ は $K$ の開被覆だから、
-コンパクト性より $y_1,\ldots,y_m\in K$ が存在して
-\[
-K\subset V_{y_1}\cup\cdots\cup V_{y_m}
-\]
-となる。ここで
-\[
-U=U_{y_1}\cap\cdots\cap U_{y_m}
-\]
-とおく。$U$ は有限個の開集合の共通部分なので開であり、
-各 $U_{y_i}$ が $x$ を含むので $x\in U$ である。すなわち $U$ は $x$ の開近傍である。
-さらに $U$ は $K$ と交わらない。実際、$z\in U\cap K$ があるとすると、
-$K\subset V_{y_1}\cup\cdots\cup V_{y_m}$ よりある $i$ について $z\in V_{y_i}$ であり、
-一方 $z\in U\subset U_{y_i}$ でもあるから
-\[
-z\in U_{y_i}\cap V_{y_i}=\varnothing
-\]
-となって矛盾する。従って $U\subset X\setminus K$ である。
-$x\in X\setminus K$ は任意だったので $X\setminus K$ は開集合であり、$K$ は閉集合である。
+  \item[(2)] $x\notin K$ とする。各 $y\in K$ に対し Hausdorff 性より
+  \[
+  x\in U_y,\quad y\in V_y,\quad U_y\cap V_y=\varnothing
+  \]
+  となる開集合を取る。$K$ のコンパクト性より
+  $K\subset V_{y_1}\cup\cdots\cup V_{y_m}$ とできる。このとき
+  \[
+  U=U_{y_1}\cap\cdots\cap U_{y_m}
+  \]
+  は $x$ の開近傍で $U\cap K=\varnothing$。従って $X\setminus K$ は開であり、
+  $K$ は閉である。
 
-\item[(3)] $T$ が連結でないと仮定すると、非空な開集合 $U,V\subset T$ により
-\[
-T=U\cup V,\qquad U\cap V=\varnothing
-\]
-と書ける。$F$ は連続なので $F^{-1}(U),F^{-1}(V)$ は $S$ の開集合である。
-また $F$ は全射だから、$U\ne\varnothing$ の点は像に現れ、$F^{-1}(U)\ne\varnothing$、
-同様に $F^{-1}(V)\ne\varnothing$ である。さらに逆像は合併と共通部分を保つので
-\[
-F^{-1}(U)\cup F^{-1}(V)=F^{-1}(U\cup V)=F^{-1}(T)=S,
-\]
-\[
-F^{-1}(U)\cap F^{-1}(V)=F^{-1}(U\cap V)=F^{-1}(\varnothing)=\varnothing.
-\]
-従って $S$ も空でない二つの開集合へ分割され、$S$ が連結であることに矛盾する。
-よって $T$ は連結である。
+  \item[(3)] $T=U\cup V$ が非自明な開分離だとする。連続性と全射性より
+  $F^{-1}(U),F^{-1}(V)$ は空でない $S$ の開集合であり、
+  \[
+  S=F^{-1}(U)\cup F^{-1}(V),\qquad
+  F^{-1}(U)\cap F^{-1}(V)=\varnothing.
+  \]
+  これは $S$ の連結性に反する。従って $T$ は連結である。
 \end{enumerate}
 \end{proof}
