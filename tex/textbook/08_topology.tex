@@ -148,8 +148,9 @@ K\text{ がコンパクト}\Longleftrightarrow K\text{ が有界かつ閉}
   \item $x\notin K$ と各 $y\in K$ を Hausdorff 性で分離し、$K$ 側の有限部分被覆を選ぶ。
 \end{enumerate}
 
-\begin{corollary}{コンパクトから Hausdorff への全単射}{tb-compact-bijection}
-$K$ がコンパクト、$Y$ が Hausdorff で、$f:K\to Y$ が連続全単射なら $f$ は同相写像である。
+\begin{corollary}{コンパクトから Hausdorff への単射}{tb-compact-bijection}
+$K$ がコンパクト、$Y$ が Hausdorff で、$f:K\to Y$ が連続単射なら
+$f:K\to f(K)$ は同相写像である。特に $f$ が全単射なら $K$ と $Y$ は同相である。
 \end{corollary}
 
 実際、閉集合 $F\subset K$ はコンパクト、その像 $f(F)$ はコンパクト、従って $Y$ で閉である。
@@ -160,6 +161,8 @@ $K$ がコンパクト、$Y$ が Hausdorff で、$f:K\to Y$ が連続全単射�
 f:[0,2\pi)\to S^1,\qquad f(t)=(\cos t,\sin t)
 \]
 は連続全単射だが、$(1,0)$ の近くで逆写像の値が $0$ 側と $2\pi$ 側に分かれるため同相写像でない。
+Hausdorff 性も必要である。二点集合上の離散位相から密着位相への恒等写像は
+コンパクト空間からの連続全単射だが、逆写像は連続でない。
 
 Hausdorff 空間では一点集合が閉である。したがって、コンパクト空間 $S$ から
 Hausdorff 空間 $T$ への連続写像 $f$ と $p\in T$ に対し、
