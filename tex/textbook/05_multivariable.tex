@@ -1,238 +1,249 @@
 \chapter{多変数の微分積分}
 \label{ch:tb-multivariable}
 
-\section{偏微分と $C^1$ 級}
+\section{連続性、偏微分、\texorpdfstring{$C^1$ 級}{C1 級}}
 
-\begin{definition}{偏導関数}{tb-partial-derivative}
-$f(x,y)$ に対して
+\begin{definition}{連続と偏微分}{tb-multivariable-basics}
+$f:\R^2\to\R$ が $(a,b)$ で連続であるとは
 \[
-f_x(a,b)=\frac{\partial f}{\partial x}(a,b)
-=\lim_{h\to0}\frac{f(a+h,b)-f(a,b)}h
+(x,y)\to(a,b)\Longrightarrow f(x,y)\to f(a,b)
 \]
-を $x$ に関する\textbf{偏導関数}という。$f_y$ も同様である。
-定義が差商の極限であることを忘れないこと。
-場合分けで定義された関数では、公式ではなく定義に戻って計算する必要がある。
+をいう。偏導関数は一方の変数を固定した差商
+\[
+f_x(a,b)=\lim_{h\to0}\frac{f(a+h,b)-f(a,b)}h,\qquad
+f_y(a,b)=\lim_{h\to0}\frac{f(a,b+h)-f(a,b)}h
+\]
+である。全ての1階偏導関数が存在し連続なら $C^1$ 級、
+全ての階数の偏導関数が連続なら $C^\infty$ 級という。
 \end{definition}
 
-\begin{definition}{$C^1$ 級・$C^\infty$ 級}{tb-c1-class}
-全ての1階偏導関数が存在して連続なとき $f$ は\textbf{$C^1$ 級}であるという。
-任意の階数の偏導関数が存在して連続なとき $C^\infty$ 級（\textbf{滑らか}）という。
-\end{definition}
+$C^1$ 級なら連続であるが、偏導関数が存在するだけでは連続とは限らない。
+$C^1$ 級でないことを示すには、ある偏導関数が不連続であることを一つ示せばよい。
 
-\begin{theorem}{$C^1$ 級なら全微分可能}{tb-c1-differentiable}
-$C^1$ 級の関数は全微分可能であり、特に連続である。
-逆に、偏導関数が存在するだけでは連続とは限らない。
-\end{theorem}
+原点での連続性は極座標 $x=r\cos\theta$, $y=r\sin\theta$ を使い、
+$\abs{f(x,y)-f(0,0)}\le C r^\alpha$（$\alpha>0$）へ落とすと速い。
+2021年度第1期では $\abs{\sin u}\le\min\{\abs u,1\}$ を原点付近と無限遠で使い分ける。
+場合分け関数の原点での偏微分は、必ず差商の定義から計算する。
 
-$C^1$ 級を否定するには、偏導関数を実際に計算し、
-それが\textbf{不連続}である点を一つ示せばよい。
-2021年度 第1期 専門基礎 第2問では
-\[
-\frac{\partial f}{\partial y}(x,0)=1\ (x\ne0),
-\qquad
-\frac{\partial f}{\partial y}(0,0)=0
-\]
-となるので、原点で不連続であり $C^1$ 級でないと結論する。
-
-\begin{theorem}{連鎖律}{tb-chain-rule}
-$f$ が $C^1$ 級、$x(t),y(t)$ が微分可能なら
+\begin{theorem}{曲線に沿う連鎖律}{tb-multivariable-chain-rule}
+$f$ が $C^1$ 級で $x(t),y(t)$ が微分可能なら
 \[
 \frac{\d}{\d t}f(x(t),y(t))
-=f_x(x(t),y(t))\,x'(t)+f_y(x(t),y(t))\,y'(t).
+=f_x(x(t),y(t))x'(t)+f_y(x(t),y(t))y'(t).
 \]
-特に $\varphi(t)=f(tx,ty)$ に対しては
-\[
-\varphi'(t)=x\,f_x(tx,ty)+y\,f_y(tx,ty)
-\]
-となり、右辺に係数 $x,y$ が現れる。
 \end{theorem}
 
-\begin{memo*}
-連鎖律で係数 $x,y$ が出ることは、
-2015年度 第2期 専門基礎 第2問（$f=xg+yh$ と分解する問題）の鍵である。
-$\varphi(1)-\varphi(0)=\int_0^1\varphi'(t)\,\d t$ と組み合わせると、
-求める形の分解がそのまま得られる。
-\end{memo*}
+\begin{proposition}{原点で消える滑らかな関数の分解}{tb-smooth-factorization}
+$f\in C^\infty(\R^2)$, $f(0,0)=0$ なら
+\[
+f(x,y)=xg(x,y)+yh(x,y)
+\]
+となる $g,h\in C^\infty(\R^2)$ が存在する。さらに
+\[
+f(x,y)=xG(x,y)+yH(y)
+\]
+という形にもできる。
+\end{proposition}
+
+\begin{proof}
+$F(t)=f(tx,ty)$ とおく。基本定理と連鎖律から
+\[
+f(x,y)=\int_0^1F'(t)\,\d t
+=x\int_0^1f_x(tx,ty)\,\d t
++y\int_0^1f_y(tx,ty)\,\d t.
+\]
+これが最初の表示である。二つ目は
+\[
+f(x,y)=\bigl(f(x,y)-f(0,y)\bigr)+f(0,y)
+=x\int_0^1 f_x(tx,y)\,\d t
++y\int_0^1f_y(0,ty)\,\d t
+\]
+とすればよい。被積分関数が滑らかなので、得られた関数も滑らかである。
+\end{proof}
 
 \section{積分記号下の微分}
 
-\begin{theorem}{固定端点の Leibniz 則}{tb-leibniz-fixed}
-$f$ と $f_x$ が $[a,b]\times[c,d]$ 上連続なら
+\begin{theorem}{Leibniz 則}{tb-leibniz-rule}
+$f,f_x$ が必要な長方形上で連続なら
 \[
-\frac{\d}{\d x}\int_c^df(x,y)\,\d y=\int_c^df_x(x,y)\,\d y.
+\frac{\d}{\d x}\int_c^d f(x,y)\,\d y
+=\int_c^d f_x(x,y)\,\d y.
 \]
-\end{theorem}
-
-\begin{theorem}{可変端点の Leibniz 則}{tb-leibniz-variable}
-さらに $\phi,\psi$ が微分可能なら
+さらに $\phi,\psi$ が $C^1$ 級なら
 \[
 \frac{\d}{\d x}\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y
 =f(x,\psi(x))\psi'(x)-f(x,\phi(x))\phi'(x)
 +\int_{\phi(x)}^{\psi(x)}f_x(x,y)\,\d y.
 \]
-右辺の三項は「上端の移動」「下端の移動」「被積分関数自身の変化」に対応する。
 \end{theorem}
 
-\begin{proof}
-$Q(x,v)=\int_c^vf(x,y)\,\d y$ とおくと、固定端点版と基本定理から
+右辺は順に「上端」「下端」「中身」の変化である。
+証明は $Q(x,v)=\int_c^v f(x,y)\,\d y$ と置き、
+$Q(x,\psi(x))-Q(x,\phi(x))$ に二変数の連鎖律を使う。
+
+例えば
 \[
-Q_x(x,v)=\int_c^vf_x(x,y)\,\d y,\qquad Q_v(x,v)=f(x,v)
+f(x)=\int_a^x\d s\int_a^s u(s,t)\,\d t
 \]
-である。$\int_{\phi(x)}^{\psi(x)}=Q(x,\psi(x))-Q(x,\phi(x))$ に
-連鎖律を使えば定理~\ref{thm:tb-leibniz-variable} が出る。
-公式を丸暗記するより、この二段構えを覚える方が安全である。
-\end{proof}
+では、外側の基本定理だけで
+$f'(x)=\int_a^xu(x,t)\,\d t$ となる。
 
-\section{重積分}
-
-\begin{definition}{累次積分}{tb-iterated-integral}
-領域 $D=\{(x,y)\mid a\le x\le b,\ \phi(x)\le y\le\psi(x)\}$ に対して
+\begin{theorem}{パラメータ積分の微分}{tb-differentiate-integral}
+$t$ がコンパクト区間を動き、$f(t,x)$ と $f_t(t,x)$ が連続で、
+$\abs{f_t(t,x)}\le g(x)$ となる可積分関数 $g$ があれば
 \[
-\iint_Df(x,y)\,\d x\d y=\int_a^b\left(\int_{\phi(x)}^{\psi(x)}f(x,y)\,\d y\right)\d x
+\frac{\d}{\d t}\int f(t,x)\,\d x=\int f_t(t,x)\,\d x.
 \]
-と計算する。どちらの変数を外側に取るかは、領域の記述しやすさで決める。
-\end{definition}
-
-\begin{theorem}{Fubini--Tonelli の定理}{tb-fubini-tonelli}
-被積分関数が\textbf{非負可測}なら、積分順序はいつでも交換してよい（Tonelli）。
-符号を持つ場合は、$\iint\abs f<\infty$（絶対可積分）を確かめてから交換してよい（Fubini）。
+広義積分では、交換を正当化する優関数 $g$ を答案に書く。
 \end{theorem}
 
-答案では「非負なので Tonelli の定理により」または
-「絶対可積分なので Fubini の定理により」と、
-\textbf{どちらの定理をどの仮定で使ったか}を明記する。
-
-\begin{theorem}{変数変換}{tb-change-of-variables}
-$\Phi:(u,v)\mapsto(x,y)$ が $C^1$ 級の全単射で Jacobian が消えないとき
+\begin{example}{$(x^t-1)/\log x$}{tb-log-quotient-parameter}
+$0<x<1$, $t\ge0$ では
 \[
-\iint_Df(x,y)\,\d x\d y
+\frac{x^t-1}{\log x}=\int_0^t x^s\,\d s.
+\]
+この表示から $0\le (x^t-1)/\log x\le t$、$x\to1$ での極限が $t$ と分かる。
+さらに $t$ で微分すれば $x^t$ なので
+\[
+\frac{\d}{\d t}\int_0^1\frac{x^t-1}{\log x}\,\d x
+=\int_0^1x^t\,\d x=\frac1{t+1}.
+\]
+積分表示は端点の特異性、評価、微分を同時に処理する。
+\end{example}
+
+\section{重積分と変数変換}
+
+\begin{theorem}{Fubini--Tonelli}{tb-fubini-tonelli}
+$f\ge0$ なら Tonelli の定理により累次積分の順序を交換できる。
+符号を持つ $f$ では $\iint\abs f<\infty$ なら Fubini の定理により交換できる。
+有界閉領域上の連続関数では後者の条件が自動的に成り立つ。
+\end{theorem}
+
+累次積分へ直す前に領域を図示し、例えば
+\[
+D=\{(x,y)\mid a\le x\le b,\ \phi(x)\le y\le\psi(x)\}
+\]
+の形へ書く。境界の上下関係が変わる点で積分区間を分ける。
+
+\begin{theorem}{二変数の変数変換}{tb-change-of-variables}
+$\Phi:(u,v)\mapsto(x,y)$ が領域間の $C^1$ 級全単射で、内部で Jacobian が消えないなら
+\[
+\iint_D f(x,y)\,\d x\d y
 =\iint_{\Phi^{-1}(D)}f(\Phi(u,v))
-\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\d u\d v,
+\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\d u\d v.
 \]
+掛けるのは
 \[
-\frac{\partial(x,y)}{\partial(u,v)}
-=\begin{vmatrix}
-\partial x/\partial u&\partial x/\partial v\\
-\partial y/\partial u&\partial y/\partial v
-\end{vmatrix}.
+\left|\frac{\partial(x,y)}{\partial(u,v)}\right|
+=\left|\det
+\begin{pmatrix}x_u&x_v\\y_u&y_v\end{pmatrix}\right|
 \]
-掛けるのは Jacobian の\textbf{絶対値}である。
+であり、絶対値を忘れない。
 \end{theorem}
 
-\begin{proposition}{よく使う変換}{tb-standard-transformations}
-平面の極座標
+変数変換は次の順に行う。
+\begin{enumerate}
+  \item 逆変換を求める。
+  \item 領域の全ての不等式を新変数へ移し、新領域を確定する。
+  \item Jacobian の絶対値を計算する。
+  \item 被積分関数と面積要素を両方置き換える。
+\end{enumerate}
+
+\begin{proposition}{頻出する変換}{tb-standard-transformations}
 \[
-x=r\cos\theta,\quad y=r\sin\theta,
-\qquad
-\frac{\partial(x,y)}{\partial(r,\theta)}=r,
-\qquad \d x\d y=r\,\d r\d\theta.
+\begin{array}{c|c|c}
+\text{目的}&(x,y)&\left|\partial(x,y)/\partial(u,v)\right|\\ \hline
+\text{極座標}&(r\cos\theta,r\sin\theta)&r\\
+x+y,\ x-y&( (u+v)/2,(u-v)/2)&1/2\\
+\text{合計と割合}&(st,s(1-t))&s\\
+\text{平方した極座標}&((r\cos\theta)^2,(r\sin\theta)^2)&4r^3\sin\theta\cos\theta
+\end{array}
 \]
-一次変換 $\binom xy=M\binom uv$ では Jacobian は $|M|$ である。
-これは $\Phi$ が線形なら偏微分の行列が $M$ そのものになるからで、
-$u=x+y$, $v=x-y$ のような和と差の置き換えはこの形で処理できる。
+最後の二行では通常 $s>0$, $0<t<1$ および $r>0$, $0<\theta<\pi/2$ を使う。
 \end{proposition}
 
-変数変換は次の順で行う。
-\begin{enumerate}
-  \item 逆変換を求め、旧変数の不等式を新変数の不等式へ一つずつ書き換える。
-  \item 新しい積分領域を、外側の変数と内側の変数の順に決める。
-  \item Jacobian を計算し、その絶対値を掛ける。
-  \item 被積分関数を新変数で書き直す。
-\end{enumerate}
-上端が二つの式の小さい方になるときは、両者が等しくなる点で区間を分ける。
-2026年度 第2期 専門基礎 第2問では、$r$ の上端が $\min\{2,\sec\theta\}$ になり、
-$\sec\theta=2$ すなわち $\theta=\pi/3$ で分割する。
+極座標で $0\le x\le1$ は $0\le r\cos\theta\le1$ となる。
+$1\le r\le2$ と同時に課されるなら $r\le\min\{2,\sec\theta\}$ であり、
+$\sec\theta=2$ となる $\theta=\pi/3$ で領域を分ける。
 
-\begin{proposition}{対称性による消去}{tb-symmetry-vanishing}
-領域 $V$ が原点対称で、被積分関数が奇関数（$f(-P)=-f(P)$）なら
+\begin{proposition}{対称性}{tb-symmetry-vanishing}
+領域 $D$ が変換 $T$ で不変、Jacobian の絶対値が1で、
+$f(Tx)=-f(x)$ なら $\int_Df=0$ である。
+特に原点対称な領域上では、奇関数の積分は0になる。
+\end{proposition}
+
+\begin{proposition}{Gaussian 積分}{tb-gaussian-integral}
 \[
-\iiint_Vf=0.
+\int_0^\infty e^{-x^2}\,\d x=\frac{\sqrt\pi}{2}.
 \]
 \end{proposition}
 
 \begin{proof}
-$T(P)=-P$ は $V$ を $V$ へ写し、Jacobian の絶対値は1なので、
-積分値 $J$ が $J=-J$ を満たす。従って $J=0$ である。
+$I_R=\int_0^Re^{-x^2}\,\d x$ とし、$S_R=[0,R]^2$ とおくと Fubini の定理により
+\[
+I_R^2=\iint_{S_R}e^{-(x^2+y^2)}\,\d x\d y.
+\]
+第1象限の半径 $a$ の四分円を $D_a$ とすれば
+$D_R\subset S_R\subset D_{\sqrt2R}$ である。極座標により
+\[
+\iint_{D_a}e^{-(x^2+y^2)}\,\d x\d y
+=\int_0^{\pi/2}\!\int_0^a e^{-r^2}r\,\d r\d\theta
+=\frac\pi4(1-e^{-a^2}).
+\]
+両側から挟んで $R\to\infty$ とすると $I_R^2\to\pi/4$。
+$I_R\ge0$ なので結論を得る。
 \end{proof}
 
-\section{Gamma 関数と Beta 関数}
+\section{Gamma・Beta 関数}
 
-\begin{definition}{Gamma 関数・Beta 関数}{tb-gamma-beta}
-$p,q>0$ に対して
+\begin{definition}{Gamma・Beta 関数}{tb-gamma-beta}
+$p,q>0$ に対し
 \[
 \Gamma(p)=\int_0^\infty x^{p-1}e^{-x}\,\d x,
 \qquad
-B(p,q)=\int_0^1x^{p-1}(1-x)^{q-1}\,\d x.
+B(p,q)=\int_0^1t^{p-1}(1-t)^{q-1}\,\d t.
 \]
 \end{definition}
 
-\begin{proposition}{基本性質}{tb-gamma-properties}
+\begin{theorem}{Beta--Gamma 関係式}{tb-beta-gamma-relation}
 \[
-\Gamma(1)=1,\qquad
-\Gamma(p+1)=p\,\Gamma(p),\qquad
-\Gamma(n)=(n-1)!\ (n\in\N),
-\qquad
-\Gamma\left(\frac12\right)=\sqrt\pi.
-\]
-\end{proposition}
-
-\begin{theorem}{Gamma と Beta の関係}{tb-beta-gamma-relation}
-\[
-B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)},
-\qquad\text{すなわち}\qquad
-\Gamma(p)\Gamma(q)=B(p,q)\Gamma(p+q).
+B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}.
 \]
 \end{theorem}
 
 \begin{proof}
-$\Gamma(p)\Gamma(q)$ を第1象限上の二重積分
-$\iint x^{p-1}y^{q-1}e^{-(x+y)}\,\d x\d y$ と書いてから、次のどちらかで分離する。
-\begin{enumerate}
-  \item $x=st$, $y=s(1-t)$。$s=x+y$ が合計、$t=x/(x+y)$ が割合で、
-        Jacobian の絶対値は $s$ である。
-  \item $x=(r\cos\theta)^2$, $y=(r\sin\theta)^2$。このとき $x+y=r^2$ であり、
-        Jacobian の絶対値は $4r^3\sin\theta\cos\theta$ である。
-        続けて $u=r^2$ と $t=\cos^2\theta$ で置換する。
-\end{enumerate}
-どちらも「$r$ だけの因子」と「$\theta$（または $t$）だけの因子」の積に分かれる点が要点である。
+積を第1象限の積分
+\[
+\Gamma(p)\Gamma(q)=\iint x^{p-1}y^{q-1}e^{-(x+y)}\,\d x\d y
+\]
+にする。$x=st$, $y=s(1-t)$ を使えば
+\[
+\int_0^\infty s^{p+q-1}e^{-s}\,\d s
+\int_0^1t^{p-1}(1-t)^{q-1}\,\d t
+=\Gamma(p+q)B(p,q).
+\]
+別解では $x=(r\cos\theta)^2$, $y=(r\sin\theta)^2$ とし、
+Jacobian $4r^3\sin\theta\cos\theta$ を掛ける。$r$ と $\theta$ の積分に分離した後、
+$s=r^2$, $t=\cos^2\theta$ と置けば同じ二因子を得る。
 \end{proof}
 
-\begin{proposition}{Beta 関数の三角関数表示}{tb-beta-trig}
-$t=\cos^2\theta$ と置くことで
+\section{円板を広げる極限}
+
+2021年度第1期では、非負関数を円板 $B(R)$ 上で積分する。
+$B(R)$ は $R$ とともに増大するので、単調収束定理から
 \[
-\int_0^{\pi/2}\cos^{2p-1}\theta\,\sin^{2q-1}\theta\,\d\theta
-=\frac12B(p,q).
+\lim_{R\to\infty}\iint_{B(R)}F
+=\iint_{\R^2}F
 \]
-\end{proposition}
-
-\begin{memo*}
-2021年度 第2期 専門基礎 第2問は、上の二つの変換を両方使わせる問題である。
-指数の勘定を落とさないこと。二つ目の変換では
-$(2p-2)+(2q-2)+3=2p+2q-1$ が $r$ の指数になる。
-\end{memo*}
-
-\section{収束定理}
-
-\begin{theorem}{単調収束定理}{tb-monotone-convergence}
-$0\le f_1\le f_2\le\cdots$ が可測で $f_n\to f$ なら
+となる。右辺が有限であることは原点と無限遠を分けて評価する。
+問題の関数では、極座標で
 \[
-\lim_{n\to\infty}\int f_n=\int f
+\abs f\le r\quad(0<r\le1),\qquad
+\abs f\le r^{-2}\quad(r\ge1)
 \]
-（値が $\infty$ でもよい）。
-\end{theorem}
-
-\begin{theorem}{優収束定理}{tb-dominated-convergence}
-$f_n\to f$ がほとんど至る所で成り立ち、可積分な $g$ が存在して
-全ての $n$ で $\abs{f_n}\le g$ なら
+なら、$p>1$ に対し
 \[
-\lim_{n\to\infty}\int f_n=\int f.
+\iint\abs f^p
+\le2\pi\left(\int_0^1r^{p+1}\,\d r+\int_1^\infty r^{1-2p}\,\d r\right)<\infty.
 \]
-\end{theorem}
-
-優収束定理を使う答案では、優関数 $g$ を具体的に書き、
-その可積分性を確かめる一行を必ず入れる。
-たとえば $\abs{\sin x}\le\abs x$ を $x=f/n$ に使って
-$\abs{n\sin(f/n)}^p\le f^p$ とし、
-$\int f^p=1$ を根拠にする。
-また、領域を広げていく積分 $\int_{B(R)}$ では、被積分関数が非負なら
-単調収束定理で $R\to\infty$ の極限が存在することが言える。
+原点と無限遠で別の評価を使う典型である。
