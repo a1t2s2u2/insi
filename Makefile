@@ -5,11 +5,12 @@
 
 SITE := node tools/site
 
-.PHONY: help all site pdf open clean
+.PHONY: help all site pdf prediction-pdf open clean
 
 help:
 	@echo "make site   tex から Web サイトを生成（site/dist/index.html）"
-	@echo "make pdf    演習用（問題と解答欄のみ）とその解答編の2 PDFを生成"
+	@echo "make pdf    演習用・解答編・予想問題のみの3 PDFを生成"
+	@echo "make prediction-pdf  予想問題6題だけのPDFを生成"
 	@echo "make all    site と pdf の両方"
 	@echo "make open   生成したサイトをブラウザで開く"
 	@echo "make clean  生成物を削除"
@@ -23,7 +24,11 @@ site:
 
 pdf:
 	node tools/split-pdf-sources.mjs .
-	cd tex && latexmk kumadai-workbook.tex kumadai-workbook-answers.tex
+	cd tex && latexmk kumadai-workbook.tex kumadai-workbook-answers.tex kumadai-prediction.tex
+
+prediction-pdf:
+	node tools/split-pdf-sources.mjs .
+	cd tex && latexmk kumadai-prediction.tex
 
 open: site
 	@open site/dist/index.html 2>/dev/null || xdg-open site/dist/index.html
