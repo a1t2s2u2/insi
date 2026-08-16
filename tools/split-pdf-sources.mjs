@@ -109,7 +109,7 @@ for (const year of years) {
   }
 }
 
-if (counts.workbook !== 37 || counts.answers !== 37) {
+if (counts.workbook !== 40 || counts.answers !== 40) {
   throw new Error(
     `問題数が想定外です: workbook=${counts.workbook}, answers=${counts.answers}`,
   );

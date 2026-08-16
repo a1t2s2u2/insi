@@ -14,7 +14,7 @@
 \section{専門基礎科目との対応}
 
 \begin{itemize}
-  \item \textbf{2026年度}: エルミート行列は第\ref{ch:linear-algebra}章、重積分は第\ref{ch:calculus}章、集合までの距離は第\ref{ch:metric-topology}章。
+  \item \textbf{2026年度}: 行列の分解・エルミート行列は第\ref{ch:linear-algebra}章、誤差関数と一様収束・重積分は第\ref{ch:calculus}章、ハウスドルフ空間と連結性・集合までの距離は第\ref{ch:metric-topology}章。
   \item \textbf{2022年度}: 実行列・線形空間は第\ref{ch:linear-algebra}章、関数方程式・微分積分は第\ref{ch:calculus}章、連続写像・位相空間は第\ref{ch:metric-topology}章。
   \item \textbf{2021年度}: Jordan 標準形と対称行列は第\ref{ch:linear-algebra}章、二変数関数と Gamma・Beta 関数は第\ref{ch:calculus}章、連続像と距離空間は第\ref{ch:metric-topology}章。
   \item \textbf{2017年度}: 不変部分空間は第\ref{ch:linear-algebra}章、近似恒等核は第\ref{ch:calculus}章、有理数の部分空間は第\ref{ch:metric-topology}章。
@@ -295,6 +295,24 @@ $f$ と $\partial f/\partial x$ が必要な領域で連続なら
 +\int_{\phi(x)}^{\psi(x)}\frac{\partial f}{\partial x}(x,t)\,\d t.
 \]
 固定端点なら最初の2項は消える。
+\end{theorem}
+
+\begin{definition}{各点収束と一様収束}{uniform-convergence}
+関数列 $f_N:I\to\R$ が $f$ に\textbf{各点収束}するとは、各 $x\in I$ について
+$f_N(x)\to f(x)$ となることをいう。
+これに対し\textbf{一様収束}するとは
+\[
+\lim_{N\to\infty}\ \sup_{x\in I}\abs{f_N(x)-f(x)}=0
+\]
+となることをいう。すなわち誤差の上界を $x$ に依存しない量で取れることを要求する。
+\end{definition}
+
+\begin{theorem}{一様収束のもとでの項別積分}{termwise-integration}
+有界閉区間 $[a,b]$ 上の連続関数列 $f_N$ が $f$ に一様収束するなら、$f$ も連続であり
+\[
+\lim_{N\to\infty}\int_a^bf_N(x)\,\d x=\int_a^bf(x)\,\d x.
+\]
+特に関数項級数が一様収束すれば項別に積分してよい。各点収束だけでは成り立たない。
 \end{theorem}
 
 \begin{proposition}{原点で消える滑らかな関数の分解}{hadamard-lemma}
