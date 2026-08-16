@@ -108,13 +108,33 @@ $(A-\lambda I_3)\boldsymbol{x}=\boldsymbol{0}$ へ代入して固有空間を求
 \begin{proof}[解答]
 \begin{enumerate}
   \item[(1)]
+  第2、3行から第1行を引けば
+  \begin{align*}
+  \det(A-\lambda I_3)
+  &=(1-\lambda)^2
+  \begin{vmatrix}
+  2-\lambda&1&1\\
+  -1&1&0\\
+  -1&0&1
+  \end{vmatrix}\\
+  &=(1-\lambda)^2(4-\lambda).
+  \end{align*}
+  よって固有値は $1,4$。各行列を簡約化すると
   \[
-  \det(A-\lambda I_3)=(1-\lambda)^2(4-\lambda).
+  A-I_3\sim
+  \begin{pmatrix}1&1&1\\0&0&0\\0&0&0\end{pmatrix},
+  \qquad
+  A-4I_3\sim
+  \begin{pmatrix}1&0&-1\\0&1&-1\\0&0&0\end{pmatrix}.
   \]
   従って
   \[
-  E_1=\left\{(x,y,z)^{\mathsf T}\in\R^3\mid x+y+z=0\right\},
-  \qquad
+  E_1=\left\{\begin{pmatrix}x\\y\\z\end{pmatrix}\middle|x+y+z=0\right\}
+  =\left\langle
+  \begin{pmatrix}1\\-1\\0\end{pmatrix},
+  \begin{pmatrix}1\\1\\-2\end{pmatrix}
+  \right\rangle,
+  \quad
   E_4=\langle(1,1,1)^{\mathsf T}\rangle.
   \]
 
@@ -124,7 +144,9 @@ $(A-\lambda I_3)\boldsymbol{x}=\boldsymbol{0}$ へ代入して固有空間を求
   u_2=\frac1{\sqrt6}\begin{pmatrix}1\\1\\-2\end{pmatrix},\quad
   u_3=\frac1{\sqrt3}\begin{pmatrix}1\\1\\1\end{pmatrix}
   \]
-  は正規直交固有基底である。従って $P=(u_1\ u_2\ u_3)$ は直交行列で
+  とおく。(1) より $Au_1=u_1$, $Au_2=u_2$, $Au_3=4u_3$ であり、
+  直接計算で $u_i^{\mathsf T}u_j=\delta_{ij}$。従って
+  $P=(u_1\ u_2\ u_3)$ は直交行列で
   \[
   P^{\mathsf T}AP=\diag(1,1,4).
   \]
