@@ -28,92 +28,37 @@ Jordan ブロック $J_k(-1)$ に $I_k$ を足すと、上の対角線に1が並
 $a=0$ のときだけ $N^2$ が0になるので場合分けする。
 \end{memo*}
 \begin{proof}[解答]
-$N=A+I_3$ とおくと、$A$ の対角成分に $1$ を足して
+$N=A+I_3$ とおくと
 \[
-N=\begin{pmatrix}a&a&0\\-a&-a&0\\-1&1&0\end{pmatrix}
+N=\begin{pmatrix}a&a&0\\-a&-a&0\\-1&1&0\end{pmatrix},\qquad
+N^2=\begin{pmatrix}0&0&0\\0&0&0\\-2a&-2a&0\end{pmatrix},\qquad
+N^3=O.
 \]
-である。この行列の冪を計算する。第1行 $(a,a,0)$ と $N$ の第1列 $(a,-a,-1)^{\mathsf T}$ の積は
-$a^2-a^2+0=0$ であり、第2列 $(a,-a,1)^{\mathsf T}$ との積も $a^2-a^2+0=0$、
-第3列は零ベクトルなので0である。第2行 $(-a,-a,0)$ は第1行の $-1$ 倍だから、
-その行も全て0になる。第3行 $(-1,1,0)$ については
-\[
-(-1)a+1\cdot(-a)+0=-2a,\qquad
-(-1)a+1\cdot(-a)+0=-2a
-\]
-となる。従って
-\[
-N^2=\begin{pmatrix}0&0&0\\0&0&0\\-2a&-2a&0\end{pmatrix}.
-\]
-さらに $N^3=N^2N$ の第3行は $(-2a,-2a,0)$ と $N$ の各列の積であり、
-第1列では $-2a\cdot a+(-2a)(-a)=-2a^2+2a^2=0$、第2列でも同様に0、第3列は0である。
-他の行はすでに0なので
-\[
-N^3=O
-\]
-である。
-
 \begin{enumerate}
-\item[(1)] $Nx=\mu x$ を満たす $x\ne0$ があれば
-\[
-0=N^3x=\mu^3x
-\]
-だから $\mu^3=0$、すなわち $\mu=0$ である。従って $N$ の固有値は0だけであり、
-3次の特性多項式は根を重複度込みで全て並べたものだから $|\mu I_3-N|=\mu^3$ となる。
-$A=N-I_3$ なので $\lambda I_3-A=(\lambda+1)I_3-N$ であり、上の式へ $\mu=\lambda+1$ を代入して
-\[
-|\lambda I_3-A|=(\lambda+1)^3.
-\]
-\item[(2)] 従って固有値は $-1$ のみ（重複度3）である。固有空間の次元を $a$ で場合分けして求める。
+  \item[(1)] $N$ は冪零だから
+  \[
+  \det(\lambda I_3-A)=\det\{(\lambda+1)I_3-N\}=(\lambda+1)^3.
+  \]
 
-$a\ne0$ の場合を見る。$Nx=0$ は
-\[
-ax_1+ax_2=0,\qquad -ax_1-ax_2=0,\qquad -x_1+x_2=0
-\]
-であり、$a\ne0$ より第1式は $x_1+x_2=0$、第3式は $x_1=x_2$ だから $x_1=x_2=0$、
-$x_3$ は自由である。従って
-\[
-\ker(A+I_3)=\ker N=\left\langle(0,0,1)^{\mathsf T}\right\rangle,
-\qquad \dim\ker(A+I_3)=1.
-\]
+  \item[(2)] 固有値は $-1$ のみである。固有空間は $\ker N$ であり、
+  \[
+  a\ne0:\quad \ker N=\left\langle(0,0,1)^{\mathsf T}\right\rangle,
+  \quad \dim\ker N=1,
+  \]
+  \[
+  a=0:\quad
+  \ker N=\left\langle(1,1,0)^{\mathsf T},(0,0,1)^{\mathsf T}\right\rangle,
+  \quad \dim\ker N=2.
+  \]
 
-$a=0$ なら
-\[
-N=\begin{pmatrix}0&0&0\\0&0&0\\-1&1&0\end{pmatrix},
-\]
-従って $N\ne O$, $N^2=O$ である。
-$x=(x_1,x_2,x_3)^{\mathsf T}$ とすると
-\[
-Nx=\begin{pmatrix}0\\0\\-x_1+x_2\end{pmatrix}=0
-\quad\Longleftrightarrow\quad x_2=x_1.
-\]
-従って全ての解は
-\[
-x=x_1\begin{pmatrix}1\\1\\0\end{pmatrix}
- +x_3\begin{pmatrix}0\\0\\1\end{pmatrix}
-\]
-と表され、自由に選べる数が $x_1,x_3$ の二つあるので
-$\dim\ker(A+I_3)=\dim\ker N=2$ である。
-
-\item[(3)] $a\ne0$ のとき、$N^2\ne O$ かつ $N^3=O$ である。
-大きさ $k$ の冪零 Jordan ブロックは $k$ 乗で初めて0になるので、
-最大の Jordan ブロックの大きさは3である。
-全体の大きさも3だから、標準形はブロック一つの $J_3(-1)$ に限る。
-
-$a=0$ のときは $N\ne O$ なので大きさ2のブロックが少なくとも一つ必要である。
-大きさ $k$ の冪零 Jordan ブロック
-\[
-J_k(0)=\begin{pmatrix}
-0&1&&0\\
-&0&\ddots&\\
-&&\ddots&1\\
-0&&&0
-\end{pmatrix}
-\]
-では $J_k(0)y=0$ の解は $y=(y_1,0,\ldots,0)^{\mathsf T}$ であり、
-各ブロックが核の自由な数を一つずつ作る。従って
-$\dim\ker N=2$ は Jordan ブロックが2個あることを表す。
-全体の大きさは3だから、ブロックの大きさは2と1になり、標準形は
-$J_2(-1)\oplus(-1)$ となる。
+  \item[(3)] $a\ne0$ なら $N^2\ne O$, $N^3=O$ だから
+  \[
+  J=J_3(-1).
+  \]
+  $a=0$ なら $N\ne O$, $N^2=O$ かつ $\dim\ker N=2$ だから
+  \[
+  J=J_2(-1)\oplus(-1).
+  \]
 \end{enumerate}
 \end{proof}
 
@@ -146,74 +91,41 @@ $\d x\d y=r\,\d r\d\theta$ を掛けた一変数積分が収束するか確認�
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-  \item[(1)] $r=\sqrt{x^2+y^2}>0$ とおくと $|x|\le r$, $|y|\le r$ である。
-  $|\sin u|\le|u|$ を $u=x^2y$ に使えば
+  \item[(1)] $r=\sqrt{x^2+y^2}$ とすると $|x|,|y|\le r$ だから
   \[
-  |f(x,y)|
-  \le\frac{|x|^2|y|}{x^2+y^2}
-  \le\frac{r^3}{r^2}=r.
+  |f(x,y)|\le\frac{|x|^2|y|}{r^2}\le r
   \]
-  また $|\sin u|\le1$ より
-  \[
-  |f(x,y)|\le\frac1{x^2+y^2}=\frac1{r^2}.
-  \]
-  \item[(2)] 任意の $\varepsilon>0$ に対して $\delta=\varepsilon$ と取る。
-  $0<\sqrt{x^2+y^2}=r<\delta$ なら (1) より
-  \[
-  |f(x,y)-f(0,0)|=|f(x,y)|\le r<\varepsilon.
-  \]
-  従って $f$ は原点で連続である。
-  \item[(3)] $r\le1$ では $|f|^p\le r^p$、$r\ge1$ では
-  $|f|^p\le r^{-2p}$ である。極座標の面積要素は
-  $\d x\d y=r\,\d r\d\theta$ だから
-  \begin{align*}
-  \iint_{r\le1}|f|^p\,\d x\d y
-  &\le\int_0^{2\pi}\int_0^1r^p\cdot r\,\d r\d\theta\\
-  &=2\pi\int_0^1r^{p+1}\,\d r
-  =2\pi\left[\frac{r^{p+2}}{p+2}\right]_0^1
-  =\frac{2\pi}{p+2}<\infty,
-  \end{align*}
-  \begin{align*}
-  \iint_{r\ge1}|f|^p\,\d x\d y
-  &\le\int_0^{2\pi}\int_1^\infty r^{-2p}\cdot r\,\d r\d\theta\\
-  &=2\pi\int_1^\infty r^{1-2p}\,\d r
-  =2\pi\left[\frac{r^{2-2p}}{2-2p}\right]_1^\infty
-  =\frac{2\pi}{2p-2}<\infty.
-  \end{align*}
-  最後の広義積分では、上端で $r^{2-2p}\to0$ となるために指数の条件
-  $2-2p<0$、すなわち $p>1$ が必要であり、仮定はこれを満たしている。
-  従って $|f|^p\in L^1(\R^2)$。また
-  $R$ を増やすと円板 $B(R)$ は広がるので、非負関数
-  $|f|^p\mathbf1_{B(R)}$ は各点で $|f|^p$ へ単調に増加する。従って単調収束定理より
-  \[
-  \lim_{R\to\infty}I_p(R)=\iint_{\R^2}|f|^p\,\d x\d y<\infty.
-  \]
-  \item[(4)] 偏微分を計算すると
-  \[
-  \frac{\partial f}{\partial y}(x,0)=\begin{cases}1,&x\ne0,\\0,&x=0.
-  \end{cases}
-  \]
-  実際、$x\ne0$ では偏微分の定義から
-  \begin{align*}
-  \frac{\partial f}{\partial y}(x,0)
-  &=\lim_{h\to0}\frac{f(x,h)-f(x,0)}h\\
-  &=\lim_{h\to0}\frac{\sin(x^2h)}{h(x^2+h^2)}\\
-  &=\lim_{h\to0}
-    \frac{\sin(x^2h)}{x^2h}\frac{x^2}{x^2+h^2}=1.
-  \end{align*}
-  最後の等号では $\sin u/u\to1$（$u=x^2h\to0$）と
-  $x^2/(x^2+h^2)\to1$（$x\ne0$ を固定）を使った。
-  $x=0$ では、全ての $h$ について $f(0,h)=\sin0/h^2=0$ かつ $f(0,0)=0$ なので、
-  同じ差商は0であり $\partial f/\partial y(0,0)=0$ である。
+  である。また $|\sin u|\le1$ より $|f(x,y)|\le r^{-2}$。
 
-  $C^1$ 級とは、全ての1階偏導関数が存在して連続になることである。
-  いま $x\to0$（$x\ne0$）とすると
+  \item[(2)] (1) より
   \[
-  \frac{\partial f}{\partial y}(x,0)=1
-  \longrightarrow1
-  \ne0=\frac{\partial f}{\partial y}(0,0)
+  |f(x,y)-f(0,0)|\le\sqrt{x^2+y^2}\longrightarrow0.
   \]
-  だから、$\partial f/\partial y$ は原点で不連続である。従って $f$ は $C^1$ 級ではない。
+  従って原点で連続である。
+
+  \item[(3)] $0<r\le1$ では $|f|^p\le r^p$、$r\ge1$ では
+  $|f|^p\le r^{-2p}$ だから
+  \[
+  I_p(R)\le
+  2\pi\int_0^1r^{p+1}\,\d r+
+  2\pi\int_1^\infty r^{1-2p}\,\d r
+  =\frac{2\pi}{p+2}+\frac{\pi}{p-1}<\infty.
+  \]
+  $I_p(R)$ は $R$ について単調増加かつ上に有界なので、
+  $\lim_{R\to\infty}I_p(R)$ は存在する。
+
+  \item[(4)] $x\ne0$ なら
+  \[
+  \frac{\partial f}{\partial y}(x,0)
+  =\lim_{h\to0}\frac{\sin(x^2h)}{h(x^2+h^2)}
+  =\lim_{h\to0}\frac{\sin(x^2h)}{x^2h}\frac{x^2}{x^2+h^2}=1.
+  \]
+  $x=0$ では差商は0だから
+  \[
+  \frac{\partial f}{\partial y}(x,0)=
+  \begin{cases}1&(x\ne0),\\0&(x=0).\end{cases}
+  \]
+  この偏導関数は原点で不連続なので、$f$ は $C^1$ 級でない。
 \end{enumerate}
 \end{proof}
 
@@ -243,41 +155,18 @@ $U$ のコンパクト性で有限個に絞れる。その有限個を $f$ で�
   \[
   f(0)=0,\qquad g(0)=g(1)=0
   \]
-  と定める。$f$ は $1$ を値に取らないので全射でない。
-  $g$ は $g(0)=g(1)$ なので単射でない。
-  一方 $g\circ f:X\to Z$ は $(g\circ f)(0)=0$ であり、
-  一元集合から一元集合への写像なので全単射である。
+  とする。$f$ は全射でなく、$g$ は単射でないが、
+  $g\circ f:\{0\}\to\{0\}$ は全単射である。
 
-  \item[(2)] 連結である。$f(U)$ が連結でないと仮定すると、$f(U)$ の相対位相で開な
-  空でない集合 $A,B$ が存在して
+  \item[(2)] 連結である。$f(U)$ に非自明な開分離 $A\cup B$ があれば、制限写像を用いて
   \[
-  f(U)=A\cup B,\qquad A\cap B=\varnothing
+  U=(f|_U)^{-1}(A)\cup(f|_U)^{-1}(B)
   \]
-  と書ける。$A=f(U)\cap A'$, $B=f(U)\cap B'$ となる $Y$ の開集合 $A',B'$ を取ると、
-  $f$ は連続だから $f^{-1}(A')$, $f^{-1}(B')$ は $X$ で開であり、
-  \[
-  U=\bigl(U\cap f^{-1}(A')\bigr)\cup\bigl(U\cap f^{-1}(B')\bigr)
-  \]
-  となる。右辺の二つは $U$ で開で、互いに交わらない。
-  また $A,B$ が空でないので、どちらも空でない。
-  従って $U$ も二つに分かれることになり、$U$ が連結であることに矛盾する。
-  よって $f(U)$ は連結である。
+  は $U$ の非自明な開分離となり、連結性に反する。
 
-  \item[(3)] コンパクトである。$f(U)$ の任意の開被覆を
-  \[
-  f(U)\subset\bigcup_{\lambda\in\Lambda}V_\lambda
-  \]
-  とする。$f$ は連続だから各 $f^{-1}(V_\lambda)$ は $X$ で開であり、
-  \[
-  U\subset\bigcup_{\lambda\in\Lambda}f^{-1}(V_\lambda)
-  \]
-  なので、これは $U$ の開被覆である。$U$ はコンパクトなので有限個
-  $f^{-1}(V_{\lambda_1}),\ldots,f^{-1}(V_{\lambda_m})$ で $U$ を覆える。
-  この両辺を $f$ で写すと
-  \[
-  f(U)\subset V_{\lambda_1}\cup V_{\lambda_2}\cup\cdots\cup V_{\lambda_m}
-  \]
-  となり、有限部分被覆が取れた。よって $f(U)$ はコンパクトである。
+  \item[(3)] コンパクトである。$f(U)$ の開被覆 $\{V_\lambda\}$ に対し
+  $\{f^{-1}(V_\lambda)\}$ は $U$ の開被覆である。有限部分被覆を取って像へ戻せば、
+  対応する有限個の $V_\lambda$ が $f(U)$ を覆う。
 \end{enumerate}
 \end{proof}
 
@@ -643,63 +532,34 @@ $\sum_{i\ne j}a_i=\sum_ia_i-a_j$ と書き直す。すると $a_j$ の項と $j$
 $a_j$ が $j$ によらないことが読み取れる。
 \end{memo*}
 \begin{proof}[解答]
-(1) 3次実対称行列は
-\[
-S=\begin{pmatrix}a&b&c\\b&d&e\\c&e&f\end{pmatrix}
-\]
-と書ける。逆に $a,b,c,d,e,f\in\R$ を自由に選べば対称行列が一つ定まり、
-この対応は一対一である。従って自由に選べる成分は6個で、次元は6である。
+\begin{enumerate}
+  \item[(1)] 3次実対称行列は
+  \[
+  \begin{pmatrix}a&b&c\\b&d&e\\c&e&f\end{pmatrix}
+  \]
+  と一意に書けるので、次元は $6$。
 
-(2) 条件から $(x_j,x_j)^2=|(x_j,x_j)|^2=1$ であり、$i\ne j$ では
-$(x_i,x_j)^2=|(x_i,x_j)|^2=r^2$ である。
-従って $j$ を固定した式を $i=j$ の項とそれ以外に分けると
-\[
-0=\sum_{i=1}^na_i(x_i,x_j)^2=a_j+r^2\sum_{i\ne j}a_i
-\]
-となる。ここで $\sum_{i\ne j}a_i=\sum_{i=1}^na_i-a_j$ だから
-\[
-0=a_j+r^2\left(\sum_{i=1}^na_i-a_j\right)
-=(1-r^2)a_j+r^2\sum_{i=1}^na_i.
-\tag{$*$}
-\]
-右辺の第2項は $j$ に依らない。また $r=|(x_i,x_j)|\ge0$ と $r\ne1$ から $r^2\ne1$、
-すなわち $1-r^2\ne0$ である。従って ($*$) は $a_j$ を一意に定めており、
-これが $j=1,2,\ldots,n$ で成り立つので
-\[
-a_1=a_2=\cdots=a_n=:a
-\]
-となる。$\sum_{i=1}^na_i=na$ をあらためて ($*$) へ代入すると
-\[
-0=(1-r^2)a+r^2na=(1-r^2+r^2n)a=\{1+(n-1)r^2\}a.
-\]
-$n\ge1$, $r\ge0$ より $1+(n-1)r^2>0$ なので $a=0$、
-すなわち $a_1=a_2=\cdots=a_n=0$ である。
+  \item[(2)] $S=\sum_{i=1}^na_i$ とおく。$n=1$ なら与式から直ちに $a_1=0$。
+  $n\ge2$ では $r\ge0$, $r\ne1$ だから $r^2\ne1$ であり、各 $j$ について
+  \[
+  0=a_j+r^2\sum_{i\ne j}a_i=(1-r^2)a_j+r^2S.
+  \]
+  従って全ての $a_j$ は同じ値 $a$ である。これを戻すと
+  \[
+  \{1+(n-1)r^2\}a=0,
+  \]
+  よって $a=0$。
 
-(3) $\sum_{i=1}^na_ix_ix_i^{\mathsf T}=O$ とする。両側から $x_j^{\mathsf T}$ と $x_j$ を掛けると
-\[
-x_j^{\mathsf T}\left(\sum_{i=1}^na_ix_ix_i^{\mathsf T}\right)x_j=0
-\]
-である。左辺を展開すると
-\[
-\sum_{i=1}^na_i(x_j^{\mathsf T}x_i)(x_i^{\mathsf T}x_j)=0
-\]
-となる。$x_j^{\mathsf T}x_i$ と $x_i^{\mathsf T}x_j$ はともにスカラーで互いに等しく、
-その値は $(x_i,x_j)$ だから
-\[
-\sum_{i=1}^na_i(x_i,x_j)^2=0
-\]
-を得る。これが $j=1,2,\ldots,n$ で成り立つので、(2) より $a_1=\cdots=a_n=0$ である。
-従って $x_1x_1^{\mathsf T},\ldots,x_nx_n^{\mathsf T}$ は一次独立である。
+  \item[(3)] $\sum_i a_ix_ix_i^{\mathsf T}=O$ とする。両側から
+  $x_j^{\mathsf T}$ と $x_j$ を掛けると
+  \[
+  \sum_{i=1}^na_i(x_i,x_j)^2=0\qquad(j=1,\ldots,n).
+  \]
+  (2) より全ての $a_i$ は0だから、$x_ix_i^{\mathsf T}$ は一次独立である。
 
-(4) 各 $x_ix_i^{\mathsf T}$ は
-\[
-(x_ix_i^{\mathsf T})^{\mathsf T}
-=(x_i^{\mathsf T})^{\mathsf T}x_i^{\mathsf T}
-=x_ix_i^{\mathsf T}
-\]
-を満たすので3次実対称行列である。(1) よりその全体のなす空間の次元は6であり、
-(3) よりその中の $n$ 個 $x_1x_1^{\mathsf T},\ldots,x_nx_n^{\mathsf T}$ が一次独立である。
-6次元の空間で一次独立に取れるベクトルは高々6個なので $n\le6$ である。
+  \item[(4)] 各 $x_ix_i^{\mathsf T}$ は3次実対称行列である。
+  (1), (3) より6次元空間内に一次独立な元が $n$ 個あるので、$n\le6$。
+\end{enumerate}
 \end{proof}
 
 \begin{problem}{第2問｜Gamma 関数と Beta 関数}{2021-2-2}
@@ -741,120 +601,41 @@ B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}
 $\Gamma$ と $B$ の定義の形に戻すため $u=r^2$ と $t=\cos^2\theta$ を代入する。
 \end{memo*}
 \begin{proof}[解答]
-被積分関数は非負なので Tonelli の定理により積分順序を変えてよく、
-与えられた ($*$) は
-\[
-\Gamma(p)\Gamma(q)
-=\int_0^\infty\int_0^\infty x^{p-1}y^{q-1}e^{-(x+y)}\,\d x\d y
-\]
-と累次積分で書ける。以下これを二通りに変数変換する。
-重積分の変数変換では Jacobian の絶対値を掛けることに注意する。
+\begin{enumerate}
+  \item[(1)] $x=st$, $y=s(1-t)$ とおくと
+  \[
+  s>0,\quad 0<t<1,\qquad
+  \left|\frac{\partial(x,y)}{\partial(s,t)}\right|=s.
+  \]
+  従って
+  \begin{align*}
+  \Gamma(p)\Gamma(q)
+  &=\int_0^\infty\int_0^1
+  s^{p+q-1}e^{-s}t^{p-1}(1-t)^{q-1}\,\d t\d s\\
+  &=\Gamma(p+q)B(p,q).
+  \end{align*}
 
-(1) $x=st$, $y=s(1-t)$ とおく。このとき
+  \item[(2)] $x=(r\cos\theta)^2$, $y=(r\sin\theta)^2$ とおくと
+  \[
+  r>0,\quad0<\theta<\frac{\pi}{2},\qquad
+  \left|\frac{\partial(x,y)}{\partial(r,\theta)}\right|
+  =4r^3\sin\theta\cos\theta.
+  \]
+  よって
+  \begin{align*}
+  \Gamma(p)\Gamma(q)
+  &=4\left(\int_0^\infty r^{2p+2q-1}e^{-r^2}\,\d r\right)
+  \left(\int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\,\d\theta\right)\\
+  &=4\left\{\frac12\Gamma(p+q)\right\}
+       \left\{\frac12B(p,q)\right\}\\
+  &=\Gamma(p+q)B(p,q).
+  \end{align*}
+  最後はそれぞれ $u=r^2$, $t=\cos^2\theta$ と置換した。
+\end{enumerate}
+従って、いずれの方法でも
 \[
-s=x+y>0,\qquad t=\frac xs=\frac x{x+y}
+B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}.
 \]
-であり、$x>0$, $y>0$ から $0<t<1$ となる。Jacobian は
-\[
-\frac{\partial(x,y)}{\partial(s,t)}
-=\begin{vmatrix}
-\dfrac{\partial x}{\partial s}&\dfrac{\partial x}{\partial t}\\[3mm]
-\dfrac{\partial y}{\partial s}&\dfrac{\partial y}{\partial t}
-\end{vmatrix}
-=\begin{vmatrix}t&s\\1-t&-s\end{vmatrix}
-=t(-s)-s(1-t)=-s
-\]
-だから
-\[
-\d x\d y=\left|\frac{\partial(x,y)}{\partial(s,t)}\right|\d s\d t=s\,\d s\d t.
-\]
-従って
-\begin{align*}
-\Gamma(p)\Gamma(q)
-&=\int_0^\infty\int_0^1(st)^{p-1}\{s(1-t)\}^{q-1}e^{-s}\,s\,\d t\d s\\
-&=\int_0^\infty\int_0^1
-\underbrace{s^{p+q-1}e^{-s}}_{s\ \text{のみ}}\cdot
-\underbrace{t^{p-1}(1-t)^{q-1}}_{t\ \text{のみ}}\,\d t\d s.
-\end{align*}
-被積分関数が $s$ だけの因子と $t$ だけの因子の積になったので、
-\[
-\iint f(s)g(t)\,\d t\d s
-=\left(\int f(s)\,\d s\right)\left(\int g(t)\,\d t\right)
-\]
-により積分が分離できて
-\begin{align*}
-\Gamma(p)\Gamma(q)
-&=\left(\int_0^\infty s^{p+q-1}e^{-s}\,\d s\right)
-\left(\int_0^1t^{p-1}(1-t)^{q-1}\,\d t\right)\\
-&=\Gamma(p+q)B(p,q).
-\end{align*}
-以上より $B(p,q)=\dfrac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}$ である。
-
-(2) $x=(r\cos\theta)^2$, $y=(r\sin\theta)^2$ とおく。このとき
-\[
-r^2=x+y>0
-\]
-なので $r>0$ であり、$x>0$, $y>0$ は $0<\theta<\pi/2$ と同じことである。
-各偏微分は
-\[
-\frac{\partial x}{\partial r}=2r\cos^2\theta,\qquad
-\frac{\partial x}{\partial\theta}=-2r^2\sin\theta\cos\theta,
-\]
-\[
-\frac{\partial y}{\partial r}=2r\sin^2\theta,\qquad
-\frac{\partial y}{\partial\theta}=2r^2\sin\theta\cos\theta
-\]
-なので、Jacobian は
-\begin{align*}
-\frac{\partial(x,y)}{\partial(r,\theta)}
-&=\begin{vmatrix}
-\dfrac{\partial x}{\partial r}&\dfrac{\partial x}{\partial\theta}\\[3mm]
-\dfrac{\partial y}{\partial r}&\dfrac{\partial y}{\partial\theta}
-\end{vmatrix}
-=\begin{vmatrix}
-2r\cos^2\theta&-2r^2\sin\theta\cos\theta\\
-2r\sin^2\theta&2r^2\sin\theta\cos\theta
-\end{vmatrix}\\[1mm]
-&=4r^3\sin\theta\cos^3\theta+4r^3\sin^3\theta\cos\theta\\
-&=4r^3\sin\theta\cos\theta(\cos^2\theta+\sin^2\theta)\\
-&=4r^3\sin\theta\cos\theta
-\end{align*}
-となる。$0<\theta<\pi/2$ では $\sin\theta,\cos\theta>0$ なのでこれは正であり、
-\[
-\d x\d y=4r^3\sin\theta\cos\theta\,\d r\d\theta.
-\]
-$x+y=r^2$ にも注意して代入すると
-\begin{align*}
-\Gamma(p)\Gamma(q)
-&=\int_0^\infty\int_0^{\pi/2}
-(r\cos\theta)^{2(p-1)}(r\sin\theta)^{2(q-1)}e^{-r^2}
-\cdot4r^3\sin\theta\cos\theta\,\d\theta\d r\\
-&=4\left(\int_0^\infty r^{2p+2q-1}e^{-r^2}\,\d r\right)
-\left(\int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\,\d\theta\right)
-\end{align*}
-となり、ここでも $r$ だけの因子と $\theta$ だけの因子に分かれた。
-第1の積分では $u=r^2$, $\d u=2r\,\d r$ とおくと
-$r^{2p+2q-1}\,\d r=r^{2p+2q-2}\cdot r\,\d r=u^{p+q-1}\dfrac{\d u}2$ だから
-\[
-\int_0^\infty r^{2p+2q-1}e^{-r^2}\,\d r
-=\frac12\int_0^\infty u^{p+q-1}e^{-u}\,\d u
-=\frac12\Gamma(p+q).
-\]
-第2の積分では $t=\cos^2\theta$, $\d t=-2\sin\theta\cos\theta\,\d\theta$ とおく。
-$\sin^2\theta=1-t$ であり、$\theta=0,\pi/2$ がそれぞれ $t=1,0$ に対応するので
-\begin{align*}
-\int_0^{\pi/2}\cos^{2p-1}\theta\sin^{2q-1}\theta\,\d\theta
-&=\int_0^{\pi/2}\cos^{2p-2}\theta\sin^{2q-2}\theta
-  \cdot\sin\theta\cos\theta\,\d\theta\\
-&=\int_1^0t^{p-1}(1-t)^{q-1}\left(-\frac{\d t}2\right)\\
-&=\frac12\int_0^1t^{p-1}(1-t)^{q-1}\,\d t
-=\frac12B(p,q).
-\end{align*}
-係数は $4\cdot\dfrac12\cdot\dfrac12=1$ なので
-\[
-\Gamma(p)\Gamma(q)=\Gamma(p+q)B(p,q),
-\]
-よって $B(p,q)=\dfrac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}$ である。
 \end{proof}
 
 \begin{problem}{第3問｜距離空間の連続写像}{2021-2-3}
@@ -881,50 +662,31 @@ $\sin^2\theta=1-t$ であり、$\theta=0,\pi/2$ がそれぞれ $t=1,0$ に対�
 \end{memo*}
 \begin{proof}[解答]
 \begin{enumerate}
-\item[(1)] $f$ が点 $x$ で連続であるとは
-\[
-\forall\varepsilon>0\ \exists\delta>0\quad
-f(N_X(x;\delta))\subset N_Y(f(x);\varepsilon)
-\]
-が成り立つこと、すなわち
-\[
-d_X(x,y)<\delta\quad\Longrightarrow\quad
-d_Y(f(x),f(y))<\varepsilon
-\]
-が成り立つことである。
+  \item[(1)] $f$ が $x$ で連続であるとは
+  \[
+  \forall\varepsilon>0\ \exists\delta>0,\qquad
+  f(N_X(x;\delta))\subset N_Y(f(x);\varepsilon)
+  \]
+  が成り立つことである。
 
-\item[(2)] $F\subset Y$ を閉集合とすると $Y\setminus F$ は開集合である。
-$x\in f^{-1}(Y\setminus F)$ を取ると $f(x)\in Y\setminus F$ である。
-補集合は開なので、ある $\varepsilon>0$ に対して
-\[
-N_Y(f(x);\varepsilon)\subset Y\setminus F
-\]
-となる。$x$ における連続性から、ある $\delta>0$ が存在して
-\[
-f(N_X(x;\delta))\subset N_Y(f(x);\varepsilon)
-\]
-となる。従って $N_X(x;\delta)\subset f^{-1}(Y\setminus F)$ である。
-各点 $x$ の周りにこのような開球が取れるので $f^{-1}(Y\setminus F)$ は開であり、
-\[
-f^{-1}(Y\setminus F)=X\setminus f^{-1}(F)
-\]
-である。従って $f^{-1}(F)$ の補集合は開であり、$f^{-1}(F)$ は閉集合である。
+  \item[(2)] $F\subset Y$ を閉集合とする。$x\notin f^{-1}(F)$ なら、
+  ある $\varepsilon>0$ で
+  $N_Y(f(x);\varepsilon)\subset Y\setminus F$。
+  連続性より、ある $\delta>0$ で
+  \[
+  N_X(x;\delta)\subset f^{-1}(Y\setminus F)
+  =X\setminus f^{-1}(F).
+  \]
+  従って補集合は開であり、$f^{-1}(F)$ は閉である。
 
-\item[(3)] $x\in\overline A$ を取り、$f(x)\in\overline{f(A)}$ を示す。
-任意の $\varepsilon>0$ に対して、$x$ における連続性より、ある $\delta>0$ が存在して
-\[
-f(N_X(x;\delta))\subset N_Y(f(x);\varepsilon)
-\]
-となる。$x\in\overline A$ だから $N_X(x;\delta)\cap A\ne\varnothing$ である。
-この共通部分から $a$ を一つ取ると
-\[
-f(a)\in N_Y(f(x);\varepsilon)\cap f(A)
-\]
-となる。従って $f(x)$ の任意の開球は $f(A)$ と交わるので
-$f(x)\in\overline{f(A)}$ である。以上より
-\[
-f(\overline A)\subset\overline{f(A)}
-\]
-を得る。
+  \item[(3)] $x\in\overline A$ とする。任意の $\varepsilon>0$ に対し、
+  連続性から
+  $f(N_X(x;\delta))\subset N_Y(f(x);\varepsilon)$ となる $\delta>0$ を取る。
+  $N_X(x;\delta)\cap A\ne\varnothing$ だから
+  \[
+  N_Y(f(x);\varepsilon)\cap f(A)\ne\varnothing.
+  \]
+  よって $f(x)\in\overline{f(A)}$、従って
+  $f(\overline A)\subset\overline{f(A)}$。
 \end{enumerate}
 \end{proof}
