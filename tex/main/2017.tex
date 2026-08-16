@@ -44,8 +44,11 @@ v_3=\begin{pmatrix}0\\1\\2\end{pmatrix}\ (\lambda=-3)
 を取れる。固有値が相異なるので $v_1,v_2,v_3$ は基底をなす。
 
 $A$-不変部分空間 $W$ は、これらの固有ベクトルの一部で生成される。
-実際、$w=\sum c_kv_k\in W$ に対し、$A$ の多項式である固有空間への射影を施せば
-$c_kv_k\in W$ となるからである。逆に、それらの任意の組の生成する空間は明らかに $A$-不変である。
+実際、$w=\sum c_kv_k\in W$ に対し
+\[
+\prod_{j\ne k}\frac{A-\lambda_jI}{\lambda_k-\lambda_j}\,w=c_kv_k\in W
+\]
+となる。逆に、それらの任意の組の生成する空間は明らかに $A$-不変である。
 従って
 \begin{enumerate}
   \item[(1)]
