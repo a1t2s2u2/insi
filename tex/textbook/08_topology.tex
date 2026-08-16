@@ -1,278 +1,282 @@
-\chapter{距離空間と位相空間}
+\chapter{距離空間と位相}
 \label{ch:tb-topology}
 
-この章の主張はどれも短いが、\textbf{どの空間の中で考えているか}を取り違えると
-すべて崩れる。部分集合を扱うときは、全体空間を毎回明示すること。
+この章では、定義から証明を始められることを優先する。
 
-\section{距離空間と開球}
+\section{開集合・閉集合・閉包}
 
-\begin{definition}{距離空間}{tb-metric-space}
-集合 $X$ 上の関数 $d:X\times X\to[0,\infty)$ が次を満たすとき
-\textbf{距離}といい、$(X,d)$ を\textbf{距離空間}という。
-\begin{enumerate}
-  \item $d(x,y)=0\iff x=y$。
-  \item $d(x,y)=d(y,x)$（対称性）。
-  \item $d(x,z)\le d(x,y)+d(y,z)$（三角不等式）。
-\end{enumerate}
-$B(x,\varepsilon)=\{y\in X\mid d(x,y)<\varepsilon\}$ を\textbf{開球}という。
+\begin{definition}{距離空間と開球}{tb-metric-space}
+集合 $X$ 上の距離 $d$ は
+\[
+d(x,y)\ge0,\quad d(x,y)=0\Longleftrightarrow x=y,\quad
+d(x,y)=d(y,x),\quad d(x,z)\le d(x,y)+d(y,z)
+\]
+を満たす。$B(x;r)=\{y\in X\mid d(x,y)<r\}$ を開球という。
 \end{definition}
 
-\begin{definition}{開集合・閉集合}{tb-open-closed}
-$U\subset X$ が\textbf{開}であるとは、各 $x\in U$ に対して
-$B(x,\varepsilon)\subset U$ となる $\varepsilon>0$ が存在することをいう。
-補集合が開である集合を\textbf{閉}という。
+\begin{definition}{開集合・閉集合・閉包}{tb-open-closed-closure}
+$U\subset X$ が開集合であるとは、各 $x\in U$ に対し
+$B(x;r)\subset U$ となる $r>0$ が存在することをいう。
+$F\subset X$ が閉集合であるとは $X\setminus F$ が開集合であることをいう。
+$A$ を含む最小の閉集合を閉包 $\overline A$ といい、
+$x\in\overline A$ を $A$ の触点という。
 \end{definition}
 
-\begin{proposition}{閉集合と収束列}{tb-closed-sequence}
-距離空間では、$F$ が閉であることと
-「$F$ の点からなる収束列の極限が必ず $F$ に属する」ことが同値である。
+距離空間では
+\[
+x\in\overline A
+\Longleftrightarrow \forall r>0,\ B(x;r)\cap A\ne\varnothing
+\Longleftrightarrow A\text{ の点列 }a_n\to x\text{ が存在する}.
+\]
+$\overline A=X$ のとき $A$ は $X$ で稠密という。
+
+\begin{proposition}{閉包の計算法則}{tb-closure-laws}
+\[
+A\subset\overline A,\quad
+\overline{\overline A}=\overline A,\quad
+A\subset B\Rightarrow\overline A\subset\overline B,\quad
+\overline{A\cup B}=\overline A\cup\overline B.
+\]
 \end{proposition}
 
-$F$ が閉でないことを示すには、$F$ の点からなる列で、
-極限が\textbf{全体空間には属するが $F$ には属さない}ものを一つ作ればよい。
-例えば $\Q$ の中で $\{x\in\Q\mid1\le x<2\}$ を考えると、$x_n=2-1/n$ の極限 $2$ は
-$\Q$ に属するが集合には属さないので、この集合は閉でない。
-これに対し 2017年度 専門基礎 第3問の $A=\{x\in\Q\mid1\le x\le2\}$ では、
-$A$ の点からなる収束列の極限は $\Q\cap[1,2]=A$ に留まるので $A$ は $\Q$ の閉集合である。
-同じ $\Q$ の中でも、端点を含めるかどうかで結論が変わる。
-
-\section{閉包・内部・稠密}
-
-\begin{definition}{閉包・触点・稠密}{tb-closure}
-$A\subset X$ を含む最小の閉集合を\textbf{閉包}といい $\overline A$ と書く。
-$x\in\overline A$ であることは、$x$ の任意の開球が $A$ と交わることと同値であり、
-このとき $x$ を $A$ の\textbf{触点}という。
-$\overline A=X$ のとき $A$ は $X$ で\textbf{稠密}であるという。
-\end{definition}
-
-\begin{definition}{内部と境界}{tb-interior-boundary}
-$A$ に含まれる最大の開集合を\textbf{内部}といい $A^{\circ}$ と書く。
-$x\in A^{\circ}$ であることは、$B(x,\varepsilon)\subset A$ となる $\varepsilon>0$ が
-存在することと同値である。また
-\[
-\partial A=\overline A\setminus A^{\circ}
-\]
-を\textbf{境界}という。定義から
-\[
-A^{\circ}\subset A\subset\overline A,
-\qquad
-A\ \text{が開}\iff A=A^{\circ},
-\qquad
-A\ \text{が閉}\iff A=\overline A.
-\]
-\end{definition}
-
-\begin{proposition}{閉包の基本法則}{tb-closure-laws}
-\[
-A\subset\overline A,\qquad
-\overline{\overline A}=\overline A,\qquad
-A\subset B\Longrightarrow\overline A\subset\overline B,
-\]
-\[
-\overline{A\cup B}=\overline A\cup\overline B,
-\qquad
-\overline{A\cap B}\subset\overline A\cap\overline B.
-\]
-最後の包含は一般に等号にならない。
-\end{proposition}
-
-$A$ が稠密でないことを示すには、$A$ と交わらない空でない開集合を一つ挙げればよい。
-2022年度 第1期 専門基礎 第3問では、孤立点 $p$（$\{p\}$ 自身が開になる点）を
-空間に加えることで、この開集合を人工的に作る。
-
-\section{連続性}
-
-\begin{definition}{距離空間の間の連続性}{tb-metric-continuity}
-$f:X\to Y$ が $x\in X$ で連続であるとは
-\[
-\forall\varepsilon>0\ \exists\delta>0:\quad
-f(B_X(x,\delta))\subset B_Y(f(x),\varepsilon)
-\]
-が成り立つことをいう。同じことを
-$d_X(x,y)<\delta\Rightarrow d_Y(f(x),f(y))<\varepsilon$ とも書く。
-\end{definition}
-
-\begin{theorem}{連続性の位相的特徴づけ}{tb-continuity-topological}
-$f:X\to Y$ について次は同値である。
-\begin{enumerate}
-  \item $f$ は連続である。
-  \item 任意の開集合 $V\subset Y$ に対し $f^{-1}(V)$ は $X$ で開である。
-  \item 任意の閉集合 $F\subset Y$ に対し $f^{-1}(F)$ は $X$ で閉である。
-  \item 任意の $A\subset X$ に対し $f(\overline A)\subset\overline{f(A)}$。
-\end{enumerate}
-2.\ と 3.\ が同値なのは $f^{-1}(Y\setminus F)=X\setminus f^{-1}(F)$ による。
-\end{theorem}
-
-開集合の像は開とは限らない。連続性が保証するのは\textbf{逆像}の側だけである。
-定数写像 $f\equiv0$ は連続だが、$f(\R)=\{0\}$ は開でない。
-同じ写像で $f^{-1}(\{0\})=\R$ はコンパクトでない。
-
-\section{相対位相と部分空間}
+最後の式は、右辺が $A\cup B$ を含む閉集合なので一方の包含を得る。
+逆包含は $A,B\subset A\cup B$ の単調性から得る。
 
 \begin{definition}{相対位相}{tb-subspace-topology}
-$A\subset X$ に対し、$X$ の開集合 $U$ を用いて $A\cap U$ と書ける集合を
-$A$ の\textbf{相対開集合}という。これにより $A$ 自身が位相空間になる。
+$Y\subset X$ に対し、$Y$ の開集合を $Y\cap U$（$U$ は $X$ の開集合）と定める。
+閉集合も $Y\cap F$（$F$ は $X$ の閉集合）の形である。
+したがって $[1,2]\cap\Q$ は $\Q$ の中では閉集合である。
 \end{definition}
 
-「$A$ は閉か」という問いは、$A$ をどの空間の部分集合と見るかで答が変わる。
-$A=\{x\in\Q\mid1\le x<2\}$ は $\Q$ の中で閉でないが、
-$\R$ の中で考えても閉ではない。一方
-$\Q$ 自身は $\Q$ の中では閉かつ開である。
-答案では「$\Q$ の中で」と毎回書くのが安全である。
-
-\begin{definition}{直和位相}{tb-disjoint-union-topology}
-互いに交わらない位相空間 $X_1,X_2$ の合併 $X_1\sqcup X_2$ に対し、
-$O_1\sqcup O_2$（$O_i$ は $X_i$ の開集合）の形の集合を開と定める。
-このとき $X_1$ も $X_2$ も $X_1\sqcup X_2$ の開集合である。
-一点 $\{p\}$ を付け加えた $\R\sqcup\{p\}$ では、$\{p\}$ が開になる。
+\begin{definition}{位相空間と Hausdorff 性}{tb-topological-space}
+集合 $X$ の部分集合族 $\mathcal T$ が
+\[
+\varnothing,X\in\mathcal T,\qquad
+\mathcal T\text{ の任意個の元の合併が }\mathcal T\text{ に属する},
+\]
+\[
+\mathcal T\text{ の有限個の元の共通部分が }\mathcal T\text{ に属する}
+\]
+を満たすとき $(X,\mathcal T)$ を位相空間という。$\mathcal T$ の元を開集合、補集合を閉集合と呼ぶ。
+異なる二点が互いに交わらない開近傍で分離できるとき Hausdorff 空間という。
 \end{definition}
 
-\section{位相空間と Hausdorff 性}
-
-\begin{definition}{位相空間}{tb-topological-space}
-集合 $X$ の部分集合族 $\mathcal O$ が
-$\varnothing,X\in\mathcal O$、任意個の合併で閉じる、有限個の共通部分で閉じる、
-を満たすとき $\mathcal O$ を\textbf{位相}といい、その元を開集合という。
+\begin{definition}{点列の収束}{tb-topological-sequence}
+位相空間 $X$ の点列 $a_n$ が $a\in X$ に収束するとは、
+$a$ の任意の開近傍 $U$ に対し、ある $N$ が存在して
+\[
+n\ge N\Longrightarrow a_n\in U
+\]
+となることをいう。
 \end{definition}
 
-\begin{definition}{Hausdorff 空間}{tb-hausdorff}
-相異なる二点 $x\ne y$ に対して、交わらない開集合 $U\ni x$, $V\ni y$ が
-必ず取れるとき、$X$ を\textbf{Hausdorff 空間}という。
-距離空間は $\varepsilon=d(x,y)/2$ と取れば Hausdorff である。
-\end{definition}
-
-\begin{proposition}{Hausdorff 空間では一点集合が閉}{tb-hausdorff-point-closed}
-Hausdorff 空間 $X$ の各点 $p$ について、一点集合 $\{p\}$ は閉である。
+\begin{proposition}{Hausdorff 空間では極限が一意}{tb-hausdorff-limit}
+Hausdorff 空間の点列が極限を持つなら、その極限は一つだけである。
 \end{proposition}
 
 \begin{proof}
-$q\ne p$ を取ると、Hausdorff 性から交わらない開近傍 $U\ni p$, $V\ni q$ があり
-$V\subset X\setminus\{p\}$ となる。従って $X\setminus\{p\}$ は開であり、
-$\{p\}$ は閉である。
+$a_n\to a,b$ かつ $a\ne b$ と仮定する。Hausdorff 性により
+$a\in U$, $b\in V$, $U\cap V=\varnothing$ となる開近傍を取れる。
+十分大きい $n$ では $a_n\in U$ かつ $a_n\in V$ となり矛盾する。
 \end{proof}
+
+\section{連続写像}
+
+\begin{definition}{連続性}{tb-metric-continuity}
+距離空間の写像 $f:X\to Y$ が $x\in X$ で連続であるとは
+\[
+\forall\varepsilon>0\ \exists\delta>0\ \forall u\in X,\qquad
+d_X(u,x)<\delta\Rightarrow d_Y(f(u),f(x))<\varepsilon
+\]
+をいう。距離空間では $x_n\to x\Rightarrow f(x_n)\to f(x)$ と同値である。
+\end{definition}
+
+\begin{theorem}{開集合・閉集合による連続性}{tb-continuity-preimage}
+$f:X\to Y$ について次は同値である。
+\[
+f\text{ は連続},\quad
+Y\text{ の全ての開集合 }U\text{ で }f^{-1}(U)\text{ は開},\quad
+Y\text{ の全ての閉集合 }F\text{ で }f^{-1}(F)\text{ は閉}.
+\]
+\end{theorem}
+
+補集合と逆像が交換する
+$f^{-1}(Y\setminus F)=X\setminus f^{-1}(F)$ ため、開集合版と閉集合版は同値である。
+
+\begin{proposition}{閉包と連続写像}{tb-continuity-closure}
+連続写像 $f:X\to Y$ と $A\subset X$ に対し
+\[
+f(\overline A)\subset\overline{f(A)}.
+\]
+\end{proposition}
+
+\begin{proof}
+$\overline{f(A)}$ は閉集合なので、その逆像は閉集合である。
+しかも $A\subset f^{-1}(\overline{f(A)})$ だから
+$\overline A\subset f^{-1}(\overline{f(A)})$、従って主張を得る。
+\end{proof}
+
+$\abs{f(x)-f(y)}\le Ld(x,y)$ を満たす写像は Lipschitz 連続である。
+この評価が得られたら $\delta=\varepsilon/L$ と取ればよい。
 
 \section{コンパクト性}
 
 \begin{definition}{コンパクト}{tb-compact}
-$K\subset X$ が\textbf{コンパクト}であるとは、
-$K$ の任意の開被覆から有限部分被覆が選べることをいう。すなわち
-\[
-K\subset\bigcup_{\lambda\in\Lambda}U_\lambda
-\ \Longrightarrow\
-K\subset U_{\lambda_1}\cup\cdots\cup U_{\lambda_m}
-\]
-となる有限個の添字が取れることをいう。
+$K$ の任意の開被覆 $K\subset\bigcup_{\alpha\in I}U_\alpha$ から
+有限個 $U_{\alpha_1},\ldots,U_{\alpha_m}$ でなお $K$ を覆えるとき、$K$ はコンパクトという。
 \end{definition}
 
-\begin{theorem}{Heine--Borel の定理}{tb-heine-borel}
-$\R^d$ の部分集合について
+距離空間では「任意の点列が収束部分列を持ち、その極限が $K$ に属する」と同値である。
+$\R^n$ では
 \[
-\text{コンパクト}\iff\text{有界かつ閉}.
+K\text{ がコンパクト}\Longleftrightarrow K\text{ が有界かつ閉}
 \]
-一般の距離空間では「有界かつ閉」では足りず、
-「完備かつ全有界」が正しい条件になる。
-\end{theorem}
+である。
 
-\begin{theorem}{コンパクト性の基本事実}{tb-compact-facts}
+\begin{theorem}{コンパクト性の基本三定理}{tb-compact-toolkit}
 \begin{enumerate}
   \item コンパクト空間の閉部分集合はコンパクトである。
-  \item Hausdorff 空間のコンパクト部分集合は閉である。
   \item コンパクト集合の連続像はコンパクトである。
-  \item コンパクト集合上の連続な実数値関数は最大値・最小値を取る。
-  \item 距離空間では、コンパクトと点列コンパクト（任意の列が収束部分列を持つ）は同値である。
+  \item Hausdorff 空間のコンパクト部分集合は閉集合である。
 \end{enumerate}
 \end{theorem}
 
-\begin{proof}
-2.\ を示す。$x\notin K$ を固定し、各 $y\in K$ に対して交わらない開近傍
-$U_y\ni x$, $V_y\ni y$ を取る。$\{V_y\}$ は $K$ の開被覆だから
-有限個 $V_{y_1},\ldots,V_{y_m}$ で覆える。
-$U=U_{y_1}\cap\cdots\cap U_{y_m}$ は $x$ の開近傍で、$K$ と交わらない。
-\textbf{有限個に絞ったからこそ共通部分が開になる}点が要点である。
-\end{proof}
+証明の核は次の通りである。
+\begin{enumerate}
+  \item 閉部分集合 $F\subset K$ の開被覆に $K\setminus F$ を一つ加えて $K$ を覆う。
+  \item $f(K)$ の開被覆を逆像で $K$ の開被覆へ戻し、有限個を選んで再び像へ送る。
+  \item $x\notin K$ と各 $y\in K$ を Hausdorff 性で分離し、$K$ 側の有限部分被覆を選ぶ。
+\end{enumerate}
 
-有限部分被覆を持たない開被覆を一つ具体的に挙げる。
-$\R$ に対しては $\{(-n,n)\}_{n\ge1}$ が定番である。
-あるいは「コンパクトなら閉」の対偶を使い、閉でないことから結論してもよい。
+\begin{corollary}{コンパクトから Hausdorff への全単射}{tb-compact-bijection}
+$K$ がコンパクト、$Y$ が Hausdorff で、$f:K\to Y$ が連続全単射なら $f$ は同相写像である。
+\end{corollary}
 
-\section{連結性}
+実際、閉集合 $F\subset K$ はコンパクト、その像 $f(F)$ はコンパクト、従って $Y$ で閉である。
+よって $f$ は閉写像であり、$(f^{-1})^{-1}(F)=f(F)$ から逆写像が連続となる。
+
+定義域のコンパクト性を外すと結論は壊れる。例えば
+\[
+f:[0,2\pi)\to S^1,\qquad f(t)=(\cos t,\sin t)
+\]
+は連続全単射だが、$(1,0)$ の近くで逆写像の値が $0$ 側と $2\pi$ 側に分かれるため同相写像でない。
+
+Hausdorff 空間では一点集合が閉である。したがって、コンパクト空間 $S$ から
+Hausdorff 空間 $T$ への連続写像 $f$ と $p\in T$ に対し、
+$f^{-1}(\{p\})$ は $S$ の閉部分集合、従ってコンパクトである。
+
+\section{連結性と道連結性}
 
 \begin{definition}{連結・道連結}{tb-connected}
-$X$ が空でない二つの開集合の直和 $X=U\sqcup V$ として書けないとき、
-$X$ は\textbf{連結}であるという。
-任意の二点が $X$ 内の連続な道で結べるとき\textbf{道連結}であるという。
+$X$ が二つの互いに素な空でない開集合の合併に分かれないとき連結という。
+任意の $x,y\in X$ に対し連続写像 $\gamma:[0,1]\to X$ で
+$\gamma(0)=x$, $\gamma(1)=y$ となるものが存在するとき道連結という。
+道連結なら連結である。
 \end{definition}
 
-\begin{proposition}{道連結なら連結}{tb-path-connected}
-道連結な空間は連結である。逆は一般に成り立たない。
-\end{proposition}
-
-\begin{theorem}{連結性は連続写像で保たれる}{tb-connected-image}
-$f:X\to Y$ が連続で $X$ が連結なら $f(X)$ は連結である。
-特に全射連続写像の終域は連結になる。
+\begin{theorem}{連続像は連結性を保つ}{tb-connected-image}
+$X$ が連結で $f:X\to Y$ が連続なら $f(X)$ は連結である。
+$f$ が全射なら特に $Y$ が連結である。連続像は道連結性も保つ。
 \end{theorem}
 
-非空な相対開集合 $U,V$ で $A=U\sqcup V$ となるものを具体的に作る。
-$\Q$ や $\Q^2$ では、\textbf{無理数を境界に選ぶ}と
-境界上に点が残らないため、この分割がきれいに作れる。
+もし $f(X)=U\cup V$ が分離なら、逆像 $f^{-1}(U),f^{-1}(V)$ が $X$ の分離となるため矛盾する。
+実数の部分集合が連結であることは区間であることと同値である。
+
+\begin{proposition}{二重周期関数}{tb-periodic-function}
+連続関数 $f:\R^2\to\R$ が
+$f(x+1,y)=f(x,y+1)=f(x,y)$ を満たすなら、最大値 $b$ と最小値 $a$ を持ち、
+$f(\R^2)=[a,b]$ である。
+\end{proposition}
+
+\begin{proof}
+整数部分を引けば任意の点を $[0,1]^2$ へ移せるので
+$f(\R^2)=f([0,1]^2)$ である。右辺はコンパクト集合の連続像だからコンパクトで、最大・最小を取る。
+それらを取る点を $p,q$ とし $\sigma(t)=(1-t)p+tq$ とおけば、
+$f\circ\sigma$ は連続で端点値が $a,b$ だから中間値の定理により $[a,b]$ へ全射である。
+\end{proof}
+
+\section{有理数と数列集合の標準例}
+
+\begin{proposition}{有理数の部分空間}{tb-rational-examples}
+通常の距離を入れた $\Q$ で $A=[1,2]\cap\Q$ とすると、$A$ は閉だがコンパクトでも連結でもない。
+また $\Q$ と $\Q^2$ は全不連結であり、$\R^2\setminus\Q^2$ は道連結である。
+\end{proposition}
+
+\begin{proof}
+$A=\Q\cap[1,2]$ なので相対位相で閉である。
+$\sqrt2$ に収束する $A$ 内の有理数列は $A$ 内に収束部分列を持たないのでコンパクトでない。
+二つの異なる有理点の間に無理数を選び、その点で左右に切れば連結でない。
+同じ切断により $\Q$ の二点以上を含む部分集合は全て非連結である。
+
+$\Q^2$ の異なる二点も、異なる座標の間を無理数で切れるため、二点以上の連結部分集合を持たない。
+$p,q\in\R^2\setminus\Q^2$ に対し、各 $a\in\Q^2$ を通る直線 $pa,qa$ を全て避ける点 $z$ を選ぶ。
+避ける直線は可算本しかなく平面を覆わない。このとき折れ線 $p\to z\to q$ は $\Q^2$ を通らない。
+\end{proof}
+
+\begin{proposition}{$\{1/n\}$ とその極限点}{tb-sequence-set}
+\[
+A=\{1/n\mid n\in\N\},\qquad B=A\cup\{0\}
+\]
+とすると、$A$ は閉でもコンパクトでもなく、$B$ はコンパクトである。
+どちらも二点以上を含む連結部分集合を持たない。
+\end{proposition}
+
+$0\in\overline A\setminus A$ なので $A$ は閉でない。
+開被覆 $U_N=(1/(N+1),2)$（$N\in\N$）は $A$ を覆うが有限部分被覆を持たない。
+$B$ の任意の開被覆では、$0$ を含む一つの開集合が $1/n$ の十分長い尾部を覆い、
+残る有限個を有限個の開集合で覆える。
 
 \section{集合までの距離}
 
 \begin{definition}{集合までの距離}{tb-distance-to-set}
 空でない $A\subset X$ に対し
 \[
-d(x,A)=\inf\{d(x,a)\mid a\in A\}
+d(x,A)=\inf_{a\in A}d(x,a)
 \]
-と定める。二つの集合の間の距離も
-$d(K,F)=\inf\{d(k,f)\mid k\in K,\ f\in F\}$ で定める。
+と定める。
 \end{definition}
 
-\begin{proposition}{1-Lipschitz 性}{tb-distance-lipschitz}
-\[
-\abs{d(x,A)-d(y,A)}\le d(x,y).
-\]
-従って $x\mapsto d(x,A)$ は連続である。
-\end{proposition}
-
-\begin{proof}
-任意の $a\in A$ について三角不等式
-$d(x,a)\le d(x,y)+d(y,a)$ を書き、左辺を $d(x,A)$ で下から押さえてから、
-右辺で $a$ に関する下限を取る。得られるのは片側の不等式なので、
-$x,y$ を交換してもう一方も出す。
-\end{proof}
-
-\begin{proposition}{触点との関係}{tb-distance-closure}
-\[
-d(x,A)=0\iff x\in\overline A.
-\]
-\end{proposition}
-
-\begin{theorem}{コンパクト集合への最短点}{tb-nearest-point}
-$K$ がコンパクトなら、各 $x$ に対して $d(x,k_x)=d(x,K)$ を満たす
-$k_x\in K$ が存在する。
+\begin{theorem}{集合までの距離の三性質}{tb-distance-properties}
+\begin{enumerate}
+  \item $\abs{d(x,A)-d(y,A)}\le d(x,y)$。従って $x\mapsto d(x,A)$ は連続である。
+  \item $d(x,A)=0\Longleftrightarrow x\in\overline A$。
+  \item $A$ がコンパクトなら、各 $x$ に対して $d(x,A)=d(x,a_0)$ となる $a_0\in A$ が存在する。
+\end{enumerate}
 \end{theorem}
 
 \begin{proof}
-$z\mapsto d(x,z)$ は連続で、コンパクト集合 $K$ 上で最小値を取る。
+任意の $a\in A$ に三角不等式を使うと
+$d(x,A)\le d(x,a)\le d(x,y)+d(y,a)$ である。
+$a$ について下限を取り、$x,y$ を交換すれば (1) を得る。
+(2) は、距離0なら各 $n$ で $d(x,a_n)<1/n$ となる $a_n\in A$ を選ぶことと、触点の定義から従う。
+(3) は連続関数 $a\mapsto d(x,a)$ がコンパクト集合 $A$ 上で最小値を取ることによる。
 \end{proof}
 
-\begin{theorem}{コンパクト集合と閉集合の距離}{tb-compact-closed-distance}
-$K$ がコンパクト、$F$ が閉で $K\cap F=\varnothing$ なら $d(K,F)>0$ である。
-従って $K$ を含む開集合 $U$ に対して、ある $\varepsilon>0$ が存在して
+\begin{proposition}{コンパクト集合の一様な近傍}{tb-compact-neighborhood}
+$K$ がコンパクトで $K\subset L$、$L$ が開なら、ある $r>0$ が存在して
 \[
-\{x\in X\mid d(x,K)<\varepsilon\}\subset U
+K_r=\{x\in X\mid d(x,K)<r\}\subset L
 \]
 となる。
-\end{theorem}
+\end{proposition}
 
-上の主張で $U=X$ のときは $F=X\setminus U=\varnothing$ となり、
-$d(K,F)$ が定義できない。この場合は任意の $\varepsilon>0$ で結論が成り立つので、
-答案では最初に「$F=\varnothing$ なら明らか」と場合を分けておく。
-細かいが、減点されやすい箇所である。
+各 $a\in K$ で $B(a;2r_a)\subset L$ を取り、$B(a;r_a)$ の有限部分被覆を選ぶ。
+選ばれた半径の最小値を $r>0$ とすれば、$d(x,K)<r$ の点は
+ある $a\in K$ の $B(a;2r_a)$ に入り、$x\in L$ となる。
 
-\begin{memo*}
-集合までの距離は、2026年度 第2期 専門基礎 第3問、
-年度不明の距離空間の問題、予想問題第3問で繰り返し問われている。
-「下限を取る順序」「最短点の存在にはコンパクト性が要る」
-「空集合の場合分け」の三点を押さえておけば、この分野は取り切れる。
-\end{memo*}
+\section{反例の最小セット}
+
+連続写像について誤りやすい主張は、次の三例で処理できる。
+\begin{enumerate}
+  \item \textbf{開集合の像は開とは限らない。}
+        $f:\R\to\R$, $f(x)=x^2$ で $f((-1,1))=[0,1)$。
+  \item \textbf{コンパクト集合の逆像はコンパクトとは限らない。}
+        定数写像 $f:\R\to\R$, $f(x)=0$ で $f^{-1}(\{0\})=\R$。
+  \item \textbf{全射でも稠密集合の逆像は稠密とは限らない。}
+        $f:\R\to\R$ を $\abs x\le1$ で0、$x>1$ で $x-1$、$x<-1$ で $x+1$ とする。
+        これは連続全射だが、稠密集合 $\R\setminus\{0\}$ の逆像は
+        $(-\infty,-1)\cup(1,\infty)$ であり稠密でない。
+\end{enumerate}
+
+「連続像が保つ」のはコンパクト性と連結性、
+「連続写像の逆像が保つ」のは開集合と閉集合、と整理する。

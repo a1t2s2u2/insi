@@ -1,177 +1,78 @@
 \chapter{一変数の積分}
 \label{ch:tb-integral}
 
-\section{定積分と微積分学の基本定理}
+\section{出題で使う積分操作}
 
-\begin{definition}{原始関数と不定積分}{tb-antiderivative}
-$F'=f$ となる $F$ を $f$ の\textbf{原始関数}という。
-原始関数は定数の差を除いて一意であり、$\int f(x)\,\d x=F(x)+C$ と書く。
-\end{definition}
-
-\begin{theorem}{微積分学の基本定理}{tb-ftc}
-$f$ が $[a,b]$ 上連続なら
+変数上端には微積分学の基本定理
 \[
-F(x)=\int_a^xf(t)\,\d t
+\frac{\d}{\d x}\int_a^x f(t)\,\d t=f(x)
 \]
-は $(a,b)$ で微分可能で $F'(x)=f(x)$ である。また $F$ が $f$ の原始関数なら
+を使う。置換積分と部分積分は
 \[
-\int_a^bf(x)\,\d x=F(b)-F(a).
+\int_{\phi(\alpha)}^{\phi(\beta)}f(x)\,\d x
+=\int_\alpha^\beta f(\phi(t))\phi'(t)\,\d t,
 \]
-\end{theorem}
-
-\begin{corollary}{上端が関数の場合}{tb-ftc-composite}
-$\varphi$ が微分可能なら、合成関数の微分と合わせて
-\[
-\frac{\d}{\d x}\int_a^{\varphi(x)}f(t)\,\d t=f(\varphi(x))\varphi'(x).
-\]
-\end{corollary}
-
-\begin{proposition}{原始関数の表}{tb-antiderivative-table}
-\[
-\begin{array}{ll}
-\displaystyle\int x^\alpha\,\d x=\frac{x^{\alpha+1}}{\alpha+1}\ (\alpha\ne-1), &
-\displaystyle\int\frac{\d x}x=\log\abs x,\\[8pt]
-\displaystyle\int e^{ax}\,\d x=\frac{e^{ax}}a, &
-\displaystyle\int\log x\,\d x=x\log x-x,\\[8pt]
-\displaystyle\int\sin x\,\d x=-\cos x, &
-\displaystyle\int\cos x\,\d x=\sin x,\\[8pt]
-\displaystyle\int\sec^2x\,\d x=\tan x, &
-\displaystyle\int\tan x\,\d x=-\log\abs{\cos x},\\[8pt]
-\displaystyle\int\frac{\d x}{1+x^2}=\arctan x, &
-\displaystyle\int\frac{\d x}{\sqrt{1-x^2}}=\arcsin x,\\[8pt]
-\displaystyle\int\frac{\d x}{\sqrt{x^2+1}}=\log\left(x+\sqrt{x^2+1}\right), &
-\displaystyle\int\sec x\,\d x=\log\abs{\sec x+\tan x}.
-\end{array}
-\]
-いずれも積分定数は省略した。
-\end{proposition}
-
-\begin{proposition}{$\int\sec\theta\,\d\theta$ の導出}{tb-integral-sec}
-$\sec\theta+\tan\theta$ を $h(\theta)$ とおくと
-\[
-h'(\theta)=\sec\theta\tan\theta+\sec^2\theta
-=\sec\theta(\sec\theta+\tan\theta)
-=\sec\theta\,h(\theta)
-\]
-である。従って $h>0$ となる区間で
-\[
-\frac{\d}{\d\theta}\log h(\theta)=\frac{h'(\theta)}{h(\theta)}=\sec\theta,
-\]
-すなわち
-\[
-\int\sec\theta\,\d\theta=\log\abs{\sec\theta+\tan\theta}+C
-\]
-を得る。公式を忘れても、$\sec\theta+\tan\theta$ を微分してみればその場で復元できる。
-\end{proposition}
-
-\begin{memo*}
-この公式は 2026年度 第2期 専門基礎 第2問の小問 (2) でそのまま問われ、
-小問 (3) の重積分で使われる。
-問題が「まず導関数を求めよ」と誘導しているのは、この復元手順を踏ませるためである。
-\end{memo*}
-
-\section{置換積分と部分積分}
-
-\begin{theorem}{置換積分}{tb-substitution}
-$x=\varphi(t)$ が $C^1$ 級で、$\varphi$ が対応する区間の間の全単射なら
-\[
-\int_{\varphi(\alpha)}^{\varphi(\beta)}f(x)\,\d x
-=\int_\alpha^\beta f(\varphi(t))\varphi'(t)\,\d t.
-\]
-定積分では\textbf{積分の端点も必ず変換}する。
-\end{theorem}
-
-\begin{theorem}{部分積分}{tb-integration-by-parts}
 \[
 \int_a^bu(x)v'(x)\,\d x
-=\bigl[u(x)v(x)\bigr]_a^b-\int_a^bu'(x)v(x)\,\d x.
+=\bigl[u(x)v(x)\bigr]_a^b-\int_a^bu'(x)v(x)\,\d x
 \]
-$\log$ や $\arctan$ のように「微分すると簡単になる関数」を $u$ に取るのが定石である。
-\end{theorem}
+である。定積分の置換では端点も変える。
 
-\begin{example}{$\int x^a\log x\,\d x$}{tb-integral-xa-log}
-$a\ne-1$ のとき $u=\log x$, $v'=x^a$ と取ると $v=x^{a+1}/(a+1)$ なので
+2015年度第1期で必要な部分積分は、$a\ne-1$ のとき
 \[
 \int x^a\log x\,\d x
-=\frac{x^{a+1}\log x}{a+1}-\frac1{a+1}\int x^a\,\d x
 =x^{a+1}\left(\frac{\log x}{a+1}-\frac1{(a+1)^2}\right)+C.
 \]
-$a=-1$ のときだけは別扱いで、$u=\log x$ と置換して
+$a=-1$ だけは $u=\log x$ と置いて
 \[
-\int\frac{\log x}x\,\d x=\frac{(\log x)^2}2+C.
+\int\frac{\log x}{x}\,\d x=\frac{(\log x)^2}{2}+C
 \]
-\end{example}
+となる。$\sqrt{x^2+1}$ の置換は第\ref{ch:tb-functions}章に置いた。
 
-\begin{proposition}{頻出の置換}{tb-standard-substitutions}
+\section{広義積分と比較}
+
+非有界区間または特異点を含む積分は、端を切った積分の極限で定義する。
+例えば
 \[
-\begin{array}{ll}
-\sqrt{a^2-x^2} & x=a\sin\theta,\\
-\sqrt{a^2+x^2} & x=a\tan\theta\ \text{または}\ x=a\sinh u,\\
-\sqrt{x^2-a^2} & x=a\sec\theta,\\
-\text{$\sin,\cos$ の有理式} & t=\tan(\theta/2),\\
-\sqrt{x^2+1}\ \text{を含む式} & t=x+\sqrt{x^2+1}.
-\end{array}
+\int_a^\infty f(x)\,\d x
+=\lim_{R\to\infty}\int_a^Rf(x)\,\d x.
 \]
-$t=\tan(\theta/2)$ のときは
+特異点が内部にあれば左右を別々に判定する。
+
 \[
-\sin\theta=\frac{2t}{1+t^2},\qquad
-\cos\theta=\frac{1-t^2}{1+t^2},\qquad
-\d\theta=\frac{2}{1+t^2}\,\d t
-\]
-である。
-\end{proposition}
-
-答案では「$t=\cdots$ とおく」だけでなく、
-なぜその置換で式が簡単になるかを一行添える。
-たとえば $t=x+\sqrt{x^2+1}$ なら
-「共役を掛けると $t^{-1}=\sqrt{x^2+1}-x$ となり、
-$t$ と $t^{-1}$ の和と差で $x$ と根号を表せるから」と書く。
-
-\section{広義積分}
-
-\begin{definition}{広義積分}{tb-improper-integral}
-積分区間が非有界、または被積分関数が非有界のとき、
-極限
-\[
-\int_a^\infty f(x)\,\d x=\lim_{R\to\infty}\int_a^Rf(x)\,\d x,
+\int_1^\infty x^a\,\d x<\infty\Longleftrightarrow a<-1,
 \qquad
-\int_a^bf(x)\,\d x=\lim_{\varepsilon\to+0}\int_{a+\varepsilon}^bf(x)\,\d x
+\int_0^1x^a\,\d x<\infty\Longleftrightarrow a>-1.
 \]
-が有限の値に収束するとき、その積分は\textbf{収束する}という。
-$\int\abs f<\infty$ のときは\textbf{絶対収束}という。
-\end{definition}
+$0\le f\le g$ かつ $\int g<\infty$ なら $\int f<\infty$ であり、
+$\int\abs f<\infty$ なら $\int f$ は収束する。
 
-\begin{proposition}{冪の広義積分}{tb-improper-power}
+問題の $\int_1^\infty x^a\log x\,\d x$ は $t=\log x$ により
 \[
-\int_1^\infty\frac{\d x}{x^p}<\infty\iff p>1,
-\qquad
-\int_0^1\frac{\d x}{x^p}<\infty\iff p<1.
+\int_0^\infty te^{(a+1)t}\,\d t
 \]
-無限遠では指数が大きいほど、原点では指数が小さいほど収束しやすい、と覚える。
-\end{proposition}
+へ変わるため、$a<-1$ のとき、かつそのときに限り収束する。
 
-\begin{theorem}{比較判定}{tb-comparison-test}
-$0\le f\le g$ が成り立つとき
+\section{局所化する指数核}
+
+\begin{theorem}{近似恒等核 $ne^{-nx}$}{tb-exponential-kernel}
+$f:[0,\infty)\to\R$ が有界かつ $0$ で連続なら
 \[
-\int g<\infty\ \Longrightarrow\ \int f<\infty,
-\qquad
-\int f=\infty\ \Longrightarrow\ \int g=\infty.
+\lim_{n\to\infty}\int_0^\infty n f(x)e^{-nx}\,\d x=f(0).
 \]
-絶対収束する広義積分は収束する。
 \end{theorem}
 
-収束を示すときは、優関数 $g$ を明示して $\int g<\infty$ を計算まで書く。
-発散を示すときは、劣関数 $f$ を明示して $\int f=\infty$ を示す。
-「明らかに収束する」は答案にならない。
-
-対数を含む場合は、$\log x$ が任意の正冪より遅いこと
-（命題~\ref{prop:tb-standard-limits}）を使って冪の積分へ帰着させる。
-たとえば $x\ge e$ では $\log x\ge1$ だから $x^a\log x\ge x^a$ である。
-
-\begin{memo*}
-2015年度 第1期 専門基礎 第2問は、
-$\int_1^\infty u^a\log u\,\d u$ の収束範囲が $a<-1$ であることを、
-原始関数の極限から直接判定する問題である。
-2017年度 専門基礎 第2問では、$\int_0^\infty ne^{-nx}\,\d x=1$ という
-「全体で1になる重み」を先に計算しておくと、以降の評価が一行で済む。
-\end{memo*}
+\begin{proof}
+$\int_0^\infty ne^{-nx}\,\d x=1$ なので、差は
+\[
+\int_0^\infty n\bigl(f(x)-f(0)\bigr)e^{-nx}\,\d x
+\]
+である。$\varepsilon>0$ に対し、$0\le x\le\delta$ で
+$\abs{f(x)-f(0)}<\varepsilon$ となる $\delta$ を取る。
+$M=\sup_{x\ge0}\abs{f(x)-f(0)}$ とすれば、積分を $\delta$ で分けて
+\[
+\left|\int_0^\infty n(f(x)-f(0))e^{-nx}\,\d x\right|
+\le\varepsilon+Me^{-n\delta}\longrightarrow\varepsilon.
+\]
+$\varepsilon$ は任意なので結論を得る。
+\end{proof}
