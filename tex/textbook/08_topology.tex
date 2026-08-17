@@ -84,6 +84,22 @@ $a\in U$, $b\in V$, $U\cap V=\varnothing$ となる開近傍を取れる。
 十分大きい $n$ では $a_n\in U$ かつ $a_n\in V$ となり矛盾する。
 \end{proof}
 
+\begin{proposition}{補有限位相}{tb-cofinite-topology}
+無限集合 $X$ に
+\[
+\mathcal T=\{\varnothing\}\cup
+\{U\subset X\mid X\setminus U\text{ は有限集合}\}
+\]
+を入れると位相空間になり、コンパクトかつ連結である。
+\end{proposition}
+
+任意個の合併の補集合は有限集合の一つに含まれ、有限個の共通部分の補集合は
+有限集合の有限合併なので、位相の公理を満たす。
+開被覆から非空な一つ $U_0$ を選べば $X\setminus U_0$ は有限であり、
+残る各点を覆う開集合を一つずつ足せば有限部分被覆になる。
+また二つの非空開集合の共通部分は補有限、従って空でない。
+よって二つの非空開集合による分離は存在しない。
+
 \section{連続写像}
 
 \begin{definition}{連続性}{tb-metric-continuity}
@@ -125,6 +141,33 @@ $\abs{f(x)-f(y)}\le Ld(x,y)$ を満たす写像は Lipschitz 連続である。
 具体的な距離評価があれば Lipschitz、点列が与えられれば点列、
 位相だけの問題なら開集合の逆像を使うのが最短である。
 
+\begin{theorem}{コンパクト集合上では一様連続}{tb-heine-cantor}
+コンパクト距離空間 $K$ 上の連続写像は一様連続である。
+\end{theorem}
+
+この定理は「点ごとの連続性」を「全ての点で共通の $\delta$」へ変える。
+例えば $I=[0,1]$ とし、連続関数 $g:I\times I\to\R$ が
+$c=\inf_{x\in I}g(x,0)>0$ を満たすとする。一様連続性から、十分小さい $b>0$ では全ての $x$ で
+\[
+|g(x,b)-g(x,0)|<c/2,\qquad g(x,b)>c/2.
+\]
+従って $\inf_xg(x,b)=0$ にはなれない。一方、$\R\times I$ はコンパクトでないため
+\[
+f(x,b)=(bx-1)^2
+\]
+なら $\inf_xf(x,0)=1$ だが、$b>0$ では $x=1/b$ で最小値0を取る。
+
+\begin{definition}{商位相}{tb-quotient-topology}
+同値関係 $\sim$ による商集合 $Y=X/{\sim}$ と標準全射 $\pi:X\to Y$ に対し
+\[
+U\subset Y\text{ が開}\Longleftrightarrow\pi^{-1}(U)\text{ が }X\text{ で開}
+\]
+と定める。この位相では $\pi$ は定義から連続である。
+\end{definition}
+
+$S\subset X$ がコンパクトで $\pi(S)=Y$ まで示せたなら、
+$\pi|_S:S\to Y$ は連続全射なので、$Y$ はコンパクト集合の連続像としてコンパクトである。
+
 \section{コンパクト性}
 
 \begin{definition}{コンパクト}{tb-compact}
@@ -138,6 +181,31 @@ $\R^n$ では
 K\text{ がコンパクト}\Longleftrightarrow K\text{ が有界かつ閉}
 \]
 である。
+
+\begin{proposition}{点列コンパクトから有限部分被覆を作る}{tb-sequential-compact-proof}
+距離空間 $X$ が点列コンパクトなら、任意の開被覆 $\{W_\lambda\}$ に対して
+ある $\delta>0$ が存在し、各 $x\in X$ で
+\[
+B(x;\delta)\subset W_\lambda
+\]
+となる $\lambda$ を選べる。さらに $X$ はコンパクトである。
+\end{proposition}
+
+最初の主張が偽なら、各 $n$ で「$B(x_n;1/n)$ がどの $W_\lambda$ にも入らない」
+点 $x_n$ を取れる。収束部分列 $x_{n(k)}\to x$ を取り、$x\in W_\lambda$ を一つ選ぶ。
+$W_\lambda$ は開なので $B(x;\varepsilon)\subset W_\lambda$ となる $\varepsilon>0$ がある。
+十分大きい $k$ では
+\[
+d(x_{n(k)},x)<\varepsilon/2,\qquad 1/n(k)<\varepsilon/2
+\]
+だから $B(x_{n(k)};1/n(k))\subset W_\lambda$ となり矛盾する。
+
+次に $X$ は任意の $r>0$ に対して有限個の半径 $r$ の球で覆える。
+そうでなければ、既に選んだ点から距離 $r$ 以上の点を順に選び、
+収束部分列を持たない点列を作れてしまう。
+上で得た $\delta$ に対して有限個の球 $B(x_i;\delta/2)$ で $X$ を覆い、
+各 $i$ で $B(x_i;\delta)\subset W_{\lambda_i}$ を選べば、
+$W_{\lambda_1},\ldots,W_{\lambda_m}$ が有限部分被覆になる。
 
 \begin{theorem}{コンパクト性の基本三定理}{tb-compact-toolkit}
 \begin{enumerate}

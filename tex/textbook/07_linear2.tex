@@ -66,6 +66,31 @@ $Av=\lambda v$ なら $p(A)v=p(\lambda)v$ なので前半が従う。
 後半は Lagrange 補間の恒等式 $\sum_iP_i=I$ と
 $(A-\lambda_iI)P_i=O$ を用いればよい。
 
+\begin{proposition}{全成分1の行列を含む式}{tb-all-ones-matrix}
+$e=(1,\ldots,1)^{\mathsf T}$, $J_n=ee^{\mathsf T}$ とする。
+実対称行列 $A$ が
+\[
+A^2=aA+bJ_n+cI_n\qquad(b\ne0)
+\]
+を満たすなら、$AJ_n=J_nA$ であり、ある $r\in\R$ に対して
+$Ae=re$ となる。さらに $r$ と異なる固有値 $\lambda$ は
+\[
+\lambda^2-a\lambda-c=0
+\]
+を満たす。従って $A$ の相異なる固有値は高々3個である。
+\end{proposition}
+
+与式に左から $A$、右から $A$ を掛けた二式を引けば
+$b(AJ_n-J_nA)=O$ となる。$y=Ae$ とおくと、対称性から
+$AJ_n=ye^{\mathsf T}$, $J_nA=ey^{\mathsf T}$ なので、成分比較により $y=re$ である。
+$Ax=\lambda x$, $\lambda\ne r$ なら
+\[
+r e^{\mathsf T}x=(Ae)^{\mathsf T}x=e^{\mathsf T}Ax
+=\lambda e^{\mathsf T}x
+\]
+より $e^{\mathsf T}x=0$、従って $J_nx=0$ である。元の式を $x$ に作用させれば二次方程式を得る。
+重複度は「全重複度の和 $=n$」と $\tr A=$ 固有値の和で決める。
+
 対角化できれば
 \[
 A^k=PD^kP^{-1},\qquad
@@ -88,6 +113,15 @@ J_k(\lambda)=
 \]
 を Jordan ブロックといい、これらを対角に並べた行列を Jordan 標準形という。
 \end{definition}
+
+長さ2の Jordan 鎖は、まず $(A-\lambda I)v=0$ となる固有ベクトル $v$ を取り、
+\[
+(A-\lambda I)u=v
+\]
+を連立方程式として解いて作る。このとき
+$Av=\lambda v$, $Au=v+\lambda u$ なので、順序付き基底 $(v,u)$ では
+対応部分が $J_2(\lambda)$ になる。基底の順序を $(u,v)$ にすれば下三角になるため、
+表現行列を書く前に列の順序を明記する。
 
 冪零行列の固有値は0だけである。実際 $Nv=\lambda v$ なら
 $0=N^mv=\lambda^mv$ なので $\lambda=0$ である。

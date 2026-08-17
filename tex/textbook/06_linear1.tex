@@ -129,6 +129,43 @@ n=\dim(\ker f+\ker g)
 従って $\ker(f+g)=\ker f\cap\ker g=\{0\}$ であり、$f+g$ は全単射である。
 \end{proof}
 
+\section{核の増大列と射影}
+
+\begin{proposition}{高い冪の核は有限回で止まる}{tb-kernel-stabilization}
+有限次元空間 $V$ の線形変換 $f:V\to V$ について
+\[
+\ker f\subset\ker f^2\subset\ker f^3\subset\cdots
+\]
+であり、十分大きい $m$ では $\ker f^m=\ker f^{m+1}$ となる。
+\end{proposition}
+
+包含は $f^mx=0\Rightarrow f^{m+1}x=0$ から従う。
+包含が真に増えるたび次元は1以上増えるが、$\dim V$ を超えないため有限回で止まる。
+一度 $\ker f^m=\ker f^{m+1}$ となれば、$f^{m+2}x=0$ に対し
+$fx\in\ker f^{m+1}=\ker f^m$ だから $x\in\ker f^{m+1}$ となり、その後も等しい。
+
+\begin{proposition}{冪等行列は射影である}{tb-idempotent-projection}
+$P^2=P$ なら
+\[
+\boxed{V=\operatorname{Im}P\oplus\ker P},
+\qquad
+\operatorname{Im}P=\ker(I-P),\quad
+\ker P=\operatorname{Im}(I-P).
+\]
+また $P$ の固有値は0または1である。
+\end{proposition}
+
+実際
+\[
+x=Px+(I-P)x,\qquad Px\in\operatorname{Im}P,\quad
+P(I-P)x=0
+\]
+である。共通部分の $y=Pz$ が $Py=0$ を満たせば
+$y=Pz=P^2z=Py=0$ なので直和である。
+像と核の二つの等式は $P(I-P)=O$ と同じ分解から従う。
+固有値は $Pv=\lambda v$ に $P$ をもう一度作用させ、
+$\lambda^2v=\lambda v$ とすればよい。
+
 \section{行基本変形と連立方程式}
 
 拡大係数行列を階段形にし、
