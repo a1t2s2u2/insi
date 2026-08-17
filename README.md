@@ -24,13 +24,14 @@ open site/dist/index.html
 make pdf
 ```
 
-次の3冊を `tex/out/` に生成します。
+次の4冊を `tex/out/` に生成します。
 
 - `kumadai-workbook.pdf` — 演習用（問題と解答欄のみ）
 - `kumadai-workbook-answers.pdf` — 演習用と同じ並び・同じ紙面の解答編
 - `kumadai-prediction.pdf` — 予想問題6題だけを抜き出した演習用
+- `kumadai-workbook-2023-2025.pdf` — 提供画像から転記した2023--2025年度の独立版過去問 workbook（15題）
 
-どちらも専門基礎科目の過去問34題と予想問題6題、合わせて40題を収めています。
+`kumadai-workbook.pdf` と `kumadai-workbook-answers.pdf` は、専門基礎科目の過去問34題と予想問題6題、合わせて40題を収めています。
 
 演習用は、解答・解説・解答の見通しを伏せた自習用の冊子です。
 1問1ページで、問題文の下に引いた細い罫線から先がそのまま解答欄になります。
@@ -46,6 +47,15 @@ make prediction-pdf
 ```
 
 `kumadai-prediction.pdf` は表紙や目次を置かず、2回分・全6題を1問1ページで収録します。
+
+2023--2025年度の独立版 workbook だけを生成したい場合は次を実行します。
+
+```sh
+make recent-workbook-pdf
+```
+
+`kumadai-workbook-2023-2025.pdf` は従来の workbook には連結せず、
+2023年度第1期・第2期、2024年度第1期、2025年度第1期・第2期の問題文を原文どおり収録します。
 
 解答編は演習用とまったく同じ順序・同じ柱で並んでいるので、
 解いた問題のページをそのまま突き合わせて答え合わせできます。
@@ -83,4 +93,4 @@ node tools/site/tex2md.mjs . --strict
 make pdf
 ```
 
-前者は未変換の LaTeX や参照エラーを検査します。後者は3冊の PDF を生成します。
+前者は未変換の LaTeX や参照エラーを検査します。後者は4冊の PDF を生成します。
