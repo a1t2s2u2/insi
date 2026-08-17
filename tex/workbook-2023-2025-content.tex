@@ -1,0 +1,334 @@
+% 2023--2025年度の提供画像から転記した、独立版 workbook の問題本文。
+% 問題文の内容・順序は原文どおりとし、問題名や補足説明は加えない。
+
+\wbchapter{2023年度}
+
+\wbsection{第1期・専門基礎科目（3題必修）}
+
+\wbproblem{第1問}
+$n>1$ を整数とし，$A$ を以下の条件を満たす $n$ 次実対称行列とする。
+
+実数 $a,b,c$ が存在し，$A^2=aA+bJ_n+cI_n$ を満たす。ただし，$b\ne0$ とする。
+
+ここで，$J_n$ はすべての成分が $1$ の $n$ 次正方行列，$I_n$ は $n$ 次単位行列である。
+以下の問いに答えよ。
+\begin{enumerate}
+  \item[(問1)] $AJ_n=J_nA$ を示せ。
+  \item[(問2)] $A$ の各行，各列の成分の和はすべて一定であることを示せ。また，その値を $r$ とするとき，$A$ は $r$ を固有値として持つことを示し，固有ベクトルを一つ求めよ。
+  \item[(問3)] $A$ の $r$ とは異なる固有値の固有ベクトル $x$ に対し，$J_nx=0$ が成り立つことを示せ。
+  \item[(問4)] $A$ の異なる固有値は高々 $3$ 個であることを示せ。
+  \item[(問5)] 以下の行列の固有値を重複度も含めてすべて求めよ。
+  \[
+  \begin{pmatrix}
+  2&1&0&0&1\\
+  1&2&1&0&0\\
+  0&1&2&1&0\\
+  0&0&1&2&1\\
+  1&0&0&1&2
+  \end{pmatrix}
+  \]
+\end{enumerate}
+\wbend
+
+\wbproblem{第2問}
+$p>1$ とする。以下の問いに答えよ。
+\begin{enumerate}
+  \item[(問1)] $t>2$ とする。$\displaystyle\int_2^t\frac{1}{x(\log x)^p}\,\d x$ を求めよ。
+  \item[(問2)] 級数 $\displaystyle\sum_{n=2}^{\infty}\frac{1}{n(\log n)^p}$ は，収束することを示せ。
+  \item[(問3)] $2$ 以上の整数 $n$ に対し，
+  \[
+  D(n)=\{(x,y)\in\R^2\mid x,y\ge0,\ 2\le x^{\frac23}+y^{\frac23}\le n\}
+  \]
+  とおく。極限
+  \[
+  \lim_{n\to\infty}\iint_{D(n)}
+  \frac{1}{\left(x^{\frac23}+y^{\frac23}\right)^3
+  \left(\log\left(x^{\frac23}+y^{\frac23}\right)\right)^p}\,\d x\d y
+  \]
+  は収束することを示せ。ただし，必要ならば $D(n)$ の面積が $\displaystyle\frac{3}{32}\pi(n^3-8)$ であることは用いてよい。
+\end{enumerate}
+\wbend
+
+\wbproblem{第3問}
+$I=\{x\in\R\mid0\le x\le1\}$ とおく。以下の問いに答えよ。
+\begin{enumerate}
+  \item[(問1)] 次の条件 $(*)$ を満たす連続関数 $f:\R\times I\longrightarrow\R$ が存在することを示せ。
+  \[
+  (*)\quad \inf_{x\in\R}f(x,0)>0\text{ であり，任意の }0<b\le1\text{ に対し }
+  \inf_{x\in\R}f(x,b)=0\text{ である。}
+  \]
+  \item[(問2)] 次の条件 $(**)$ を満たす連続関数 $g:I\times I\longrightarrow\R$ は存在しないことを示せ。
+  \[
+  (**)\quad \inf_{x\in I}g(x,0)>0\text{ であり，任意の }0<b\le1\text{ に対し }
+  \inf_{x\in I}g(x,b)=0\text{ である。}
+  \]
+\end{enumerate}
+\wbend
+
+\wbsection{第2期・専門基礎科目（3題必修）}
+
+\wbproblem{第1問}
+以下の問いに答えよ。
+\begin{enumerate}
+  \item[(問1)] 次の行列式を因数分解せよ。
+  \[
+  \begin{vmatrix}
+  1&x&y\\
+  1&x^2&y^2\\
+  x+y&1+y&1+x
+  \end{vmatrix}
+  \]
+  \item[(問2)] 正方行列 $A$ が $A^2=A$ を満たすとする。$A$ の固有値が $0$ または $1$ であることを示せ。
+  \item[(問3)] 有限次元（実）線形空間 $V$ の線形変換 $f:V\longrightarrow V$ について，次の問いに答えよ。
+  \begin{enumerate}
+    \item[(i)] 線形変換 $f$ の核 $\operatorname{Ker} f:=\{v\in V\mid f(v)=o\}$ が $V$ の部分空間をなすことを示せ。ここで $o$ は $V$ の零元である。
+    \item[(ii)] 十分大きい整数 $n$ が存在して $n$ 以上の整数 $m$ に対して，$\operatorname{Ker} f^m=\operatorname{Ker} f^{m+1}$ が成り立つことを示せ。ただし $f^m$ は $f$ を $m$ 回合成した写像である。
+    \item[(iii)] $V=\R^3$ の場合を考える。行列
+    \[
+    A=\begin{pmatrix}
+    0&1&1\\
+    0&0&1\\
+    0&0&0
+    \end{pmatrix}
+    \]
+    で定まる $\R^3$ から $\R^3$ への線形変換を $f$ とする。このとき，$\dim\operatorname{Ker} f$，$\dim\operatorname{Ker} f^2$，$\dim\operatorname{Ker} f^3$ を求めよ。ただし $\R^3$ の部分空間 $W$ に対して，$\dim W$ は $W$ の $\R$ 上の次元を表す。
+  \end{enumerate}
+\end{enumerate}
+\wbend
+
+\wbproblem{第2問}
+以下の問いに答えよ。
+\begin{enumerate}
+  \item[(問1)] $\tan^{-1}x$ は $\R$ で一様連続であることを示せ。
+  \item[(問2)] 定数 $C>0$ が存在して，すべての $x\in\R$，$h\ne0$ に対して
+  \[
+  \left|\frac{\tan^{-1}(x+h)-\tan^{-1}x}{h}-\frac{1}{1+x^2}\right|\le C|h|
+  \]
+  が成り立つことを示せ。
+  \item[(問3)] $f(x)$ を $\R$ 上の連続な実数値関数とし，$\displaystyle\int_{-\infty}^{\infty}|f(x)|\d x<\infty$ を満たすとする。このとき $\R$ 上の関数
+  \[
+  F(x):=\int_{-\infty}^{\infty}f(y)\tan^{-1}(x-y)\d y
+  \]
+  は $\R$ で一様連続であることを示せ。
+  \item[(問4)] (問3) で与えた関数 $F(x)$ は $\R$ で微分可能であることを示せ。
+\end{enumerate}
+\wbend
+
+\wbproblem{第3問}
+実数全体の集合 $\R$ に対して，
+\[
+\mathfrak{D}:=\{O\subset\R\mid O^c:=\R\setminus O\text{ は有限集合}\}\cup\{\R,\varnothing\}
+\]
+とおく。ただし $\varnothing$ は空集合を表す。このとき，以下の問いに答えよ。
+\begin{enumerate}
+  \item[(問1)] 組 $(\R,\mathfrak{D})$ は $\mathfrak{D}$ を開集合系とする位相空間であることを示せ。
+  \item[(問2)] 位相空間 $(\R,\mathfrak{D})$ はコンパクトとなることを示せ。
+  \item[(問3)] 位相空間 $(\R,\mathfrak{D})$ は連結となることを示せ。
+\end{enumerate}
+\wbend
+
+\wbchapter{2024年度}
+
+\wbsection{第1期・専門基礎科目（3題必修）}
+
+\wbproblem{第1問}
+$\R^4$ を実数体上の $4$ 次元列ベクトル空間とする。
+\[
+A=\begin{pmatrix}
+3&1&1&1\\
+-1&3&1&1\\
+0&-6&-3&-6\\
+1&5&4&7
+\end{pmatrix}
+\]
+とし，$f:\R^4\longrightarrow\R^4$ を $f(w)=Aw\ (w\in\R^4)$ と定める。
+\begin{enumerate}
+  \item[(問1)] $A$ の固有値および各固有値に対する固有空間の基底をそれぞれ $1$ 組ずつ求めよ。
+  \item[(問2)] (問1) で求めた $A$ の固有値のうち最小のものを $\lambda$ とする。固有値 $\lambda$ に関する固有ベクトルの $1$ つ $v$ をとって，$(A-\lambda E)u=v$ となるベクトル $u$ を $1$ つ求めよ。ここで，$E$ は単位行列とする。
+  \item[(問3)] (問1) で求めた $A$ の各固有空間の基底の和集合を $B$ とおく。このとき，(問2) で求めた $u$ に対し，$\{u\}\cup B$ は $\R^4$ の基底をなすことを示せ。また，$\{u\}\cup B$ に関する $f$ の表現行列を求めよ。
+\end{enumerate}
+\wbend
+
+\wbproblem{第2問}
+\begin{enumerate}
+  \item[(問1)] $\displaystyle\sum_{k=1}^{\infty}\frac{k}{2^k}$ は収束することを示せ。
+  \item[(問2)] 関数 $\log\left(x^2+\sqrt{\sin^2x+1}\right)$ を微分せよ。
+  \item[(問3)] 領域
+  \[
+  D=\left\{(x,y)\in\R^2\mathrel{}\middle|\mathrel{}\left(\frac{x}{a}\right)^2+\left(\frac{y}{b}\right)^2\le1\right\}
+  \quad\text{（ただし，}a,b>0\text{）}
+  \]
+  において，積分
+  \[
+  \iint_D x^2\d x\d y
+  \]
+  を計算せよ。
+\end{enumerate}
+\wbend
+
+\wbproblem{第3問}
+ユークリッド空間 $\R^2$ を考える。正方形領域
+\[
+A=\{(x,y)\in\R^2\mid-1<x<1,-1<y<1\}
+\]
+を考え，相対位相空間 $X=\R^2\setminus A$ を考える。
+\begin{enumerate}
+  \item[(問1)] $\R^2$ の部分集合
+  \[
+  B=\left\{v\in\R^2\mathrel{}\middle|\mathrel{}\frac12\le|v|<2\right\}
+  \]
+  を考える。$X$ の部分集合 $B\cap X$ は $X$ の開集合であることを示せ。ただし，$|v|$ は点 $v$ と $\R^2$ の原点とのユークリッド距離を表す。
+  \item[(問2)] ある $a\in\R$ が存在し，$ax=s$ かつ $ay=t$ が成り立つとき，$(x,y)\sim(s,t)$ と定める。このとき $X$ 上の二項関係 $\sim$ は同値関係であることを示せ。
+  \item[(問3)] (問2) の同値関係による商集合 $Y=X/{\sim}$ を考え，標準全射を $\pi:X\longrightarrow Y$ と表す。$X$ の部分集合
+  \[
+  S=\{v\in\R^2\mid|v|=2\}
+  \]
+  への $\pi$ の制限 $\pi|_S:S\longrightarrow Y$ は全射であることを示せ。
+  \item[(問4)] $Y$ がコンパクトであることを証明せよ。ただし $Y$ は
+  \[
+  \mathcal{O}=\{U\subset Y\mid\pi^{-1}(U)\text{ は }X\text{ の開集合}\}
+  \]
+  を開集合系として位相空間とみなす。
+\end{enumerate}
+\wbend
+
+\wbchapter{2025年度}
+
+\wbsection{第1期・専門基礎科目（3題必修）}
+
+\wbproblem{第1問}
+行列
+\[
+P=\begin{pmatrix}
+1/\sqrt3&1/\sqrt2&p\\
+q&r&s\\
+-1/\sqrt3&1/\sqrt2&-1/\sqrt6
+\end{pmatrix}
+\qquad(p,q,r,s\in\R)
+\]
+は直交行列であるとする。以下の問いに答えよ。
+\begin{enumerate}
+  \item[(問1)] $p,q,r,s$ の取りうる組み合わせを全て求めよ。
+  \item[(問2)] 行列 ${}^{t}(P^{10})P^{19}({}^{t}P)^{10}$ を求めよ。
+  \item[(問3)] 行列 $A$ は $P$ で対角化されるとし，$A$ の固有多項式 $g_A(x)$ は $x^3+\sqrt[10]{2}x^2$ であるとする。また，ベクトル
+  \[
+  \begin{pmatrix}1\\0\\1\end{pmatrix}
+  \]
+  は固有値 $-\sqrt[10]{2}$ に属する $A$ の固有ベクトルであるとする。このとき，$A^{10}$ を求めよ。
+  \item[(問4)] 直交行列で対角化される行列は対称行列であることを証明せよ。
+\end{enumerate}
+\wbend
+
+\wbproblem{第2問}
+$a,b,c,d\in\R$ に対し，$a<b,c<d$ を仮定する。$D$ は $\R^2$ の開集合で，$[a,b]\times[c,d]$ を含むとする。$f(x,y)$ を $D$ 上の $C^1$ 級関数とする。以下の問いに答えよ。
+\begin{enumerate}
+  \item[(問1)] $[a,b]$ 上で
+  \[
+  \frac{\d}{\d x}\int_c^d f(x,y)\d y
+  =\int_c^d\frac{\partial f}{\partial x}(x,y)\d y
+  \]
+  が成り立つことを示せ。ただし，
+  \[
+  G(x)=\int_c^d\frac{\partial f}{\partial x}(x,y)\d y
+  \]
+  が $[a,b]$ 上で連続であることを仮定して良い。
+  \item[(問2)] $\phi(x),\psi(x)$ は $[a,b]$ を含む開区間上の $C^1$ 級関数で，任意の $x\in[a,b]$ に対し $\phi(x),\psi(x)\in[c,d]$ が成り立つとする。このとき
+  \[
+  \frac{\d}{\d x}\int_{\phi(x)}^{\psi(x)}f(x,y)\d y
+  =f(x,\psi(x))\frac{\d\psi}{\d x}(x)
+  -f(x,\phi(x))\frac{\d\phi}{\d x}(x)
+  +\int_{\phi(x)}^{\psi(x)}\frac{\partial f}{\partial x}(x,y)\d y
+  \]
+  が成り立つことを示せ。
+  \item[(問3)] $x>0$ に対し
+  \[
+  p(x)=\int_{x^2}^{x^3}\frac{\sin(xy)}{y}\d y
+  \]
+  とおくとき，$\displaystyle\frac{\d p}{\d x}(x)$ を求めよ。
+\end{enumerate}
+\wbend
+
+\wbproblem{第3問}
+$(X,d)$ を距離空間とし，$K$ を $X$ のコンパクトな部分集合とする。関数 $\rho:X\longrightarrow\R$ を
+\[
+\rho(x)=\inf\{d(x,z)\mid z\in K\}\qquad(x\in X)
+\]
+で定める。以下の問いに答えよ。
+\begin{enumerate}
+  \item[(問1)] すべての $x,y\in X$ に対して
+  \[
+  |\rho(x)-\rho(y)|\le d(x,y)
+  \]
+  が成り立つことを示せ。
+  \item[(問2)] 任意の $x\in X$ に対して，ある $a\in K$ が存在して $\rho(x)=d(x,a)$ を満たすことを示せ。
+  \item[(問3)] $L$ は $K$ を含む $X$ の開集合とする。このとき
+  \[
+  K_r=\{x\in X\mid\rho(x)<r\}\subset L
+  \]
+  となる実数 $r>0$ が存在することを示せ。
+\end{enumerate}
+\wbend
+
+\wbsection{第2期・専門基礎科目（3題必修）}
+
+\wbproblem{第1問}
+$n$ を $2$ 以上の自然数とする。以下の問いに答えよ。
+\begin{enumerate}
+  \item[(問1)] $n$ 次正方行列 $P_n$ を以下のように定める。
+  \[
+  P_n=\begin{pmatrix}
+  0&0&\cdots&0&1\\
+  0&0&\cdots&1&0\\
+  \vdots&\vdots&&\vdots&\vdots\\
+  0&1&\cdots&0&0\\
+  1&0&\cdots&0&0
+  \end{pmatrix}
+  \]
+  $P_n$ の全ての固有値を求めよ。また各固有値に対する固有空間の基底を一組求めよ。
+  \item[(問2)] $A$ を $A^2=A$ を満たす $n$ 次実正方行列とし，$I$ を $n$ 次単位行列とする。また，線形変換 $f:\R^n\longrightarrow\R^n$ を $f(x)=Ax$ で定め，線形変換 $g:\R^n\longrightarrow\R^n$ を $g(x)=(I-A)x$ で定める。
+  \begin{enumerate}
+    \item[(i)] $\R^n=\Im(f)\oplus\operatorname{Ker}(f)$ を示せ。ここで $\Im(f)$ は $f$ の像，$\operatorname{Ker}(f)$ は $f$ の核を表す。
+    \item[(ii)] $\Im(f)=\operatorname{Ker}(g)$，$\operatorname{Ker}(f)=\Im(g)$ を示せ。
+  \end{enumerate}
+\end{enumerate}
+\wbend
+
+\wbproblem{第2問}
+実数値関数 $f(x)$ は $x\ge0$ で $C^1$ 級であり，$0<a<b$ に対して，ある定数 $C$ が存在して，
+\[
+\lim_{t\to\infty}\int_a^b\frac{f(tx)}{x}\d x=C
+\]
+をみたすとする。このとき，以下の問いに答えよ。
+\begin{enumerate}
+  \item[(問1)] $t>0$ に対して，$\displaystyle F_t(y)=\int_0^t f'(xy)\d x$ とおくとき，
+  \[
+  \int_a^b F_t(y)\d y=f(0)\log\frac{b}{a}+\int_a^b\frac{f(ty)}{y}\d y
+  \]
+  を示せ。
+  \item[(問2)]
+  \[
+  \int_0^{\infty}\frac{f(bx)-f(ax)}{x}\d x=f(0)\log\frac{a}{b}+C
+  \]
+  を示せ。
+  \item[(問3)] 次の積分を求めよ。
+  \[
+  \int_0^{\infty}\frac{e^{-bx}-e^{-ax}}{x}\d x
+  \]
+  \item[(問4)] 次の積分を求めよ。
+  \[
+  \int_0^1\frac{x^{b-1}-x^{a-1}}{\log x}\d x
+  \]
+\end{enumerate}
+\wbend
+
+\wbproblem{第3問}
+$X$ を距離空間，$d$ を $X$ 上の距離関数とする。$X$ が点列コンパクトであるとは，$X$ 内の任意の点列 $\{x_n\}_{n=0}^{\infty}$ が収束部分列 $\{x_{n(k)}\}_{k=0}^{\infty}$ を持つことをいう。$X$ は点列コンパクトであるとし，以下の問いに答えよ。
+\begin{enumerate}
+  \item[(問1)] $\{W_\lambda\}_{\lambda\in\Lambda}$ を $X$ の開被覆とする。このとき，ある実数 $\delta>0$ が存在して，任意の $x\in X$ に対して，ある $\lambda\in\Lambda$ が $B(x;\delta)\subset W_\lambda$ を満たすことを示せ。ここで，
+  \[
+  B(x;\delta)=\{y\in X\mid d(x,y)<\delta\}
+  \]
+  である。
+  \item[(問2)] $X$ はコンパクトであることを示せ。
+\end{enumerate}
+\wbend
