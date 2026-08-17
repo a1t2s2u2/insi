@@ -20,6 +20,39 @@ x^{\sin x}=\exp(\sin x\log x),
 =x^{\sin x}\left(\cos x\log x+\frac{\sin x}{x}\right).
 \]
 
+\section{\texorpdfstring{$\tan^{-1}$}{tan inverse}：有界な導関数を使い切る}
+
+$u(x)=\tan^{-1}x=\arctan x$ とおくと
+\[
+u'(x)=\frac1{1+x^2},\qquad
+u''(x)=-\frac{2x}{(1+x^2)^2}.
+\]
+従って $|u'|\le1$ であり、$M=\sup_{x\in\R}|u''(x)|<\infty$ である。
+平均値の定理と Taylor の定理から
+\[
+\boxed{|u(x)-u(y)|\le|x-y|},
+\qquad
+\boxed{
+\left|\frac{u(x+h)-u(x)}h-u'(x)\right|
+\le\frac M2|h|}\quad(h\ne0).
+\]
+前者だけで $\tan^{-1}x$ の一様連続性が出る。後者は、差商の誤差を
+$x$ に依存しない $O(|h|)$ で抑える形である。
+
+さらに連続関数 $f$ が $\int_{-\infty}^{\infty}|f(y)|\,\d y<\infty$ を満たすとき
+\[
+F(x)=\int_{-\infty}^{\infty}f(y)u(x-y)\,\d y
+\]
+とおけば
+\[
+|F(x+h)-F(x)|\le |h|\int_{-\infty}^{\infty}|f(y)|\,\d y
+\]
+なので $F$ は一様連続である。また上の差商評価を積分すれば
+\[
+F'(x)=\int_{-\infty}^{\infty}\frac{f(y)}{1+(x-y)^2}\,\d y
+\]
+まで同じ一行で正当化できる。
+
 \section{最大値・最小値}
 
 \begin{theorem}{最大値・最小値の存在}{tb-extreme-value}

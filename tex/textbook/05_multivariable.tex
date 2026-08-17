@@ -124,6 +124,27 @@ $f\ge0$ なら Tonelli の定理により累次積分の順序を交換できる
 有界閉領域上の連続関数では後者の条件が自動的に成り立つ。
 \end{theorem}
 
+\begin{proposition}{増大領域は殻に分ける}{tb-growing-domain-shells}
+$D(2)\subset D(3)\subset\cdots$ 上の非負積分の極限は、
+$E_k=D(k+1)\setminus D(k)$ に分けて級数として評価する。
+例えば
+\[
+s=x^{2/3}+y^{2/3},\qquad
+D(n)=\{x,y\ge0\mid2\le s\le n\}
+\]
+で $|D(n)|=C(n^3-8)$ なら
+\[
+|E_k|=C\bigl((k+1)^3-k^3\bigr)\le C'k^2.
+\]
+$E_k$ では $s\ge k$ なので、$p>1$ に対し
+\[
+\iint_{E_k}\frac{\d x\d y}{s^3(\log s)^p}
+\le\frac{C'k^2}{k^3(\log k)^p}
+=\frac{C'}{k(\log k)^p}.
+\]
+従って前章の級数との比較で極限の収束が分かる。
+\end{proposition}
+
 累次積分へ直す前に領域を図示し、例えば
 \[
 D=\{(x,y)\mid a\le x\le b,\ \phi(x)\le y\le\psi(x)\}
@@ -159,6 +180,7 @@ $\Phi:(u,v)\mapsto(x,y)$ が領域間の $C^1$ 級全単射で、内部で Jacob
 \begin{array}{c|c|c}
 \text{目的}&(x,y)&\left|\partial(x,y)/\partial(u,v)\right|\\ \hline
 \text{極座標}&(r\cos\theta,r\sin\theta)&r\\
+\text{楕円を単位円板へ}&(au,bv)&ab\\
 x+y,\ x-y&( (u+v)/2,(u-v)/2)&1/2\\
 \text{合計と割合}&(st,s(1-t))&s\\
 \text{平方した極座標}&((r\cos\theta)^2,(r\sin\theta)^2)&4r^3\sin\theta\cos\theta
