@@ -11,16 +11,35 @@ $\sin,\cos,\tan$、指数・対数の基本公式は扱わない。
 \csc x=\frac1{\sin x},\qquad
 \cot x=\frac{\cos x}{\sin x}=\frac1{\tan x}.
 \]
-恒等式と微分公式は逆数から導く。収録問題で覚えて使うのは
+逆数の微分から次をまとめて出せる。
+\[
+\boxed{
+\begin{aligned}
+(\tan x)'&=\sec^2x,&
+(\cot x)'&=-\csc^2x,\\
+(\sec x)'&=\sec x\tan x,&
+(\csc x)'&=-\csc x\cot x.
+\end{aligned}}
+\]
+符号を含めて覚えるのはこの4本でよい。恒等式
+$1+\tan^2x=\sec^2x$, $1+\cot^2x=\csc^2x$ も同じ記号で使う。
+積分では
 \[
 \boxed{\int\sec x\,\d x=\log\abs{\sec x+\tan x}+C}
 \]
-である。極座標で $x=1$ が $r=\sec\theta$ になる問題では、この原始関数まで一続きで使う。
+を使う。極座標で $x=1$ が $r=\sec\theta$ になる問題では、この原始関数まで一続きで使う。
 
-\section{逆三角関数は積分の形で覚える}
+\section{逆三角関数は微分・積分の形で覚える}
 
 定義域・値域の表は、逆関数を作る単調区間から判断できるため載せない。
-導関数は逆関数の微分から出せる。積分では定数倍まで含めた次の二形だけを認識する。
+ただし問題文の $\tan^{-1}x$ は $\arctan x$ の意味であり、
+$1/\tan x=\cot x$ とは別物である。
+導関数と対応する原始関数を対で持つ。
+\[
+\boxed{
+(\arcsin x)'=\frac1{\sqrt{1-x^2}},\qquad
+(\arctan x)'=\frac1{1+x^2}}
+\]
 \[
 \boxed{
 \int\frac{\d x}{\sqrt{a^2-x^2}}=\arcsin\frac xa+C,

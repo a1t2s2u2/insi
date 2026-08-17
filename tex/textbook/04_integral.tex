@@ -45,6 +45,49 @@ $\int_1^\infty x^a\log x\,\d x$ を見たら $t=\log x$ として
 \]
 へ変える。指数減衰が必要なので、収束条件は $a+1<0$、すなわち $a<-1$ である。
 
+\section{正項級数は比か積分で判定する}
+
+$a_n>0$ で $\lim a_{n+1}/a_n=L<1$ なら $\sum a_n$ は収束する。
+例えば
+\[
+\frac{(n+1)/2^{n+1}}{n/2^n}=\frac{n+1}{2n}\longrightarrow\frac12
+\]
+なので $\sum_{n=1}^{\infty}n/2^n$ は収束する。
+
+正で単調減少する $f$ については
+\[
+\sum_{n=N}^{\infty}f(n)\text{ が収束}
+\Longleftrightarrow
+\int_N^{\infty}f(x)\,\d x<\infty
+\]
+である。特に $p>0$ なら、$u=\log x$ により
+\[
+\int_2^\infty\frac{\d x}{x(\log x)^p}
+=\int_{\log2}^{\infty}u^{-p}\,\d u
+\]
+だから
+\[
+\boxed{\displaystyle
+\sum_{n=2}^{\infty}\frac1{n(\log n)^p}\text{ は }p>1\text{ のとき収束する}.}
+\]
+
+\section{差で特異性が消える二つの積分}
+
+$0<a<b$ とする。個々には $x=0$ で発散して見えても、差をパラメータ積分に直せばよい。
+\[
+\frac{e^{-bx}-e^{-ax}}x=-\int_a^b e^{-tx}\,\d t,
+\qquad
+\frac{x^{b-1}-x^{a-1}}{\log x}=\int_a^b x^{t-1}\,\d t.
+\]
+積分順序を交換すると
+\[
+\boxed{
+\int_0^\infty\frac{e^{-bx}-e^{-ax}}x\,\d x=\log\frac ab,
+\qquad
+\int_0^1\frac{x^{b-1}-x^{a-1}}{\log x}\,\d x=\log\frac ba.}
+\]
+符号を暗記せず、上のパラメータ積分から再現する。
+
 \section{局所化する指数核}
 
 \begin{theorem}{近似恒等核 $ne^{-nx}$}{tb-exponential-kernel}
