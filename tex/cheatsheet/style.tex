@@ -1,0 +1,109 @@
+% 16:9 数学チートシート：数式と図を主役にした簡潔な紙面（LuaLaTeX）
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{mathptmx}
+\usepackage{tikz}
+\usepackage{tabularx,array,booktabs}
+\usetikzlibrary{arrows.meta,calc,positioning,shapes.geometric,decorations.pathreplacing}
+
+\setsansfont{Arial}
+\setmainfont{Times New Roman}
+\setsansjfont[BoldFont=HaranoAjiGothic-Medium,YokoFeatures={JFM=prop}]{HaranoAjiGothic-Regular}
+\setmainjfont[BoldFont=HaranoAjiMincho-Bold,YokoFeatures={JFM=prop}]{HaranoAjiMincho-Regular}
+\usefonttheme{serif}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{cyan}{HTML}{168C82}
+\definecolor{coral}{HTML}{D85C41}
+\definecolor{violet}{HTML}{6654C7}
+\definecolor{ink}{HTML}{18212A}
+\definecolor{muted}{HTML}{5F6B76}
+\definecolor{pale}{HTML}{EDF1F4}
+\definecolor{line}{HTML}{BCC7D0}
+\colorlet{accent}{navy}
+
+\setbeamercolor{normal text}{fg=ink,bg=white}
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{.6mm}
+
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox{%
+    \begin{beamercolorbox}[wd=.9\paperwidth,ht=2.1ex,dp=.9ex,leftskip=5mm]{normal text}%
+      \color{muted}\fontsize{5.4}{6}\selectfont 熊本大学 数学系大学院｜専門基礎
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.1ex,dp=.9ex,rightskip=5mm plus1fil]{normal text}%
+      \raggedleft\color{accent}\bfseries\fontsize{6.3}{7}\selectfont\insertframenumber/\inserttotalframenumber
+    \end{beamercolorbox}%
+  }%
+}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\ip}[2]{\langle#1,#2\rangle}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Img}{\operatorname{Im}}
+
+\newcommand{\key}[1]{\textcolor{accent}{\bfseries #1}}
+\newcommand{\warn}[1]{\textcolor{coral}{\bfseries #1}}
+
+\newcommand{\sheethead}[2]{%
+  \vspace*{-1.4mm}%
+  {\color{accent}\bfseries\fontsize{7}{7.8}\selectfont #1}\hspace{2.1mm}%
+  {\color{ink}\bfseries\fontsize{15.2}{16.2}\selectfont #2}\par
+  \vspace{.6mm}{\color{accent}\rule{\textwidth}{.75pt}}\vspace{.6mm}%
+}
+
+\newcommand{\subhead}[1]{%
+  \par\vspace{.6mm}%
+  {\color{accent}\rule{1.8mm}{1.15mm}}\hspace{1mm}%
+  {\bfseries\fontsize{7.4}{8.2}\selectfont #1}\par\vspace{.4mm}%
+}
+
+\newcommand{\minorhead}[1]{%
+  {\color{muted}\bfseries\fontsize{6.25}{7}\selectfont #1}\par\vspace{.2mm}%
+}
+
+\newcommand{\separator}{\par\vspace{.7mm}{\color{line}\rule{\linewidth}{.35pt}}\vspace{.3mm}}
+
+\newenvironment{sheetframe}[4][50]{%
+  \colorlet{accent}{#2}%
+  \begin{frame}[t,environment=sheetframe,shrink=#1]
+  \rmfamily\fontsize{6.35}{7.5}\selectfont
+  \setlength{\abovedisplayskip}{1.25pt}
+  \setlength{\belowdisplayskip}{1.25pt}
+  \setlength{\abovedisplayshortskip}{.6pt}
+  \setlength{\belowdisplayshortskip}{.6pt}
+  \thinmuskip=2.5mu
+  \medmuskip=3mu plus 1mu minus 1mu
+  \thickmuskip=4mu plus 1.5mu minus 1mu
+  \sheethead{#3}{#4}
+}{%
+  \end{frame}
+}
+
+\tikzset{
+  flow/.style={-{Latex[length=2mm,width=1.25mm]},draw=accent,line width=.55pt},
+  softflow/.style={-{Latex[length=1.7mm,width=1mm]},draw=muted,line width=.4pt},
+  focus/.style={circle,draw=accent,line width=.65pt,minimum size=7mm,inner sep=.8mm,fill=white},
+  decision/.style={diamond,draw=accent,line width=.55pt,aspect=2.1,inner sep=.7mm,fill=white},
+  labelnode/.style={align=center,font=\fontsize{5.8}{6.4}\selectfont,text=ink},
+  tinylabel/.style={align=center,font=\fontsize{5}{5.5}\selectfont,text=muted}
+}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\renewcommand{\arraystretch}{1.1}
+
+\AtBeginDocument{\hypersetup{pdftitle={熊本大学 数学系大学院 入試数学チートシート},pdfauthor={}}}

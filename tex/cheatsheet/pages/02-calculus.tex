@@ -1,0 +1,246 @@
+\begin{sheetframe}[50]{cyan}{02｜一変数・積分}{条件を確認して交換する}
+
+\begin{columns}[T,onlytextwidth]
+\begin{column}{.315\textwidth}
+\subhead{一変数の基本公式}
+\[
+\begin{array}{c@{\qquad}c}
+(\tan x)'=\sec^2x &(\cot x)'=-\csc^2x\\
+(\sec x)'=\sec x\tan x &(\csc x)'=-\csc x\cot x\\[1mm]
+(\arcsin x)'=\dfrac1{\sqrt{1-x^2}}
+&(\arctan x)'=\dfrac1{1+x^2}
+\end{array}
+\]
+\[
+\int\sec x\dd x=\log\abs{\sec x+\tan x}+C.
+\]
+\[
+\begin{aligned}
+x^{g(x)}&=e^{g(x)\log x},\\
+(\log|u|)'&=u'/u.
+\end{aligned}
+\]
+
+\separator
+\subhead{最大値・最小値の候補}
+\begin{center}
+\begin{tikzpicture}[x=1mm,y=1mm]
+  \draw[muted,line width=.5pt] (-22,0)--(22,0);
+  \foreach \x/\lab in {-20/$a$,-7/$f'=0$,6/\text{特異点},20/$b$}{
+    \draw[accent,line width=.7pt] (\x,-1.6)--(\x,1.6);
+    \node[tinylabel,below] at (\x,-1.8) {\lab};
+  }
+  \draw[decorate,decoration={brace,amplitude=2.5pt},accent] (-20,4)--(20,4)
+    node[midway,above,tinylabel]{連続＋コンパクト $\Rightarrow$ 最大・最小が存在};
+\end{tikzpicture}
+\end{center}
+\[
+|u'|\le L\Rightarrow|u(x)-u(y)|\le L|x-y|,
+\]
+\[
+\sup|u''|=M\Rightarrow
+\left|\frac{u(x+h)-u(x)}h-u'(x)\right|\le\frac M2|h|.
+\]
+
+\separator
+\subhead{広義積分・級数：特異点ごとに分ける}
+\begin{center}
+\begin{tikzpicture}[x=1mm,y=1mm]
+  \draw[muted,line width=.55pt] (-22,0)--(22,0);
+  \fill[accent] (-15,0) circle (1.1) node[below=2mm,tinylabel] {$a$};
+  \fill[coral] (0,0) circle (1.1) node[below=2mm,tinylabel] {特異点 $c$};
+  \draw[flow] (1.5,0)--(21,0) node[above left,tinylabel] {$\infty$};
+  \node[tinylabel] at (-7.5,3.2) {$[a,c)$};
+  \node[tinylabel] at (10,3.2) {$(c,\infty)$};
+\end{tikzpicture}
+\end{center}
+\[
+\begin{aligned}
+\int_0^1x^a\dd x<\infty
+&\iff a>-1,\\
+\int_1^\infty x^a\dd x<\infty
+&\iff a<-1.
+\end{aligned}
+\]
+\[
+\begin{aligned}
+\frac{a_{n+1}}{a_n}\to L<1
+&\Rightarrow\sum a_n<\infty,\\
+\sum_{n\ge2}\frac1{n(\log n)^p}<\infty
+&\iff p>1.
+\end{aligned}
+\]
+\minorhead{一様収束なら積分と極限を交換できる}
+\[
+\begin{aligned}
+f_n\in C(I),\quad f_n\rightrightarrows f
+&\iff\sup_{x\in I}|f_n(x)-f(x)|\to0,\\
+f_n\rightrightarrows f
+&\Rightarrow\int_I f_n\to\int_I f
+\quad(I\text{ は有界閉区間}).
+\end{aligned}
+\]
+
+\end{column}
+
+\begin{column}{.35\textwidth}
+\subhead{積分を微分する：端点と中身を見る}
+\minorhead{まず具体例：$F(x)=\displaystyle\int_x^{x^2}e^{xy}\dd y$}
+\[
+\boxed{
+F'(x)=
+\underbrace{2x\,e^{x^3}}_{\text{上端 }x^2}
+-\underbrace{e^{x^2}}_{\text{下端 }x}
++\underbrace{\int_x^{x^2}y e^{xy}\dd y}_{\text{中身 }e^{xy}\text{ の微分}}.}
+\]
+一般に $a,b$ が微分可能で、$f,f_x$ が連続なら
+\[
+\begin{aligned}
+\frac{\dd}{\dd x}\int_{a(x)}^{b(x)}f(x,y)\dd y
+={}&f(x,b(x))b'(x)-f(x,a(x))a'(x)\\
+&+\int_{a(x)}^{b(x)}f_x(x,y)\dd y.
+\end{aligned}
+\]
+\minorhead{無限区間では、微分後を一つの可積分関数で押さえる}
+$t\ge1$ で
+\[
+\begin{aligned}
+I(t)&=\int_0^\infty e^{-ty}\dd y=\frac1t,\\
+|\partial_t e^{-ty}|&=y e^{-ty}\le y e^{-y},
+\qquad \int_0^\infty y e^{-y}\dd y=1,\\
+\therefore\quad
+I'(t)&=\int_0^\infty(-y)e^{-ty}\dd y=-\frac1{t^2}.
+\end{aligned}
+\]
+一般には、近くの全 $t$ で
+$|\partial_t f(t,y)|\le g(y)$、$\int|g(y)|\dd y<\infty$
+なら微分と積分を入れ替えられる。
+
+\separator
+\subhead{Tonelli・Fubini：何を保証する定理か}
+長方形 $D=[a,b]\times[c,d]$ 上の $f(x,y)$ を全部足すとき、
+\[
+\begin{array}{c@{\quad\Longleftrightarrow\quad}c}
+\displaystyle
+\int_a^b\underbrace{\left(\int_c^d f(x,y)\dd y\right)}_{substack{x\text{ を固定}\;\to\;y\text{ 方向に積分}}}\dd x
+&
+\displaystyle
+\int_c^d\underbrace{\left(\int_a^b f(x,y)\dd x\right)}_{substack{y\text{ を固定}\;\to\;x\text{ 方向に積分}}}\dd y
+\end{array}
+\]
+の二通りが同じ値になるための条件を与える。
+使い分けは、$f\ge0$ なら Tonelli、負の値も取るなら $\iint_D|f|<\infty$ を示して Fubini。
+
+\minorhead{Tonelli の定理（負の値がない場合）}
+\[
+\underbrace{f\text{ は可測},\quad f(x,y)\ge0}_{\text{仮定}}
+\quad\Longrightarrow\quad
+\underbrace{\iint_D f
+=\int_a^b\!\int_c^d f\dd y\dd x
+=\int_c^d\!\int_a^b f\dd x\dd y}_{\text{分かること：三つは同じ }[0,\infty]\text{ の値}}
+\]
+値が $+\infty$ でもよい。つまり、収束を先に証明せず、計算しやすい順から積分できる。
+
+\minorhead{Fubini の定理（正負があっても絶対可積分）}
+\[
+\underbrace{f\text{ は可測},\quad\iint_D|f(x,y)|\dd x\dd y<\infty}_{\text{仮定}}
+\quad\Longrightarrow\quad
+\underbrace{\begin{gathered}
+\text{ほとんど全ての固定した }x,y\text{ で内側の積分が存在},\\[-1mm]
+\iint_Df=\int_a^b\!\int_c^df\dd y\dd x
+=\int_c^d\!\int_a^bf\dd x\dd y\in\R
+\end{gathered}}_{\text{分かること：どちらから積分しても同じ有限値}}
+\]
+つまり、絶対値を付けた積分の収束を示せば、元の積分は有限で順序も替えられる。
+閉じた長方形上で $f$ が連続なら、この仮定は自動的に満たされる。
+\minorhead{どちらの仮定もなければ、順序で値が変わり得る}
+\[
+f(x,y)=\frac{x^2-y^2}{(x^2+y^2)^2}\quad(0<x,y<1)
+\]
+\[
+\int_0^1\!\int_0^1 f\,\dd y\dd x=\frac\pi4,
+\qquad
+\int_0^1\!\int_0^1 f\,\dd x\dd y=-\frac\pi4.
+\]
+\end{column}
+
+\begin{column}{.31\textwidth}
+\subhead{二つの差を一つの積分に直す}
+\[
+\begin{aligned}
+\frac{e^{-bx}-e^{-ax}}x
+&=-\int_a^be^{-tx}\dd t,\\
+\frac{x^{b-1}-x^{a-1}}{\log x}
+&=\int_a^bx^{t-1}\dd t.
+\end{aligned}
+\]
+右辺を先に積分し、Fubini で順序を交換すると
+\[
+\begin{aligned}
+\int_0^\infty\frac{e^{-bx}-e^{-ax}}x\dd x
+&=\log\frac ab,\\
+\int_0^1\frac{x^{b-1}-x^{a-1}}{\log x}\dd x
+&=\log\frac ba
+\qquad(a,b>0).
+\end{aligned}
+\]
+
+\separator
+\subhead{$ne^{-nx}$：原点だけを読み取る}
+\begin{center}
+\begin{tikzpicture}[x=7mm,y=3.2mm]
+  \draw[->,muted,line width=.4pt] (0,0)--(3.2,0) node[right,tinylabel] {$x$};
+  \draw[->,muted,line width=.4pt] (0,0)--(0,2.35);
+  \draw[accent,line width=.4pt,domain=0:3,samples=45] plot (\x,{exp(-\x)});
+  \draw[accent!75,line width=.6pt,domain=0:2.3,samples=45] plot (\x,{2*exp(-2*\x)});
+  \draw[coral,line width=.8pt,domain=0:1.45,samples=45] plot (\x,{4*exp(-4*\x)});
+  \node[tinylabel,anchor=west] at (1.7,1.55) {$n\uparrow$};
+\end{tikzpicture}
+\end{center}
+$f$ が有界で $0$ で連続なら、$u=nx$ により
+\[
+\begin{aligned}
+\int_0^\infty nf(x)e^{-nx}\dd x
+&=\int_0^\infty f(u/n)e^{-u}\dd u\\
+&\longrightarrow f(0)\int_0^\infty e^{-u}\dd u=f(0).
+\end{aligned}
+\]
+
+\separator
+\subhead{ガウス積分・$\Gamma$・$B$}
+\minorhead{ガウス積分は2乗して極座標へ}
+\[
+\begin{aligned}
+I&=\int_{-\infty}^{\infty}e^{-x^2}\dd x,\\
+I^2&=\iint_{\R^2}e^{-(x^2+y^2)}\dd x\dd y\\
+&=2\pi\int_0^\infty e^{-r^2}r\dd r=\pi.
+\end{aligned}
+\]
+したがって $\int_0^\infty e^{-x^2}\dd x=\sqrt\pi/2$。
+\[
+\begin{aligned}
+\Gamma(p)&=\int_0^\infty x^{p-1}e^{-x}\dd x\qquad(p>0),\\
+\Gamma(p+1)&=p\Gamma(p),\qquad\Gamma(\tfrac12)=\sqrt\pi,\\
+B(p,q)&=\int_0^1t^{p-1}(1-t)^{q-1}\dd t\\
+&=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}
+\qquad(p,q>0).
+\end{aligned}
+\]
+
+\separator
+\subhead{Taylor 展開・べき級数}
+$f\in C^{m+1}$ なら、$a$ と $x$ の間のある $\xi$ で
+\[
+\begin{aligned}
+f(x)&=\sum_{k=0}^{m}\frac{f^{(k)}(a)}{k!}(x-a)^k+R_m(x),\\
+R_m(x)&=\frac{f^{(m+1)}(\xi)}{(m+1)!}(x-a)^{m+1}.
+\end{aligned}
+\]
+\[
+\frac1R=\limsup_{n\to\infty}|a_n|^{1/n}
+\Rightarrow
+\sum a_n(x-a)^n\text{ は }|x-a|<R\text{ で項別微積分可}.
+\]
+\end{column}
+\end{columns}
+\end{sheetframe}

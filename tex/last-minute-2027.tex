@@ -1,0 +1,142 @@
+\documentclass[uplatex,dvipdfmx,10pt]{jsarticle}
+
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[top=16mm,bottom=16mm,left=18mm,right=18mm,headsep=5mm]{geometry}
+\usepackage[dvipdfmx,hidelinks]{hyperref}
+\usepackage{pxjahyper}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{arrows.meta,calc,patterns}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{teal}{HTML}{168C82}
+\definecolor{muted}{HTML}{63707A}
+\definecolor{pale}{HTML}{EFF3F5}
+
+\hypersetup{
+  pdftitle={熊本大学 数学系大学院 2027年度入試 精選過去問・予想問題},
+  pdfauthor={}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{.45em}
+\setlist[enumerate]{itemsep=.45em,topsep=.35em}
+\allowdisplaybreaks
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\color{muted}熊本大学 数学系大学院｜2027年度入試 直前演習}
+\fancyhead[R]{\footnotesize\color{muted}\thepage}
+\renewcommand{\headrulewidth}{.35pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\F}{\mathbb F}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\Img}{\operatorname{Im}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\diag}{\operatorname{diag}}
+
+\newcommand{\parttitle}[2]{%
+  \clearpage
+  {\color{navy}\fontsize{10}{11}\selectfont\bfseries #1}\par
+  {\LARGE\bfseries #2}\par
+  \vspace{1mm}{\color{navy}\rule{\linewidth}{.8pt}}\vspace{2mm}
+}
+
+\newcommand{\problemhead}[3]{%
+  \clearpage
+  \phantomsection
+  \addcontentsline{toc}{section}{#1\texorpdfstring{\quad}{ }#2}%
+  \noindent
+  {\color{navy}\bfseries\large #1}\hspace{2mm}
+  {\bfseries\large #2}\hfill
+  {\color{muted}\bfseries 目安 #3}\par
+  \vspace{1mm}{\color{navy}\rule{\linewidth}{.55pt}}\vspace{1mm}
+}
+
+\newcommand{\solutionhead}[2]{%
+  \clearpage
+  \phantomsection
+  \addcontentsline{toc}{section}{解答 #1\texorpdfstring{\quad}{ }#2}%
+  \noindent
+  {\color{teal}\bfseries\large 解答 #1}\hspace{2mm}
+  {\bfseries\large #2}\par
+  \vspace{1mm}{\color{teal}\rule{\linewidth}{.55pt}}\vspace{1mm}
+}
+
+\newtcolorbox{routebox}[1]{
+  colback=pale,colframe=navy!65,
+  boxrule=.6pt,arc=0pt,
+  title={#1},fonttitle=\bfseries,
+  left=3mm,right=3mm,top=2mm,bottom=2mm
+}
+
+\newtcolorbox{pointbox}[1][要点]{
+  colback=white,colframe=teal!70!black,
+  boxrule=.55pt,arc=0pt,
+  title={#1},fonttitle=\bfseries,
+  left=3mm,right=3mm,top=2mm,bottom=2mm,
+  breakable
+}
+
+\begin{document}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\vspace*{13mm}
+{\color{navy}\bfseries\large 熊本大学 数学系大学院}\par
+\vspace{3mm}
+{\Huge\bfseries
+2027年度入試\\[2mm]直前演習・予想問題}\par
+\vspace{4mm}
+{\large 再出題候補の過去問4題＋新作予想6題｜問題・解答一体版}\par
+
+\vspace{9mm}
+\begin{routebox}{公式範囲と、この冊子の方針}
+令和9年度募集要項に記載された専門基礎科目の範囲は
+\[
+\boxed{\text{線形代数}\qquad\text{微分積分}\qquad\text{集合と位相}}
+\]
+で、試験時間は120分である。専門科目は廃止されたが、範囲自体に測度論とは書かれていない。
+そこで過去問を年度単位では入れず、複数年度で繰り返された型から4題だけ選んだ。
+予想問題は三分野から2題ずつ作り、定義・計算・証明をまとめて確認できるようにした。
+\end{routebox}
+
+\begin{routebox}{解く順番}
+\begin{enumerate}
+  \item \textbf{精選過去問 P1--P4（125分）}\\
+  Jordan 鎖、射影、積分の微分、コンパクト性。まず再出題されやすい型を固める。
+  \item \textbf{予想第1組 L1・A1・T1（105分）}\\
+  三分野を一題ずつ解き、残り15分で答案を見直す。
+  \item \textbf{予想第2組 L2・A2・T2（115分）}\\
+  直交対角化、楕円の変数変換、コンパクト空間と同相を仕上げる。
+\end{enumerate}
+\end{routebox}
+
+\begin{routebox}{時間別の使い方}
+\begin{tabular}{@{}p{24mm}p{125mm}@{}}
+3時間 & P1--P4を125分＋解答確認55分。\\
+5時間 & P1--P4を125分＋予想第1組を105分＋間違い直し70分。\\
+7時間以上 & 全10題を解く。解答は一題ごとではなく、過去問4題・予想3題ごとの区切りで見る。\\
+\end{tabular}
+\end{routebox}
+
+\vfill
+{\small\color{muted}
+過去問部分は手元の2024–2025年度資料に基づく。予想6題は出題を保証しない非公式予想である。}
+\end{titlepage}
+
+\tableofcontents
+
+\input{last-minute-2027-content}
+
+\end{document}

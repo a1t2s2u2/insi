@@ -1,0 +1,335 @@
+\begin{sheetframe}[50]{violet}{04｜距離空間・位相}{定義・保存・短い証明}
+
+\begin{columns}[T,onlytextwidth]
+\begin{column}{.285\textwidth}
+\subhead{距離空間 $(X,d)$}
+\[
+d:X\times X\longrightarrow[0,\infty),\qquad
+x,y,z\in X
+\]
+\[
+\begin{aligned}
+d(x,y)=0&\iff x=y,\\
+d(x,y)&=d(y,x),\\
+d(x,z)&\le d(x,y)+d(y,z).
+\end{aligned}
+\]
+\[
+\boxed{B(x;r):=\{y\in X:d(x,y)<r\}\quad(r>0)}
+\]
+\end{column}
+
+\begin{column}{.335\textwidth}
+\subhead{位相空間 $(X,\mathcal T_X)$}
+\[
+2^X:=\{A:A\subset X\},\qquad
+\underbrace{\mathcal T_X}_{X\text{ 上の位相}}\subset 2^X
+\]
+\[
+\begin{aligned}
+&\varnothing,X\in\mathcal T_X,\\
+&(U_\alpha)_{\alpha\in I}\subset\mathcal T_X
+ \Rightarrow \bigcup_{\alpha\in I}U_\alpha\in\mathcal T_X,\\
+&U,V\in\mathcal T_X
+ \Rightarrow U\cap V\in\mathcal T_X.
+\end{aligned}
+\]
+ここで $I$ は任意の添字集合。
+この3条件を満たす $\mathcal T_X$ を位相、$(X,\mathcal T_X)$ を位相空間、$\mathcal T_X$ の要素を開集合という。
+\end{column}
+
+\begin{column}{.35\textwidth}
+\subhead{距離が作る位相・連続写像}
+\[
+\mathcal T_d
+:=\left\{U\subset X:
+\begin{array}{l}
+\forall x\in U,\ \exists r>0,\\[-.5mm]
+B(x;r)\subset U
+\end{array}\right\}.
+\]
+距離空間 $(X,d)$ は $(X,\mathcal T_d)$ という位相空間になる。
+\begin{center}
+\begin{tikzpicture}[x=.43mm,y=.43mm]
+  \draw[accent,line width=.55pt] (3,0) ellipse (16 and 6);
+  \draw[accent!75,line width=.45pt] (3,0) ellipse (7 and 3);
+  \node[tinylabel] at (-10,4) {$X$};
+  \node[tinylabel] at (3,0) {$f^{-1}(U)$};
+  \draw[accent,line width=.55pt] (52,0) ellipse (16 and 6);
+  \draw[accent!75,line width=.45pt] (52,0) ellipse (7 and 3);
+  \node[tinylabel] at (39,4) {$Y$};
+  \node[tinylabel] at (52,0) {$U$};
+  \draw[flow] (20,1)--node[above,tinylabel] {$f$}(35,1);
+\end{tikzpicture}
+\end{center}
+\[
+\boxed{
+\begin{gathered}
+f:(X,\mathcal T_X)\to(Y,\mathcal T_Y),\\
+f\text{ 連続}
+\iff
+\forall U\in\mathcal T_Y,\ f^{-1}(U)\in\mathcal T_X.
+\end{gathered}}
+\]
+同値な見方：$Y$ の閉集合 $F$ に対し、$f^{-1}(F)$ は $X$ で閉。
+\end{column}
+\end{columns}
+
+\vspace{.3mm}{\color{line}\rule{\textwidth}{.35pt}}\vspace{.25mm}
+
+\begin{columns}[T,onlytextwidth]
+\begin{column}{.315\textwidth}
+\subhead{開・閉・内部・閉包・境界}
+\begin{center}
+\begin{tikzpicture}[x=.62mm,y=.62mm]
+  \draw[muted,line width=.4pt] (-19,-8) rectangle (20,9);
+  \node[tinylabel] at (-16,6) {$X$};
+  \fill[accent!9] plot[smooth cycle,tension=.75]
+    coordinates {(-12,-4)(-6,-6)(4,-4)(8,2)(1,6)(-10,4)};
+  \draw[accent,line width=.6pt] plot[smooth cycle,tension=.75]
+    coordinates {(-12,-4)(-6,-6)(4,-4)(8,2)(1,6)(-10,4)};
+  \node[labelnode] at (-3,0) {$A$};
+  \fill[coral] (11,2) circle (.8) node[above right,tinylabel] {$x$};
+  \draw[coral,dashed,line width=.45pt] (11,2) circle (5);
+  \node[tinylabel,anchor=west] at (16,2) {$B(x;r)\cap A\ne\varnothing$};
+\end{tikzpicture}
+\end{center}
+\[
+\begin{aligned}
+U\subset X\text{ が開}
+&\iff U\in\mathcal T_X,\\
+F\subset X\text{ が閉}
+&\iff X\setminus F\in\mathcal T_X.
+\end{aligned}
+\]
+\[
+\begin{aligned}
+x\in X,\quad A\subset X:\qquad
+x\in A^\circ
+&\iff \exists U\in\mathcal T_X:
+     x\in U\subset A,\\
+x\in\overline A
+&\iff \forall U\in\mathcal T_X,\
+     x\in U\Rightarrow U\cap A\ne\varnothing.
+\end{aligned}
+\]
+\[
+\partial A=\overline A\setminus A^\circ,\qquad
+\overline A=\bigcap_{\substack{A\subset F\subset X\\F\text{ は }X\text{ で閉}}}F.
+\]
+位相空間での収束は
+\[
+x_n\to x
+\iff
+\forall U\in\mathcal T_X,\quad
+x\in U\Rightarrow
+\exists N\in\N,\ \forall n\ge N,\ x_n\in U.
+\]
+距離空間では
+\[
+x\in\overline A
+\iff
+\forall r>0,\ B(x;r)\cap A\ne\varnothing
+\iff
+\exists a_n\in A,\ a_n\to x.
+\]
+
+\separator
+\subhead{相対位相・商位相}
+部分集合 $S\subset X$ に対して
+\[
+\boxed{
+\underbrace{\mathcal T_S}_{S\text{ 上の相対位相}}
+:=\{S\cap U:U\in\mathcal T_X\}\subset 2^S.}
+\]
+たとえば $X=\R,\ S=[0,1]$ なら
+\[
+[0,\tfrac12)=S\cap(-1,\tfrac12)\in\mathcal T_S.
+\]
+これは $S$ では開だが、$\R$ では開でない。
+
+$\sim$ を $X$ 上の同値関係とし、$Q=X/{\sim}$、$\pi:X\to Q$, $\pi(x)=[x]$ とする。
+\[
+\boxed{
+\underbrace{\mathcal T_Q}_{Q\text{ 上の商位相}}
+:=\{V\subset Q:\pi^{-1}(V)\in\mathcal T_X\}.}
+\]
+
+\separator
+\subhead{ハウスドルフ}
+\[
+\forall x,y\in X,\quad x\ne y\Rightarrow
+\exists U,V\in\mathcal T_X:
+\quad
+\begin{cases}
+x\in U,\ y\in V,\\
+U\cap V=\varnothing.
+\end{cases}
+\]
+距離空間はハウスドルフ。したがって極限は一意。
+\end{column}
+
+\begin{column}{.37\textwidth}
+\subhead{コンパクトの定義}
+\begin{center}
+\begin{tikzpicture}[x=.58mm,y=.58mm]
+  \fill[accent!8] plot[smooth cycle,tension=.75]
+    coordinates {(-22,-5)(-13,-10)(1,-8)(18,-2)(15,7)(2,10)(-16,7)};
+  \draw[accent,line width=.65pt] plot[smooth cycle,tension=.75]
+    coordinates {(-22,-5)(-13,-10)(1,-8)(18,-2)(15,7)(2,10)(-16,7)};
+  \foreach \x/\y in {-16/1,-7/6,2/4,11/4,14/-3,4/-6,-8/-5}{
+    \draw[muted!65,line width=.3pt] (\x,\y) circle (7);
+  }
+  \foreach \x/\y in {-16/1,2/4,14/-3,4/-6}{
+    \draw[coral,line width=.7pt] (\x,\y) circle (7);
+  }
+  \node[tinylabel] at (0,-13) {赤い4個で覆える};
+\end{tikzpicture}
+\end{center}
+\[
+\begin{gathered}
+K\subset X,\quad U_\alpha\in\mathcal T_X,\\
+K\subset\bigcup_{\alpha\in I}U_\alpha
+\ \Longrightarrow\
+\exists\alpha_1,\ldots,\alpha_m:\
+K\subset\bigcup_{i=1}^mU_{\alpha_i}.
+\end{gathered}
+\]
+\[
+\begin{aligned}
+\text{距離空間：}\quad
+K\text{ コンパクト}
+&\iff
+\text{任意の }(x_n)\subset K\\[-.4mm]
+&\quad\text{が }K\text{ 内に収束する部分列を持つ},\\
+K\subset\R^n:\quad
+K\text{ コンパクト}
+&\iff K\text{ は閉かつ有界}.
+\end{aligned}
+\]
+
+\separator
+\subhead{性質と短い証明}
+\minorhead{$K$ がコンパクトで、$F\subset K$ が $K$ で閉なら $F$ はコンパクト}
+\[
+\begin{aligned}
+U_\alpha\in\mathcal T_K,\quad
+F\subset\bigcup_\alpha U_\alpha
+&\Rightarrow
+\{U_\alpha\}\cup\{K\setminus F\}
+   \text{ が }K\text{ を覆う}\\
+&\Rightarrow
+\text{有限個で }F\text{ を覆える}.
+\end{aligned}
+\]
+\minorhead{$f:K\to Y$ が連続なら、コンパクト $K$ の像 $f(K)$ もコンパクト}
+\[
+\begin{aligned}
+V_\alpha\in\mathcal T_Y,\quad
+f(K)\subset\bigcup_\alpha V_\alpha
+&\Rightarrow
+K\subset\bigcup_\alpha f^{-1}(V_\alpha)\\
+&\Rightarrow
+\text{有限個の }V_\alpha\text{ で }f(K)\text{ を覆える}.
+\end{aligned}
+\]
+\minorhead{$X$ がハウスドルフなら、コンパクト $K\subset X$ は閉}
+\[
+\begin{aligned}
+y\notin K,\ x\in K
+&\Rightarrow
+\exists U_x,V_x\in\mathcal T_X:\quad
+x\in U_x,\ y\in V_x,\ U_x\cap V_x=\varnothing,\\
+K\subset\bigcup_{x\in K}U_x
+&\Rightarrow
+K\subset U_{x_1}\cup\cdots\cup U_{x_m},\\
+V=V_{x_1}\cap\cdots\cap V_{x_m}
+&\Rightarrow
+y\in V\subset X\setminus K.
+\end{aligned}
+\]
+よって $X\setminus K$ は開、したがって $K$ は閉。
+\end{column}
+
+\begin{column}{.295\textwidth}
+\subhead{連結・道連結の定義}
+\begin{center}
+\begin{tikzpicture}[x=.55mm,y=.55mm]
+  \fill[accent!9] (-18,0) circle (7); \draw[accent] (-18,0) circle (7);
+  \fill[accent!9] (0,0) circle (7); \draw[accent] (0,0) circle (7);
+  \node[tinylabel] at (-9,-10) {$X=U\sqcup V$：非連結};
+  \fill[accent!9] plot[smooth cycle,tension=.8]
+    coordinates {(14,-5)(21,-8)(31,-5)(32,5)(22,8)(12,4)};
+  \draw[accent] plot[smooth cycle,tension=.8]
+    coordinates {(14,-5)(21,-8)(31,-5)(32,5)(22,8)(12,4)};
+  \draw[coral,line width=.7pt] (16,-2)..controls(21,6)and(27,-5)..(30,3);
+  \node[tinylabel] at (23,-10) {点を道で結ぶ};
+\end{tikzpicture}
+\end{center}
+\[
+\begin{aligned}
+X\text{ が非連結}
+\iff
+\exists U,V\in\mathcal T_X:\quad
+&U\ne\varnothing,\ V\ne\varnothing,\\
+&U\cap V=\varnothing,\quad X=U\cup V.
+\end{aligned}
+\]
+$X$ が連結とは、上の $U,V$ が存在しないこと。
+\[
+\begin{aligned}
+X\text{ が道連結}
+\iff
+\forall x,y\in X,\ \exists\gamma:[0,1]\to X:\quad
+&\gamma\text{ は連続},\\
+&\gamma(0)=x,\quad\gamma(1)=y.
+\end{aligned}
+\]
+\minorhead{道連結 $\Rightarrow$ 連結}
+分離 $X=U\sqcup V$ があれば、$x\in U,\ y\in V$ を結ぶ $\gamma$ により
+$[0,1]=\gamma^{-1}(U)\sqcup\gamma^{-1}(V)$ となり、区間の連結性に反する。
+\minorhead{連続像は連結性を保つ}
+$f:X\to Y$ が連続で $f(X)=U\sqcup V$ と分離できるなら、
+$X=f^{-1}(U)\sqcup f^{-1}(V)$ となるので、$X$ の連結性に反する。
+
+\separator
+\subhead{集合までの距離}
+$(X,d)$ を距離空間、$\varnothing\ne A\subset X$ とする。
+\[
+\begin{aligned}
+d(x,A)&=\inf_{a\in A}d(x,a),\\
+|d(x,A)-d(y,A)|&\le d(x,y),\\
+d(x,A)=0&\iff x\in\overline A.
+\end{aligned}
+\]
+$A$ がコンパクトなら、連続関数 $a\mapsto d(x,a)$ は最小値を取るので、
+$d(x,A)=d(x,a_0)$ となる最近点 $a_0\in A$ が存在する。
+
+\separator
+\subhead{よく使う帰結と反例}
+\[
+f\text{ が同相写像}
+\iff
+f\text{ は全単射で }f,\ f^{-1}\text{ がともに連続}.
+\]
+\[
+\begin{gathered}
+K\text{ コンパクト},\ Y\text{ ハウスドルフ},\\
+f:K\to Y\text{ 連続全単射}
+\ \Longrightarrow\ f\text{ は同相写像}.
+\end{gathered}
+\]
+理由：閉集合 $F\subset K$ はコンパクトなので、$f(F)$ はコンパクト、したがって $Y$ で閉。よって $f^{-1}$ は連続。
+\[
+\begin{aligned}
+f:\R\to\R,\quad f(x)=x^2:\qquad
+&f((-1,1))=[0,1)
+&&\text{は開でない},\\
+f:\R\to\{0\}:\qquad
+&f^{-1}(\{0\})=\R
+&&\text{はコンパクトでない}.
+\end{aligned}
+\]
+\end{column}
+\end{columns}
+\end{sheetframe}

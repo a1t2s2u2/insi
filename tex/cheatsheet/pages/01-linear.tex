@@ -1,0 +1,279 @@
+\begin{sheetframe}{navy}{01｜線形代数}{連立方程式から固有値へ}
+
+\subhead{行基本変形：拡大係数行列を上から追う}
+\[
+[A\mid b]=
+\left[
+\begin{array}{ccc|c}
+1&1&1&6\\
+2&-1&1&3\\
+1&2&-1&2
+\end{array}
+\right]
+\xrightarrow[\ R_3\leftarrow R_3-R_1\ ]
+{\,R_2\leftarrow R_2-2R_1\,}
+\left[
+\begin{array}{ccc|c}
+1&1&1&6\\
+0&-3&-1&-9\\
+0&1&-2&-4
+\end{array}
+\right]
+\xrightarrow{\ \substack{
+R_2\leftrightarrow R_3,\ R_3\leftarrow R_3+3R_2\\
+R_3\leftarrow-\frac17R_3,\ R_2\leftarrow R_2+2R_3,\
+R_1\leftarrow R_1-R_2-R_3}\ }
+\left[
+\begin{array}{ccc|c}
+1&0&0&1\\
+0&1&0&2\\
+0&0&1&3
+\end{array}
+\right]
+\quad\Longrightarrow\quad
+(x,y,z)=(1,2,3).
+\]
+\[
+\begin{array}{@{}ll@{\qquad}ll@{}}
+[\,0\ \cdots\ 0\mid c\,],\ c\ne0
+  &\Rightarrow \text{解なし},&
+\text{自由変数が }r\text{ 個}
+  &\Rightarrow \dim\ker A=r,\\
+\text{先頭の1が }s\text{ 個}
+  &\Rightarrow \rank A=s,&
+\text{その位置に対応する元の列}
+  &\Rightarrow \Img A\text{ の基底}.
+\end{array}
+\]
+\[
+\boxed{\dim\ker A+\rank A=n},
+\qquad
+\F=\R\text{ または }\C,\qquad
+\ker A=\text{核},\quad \Img A=\text{像}.
+\]
+
+\vspace{.6mm}{\color{line}\rule{\textwidth}{.35pt}}\vspace{.5mm}
+
+\begin{columns}[T,onlytextwidth]
+\begin{column}{.318\textwidth}
+\subhead{ベクトル空間：二つの演算と公理}
+$\F=\R$ または $\C$。空でない集合 $V$ に二つの演算
+\[
++:V\times V\to V,\qquad \cdot:\F\times V\to V,\quad(a,u)\mapsto au
+\]
+があり、$0\in V$ と各 $u\in V$ の $-u\in V$ が存在する。
+任意の $u,v,w\in V$、$a,b\in\F$ に対し
+\[
+\begin{array}{@{}ll@{}}
+u+v=v+u,&(u+v)+w=u+(v+w),\\
+u+0=u,&u+(-u)=0,\\
+a(u+v)=au+av,&(a+b)u=au+bu,\\
+(ab)u=a(bu),&1u=u
+\end{array}
+\]
+を満たすとき $V$ を $\F$ 上のベクトル空間という。
+
+\minorhead{部分空間の定義（記号：$W\le V$）}
+部分集合 $W\subset V$ が次を満たすこと：
+\[
+\boxed{W\ne\varnothing,\qquad
+au+bv\in W
+\quad(u,v\in W,\ a,b\in\F).}
+\]
+
+\minorhead{張る空間・一次独立・基底}
+\[
+\Span(v_1,\ldots,v_m)
+=\left\{\sum_{i=1}^ma_iv_i:a_i\in\F\right\}.
+\]
+\[
+v_1,\ldots,v_m\text{ が一次独立}
+\iff
+\sum_i a_iv_i=0\Rightarrow a_1=\cdots=a_m=0.
+\]
+一次独立かつ $\Span(v_1,\ldots,v_m)=V$ なら $V$ の基底。
+
+\minorhead{線形写像 $f:V\to U$（$U$ も $\F$ 上のベクトル空間）}
+\[
+f(au+bv)=af(u)+bf(v)
+\quad(u,v\in V,\ a,b\in\F).
+\]
+\[
+\boxed{\dim V=\dim\ker f+\dim\Img f},
+\qquad f\text{ は単射}\iff\ker f=\{0\}.
+\]
+
+\separator
+\subhead{連立方程式と逆行列}
+\[
+Ax=b\text{ に解あり}\iff\rank A=\rank[A\mid b],
+\]
+\[
+A^{-1}\exists\iff\det A\ne0\iff\rank A=n\iff\ker A=0.
+\]
+
+\separator
+\subhead{特性多項式・対角化の判定}
+\[
+\chi_A(t)=\det(tI-A),\qquad \chi_A(A)=0
+\quad\text{（Cayley--Hamilton）}.
+\]
+固有値を重複も含めて $\lambda_1,\ldots,\lambda_n$ とすると
+\[
+\tr A=\sum_{i=1}^n\lambda_i,\qquad
+\det A=\prod_{i=1}^n\lambda_i.
+\]
+\[
+\boxed{
+A\text{ が対角化可能}
+\iff
+\sum_{\lambda}\dim\ker(A-\lambda I)=n.}
+\]
+\[
+\dim\ker(A-\lambda I)
+\le\lambda\text{ の特性多項式での重複度}.
+\]
+すべての固有値で等号なら対角化可能。特に相異なる固有値が $n$ 個あればよい。
+
+\end{column}
+
+\begin{column}{.356\textwidth}
+\subhead{固有値：$A-\lambda I$ を行簡約する}
+\[
+A=
+\begin{pmatrix}2&1\\1&2\end{pmatrix},
+\qquad
+\det(A-\lambda I)
+=(2-\lambda)^2-1.
+\]
+\[
+\det(A-\lambda I)=0
+\iff(\lambda-1)(\lambda-3)=0
+\iff\lambda=1,3.
+\]
+\[
+\begin{aligned}
+\lambda=1:\quad
+A-I
+&=\begin{pmatrix}1&1\\1&1\end{pmatrix}
+\sim\begin{pmatrix}1&1\\0&0\end{pmatrix}\\
+&\Rightarrow
+E_1=\ker(A-I)
+=\Span\!\left\{\binom{1}{-1}\right\},\\[1mm]
+\lambda=3:\quad
+A-3I
+&=\begin{pmatrix}-1&1\\1&-1\end{pmatrix}
+\sim\begin{pmatrix}1&-1\\0&0\end{pmatrix}\\
+&\Rightarrow
+E_3=\ker(A-3I)
+=\Span\!\left\{\binom{1}{1}\right\}.
+\end{aligned}
+\]
+この $A$ は実対称なので、異なる固有値の固有ベクトルは直交する。長さを $1$ にすると
+\[
+q_1=\frac1{\sqrt2}\binom{1}{-1},\qquad
+q_2=\frac1{\sqrt2}\binom{1}{1},\qquad
+Q=(q_1\ q_2)=\frac1{\sqrt2}
+\begin{pmatrix}1&1\\-1&1\end{pmatrix}.
+\]
+\[
+ Aq_1=q_1,\quad Aq_2=3q_2
+\ \Longrightarrow\
+AQ=Q\underbrace{\begin{pmatrix}1&0\\0&3\end{pmatrix}}_{D}
+\ \Longrightarrow\
+\boxed{Q^{\mathsf T}AQ=D},
+\]
+ここで $Q^{-1}=Q^{\mathsf T}$。これが正規直交対角化の流れ。
+
+\separator
+\subhead{Jordan 標準形：ブロックの形を読む}
+\[
+J_k(\lambda)=
+\left(\begin{smallmatrix}
+\lambda&1&&0\\
+0&\lambda&\ddots&\\
+\vdots&\ddots&\ddots&1\\
+0&\cdots&0&\lambda
+\end{smallmatrix}\right)_{k\times k}.
+\]
+対角が $\lambda$、その一段上が $1$、他が $0$。これを固有値 $\lambda$ の Jordan ブロックという。
+\[
+A\in M_n(\C):\quad
+P^{-1}AP=\diag\bigl(J_{k_1}(\lambda_1),\ldots,J_{k_s}(\lambda_s)\bigr).
+\]
+
+$N=A-\lambda I$ とおくと
+\[
+\begin{aligned}
+\text{ブロック（小行列）の個数}&=\dim\ker N,\\
+\text{大きさが }j\text{ 以上の個数}
+  &=\dim\ker N^j-\dim\ker N^{j-1}.
+\end{aligned}
+\]
+\[
+Nv=0,\qquad Nu=v
+\quad\Longrightarrow\quad (v,u)\text{ の順で }J_2(\lambda)\text{ を得る}.
+\]
+
+\separator
+\subhead{内積・スペクトル定理}
+\[
+A^{\mathsf T}=A\text{ または }A^*=A
+\Longrightarrow
+\begin{matrix}\text{固有値は実数},\\[-.3mm]\text{正規直交固有基底あり}.
+\end{matrix}
+\]
+\end{column}
+
+\begin{column}{.302\textwidth}
+\subhead{射影：一つのベクトルを二方向へ分ける}
+\begin{center}
+\begin{tikzpicture}[x=1mm,y=1mm]
+  \draw[muted,line width=.45pt] (-20,0)--(22,0) node[right,tinylabel] {$\Img P$};
+  \draw[muted,line width=.45pt] (0,-4)--(0,20) node[above,tinylabel] {$\ker P$};
+  \draw[flow] (0,0)--(16,13) node[midway,above left,tinylabel] {$x$};
+  \draw[flow] (0,0)--(16,0) node[midway,below,tinylabel] {$Px$};
+  \draw[flow] (16,0)--(16,13) node[midway,right,tinylabel] {$(I-P)x$};
+\end{tikzpicture}
+\end{center}
+\[
+P^2=P\Rightarrow
+V=\Img P\oplus\ker P,\qquad x=Px+(I-P)x.
+\]
+ベクトル $u\ne0$ の張る直線への直交射影は
+\[
+\boxed{P=\frac{uu^*}{u^*u},\qquad Px=\frac{u^*x}{u^*u}\,u.}
+\]
+
+\separator
+\subhead{不変平面：法線を見る}
+\begin{center}
+\begin{tikzpicture}[x=1mm,y=1mm]
+  \fill[accent!7] (-20,-3)--(13,-3)--(20,7)--(-13,7)--cycle;
+  \draw[accent,line width=.5pt] (-20,-3)--(13,-3)--(20,7)--(-13,7)--cycle;
+\draw[flow] (0,2)--(0,17) node[above,tinylabel] {$u$};
+  \node[tinylabel] at (-13,1) {$W=\ker u^{\mathsf T}$};
+  \node[tinylabel] at (14,12) {$A^{\mathsf T}u=\lambda u$};
+\end{tikzpicture}
+\end{center}
+実対称行列では
+\[
+\lambda_{\min}\le\frac{x^{\mathsf T}Ax}{x^{\mathsf T}x}\le\lambda_{\max}
+\qquad(x\ne0).
+\]
+$A=A^{\mathsf T}$、$A_k=$ 左上 $k\times k$ 部分行列なら
+\[
+x^{\mathsf T}Ax>0\ (x\ne0)
+\iff \text{全固有値が正}
+\iff \det A_k>0\ (k=1,\ldots,n).
+\]
+
+\separator
+\subhead{Gram--Schmidt の直交化}
+\[
+u_k=v_k-\sum_{j<k}\frac{\ip{u_j}{v_k}}{\ip{u_j}{u_j}}u_j,
+\qquad e_k=\frac{u_k}{\norm{u_k}}.
+\]
+\end{column}
+\end{columns}
+\end{sheetframe}

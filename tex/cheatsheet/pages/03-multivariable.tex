@@ -1,0 +1,230 @@
+\begin{sheetframe}[50]{cyan}{03｜多変数・変数変換}{領域の形から置換を決める}
+
+\begin{center}
+\begin{tikzpicture}[x=1mm,y=1mm]
+  \node[labelnode] (shape) at (8,0) {領域の式\\を見る};
+  \node[labelnode] (vars) at (39,0) {同じ組合せを\\新しい変数にする};
+  \node[labelnode] (inverse) at (75,0) {逆に解いて\\$x=x(u,v),\,y=y(u,v)$};
+  \node[labelnode] (range) at (112,0) {不等式を直して\\積分範囲を決める};
+  \node[labelnode] (jac) at (148,0) {$|J|$ を掛けて\\積分する};
+  \draw[flow] (shape)--(vars);
+  \draw[flow] (vars)--(inverse);
+  \draw[flow] (inverse)--(range);
+  \draw[flow] (range)--(jac);
+\end{tikzpicture}
+\end{center}
+
+\vspace{.15mm}{\color{line}\rule{\textwidth}{.35pt}}\vspace{.25mm}
+
+\begin{columns}[T,onlytextwidth]
+\begin{column}{.305\textwidth}
+\subhead{極限・連続・微分可能性}
+\begin{center}
+\begin{tikzpicture}[x=.82mm,y=.82mm]
+  \draw[muted,line width=.4pt] (-18,0)--(20,0) (0,-10)--(0,13);
+  \draw[accent,line width=.55pt] (0,0) circle (9);
+  \draw[flow] (0,0)--(7,5.4) node[midway,above left,tinylabel] {$r$};
+  \draw[accent,line width=.4pt] (4.5,0) arc[start angle=0,end angle=38,radius=4.5];
+  \node[tinylabel] at (6.5,1.8) {$\theta$};
+  \node[labelnode,anchor=west] at (23,3)
+    {$x=r\cos\theta,\ y=r\sin\theta$};
+  \node[tinylabel,anchor=west] at (23,-3)
+    {$|f(x,y)-L|\le Cr^\alpha,\ \alpha>0\Rightarrow f\to L$};
+\end{tikzpicture}
+\end{center}
+極限が存在しないことは、$y=mx$ や $y=x^2$ など二つの経路で値が違うことを示す。
+存在を示すときは経路ではなく、$r$ だけで上から押さえる。
+\[
+\partial_xf(a),\partial_yf(a)\text{ が存在}
+\quad\not\Rightarrow\quad
+f\text{ が }a\text{ で微分可能}.
+\]
+\[
+\boxed{
+f(a+h)=f(a)+\nabla f(a)\cdot h+o(\norm h)}
+\]
+$f_x,f_y$ が $a$ の近くで連続なら、上の微分可能性が従う。
+\[
+D(g\circ f)(a)=Dg(f(a))\,Df(a).
+\]
+
+\separator
+\subhead{2次 Taylor 展開・停留点}
+$f\in C^2$ なら
+\[
+f(a+h)=f(a)+\nabla f(a)\cdot h
++\frac12h^{\mathsf T}H_f(a)h+o(\norm h^2).
+\]
+$\nabla f(a)=0$ とし
+\[
+\Delta=f_{xx}(a)f_{yy}(a)-f_{xy}(a)^2.
+\]
+\[
+\begin{array}{c|c}
+\text{条件}&a\text{ の型}\\ \hline
+\Delta>0,\ f_{xx}>0&\text{極小}\\
+\Delta>0,\ f_{xx}<0&\text{極大}\\
+\Delta<0&\text{鞍点}\\
+\Delta=0&\text{この判定だけでは不明}
+\end{array}
+\]
+
+\separator
+\subhead{制約つき極値：Lagrange 法}
+\[
+\boxed{\nabla f=\lambda\nabla g,\qquad g=c.}
+\]
+例：$f(x,y)=xy$ を $x^2+y^2=1$ 上で調べる。
+\[
+(y,x)=\lambda(2x,2y)
+\Rightarrow y=\pm x.
+\]
+\[
+\max f=\frac12\quad(y=x),\qquad
+\min f=-\frac12\quad(y=-x).
+\]
+\end{column}
+
+\begin{column}{.365\textwidth}
+\subhead{変数変換の公式}
+$\Phi(u,v)=(x(u,v),y(u,v))$ は $C^1$ で、領域の内部で1対1かつ $J_\Phi\ne0$ とする。
+\[
+J_\Phi=
+\frac{\partial(x,y)}{\partial(u,v)}
+=
+\det\begin{pmatrix}
+x_u&x_v\\y_u&y_v
+\end{pmatrix}.
+\]
+\[
+\boxed{
+\iint_D f(x,y)\dd x\dd y
+=
+\iint_{D'}f(\Phi(u,v))\,|J_\Phi|\dd u\dd v.}
+\]
+ここで $D'$ は $\Phi(D')=D$ となる新しい領域。領域と被積分関数の両方を書き換える。
+1対1にならないときは領域を分け、行列式には絶対値を付ける。
+
+\separator
+\subhead{楕円：$x=ar\cos\theta,\ y=br\sin\theta$}
+$a,b>0$ とする。
+\begin{center}
+\begin{tikzpicture}[x=.88mm,y=.88mm]
+  \draw[accent,line width=.6pt] (-20,0) circle (8);
+  \draw[muted,line width=.3pt] (-28,0)--(-12,0) (-20,-8)--(-20,8);
+  \node[tinylabel] at (-20,-11) {$0\le r\le1$};
+  \draw[flow] (-9,0)--(5,0)
+    node[midway,above,tinylabel] {$x=ar\cos\theta$}
+    node[midway,below,tinylabel] {$y=br\sin\theta$};
+  \draw[accent,line width=.6pt] (24,0) ellipse (15 and 8);
+  \draw[muted,line width=.3pt] (9,0)--(39,0) (24,-8)--(24,8);
+  \node[tinylabel] at (24,-11)
+    {$x^2/a^2+y^2/b^2\le1$};
+\end{tikzpicture}
+\end{center}
+\[
+\begin{gathered}
+D=\left\{(x,y):\frac{x^2}{a^2}+\frac{y^2}{b^2}\le1\right\},\\
+0\le r\le1,\quad0\le\theta<2\pi,\\
+|J|=\left|
+\det\begin{pmatrix}
+a\cos\theta&-ar\sin\theta\\
+b\sin\theta&br\cos\theta
+\end{pmatrix}\right|=ab\,r.
+\end{gathered}
+\]
+したがって
+\[
+\boxed{
+\iint_D
+G\!\left(\frac{x^2}{a^2}+\frac{y^2}{b^2}\right)\dd x\dd y
+=2\pi ab\int_0^1G(r^2)\,r\dd r.}
+\]
+特に
+\[
+\iint_D1\dd x\dd y=\pi ab,\qquad
+\iint_D\left(\frac{x^2}{a^2}+\frac{y^2}{b^2}\right)\dd x\dd y
+=\frac{\pi ab}{2}.
+\]
+
+\separator
+\subhead{円・円環・扇形なら極座標}
+\[
+x=r\cos\theta,\qquad y=r\sin\theta,\qquad
+\dd x\dd y=r\dd r\dd\theta.
+\]
+\[
+R_1^2\le x^2+y^2\le R_2^2
+\iff R_1\le r\le R_2.
+\]
+角度の範囲は図から決める。たとえば第1象限なら
+$0\le\theta\le\pi/2$。
+\end{column}
+
+\begin{column}{.31\textwidth}
+\subhead{$x+y,\ x-y$ が並ぶなら線形変換}
+\[
+u=x+y,\qquad v=x-y
+\]
+\[
+x=\frac{u+v}{2},\qquad
+y=\frac{u-v}{2},\qquad |J|=\frac12.
+\]
+例：
+\[
+D=\{(x,y):|x+y|\le1,\ |x-y|\le1\}
+\]
+は $(u,v)$ 平面の正方形 $[-1,1]^2$ になるので
+\[
+\operatorname{Area}(D)
+=\frac12\int_{-1}^1\!\int_{-1}^1\dd u\dd v=2.
+\]
+
+\separator
+\subhead{三角形：$s=x+y$ を先に取る}
+\begin{center}
+\begin{tikzpicture}[x=.8mm,y=.8mm]
+  \draw[->,muted,line width=.4pt] (0,0)--(28,0) node[right,tinylabel] {$x$};
+  \draw[->,muted,line width=.4pt] (0,0)--(0,22) node[above,tinylabel] {$y$};
+  \fill[accent!8] (0,0)--(22,0)--(0,18)--cycle;
+  \draw[accent,line width=.6pt] (22,0)--(0,18);
+  \node[tinylabel] at (14,12) {$x+y=c$};
+  \draw[flow] (0,0)--(12,7) node[midway,above,tinylabel] {$s$};
+\end{tikzpicture}
+\end{center}
+\[
+\begin{gathered}
+D=\{x\ge0,\ y\ge0,\ x+y\le c\},\\
+s=x+y,\qquad t=\frac{x}{x+y},\\
+x=st,\qquad y=s(1-t),\\
+0\le s\le c,\quad0\le t\le1,\quad |J|=s.
+\end{gathered}
+\]
+$s$ が原点からの大きさ、$t$ が辺上での割合になる。
+
+\separator
+\subhead{3次元の球なら球面座標}
+\[
+\begin{aligned}
+x&=r\sin\varphi\cos\theta,\\
+y&=r\sin\varphi\sin\theta,\\
+z&=r\cos\varphi,
+\end{aligned}
+\qquad
+\dd V=r^2\sin\varphi\dd r\dd\varphi\dd\theta.
+\]
+球全体では
+\[
+0\le r\le R,\quad0\le\varphi\le\pi,\quad
+0\le\theta<2\pi.
+\]
+
+\separator
+\subhead{積分順序を逆にするとき}
+\[
+\int_a^b\int_{\alpha(x)}^{\beta(x)}f(x,y)\dd y\dd x
+\]
+は、まず領域を図示し、$y$ を固定した横線で左右の端点を読み直す。交点で領域が分かれるなら積分も分ける。
+\end{column}
+\end{columns}
+\end{sheetframe}
