@@ -1,0 +1,777 @@
+\documentclass[uplatex,dvipdfmx,9pt]{jsarticle}
+
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[top=11mm,bottom=12mm,left=12mm,right=12mm,headsep=3mm]{geometry}
+\usepackage[dvipdfmx,hidelinks]{hyperref}
+\usepackage{pxjahyper}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{teal}{HTML}{168C82}
+\definecolor{muted}{HTML}{65717A}
+\definecolor{pale}{HTML}{EFF3F5}
+
+\hypersetup{
+  pdftitle={熊本大学数学系大学院 必須定義・定理 一問一答},
+  pdfauthor={}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\columnsep}{9mm}
+\setlength{\columnseprule}{.2pt}
+\raggedcolumns
+\allowdisplaybreaks
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\color{muted}熊本大学 数学系大学院｜必須定義・定理 一問一答}
+\fancyhead[R]{\footnotesize\color{muted}\thepage}
+\renewcommand{\headrulewidth}{.3pt}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\F}{\mathbb F}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\Img}{\operatorname{Im}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\diag}{\operatorname{diag}}
+
+\newcounter{quiz}
+
+% 見出し。高さを測っておき、残りをそのまま解答欄の高さにする
+\newsavebox{\hdrbox}
+\newlength{\colht}
+\newlength{\colwd}
+\newlength{\hdrgap}
+\setlength{\hdrgap}{3mm}
+
+\newcommand{\sheettitle}[3]{%
+  \sbox{\hdrbox}{\begin{minipage}{\textwidth}
+    {\color{navy}\bfseries\large #1}\hfill
+    {\color{muted}\bfseries #2}\par
+    \vspace{.6mm}
+    {\small #3}\par
+    \vspace{1.4mm}{\color{navy}\rule{\linewidth}{.65pt}}%
+  \end{minipage}}%
+  \noindent\usebox{\hdrbox}\par\nobreak
+  \setlength{\colwd}{\dimexpr.5\textwidth-.5\columnsep\relax}%
+  \setlength{\colht}{\dimexpr\textheight-\ht\hdrbox-\dp\hdrbox-\hdrgap-.5mm\relax}%
+  \vspace{\hdrgap}\nointerlineskip
+}
+
+% 段の高さを固定し、余白を \quiz 間に等分（inner-pos s）
+\newenvironment{qcol}{%
+  \begin{minipage}[t][\colht][s]{\colwd}%
+}{%
+  \end{minipage}%
+}
+
+\newcommand{\quiz}[1]{%
+  \stepcounter{quiz}%
+  \par\noindent
+  {\color{navy}\bfseries Q\thequiz}\quad #1\par
+  \vspace{6mm plus 1fil}%
+}
+
+\newcommand{\answer}[2]{%
+  \par\noindent
+  {\color{teal}\bfseries Q#1}\quad #2\par
+  \vspace{1.5mm}
+}
+
+\newcommand{\must}[1]{\boxed{\displaystyle #1}}
+
+\begin{document}
+
+% ============================================================
+% 問題：線形代数
+% ============================================================
+\setcounter{quiz}{0}
+\sheettitle{問題｜線形代数}{18問}
+{定義は記号の属する集合まで、定理は仮定と結論を答える。}
+
+\noindent\begin{qcol}
+\quiz{\(\F\) 上のベクトル空間の定義を述べよ。}
+
+\quiz{\(W\subset V\) が部分空間であるための判定条件を述べよ。}
+
+\quiz{\(\Span\{v_1,\ldots,v_k\}\)、基底、次元をそれぞれ定義せよ。}
+
+\quiz{\(v_1,\ldots,v_k\in V\) が一次独立であるとは何か。}
+
+\quiz{写像 \(T:V\to W\) が線形であるとは何か。}
+
+\quiz{\(\Ker T\) と \(\Img T\) を定義し、単射・全射との関係を述べよ。}
+
+\quiz{階数・退化次数の定理を述べよ。}
+
+\quiz{部分空間 \(U,W\subset V\) の和と直和を定義し、次元公式を述べよ。}
+
+\quiz{基底に関する表現行列の各列は何を表すか。基底変換で行列はどう変わるか。}
+
+\end{qcol}\hfill\begin{qcol}
+
+\quiz{行列 \(A\in M_n(\F)\) の固有値・固有ベクトル・固有空間を定義せよ。}
+
+\quiz{固有値の代数的重複度と幾何学的重複度を定義し、大小関係を述べよ。}
+
+\quiz{\(A\) が対角化可能であるための判定条件を二通り述べよ。}
+
+\quiz{Jordan ブロック \(J_k(\lambda)\) と長さ \(k\) の Jordan 鎖を式で書け。}
+
+\quiz{Cayley--Hamilton の定理を述べよ。}
+
+\quiz{\(A\) が正則であることと同値な条件を、行列式・階数・核で述べよ。}
+
+\quiz{直交行列を定義し、実対称行列のスペクトル定理を述べよ。}
+
+\quiz{ユニタリ行列とエルミート行列を定義し、エルミート行列のスペクトル定理を述べよ。}
+
+\quiz{\(A^2=A\) のとき、\(\R^n\) は \(\Img A\) と \(\Ker A\) にどう分解されるか。}
+\end{qcol}\par
+
+% ============================================================
+% 問題：微分積分
+% ============================================================
+\clearpage
+\setcounter{quiz}{0}
+\sheettitle{問題｜微分積分}{20問}
+{公式だけでなく、使えるための仮定を必ず答える。}
+
+\noindent\begin{qcol}
+\quiz{\(f:A\to\R\) が \(a\in A\) で連続であることを \(\varepsilon,\delta\) で書け。}
+
+\quiz{一様連続の定義を述べ、通常の連続との量化記号の違いを答えよ。}
+
+\quiz{平均値の定理の仮定と結論を述べよ。}
+
+\quiz{最大値・最小値の定理の仮定と結論を述べよ。}
+
+\quiz{微積分学の基本定理を「積分の微分」と「微分の積分」の形で述べよ。}
+
+\quiz{\(a\) のまわりの Taylor の定理を Lagrange の剰余項まで書け。}
+
+\quiz{\(e^x,\sin x,\cos x,\log(1+x)\) の \(x=0\) での展開を書け。}
+
+\quiz{\(\int_1^\infty x^{-p}\dd x\) と \(\int_0^1x^{-p}\dd x\) の収束条件を答えよ。}
+
+\quiz{\(f:\R^n\to\R^m\) が \(a\) で微分可能であることを、線形写像を用いて定義せよ。}
+
+\quiz{\(C^1\) 級の定義と、\(C^1\) 級から従うことを述べよ。}
+
+\end{qcol}\hfill\begin{qcol}
+
+\quiz{多変数の合成関数の微分を Jacobian 行列で書け。}
+
+\quiz{\(f(x,y)\) の停留点における Hessian による極値判定を述べよ。}
+
+\quiz{制約 \(g(x,y)=c\) のもとでの Lagrange の未定乗数法を書け。}
+
+\quiz{長方形上の連続関数に対する Fubini の定理を述べよ。}
+
+\quiz{\(D=\{(x,y)\mid0\le y\le x\le1\}\) の積分順序を交換せよ。}
+
+\quiz{二変数積分の変数変換公式を、Jacobian と積分領域を含めて書け。}
+
+\quiz{円と楕円に使う変数変換、およびそれぞれの Jacobian を書け。}
+
+\quiz{上下端も被積分関数も \(x\) に依存する積分の微分公式を書け。}
+
+\quiz{関数列 \(f_n:E\to\R\) の一様収束を定義し、Weierstrass の \(M\)-判定法を述べよ。}
+
+\quiz{一様収束のもとでの項別積分、および項別微分の代表的な十分条件を述べよ。}
+\end{qcol}\par
+
+% ============================================================
+% 問題：集合と位相
+% ============================================================
+\clearpage
+\setcounter{quiz}{0}
+\sheettitle{問題｜集合と位相}{20問}
+{「どの空間の開集合か」を省略せずに答える。}
+
+\noindent\begin{qcol}
+\quiz{集合 \(X\) 上の位相 \(\mathcal T\) の三つの条件を述べよ。}
+
+\quiz{位相空間 \((X,\mathcal T)\) の開集合・閉集合を定義せよ。}
+
+\quiz{\(A\subset X\) の内点と内部 \(A^\circ\) を定義せよ。}
+
+\quiz{距離空間で \(A\subset X\) の閉包 \(\overline A\) と境界 \(\partial A\) を定義せよ。}
+
+\quiz{\(A\subset X\) に入る相対位相を式で書け。}
+
+\quiz{写像 \(f:X\to Y\) の連続性を開集合の逆像で定義せよ。閉集合ではどう言い換えるか。}
+
+\quiz{同相写像を定義せよ。}
+
+\quiz{Hausdorff 空間を定義せよ。}
+
+\quiz{Hausdorff 空間では、収束する点列の極限について何がいえるか。}
+
+\quiz{コンパクト空間・コンパクト部分集合を開被覆で定義せよ。}
+
+\end{qcol}\hfill\begin{qcol}
+
+\quiz{コンパクト空間の閉部分集合について何がいえるか。}
+
+\quiz{コンパクト集合の連続像と、コンパクト距離空間上の連続写像について何がいえるか。}
+
+\quiz{Hausdorff 空間のコンパクト部分集合について何がいえるか。}
+
+\quiz{コンパクト空間から Hausdorff 空間への連続な全単射について何がいえるか。}
+
+\quiz{点列コンパクトを定義せよ。距離空間ではコンパクト性とどう関係するか。}
+
+\quiz{\(\R^n\) における Heine--Borel の定理を述べよ。}
+
+\quiz{連結空間を、開集合による分離を用いて定義せよ。}
+
+\quiz{道連結を定義し、連結性との関係を述べよ。}
+
+\quiz{連結集合の連続像について何がいえるか。}
+
+\quiz{距離空間の空でない集合 \(A\) に対する \(d(x,A)\) を定義し、基本不等式と閉包との関係を述べよ。}
+\end{qcol}\par
+
+% ============================================================
+% 解答：線形代数
+% ============================================================
+\clearpage
+\sheettitle{解答｜線形代数}{18問}
+{式の主語と仮定まで再現できれば合格。}
+
+\begin{multicols}{2}
+\answer{1}{
+\(V\ne\varnothing\) に加法とスカラー倍があり、任意の \(u,v,w\in V\)、
+\(a,b\in\F\) に対して
+\[
+\begin{gathered}
+u+v=v+u,\quad (u+v)+w=u+(v+w),\\
+\exists0:\ u+0=u,\quad \exists(-u):u+(-u)=0,\\
+a(u+v)=au+av,\quad(a+b)u=au+bu,\\
+(ab)u=a(bu),\quad1u=u
+\end{gathered}
+\]
+を満たす。}
+
+\answer{2}{
+\[
+\must{W\ne\varnothing,\quad
+au+bv\in W\quad(u,v\in W,\ a,b\in\F)}.
+\]}
+
+\answer{3}{
+\(\Span\{v_i\}=\{\sum a_iv_i\mid a_i\in\F\}\)。
+基底は \(V\) を生成する一次独立な組。基底の本数が \(\dim V\)。}
+
+\answer{4}{
+\[
+\must{\sum_{i=1}^ka_iv_i=0\Longrightarrow a_1=\cdots=a_k=0}.
+\]}
+
+\answer{5}{
+\[
+\must{T(au+bv)=aT(u)+bT(v)}
+\quad(u,v\in V,\ a,b\in\F).
+\]}
+
+\answer{6}{
+\[
+\Ker T=\{v\in V\mid T(v)=0\},\qquad
+\Img T=\{T(v)\mid v\in V\}.
+\]
+\[
+T\text{ 単射}\iff\Ker T=\{0\},\qquad
+T\text{ 全射}\iff\Img T=W.
+\]}
+
+\answer{7}{
+\(V\) が有限次元なら
+\[
+\must{\dim V=\dim\Ker T+\dim\Img T}.
+\]}
+
+\answer{8}{
+\[
+U+W=\{u+w\mid u\in U,\ w\in W\}.
+\]
+\[
+V=U\oplus W
+\iff V=U+W,\quad U\cap W=\{0\}.
+\]
+\[
+\dim(U+W)=\dim U+\dim W-\dim(U\cap W).
+\]}
+
+\answer{9}{
+\([T]_{\mathcal B}^{\mathcal C}\) の第 \(j\) 列は
+\(T(b_j)\) の \(\mathcal C\)-座標。
+\(P\) の各列を新基底 \(\mathcal B'\) の旧基底 \(\mathcal B\)-座標とすれば
+\[
+\must{[T]_{\mathcal B'}=P^{-1}[T]_{\mathcal B}P}.
+\]}
+
+\columnbreak
+
+\answer{10}{
+\[
+Av=\lambda v,\quad v\ne0.
+\]
+\(\lambda\) が固有値、\(v\) が固有ベクトルで、
+\[
+E_\lambda=\Ker(A-\lambda I),\qquad
+\det(A-\lambda I)=0.
+\]}
+
+\answer{11}{
+代数的重複度は特性多項式における根の重複度。
+幾何学的重複度は \(\dim E_\lambda\)。
+\[
+\must{1\le\dim E_\lambda\le
+\lambda\text{ の代数的重複度}}.
+\]}
+
+\answer{12}{
+\[
+\must{A\text{ 対角化可能}
+\iff\F^n\text{ が固有ベクトルの基底を持つ}}
+\]
+\[
+\iff\sum_\lambda\dim E_\lambda=n.
+\]
+各固有値で幾何学的重複度と代数的重複度が等しい、ともいえる。}
+
+\answer{13}{
+\[
+J_k(\lambda)=
+\begin{pmatrix}
+\lambda&1&&0\\
+&\lambda&\ddots&\\
+&&\ddots&1\\
+0&&&\lambda
+\end{pmatrix}.
+\]
+Jordan 鎖は
+\[
+(A-\lambda I)v_1=0,\qquad
+(A-\lambda I)v_{j+1}=v_j.
+\]}
+
+\answer{14}{
+特性多項式 \(p_A(t)=\det(tI-A)\) に行列 \(A\) を代入すると
+\[
+\must{p_A(A)=O}.
+\]}
+
+\answer{15}{
+\[
+\must{
+A\text{ 正則}
+\iff\det A\ne0
+\iff\rank A=n
+\iff\Ker A=\{0\}}.
+\]}
+
+\answer{16}{
+\[
+Q^{\mathsf T}Q=I\iff Q^{-1}=Q^{\mathsf T}.
+\]
+\(A^{\mathsf T}=A\) なら、ある直交行列 \(Q\) と実対角行列 \(D\) が存在して
+\[
+\must{Q^{\mathsf T}AQ=D}.
+\]}
+
+\answer{17}{
+\[
+U^*U=I,\qquad H^*=H.
+\]
+エルミート行列 \(H\) の固有値は実数で、あるユニタリ行列 \(U\) により
+\[
+\must{U^*HU=D}
+\]
+と実対角化できる。}
+
+\answer{18}{
+\[
+\must{\F^n=\Img A\oplus\Ker A}.
+\]
+実際 \(x=Ax+(I-A)x\) で、
+\(Ax\in\Img A\)、\((I-A)x\in\Ker A\)。}
+\end{multicols}
+
+% ============================================================
+% 解答：微分積分
+% ============================================================
+\clearpage
+\sheettitle{解答｜微分積分}{20問}
+{仮定を書かずに定理名だけを書く答案は避ける。}
+
+\begin{multicols}{2}
+\answer{1}{
+\[
+\must{\forall\varepsilon>0\ \exists\delta>0\
+\forall x\in A:\ 
+\abs{x-a}<\delta\Rightarrow
+\abs{f(x)-f(a)}<\varepsilon}.
+\]}
+
+\answer{2}{
+\[
+\forall\varepsilon>0\ \exists\delta>0\
+\forall x,y\in A:\ 
+\abs{x-y}<\delta\Rightarrow
+\abs{f(x)-f(y)}<\varepsilon.
+\]
+\(\delta\) が点によらず、集合全体で一つなのが一様連続。}
+
+\answer{3}{
+\(f\) が \([a,b]\) で連続、\((a,b)\) で微分可能なら、
+ある \(c\in(a,b)\) が存在して
+\[
+\must{f(b)-f(a)=f'(c)(b-a)}.
+\]}
+
+\answer{4}{
+\(f:[a,b]\to\R\) が連続なら、\(f\) は \([a,b]\) 上で
+最大値と最小値を取る。}
+
+\answer{5}{
+\(f\) が連続なら
+\[
+\frac{\dd}{\dd x}\int_a^xf(t)\dd t=f(x),
+\qquad
+\int_a^bf'(x)\dd x=f(b)-f(a).
+\]}
+
+\answer{6}{
+\(f\) が \(a\) と \(x\) を含む区間で \(n+1\) 回微分可能なら、
+その間のある \(\xi\) に対して
+\[
+\must{
+f(x)=\sum_{k=0}^n\frac{f^{(k)}(a)}{k!}(x-a)^k
++\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-a)^{n+1}}.
+\]}
+
+\answer{7}{
+\[
+\begin{aligned}
+e^x&=\sum_{n=0}^\infty\frac{x^n}{n!},\\
+\sin x&=\sum_{n=0}^\infty(-1)^n\frac{x^{2n+1}}{(2n+1)!},\\
+\cos x&=\sum_{n=0}^\infty(-1)^n\frac{x^{2n}}{(2n)!},\\
+\log(1+x)&=\sum_{n=1}^\infty(-1)^{n-1}\frac{x^n}{n}
+\quad(\abs x<1).
+\end{aligned}
+\]}
+
+\answer{8}{
+\[
+\int_1^\infty x^{-p}\dd x<\infty\iff p>1,
+\qquad
+\int_0^1x^{-p}\dd x<\infty\iff p<1.
+\]}
+
+\answer{9}{
+ある線形写像 \(L:\R^n\to\R^m\) が存在して
+\[
+\must{
+\lim_{h\to0}
+\frac{\norm{f(a+h)-f(a)-Lh}}{\norm h}=0}.
+\]
+この \(L\) が全微分 \(Df(a)\)。}
+
+\answer{10}{
+各1階偏導関数が存在し連続なら \(C^1\) 級。
+\(C^1\) 級なら微分可能で、実数値関数では
+\[
+Df(a)h=\nabla f(a)\cdot h.
+\]}
+
+\columnbreak
+
+\answer{11}{
+\[
+\must{D(g\circ f)(a)=Dg(f(a))\,Df(a)}.
+\]
+すなわち Jacobian 行列をこの順に掛ける。}
+
+\answer{12}{
+\(f\) は \((a,b)\) の近くで \(C^2\) 級、
+\(\nabla f(a,b)=0\) とし
+\[
+H=
+\begin{pmatrix}f_{xx}&f_{xy}\\f_{yx}&f_{yy}\end{pmatrix},
+\quad
+\Delta=f_{xx}f_{yy}-f_{xy}^2.
+\]
+\[
+\Delta>0,\ f_{xx}>0:\text{極小},\quad
+\Delta>0,\ f_{xx}<0:\text{極大},\quad
+\Delta<0:\text{鞍点}.
+\]
+\(\Delta=0\) では、この判定だけでは決まらない。}
+
+\answer{13}{
+\(f,g\) が \(C^1\) 級で、\(\nabla g\ne0\) の正則な制約上の
+極値候補では、ある \(\lambda\) が存在して
+\[
+\must{\nabla f(x,y)=\lambda\nabla g(x,y)},
+\qquad g(x,y)=c.
+\]}
+
+\answer{14}{
+\(f\) が長方形 \([a,b]\times[c,d]\) 上で連続なら
+\[
+\must{
+\int_a^b\int_c^df(x,y)\dd y\dd x
+=
+\int_c^d\int_a^bf(x,y)\dd x\dd y}.
+\]}
+
+\answer{15}{
+\[
+\must{
+\int_0^1\int_0^xf(x,y)\dd y\dd x
+=
+\int_0^1\int_y^1f(x,y)\dd x\dd y}.
+\]}
+
+\answer{16}{
+\((u,v)\in E\mapsto(x(u,v),y(u,v))\in D\) が
+1対1の \(C^1\) 級変換で Jacobian が0でないなら
+\[
+\must{
+\iint_Df(x,y)\dd x\dd y
+=
+\iint_E f(x(u,v),y(u,v))
+\abs{\frac{\partial(x,y)}{\partial(u,v)}}\dd u\dd v}.
+\]}
+
+\answer{17}{
+円では
+\[
+x=r\cos\theta,\ y=r\sin\theta,\quad
+\abs J=r.
+\]
+楕円では
+\[
+x=ar\cos\theta,\ y=br\sin\theta,\quad
+\abs J=abr.
+\]}
+
+\answer{18}{
+\[
+\boxed{\begin{aligned}
+\frac{\dd}{\dd x}\int_{\phi(x)}^{\psi(x)}f(x,y)\dd y
+&=f(x,\psi(x))\psi'(x)\\
+&\quad-f(x,\phi(x))\phi'(x)\\
+&\quad+\int_{\phi(x)}^{\psi(x)}f_x(x,y)\dd y
+\end{aligned}}
+\]}
+
+\answer{19}{
+\[
+f_n\to f\text{ 一様}
+\iff
+\begin{gathered}
+\forall\varepsilon>0\ \exists N\
+\forall n\ge N\ \forall x\in E:\\
+\abs{f_n(x)-f(x)}<\varepsilon
+\end{gathered}.
+\]
+\(\abs{f_n(x)}\le M_n\)、\(\sum M_n<\infty\) なら
+\(\sum f_n\) は一様収束する。}
+
+\answer{20}{
+\(f_n\) が \([a,b]\) 上連続で \(f_n\to f\) が一様なら
+\[
+\int_a^bf=\lim_{n\to\infty}\int_a^bf_n.
+\]
+\(f_n\in C^1([a,b])\) で、\(f_n\) が一点で収束し、
+\(f_n'\) が一様収束するなら、
+\(f_n\) は一様収束し
+\[
+f'=\lim_{n\to\infty}f_n'.
+\]}
+\end{multicols}
+
+% ============================================================
+% 解答：集合と位相
+% ============================================================
+\clearpage
+\sheettitle{解答｜集合と位相}{20問}
+{全体空間・部分空間・距離空間の区別に注意する。}
+
+\begin{multicols}{2}
+\answer{1}{
+\(\mathcal T\subset2^X\) が位相であるとは
+\[
+\varnothing,X\in\mathcal T,\qquad
+\bigcup_{\lambda\in\Lambda}U_\lambda\in\mathcal T,\qquad
+\bigcap_{i=1}^nU_i\in\mathcal T
+\]
+が成り立つこと。ただし \(U_\lambda,U_i\in\mathcal T\)。}
+
+\answer{2}{
+\(U\subset X\) が開とは \(U\in\mathcal T\)。
+\(F\subset X\) が閉とは \(X\setminus F\in\mathcal T\)。}
+
+\answer{3}{
+\(x\in A\) が内点とは、ある開集合 \(U\) が
+\[
+x\in U\subset A
+\]
+を満たすこと。内点全体が \(A^\circ\)。距離空間なら
+\(\exists r>0:B(x,r)\subset A\)。}
+
+\answer{4}{
+距離空間では
+\[
+\overline A=\{x\in X\mid
+\forall r>0,\ B(x,r)\cap A\ne\varnothing\},
+\]
+\[
+\partial A=\overline A\setminus A^\circ
+=\overline A\cap\overline{X\setminus A}.
+\]}
+
+\answer{5}{
+\[
+\must{\mathcal T_A=\{A\cap U\mid U\in\mathcal T_X\}}.
+\]
+\(A\) で開とは、全体空間 \(X\) の開集合との共通部分であること。}
+
+\answer{6}{
+\[
+\must{
+f\text{ 連続}
+\iff
+\forall V\in\mathcal T_Y,\ f^{-1}(V)\in\mathcal T_X}.
+\]
+同値に、\(Y\) の任意の閉集合 \(F\) に対して
+\(f^{-1}(F)\) が \(X\) で閉。}
+
+\answer{7}{
+\(f:X\to Y\) が全単射で、
+\[
+\must{f\text{ と }f^{-1}\text{ がともに連続}}
+\]
+であるとき同相写像という。}
+
+\answer{8}{
+\(x\ne y\) なら、ある開集合 \(U,V\subset X\) が存在して
+\[
+x\in U,\qquad y\in V,\qquad U\cap V=\varnothing.
+\]}
+
+\answer{9}{
+\[
+\must{\text{収束点列の極限は一意}}.
+\]
+二つの異なる極限を持つと仮定し、Hausdorff 性で分離すると矛盾する。}
+
+\answer{10}{
+任意の開被覆
+\[
+K\subset\bigcup_{\lambda\in\Lambda}U_\lambda
+\]
+から有限個を選んで
+\[
+\must{K\subset U_{\lambda_1}\cup\cdots\cup U_{\lambda_m}}
+\]
+とできること。}
+
+\columnbreak
+
+\answer{11}{
+\[
+\must{\text{コンパクト空間の閉部分集合はコンパクト}}.
+\]
+閉集合の補集合を開被覆に加えて有限部分被覆を取る。}
+
+\answer{12}{
+\[
+\must{K\text{ コンパクト},\ f\text{ 連続}
+\Longrightarrow f(K)\text{ コンパクト}}.
+\]
+さらに \(K\) がコンパクト距離空間、\(Y\) が距離空間なら
+\[
+\must{f:K\to Y\text{ 連続}\Longrightarrow f\text{ 一様連続}}.
+\]}
+
+\answer{13}{
+\[
+\must{Y\text{ Hausdorff},\ K\subset Y\text{ コンパクト}
+\Longrightarrow K\text{ 閉}}.
+\]}
+
+\answer{14}{
+\[
+\boxed{\begin{gathered}
+X\text{ コンパクト},\quad Y\text{ Hausdorff},\\
+f:X\to Y\text{ 連続全単射}
+\Longrightarrow f^{-1}\text{ 連続}
+\end{gathered}}.
+\]
+従って \(f\) は同相写像。}
+
+\answer{15}{
+任意の点列が収束部分列を持つとき点列コンパクトという。
+距離空間では
+\[
+\must{\text{コンパクト}\iff\text{点列コンパクト}}.
+\]}
+
+\answer{16}{
+\[
+\must{
+K\subset\R^n\text{ がコンパクト}
+\iff K\text{ が閉かつ有界}}.
+\]}
+
+\answer{17}{
+空でない開集合 \(U,V\subset X\) で
+\[
+X=U\cup V,\qquad U\cap V=\varnothing
+\]
+となるものが存在しないとき、\(X\) は連結。}
+
+\answer{18}{
+任意の \(x,y\in X\) に対し、連続写像
+\[
+\gamma:[0,1]\to X,\qquad
+\gamma(0)=x,\quad\gamma(1)=y
+\]
+が存在するとき道連結。
+\[
+\must{\text{道連結}\Longrightarrow\text{連結}}.
+\]}
+
+\answer{19}{
+\[
+\must{X\text{ 連結},\ f:X\to Y\text{ 連続}
+\Longrightarrow f(X)\text{ 連結}}.
+\]}
+
+\answer{20}{
+\[
+d(x,A)=\inf_{a\in A}d(x,a),
+\]
+\[
+\must{\abs{d(x,A)-d(y,A)}\le d(x,y)}.
+\]
+従って \(x\mapsto d(x,A)\) は連続。また
+\[
+\must{d(x,A)=0\iff x\in\overline A}.
+\]}
+\end{multicols}
+
+\end{document}
