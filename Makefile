@@ -5,7 +5,7 @@
 
 SITE := node tools/site
 
-.PHONY: help all site pdf prediction-pdf recent-workbook-pdf cheatsheet last-minute-pdf open clean
+.PHONY: help all site pdf prediction-pdf recent-workbook-pdf cheatsheet last-minute-pdf final-recall-pdf open clean
 
 help:
 	@echo "make site   tex から Web サイトを生成（site/dist/index.html）"
@@ -14,6 +14,7 @@ help:
 	@echo "make recent-workbook-pdf  2023--2025年度過去問15題だけのPDFを生成"
 	@echo "make cheatsheet  専門基礎4枚の16:9チートシート（PDF・PNG）を生成"
 	@echo "make last-minute-pdf  2027年度入試の直前演習・予想問題PDFを生成"
+	@echo "make final-recall-pdf  必須定義・定理の一問一答PDFを生成"
 	@echo "make all    site と pdf の両方"
 	@echo "make open   生成したサイトをブラウザで開く"
 	@echo "make clean  生成物を削除"
@@ -43,6 +44,9 @@ cheatsheet:
 
 last-minute-pdf:
 	cd tex && latexmk last-minute-2027.tex
+
+final-recall-pdf:
+	cd tex && latexmk final-recall.tex
 
 open: site
 	@open site/dist/index.html 2>/dev/null || xdg-open site/dist/index.html
